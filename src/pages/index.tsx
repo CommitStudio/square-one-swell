@@ -1,3 +1,5 @@
-const Home = () => <div>Hello World!</div>;
+import Navbar from '~/components/globals/Navbar';
+
+const Home = () => <Navbar />;
 
 export default Home;
