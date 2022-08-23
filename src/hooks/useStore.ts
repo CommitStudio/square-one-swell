@@ -1,13 +1,11 @@
 import { atom, useAtom } from 'jotai';
 
 type Store = {
-  isMobileMenuOpen: boolean;
-  showCourses: boolean;
+  testVariable: boolean;
 };
 
 export const store = atom({
-  isMobileMenuOpen: false,
-  showCourses: false
+  testVariable: false // Here we need to initialize de viariable we want on the store, the testVariable is just as example it may be removed
 });
 
 export function useStore(): {
