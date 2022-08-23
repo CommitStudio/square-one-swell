@@ -1,0 +1,54 @@
+{
+  "cart": {
+    "products": [
+      {
+        "name": "Product one",
+        "image": { "src": "/img/bag-picture.webp", "alt": "product picture" },
+        "size": "M",
+        "color": "red",
+        "quantity": 3,
+        "price": 25.00
+      },
+      {
+        "name": "Product two",
+        "image": { "src": "/img/bag-picture-2.jpeg", "alt": "product picture" },
+        "size": "L",
+        "color": "blue",
+        "quantity": 2,
+        "price": 45.00
+      },
+      {
+        "name": "Product three",
+        "image": { "src": "/img/t-shirt-picture.jpeg", "alt": "product picture" },
+        "size": "S",
+        "color": "green",
+        "quantity": 5,
+        "price": 15.00
+      },
+      {
+        "name": "Product four",
+        "image": { "src": "/img/bag-picture-2.jpeg", "alt": "product picture" },
+        "size": "XXL",
+        "color": "violet",
+        "quantity": 1,
+        "price": 34.00
+      },
+      {
+        "name": "Product five",
+        "image": { "src": "/img/bag-picture.webp", "alt": "product picture" },
+        "size": "XL",
+        "color": "pink",
+        "quantity": 6,
+        "price": 75.00
+      },
+      {
+        "name": "Product six",
+        "image": { "src": "/img/t-shirt-picture.jpeg", "alt": "product picture" },
+        "size": "XS",
+        "color": "brown",
+        "quantity": 5,
+        "price": 23.00
+      }
+    ]
+  }
+}
