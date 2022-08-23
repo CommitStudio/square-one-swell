@@ -36,7 +36,7 @@ const Cart = () => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="bg-primary h-full text-secondary ml-auto sm:w-[500px] pl-7 pt-7 pb-7 flex flex-col justify-between">
+        <nav className="border h-full text-secondary ml-auto sm:w-[500px] pl-7 pt-7 pb-7 flex flex-col justify-between">
           <div className="flex justify-between pr-7">
             <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
             <Image
@@ -83,7 +83,7 @@ const Cart = () => {
                 ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
               </p>
             </div>
-            <button className="bg-secondary text-white p-3 w-full rounded-md mb-2 text-base">
+            <button className="bg-green text-white p-3 w-full rounded-md mb-2 text-base">
               CHECKOUT
             </button>
             <p className="text-right">{`© ${new Date().getFullYear()} Commit Store-Front`}</p>
