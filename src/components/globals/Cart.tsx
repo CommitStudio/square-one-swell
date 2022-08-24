@@ -37,8 +37,8 @@ const Cart = () => {
         }`}
       >
         <nav className="border h-full text-secondary ml-auto sm:w-[500px] flex flex-col justify-between">
-          <div className="flex justify-between px-7 bg-secondary text-white">
-            <h3 className="mb-6 text-xl font-bold pt-7">Cart ({cart.products.length})</h3>
+          <div className="flex justify-between px-7 pt-7">
+            <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
             <Image
               src="/img/close-logo.svg"
               alt="Close icon"
