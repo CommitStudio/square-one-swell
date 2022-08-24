@@ -36,9 +36,9 @@ const Cart = () => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border h-full text-secondary ml-auto sm:w-[500px] pl-7 pt-7 pb-7 flex flex-col justify-between">
-          <div className="flex justify-between pr-7">
-            <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
+        <nav className="border h-full text-secondary ml-auto sm:w-[500px] flex flex-col justify-between">
+          <div className="flex justify-between px-7 bg-secondary text-white">
+            <h3 className="mb-6 text-xl font-bold pt-7">Cart ({cart.products.length})</h3>
             <Image
               src="/img/close-logo.svg"
               alt="Close icon"
@@ -49,7 +49,7 @@ const Cart = () => {
               onClick={closeCart}
             />
           </div>
-          <div className="overflow-y-auto pr-7 mb-auto">
+          <div className="overflow-y-auto px-7 mb-auto">
             <hr className="mb-5 opacity-20" />
             {cart.products.map((product, i) => (
               <div
@@ -69,9 +69,9 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <div className="pr-7 text-xs">
+          <div className="px-7 pb-7 bg-secondary text-xs">
             <hr className="mb-5 opacity-20" />
-            <div className="grid grid-cols-2 text-base mb-3">
+            <div className="grid grid-cols-2 text-base mb-3 text-white">
               <p>Subtotal</p>
               <p className="text-right">
                 ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
@@ -86,7 +86,7 @@ const Cart = () => {
             <button className="bg-green text-white p-3 w-full rounded-md mb-2 text-base">
               CHECKOUT
             </button>
-            <p className="text-right">{`© ${new Date().getFullYear()} Commit Store-Front`}</p>
+            <p className="text-right text-white">{`© ${new Date().getFullYear()} Commit Store-Front`}</p>
           </div>
         </nav>
       </div>
