@@ -2,7 +2,7 @@ import React from 'react';
 
 const LinksAddress = () => {
   return (
-    <div className="p-10 flex justify-around">
+    <div className="p-10 flex flex-col md:flex-row space-y-10 md:space-y-0 justify-around">
       <div className="space-y-3">
         <p className="hover:text-primary hover:cursor-pointer">About us</p>
         <p className="hover:text-primary hover:cursor-pointer">Online store</p>
