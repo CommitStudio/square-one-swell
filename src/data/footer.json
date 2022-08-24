@@ -1,0 +1,16 @@
+{
+  "items": [
+    { "id": 0, "name": "About us" },
+    { "id": 1, "name": "Online store" },
+    { "id": 2, "name": "Blog" },
+    { "id": 3, "name": "Contact Us" },
+    { "id": 4, "name": "Login/ Register" },
+    { "id": 5, "name": "Your Cart" },
+    { "id": 6, "name": "Wishlist items" },
+    { "id": 7, "name": "Your checkout" },
+    { "id": 8, "name": "FAQs" },
+    { "id": 9, "name": "Terms of service" },
+    { "id": 10, "name": "Privacy policy" },
+    { "id": 11, "name": "Returns" }
+  ]
+}
