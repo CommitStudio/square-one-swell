@@ -1,0 +1,10 @@
+{
+  "brand_name": "STORE FRONT",
+  "brand_logo": "/img/logo/logo.png",
+  "categories": [
+    { "name": "WOMEN", "slug": "women" },
+    { "name": "MEN", "slug": "men" },
+    { "name": "ABOUT US", "slug": "about-us" },
+    { "name": "CONTACT", "slug": "contact" }
+  ]
+}
