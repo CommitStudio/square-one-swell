@@ -1,5 +1,5 @@
-import Cart from '~/components/globals/Cart';
+import Navbar from '~/components/globals/navbar/Navbar';
 
-const Home = () => <Cart />;
+const Home = () => <Navbar />;
 
 export default Home;

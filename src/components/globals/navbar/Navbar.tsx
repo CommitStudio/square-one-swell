@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import data from '../../../data/partials.json';
+import Cart from '../Cart';
 
 import DesktopMenu from './DesktopMenu';
 import Hamburger from './Hamburger';
@@ -9,8 +9,23 @@ import Logo from './Logo';
 import MobileMenu from './MobileMenu';
 import UserButtons from './UserButtons';
 
+import data from '~/data/partials.json';
+
 const Navbar = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleCart = () => {
+    setIsCartOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    isCartOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'unset');
+  }, [isCartOpen]);
+
   const [isOpen, setIsOpen] = useState(false);
+
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
@@ -24,12 +39,13 @@ const Navbar = () => {
               <Logo brandLogo={data.brand_logo} brandName={data.brand_name} />
             </a>
           </Link>
-          <UserButtons />
+          <UserButtons toggleCart={toggleCart} />
           <Hamburger isOpen={isOpen} toggle={handleClick} />
           <DesktopMenu categories={data.categories} />
         </div>
       </div>
       <MobileMenu isOpen={isOpen} categories={data.categories} />
+      <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
   );
 };
