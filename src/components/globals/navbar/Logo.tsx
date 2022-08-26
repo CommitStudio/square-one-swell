@@ -9,7 +9,6 @@ type Props = {
 const Logo = ({ brandLogo, brandName }: Props) => {
   return (
     <>
-      {' '}
       {brandLogo !== '' ? (
         <Image width={165} height={40} alt="brand-logo" src={brandLogo} objectFit="contain" />
       ) : (

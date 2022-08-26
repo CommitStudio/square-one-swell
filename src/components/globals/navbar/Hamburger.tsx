@@ -1,26 +1,24 @@
 import React from 'react';
 
 type Props = {
+  isOpen: boolean;
   toggle: () => void;
 };
 
-const Hamburger = ({ toggle }: Props) => {
+const Hamburger = ({ isOpen, toggle }: Props) => {
   return (
-    <div id="hamburger-menu" className="lg:hidden" role="button">
-      <input
-        type="checkbox"
-        id="menu_checkbox"
-        onClick={toggle}
-        data-collapse-toggle="navbar-sticky"
-        aria-controls="navbar-sticky"
-        aria-expanded="false"
-      />
-      <label htmlFor="menu_checkbox">
-        <div className="bg-primary"></div>
-        <div className="bg-primary"></div>
-        <div className="bg-primary"></div>
-      </label>
-    </div>
+    <button
+      id="hamburger-button"
+      data-collapse-toggle="navbar-sticky"
+      aria-controls="navbar-sticky"
+      aria-expanded="false"
+      onClick={toggle}
+      className="lg:hidden"
+    >
+      <div className={`${isOpen && 'burger-animation-1'} bg-primary`}></div>
+      <div className={`${isOpen && 'burger-animation-2'} bg-primary`}></div>
+      <div className={`${isOpen && 'burger-animation-3'} bg-primary`}></div>
+    </button>
   );
 };
 
