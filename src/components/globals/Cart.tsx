@@ -1,42 +1,28 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 import cartJson from '~/data/global/cart.json';
 
+type Props = {
+  isCartOpen: boolean;
+  setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const { cart } = cartJson;
 
-const Cart = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const toggle = () => {
-    setIsCartOpen((prev) => !prev);
-  };
-
+const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const closeCart = () => {
     setIsCartOpen(false);
   };
 
-  useEffect(() => {
-    isCartOpen
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = 'unset');
-  }, [isCartOpen]);
-
   return (
     <>
-      {/* CART BUTTON */}
-      <button onClick={toggle} className="fixed bg-secondary rounded-md p-3 m-5">
-        <span className="sr-only">Open cart</span>
-        <div className=" text-white">Botón Carrito</div>
-      </button>
-
       {/* CART BODY */}
       <div
-        className={`fixed inset-0 top-[70px] z-30 transition-transform ${
+        className={`fixed inset-0 top-[92px] z-30 transition-transform duration-700 ${
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border h-full text-secondary ml-auto sm:w-[500px] flex flex-col justify-between">
+        <nav className="border h-full text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
             <Image
@@ -83,13 +69,12 @@ const Cart = () => {
                 ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
               </p>
             </div>
-            <button className="bg-green text-white p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide">
+            <button className="bg-primary text-secondary p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
               CHECKOUT
             </button>
           </div>
         </nav>
       </div>
-      <div className="h-[300vh]"></div>
     </>
   );
 };

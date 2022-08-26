@@ -1,5 +1,5 @@
-import { Footer } from '~/components/globals/Footer';
+import Navbar from '~/components/globals/navbar/Navbar';
 
-const Home = () => <Footer />;
+const Home = () => <Navbar />;
 
 export default Home;
