@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -7,13 +9,12 @@ module.exports = {
       green: '#38c385',
       transparent: 'transparent',
       current: 'currentColor',
-      white: '#FFFFFF',
-      'white-soft': '#FFFFFF33',
-      black: '#101010',
-      'black-medium': '#10101099',
-      'black-medium-soft': '#10101066',
-      'black-soft': '#1010101F',
-      grey: '#EFEFEF'
+      black: colors.black,
+      white: colors.white,
+      gray: colors.neutral,
+      indigo: colors.indigo,
+      red: colors.rose,
+      yellow: colors.amber
     },
     extend: {
       screens: {

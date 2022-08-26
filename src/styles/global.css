@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
+
+/* Navbar links----------------------------------------------- */
+.menu-link:active,
+.menu-link:focus-visible,
+.menu-link:focus-within,
+.menu-link:target {
+  background-color: transparent;
+  background: none;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .menu-link:focus {
+    border: #b6da40 solid 2px;
+    border-radius: 8px;
+    padding: 6px 14px 6px 10px;
+  }
+}
+
+/* Navbar burger button--------------------------------------- */
+#hamburger-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#hamburger-button:before {
+  content: '';
+  transition: 1.2s cubic-bezier(0, 0.96, 1, 0.02) background-color;
+}
+
+#hamburger-button div {
+  position: relative;
+  top: 0;
+  height: 3px;
+  margin-bottom: 4px;
+  transition: 0.3s ease transform, 0.3s ease top, 0.3s ease width, 0.3s ease right;
+  border-radius: 2px;
+}
+
+#hamburger-button div:first-child {
+  transform-origin: 0;
+}
+
+#hamburger-button div:last-child {
+  margin-bottom: 0;
+  transform-origin: 24px;
+}
+
+#hamburger-button div:nth-child(2) {
+  right: 0;
+  width: 20px;
+}
+
+.burger-animation-1 {
+  top: 0px;
+  right: -3px;
+  transform: rotateZ(45deg);
+}
+
+.burger-animation-2 {
+  width: 20px;
+  top: 0px;
+  right: 0px;
+  transform: rotateZ(-45deg);
+}
+
+.burger-animation-3 {
+  opacity: 0;
+}
