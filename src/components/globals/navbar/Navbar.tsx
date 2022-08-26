@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useState } from 'react';
+
 import data from '../../../data/partials.json';
-import MobileMenu from './MobileMenu';
+
 import DesktopMenu from './DesktopMenu';
 import Hamburger from './Hamburger';
-import UserButtons from './UserButtons';
 import Logo from './Logo';
+import MobileMenu from './MobileMenu';
+import UserButtons from './UserButtons';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

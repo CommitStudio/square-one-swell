@@ -3,14 +3,14 @@ import React from 'react';
 
 type Props = {
   isOpen: boolean;
-  categories: any[];
+  categories: { name: string; slug: string }[];
 };
 
 const MobileMenu = ({ isOpen, categories }: Props) => {
   return (
     <div
       className={`${
-        !isOpen && '-translate-y-full'
+        !isOpen ? '-translate-y-full' : ''
       } transition duration-700 z-10 w-full pt-[72px] bg-white drop-shadow-xl lg:hidden`}
     >
       <ul className="divide-y text-secondary" aria-labelledby="navbarMenu">

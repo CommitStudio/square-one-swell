@@ -15,9 +15,9 @@ const Hamburger = ({ isOpen, toggle }: Props) => {
       onClick={toggle}
       className="lg:hidden"
     >
-      <div className={`${isOpen && 'burger-animation-1'} bg-primary`}></div>
-      <div className={`${isOpen && 'burger-animation-2'} bg-primary`}></div>
-      <div className={`${isOpen && 'burger-animation-3'} bg-primary`}></div>
+      <div className={`${isOpen ? 'burger-animation-1' : ''} bg-primary`}></div>
+      <div className={`${isOpen ? 'burger-animation-2' : ''} bg-primary`}></div>
+      <div className={`${isOpen ? 'burger-animation-3' : ''} bg-primary`}></div>
     </button>
   );
 };

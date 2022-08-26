@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type Props = {
-  categories: any[];
+  categories: { name: string; slug: string }[];
 };
 
 const DesktopMenu = ({ categories }: Props) => {
