@@ -1,5 +1,16 @@
+import React from 'react';
+
+import { Footer } from '~/components/globals/Footer';
+
 import Navbar from '~/components/globals/navbar/Navbar';
 
-const Home = () => <Navbar />;
+const index = () => {
+  return (
+    <>
+      <Navbar />
+      <Footer />;
+    </>
+  );
+};
 
-export default Home;
+export default index;

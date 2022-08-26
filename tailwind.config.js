@@ -4,9 +4,9 @@ module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      primary: '#cced60',
+      primary: '#CCED60',
       secondary: '#142644',
-      green: '#38c385',
+      green: '#38C385',
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,

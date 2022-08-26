@@ -18,11 +18,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
     <>
       {/* CART BODY */}
       <div
-        className={`fixed inset-0 top-[92px] z-30 transition-transform duration-700 ${
+        className={`fixed inset-0  top-[92px] z-30 transition-transform duration-700 ${
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border h-full text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
+        <nav className="border h-full bg-white text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
             <Image
