@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import data from '../../../data/partials.json';
 import Cart from '../Cart';
 
 import DesktopMenu from './DesktopMenu';
@@ -9,6 +8,8 @@ import Hamburger from './Hamburger';
 import Logo from './Logo';
 import MobileMenu from './MobileMenu';
 import UserButtons from './UserButtons';
+
+import data from '~/data/partials.json';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

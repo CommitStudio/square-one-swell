@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 type Props = {
