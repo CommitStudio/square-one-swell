@@ -83,10 +83,9 @@ const Cart = () => {
                 ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
               </p>
             </div>
-            <button className="bg-green text-white p-3 w-full rounded-md mb-2 text-base">
+            <button className="bg-green text-white p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide">
               CHECKOUT
             </button>
-            <p className="text-right text-white">{`© ${new Date().getFullYear()} Commit Store-Front`}</p>
           </div>
         </nav>
       </div>
