@@ -8,7 +8,7 @@ const index = () => {
   return (
     <>
       <Navbar />
-      <Footer />;
+      <Footer />
     </>
   );
 };
