@@ -1,6 +1,6 @@
-import CTA from './Footer/CTA';
-import Copyright from './Footer/Copyright';
-import LinksAddress from './Footer/LinksAddress';
+import CTA from '~/components/globals/Footer/CTA';
+import Copyright from '~/components/globals/Footer/Copyright';
+import LinksAddress from '~/components/globals/Footer/LinksAddress';
 
 export const Footer = () => {
   return (
