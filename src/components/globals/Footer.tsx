@@ -4,7 +4,7 @@ import LinksAddress from '~/components/globals/Footer/LinksAddress';
 
 export const Footer = () => {
   return (
-    <div className="block md:absolute bg-secondary bottom-0 w-full text-white">
+    <div className="block bg-secondary bottom-0 w-full text-white">
       <CTA />
       <LinksAddress />
       <Copyright />
