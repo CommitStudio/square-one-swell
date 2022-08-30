@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply mt-24;
+}
+
 /* Navbar links----------------------------------------------- */
 .menu-link:active,
 .menu-link:focus-visible,

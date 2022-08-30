@@ -32,8 +32,8 @@ const LinksAddress = () => {
         })}
       </div>
       <div className="space-y-3">
-        <p className="text-2xl text-primary">STORE FRONT</p>
-        <p className="flex flex-col space-y-3">
+        <div className="text-2xl text-primary">STORE FRONT</div>
+        <div className="flex flex-col space-y-3">
           <span className="text-lg font-bold">Montevideo, Uruguay</span>
           <span>Blvr. Artigas 1182 +598 2706 5597</span>
           <div className="flex space-x-4 text-3xl cursor-pointer">
@@ -47,7 +47,7 @@ const LinksAddress = () => {
               <AiOutlineLinkedin />
             </span>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

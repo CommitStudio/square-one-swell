@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className="fixed w-full z-20 top-0 left-0 bg-secondary p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16">
+      <div className="fixed top-0 left-0 w-full h-24 p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16 flex justify-center bg-secondary z-20">
         <div className="flex flex-wrap justify-between items-center mx-auto lg:container">
           <Link href="/">
             <a className="flex items-center">

@@ -8,7 +8,7 @@ const { cart } = cartJson;
 
 const ProductList = () => {
   return (
-    <Container classes="mt-32">
+    <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 justify-items-center">
         {cart.products.map((product, i) => {
           return <ProductCard product={product} key={i} />;

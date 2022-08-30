@@ -1,14 +1,12 @@
-import { ReactNode } from 'react';
-
 type Props = {
-  children: ReactNode;
-  classes?: string;
+  children: React.ReactNode;
+  className?: string;
 };
 
-const Container = ({ children, classes }: Props) => {
+const Container = ({ children, className }: Props) => {
   return (
-    <section className="mx-auto max-w-[500px]">
-      <div className={`${classes ? classes : ''}`}>{children}</div>
+    <section className="max-w-lg mx-auto">
+      <div className={className}>{children}</div>
     </section>
   );
 };
