@@ -13,9 +13,14 @@ import data from '~/data/partials.json';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
+  };
+
+  const toggleHamburgerNav = () => {
+    setIsHamburgerNavOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -24,27 +29,29 @@ const Navbar = () => {
       : (document.body.style.overflow = 'unset');
   }, [isCartOpen]);
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen((prev) => !prev);
-  };
-
   return (
     <nav>
-      <div className="fixed w-full z-20 top-0 left-0 bg-secondary p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16">
+      {/* <div className="fixed top-0 left-0 w-full h-24 p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16 flex items-center justify-between bg-secondary z-20">
         <div className="flex flex-wrap justify-between items-center mx-auto lg:container">
-          <Link href="/">
-            <a className="flex items-center">
-              <Logo brandLogo={data.brand_logo} brandName={data.brand_name} />
-            </a>
-          </Link>
-          <UserButtons toggleCart={toggleCart} />
-          <Hamburger isOpen={isOpen} toggle={handleClick} />
-          <DesktopMenu categories={data.categories} />
-        </div>
+        <Link href="/">
+          <a className="flex items-center">
+            <Logo brandLogo={data.brand_logo} brandName={data.brand_name} />
+          </a>
+        </Link>
+        <UserButtons toggleCart={toggleCart} />
+        <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} /> */}
+      <div className="fixed top-0 left-0 w-full h-24 p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16 flex justify-between bg-secondary z-20">
+        <Link href="/">
+          <a className="flex self-center">
+            <Logo brandLogo={data.brand_logo} brandName={data.brand_name} />
+          </a>
+        </Link>
+        <UserButtons toggleCart={toggleCart} />
+        <DesktopMenu categories={data.categories} />
+        <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
       </div>
-      <MobileMenu isOpen={isOpen} categories={data.categories} />
+      {/* </div> */}
+      <MobileMenu isOpen={isHamburgerNavOpen} categories={data.categories} />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
   );

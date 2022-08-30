@@ -18,7 +18,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
     <>
       {/* CART BODY */}
       <div
-        className={`fixed inset-0  top-[92px] z-30 transition-transform duration-700 ${
+        className={`fixed inset-0 top-24 z-30 transition-transform duration-700 ${
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >

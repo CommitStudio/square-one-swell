@@ -11,7 +11,7 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
     <div
       className={`${
         !isOpen ? '-translate-y-full' : ''
-      } fixed top-0 left-0 transition duration-700 z-10 w-full pt-[72px] bg-white drop-shadow-xl lg:hidden`}
+      } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
     >
       <ul className="divide-y text-secondary" aria-labelledby="navbarMenu">
         {categories.map((category) => {
