@@ -13,9 +13,14 @@ import data from '~/data/partials.json';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
+  };
+
+  const toggleHamburgerNav = () => {
+    setIsHamburgerNavOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -23,12 +28,6 @@ const Navbar = () => {
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'unset');
   }, [isCartOpen]);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen((prev) => !prev);
-  };
 
   return (
     <nav>
@@ -40,11 +39,11 @@ const Navbar = () => {
             </a>
           </Link>
           <UserButtons toggleCart={toggleCart} />
-          <Hamburger isOpen={isOpen} toggle={handleClick} />
+          <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
           <DesktopMenu categories={data.categories} />
         </div>
       </div>
-      <MobileMenu isOpen={isOpen} categories={data.categories} />
+      <MobileMenu isOpen={isHamburgerNavOpen} categories={data.categories} />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
   );
