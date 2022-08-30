@@ -5,7 +5,7 @@ type Props = {
 
 const Container = ({ children, className }: Props) => {
   return (
-    <section className="max-w-lg mx-auto">
+    <section className="max-w-7xl mx-auto">
       <div className={className}>{children}</div>
     </section>
   );
