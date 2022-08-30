@@ -13,7 +13,7 @@ const Hamburger = ({ isOpen, toggle }: Props) => {
       aria-controls="navbar-sticky"
       aria-expanded="false"
       onClick={toggle}
-      className="lg:hidden"
+      className="self-center lg:hidden"
     >
       <div className={`${isOpen ? 'burger-animation-1' : ''} bg-primary`}></div>
       <div className={`${isOpen ? 'burger-animation-2' : ''} bg-primary`}></div>
