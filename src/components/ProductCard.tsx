@@ -41,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
         <p className="text-center text-red-600 text-xl">${product.price}</p>
       </div>
       <button
-        className={`w-full bg-red-600 hover:bg-gray-700 text-white h-12 font-bold transition-all duration-300 ${
+        className={`w-full bg-secondary hover:bg-primary hover:text-secondary text-white h-12 font-bold transition-all duration-300 ${
           isHovered ? '' : 'lg:opacity-0'
         }`}
       >
