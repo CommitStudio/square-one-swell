@@ -2,7 +2,7 @@ import Container from '~/layouts/Container';
 
 const Pagination = () => {
   return (
-    <Container className="flex justify-center">
+    <Container className="flex justify-center mb-5">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
