@@ -50,20 +50,20 @@
         "price": 23.00
       },
       {
-        "name": "Product five",
+        "name": "Product seven",
         "image": { "src": "/img/test-product-pictures/simple-red-t-shirt.jpg", "alt": "product picture" },
         "size": "XL",
-        "color": "pink",
-        "quantity": 6,
-        "price": 75.00
+        "color": "black",
+        "quantity": 2,
+        "price": 113.00
       },
       {
-        "name": "Product six",
+        "name": "Product eight",
         "image": { "src": "/img/test-product-pictures/white-flowers-on-summer-dress.jpg", "alt": "product picture" },
         "size": "XS",
-        "color": "brown",
-        "quantity": 5,
-        "price": 23.00
+        "color": "white",
+        "quantity": 1,
+        "price": 49.00
       }
     ]
   }
