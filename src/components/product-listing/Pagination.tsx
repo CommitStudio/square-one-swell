@@ -4,7 +4,7 @@ const Pagination = () => {
   return (
     <Container className="flex justify-center mb-5">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
-        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div className="flex flex-1 items-center justify-between">
           <div>
             <nav
               className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
@@ -45,13 +45,13 @@ const Pagination = () => {
               </a>
               <a
                 href="#"
-                className="relative hidden items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 md:inline-flex"
+                className="relative items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 inline-flex"
               >
                 3
               </a>
               <a
                 href="#"
-                className="relative hidden items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 md:inline-flex"
+                className="relative items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 inline-flex"
               >
                 4
               </a>
