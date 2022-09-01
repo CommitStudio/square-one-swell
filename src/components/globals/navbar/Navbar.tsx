@@ -9,7 +9,7 @@ import Logo from './Logo';
 import MobileMenu from './MobileMenu';
 import UserButtons from './UserButtons';
 
-import data from '~/data/navbar.json';
+import data from '~/data/partials.json';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

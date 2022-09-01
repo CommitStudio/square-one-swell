@@ -6,7 +6,7 @@ body {
   @apply mt-24;
 }
 
-/* Navbar links----------------------------------------------- */
+/* Navbar links-------------------------------------------------------------- */
 .menu-link:active,
 .menu-link:focus-visible,
 .menu-link:focus-within,
@@ -25,7 +25,7 @@ body {
   }
 }
 
-/* Navbar burger button--------------------------------------- */
+/* Navbar burger button------------------------------------------------------ */
 #hamburger-button {
   width: 20px;
   height: 20px;
@@ -77,29 +77,65 @@ body {
   opacity: 0;
 }
 
-/* HomeHero bullets indicators -------------------------------------*/
-
-.swiper-pagination > .swiper-pagination-bullet {
+/* HomeHero bullets indicators -----------------------------------------------*/
+#header-hero > div > .swiper-pagination > .swiper-pagination-bullet {
   @apply bg-primary;
   opacity: 0.3;
   height: 0.5rem;
   width: 0.5rem;
   transition: 0.8s;
 }
-.swiper-pagination > .swiper-pagination-bullet-active {
+#header-hero > div > .swiper-pagination > .swiper-pagination-bullet-active {
   @apply bg-primary;
   opacity: 1;
   transition: 0.8s;
 }
 
 @media (min-width: 768px) {
-  .swiper-pagination {
-    margin-bottom: 1.6rem;
+  #header-hero > div > .swiper-pagination {
+    margin-bottom: 0.75rem;
   }
 
-  .swiper-pagination > .swiper-pagination-bullet {
+  @media (min-width: 1024px) {
+    #header-hero > div > .swiper-pagination {
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  #header-hero > div > .swiper-pagination > .swiper-pagination-bullet {
     @apply bg-primary;
     height: 0.9rem;
     width: 0.9rem;
   }
+}
+
+/* HomeHero banner text animation-------------------------------------------- */
+.swiper-slide-active > #home-slide-text {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-delay: 1000ms;
+  -webkit-animation-delay: 1000ms;
+}
+
+@-webkit-keyframes slideInUp {
+  0% {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    visibility: visible;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* HomeHero banner text------------------------------------------------------ */
+.text-slide-shadow {
+  text-shadow: 0px 0px 20px #000000, 0px 0px 20px #000000, 0px 0px 6px #000000;
 }
