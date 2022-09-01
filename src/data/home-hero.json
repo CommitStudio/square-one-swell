@@ -1,0 +1,17 @@
+{
+  "images": [
+    { "alt_text": "man-in-blue-jacket", "src": "/img/heros/man-in-blue-jacket.jpg" },
+    {
+      "alt_text": "model-poses-casually-on-ride",
+      "src": "/img/heros/model-poses-casually-on-ride.jpg"
+    },
+    {
+      "alt_text": "push-point-pow",
+      "src": "/img/heros/push-point-pow.jpg"
+    },
+    {
+      "alt_text": "womens-party-fashion-in-sequin-room",
+      "src": "/img/heros/womens-party-fashion-in-sequin-room.jpg"
+    }
+  ]
+}
