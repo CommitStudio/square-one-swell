@@ -27,7 +27,7 @@ const HomeHero = () => {
         {hero_images.map((image, i) => {
           return (
             <SwiperSlide key={i} className="flex flex-col justify-center items-center relative">
-              <div className="h-[50vh] w-full relative sm:h-[90vh]">
+              <div className="h-[70vh] w-full relative sm:h-[90vh]">
                 <Image src={image.src} alt={image.alt_text} layout="fill" objectFit="cover" />
               </div>
               <div
@@ -40,7 +40,7 @@ const HomeHero = () => {
                 <p className="text-3xl font-bold text-primary sm:mt-4 sm:text-6xl">
                   {image.collection}
                 </p>
-                <button className="mt-52 mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0">
+                <button className="mt-80 mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0">
                   SHOP NOW
                 </button>
               </div>
