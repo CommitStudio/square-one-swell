@@ -76,3 +76,30 @@ body {
 .burger-animation-3 {
   opacity: 0;
 }
+
+/* HomeHero bullets indicators -------------------------------------*/
+
+.swiper-pagination > .swiper-pagination-bullet {
+  @apply bg-primary;
+  opacity: 0.3;
+  height: 0.5rem;
+  width: 0.5rem;
+  transition: 0.8s;
+}
+.swiper-pagination > .swiper-pagination-bullet-active {
+  @apply bg-primary;
+  opacity: 1;
+  transition: 0.8s;
+}
+
+@media (min-width: 768px) {
+  .swiper-pagination {
+    margin-bottom: 1.6rem;
+  }
+
+  .swiper-pagination > .swiper-pagination-bullet {
+    @apply bg-primary;
+    height: 0.9rem;
+    width: 0.9rem;
+  }
+}
