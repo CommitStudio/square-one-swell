@@ -27,20 +27,22 @@ const HomeHero = () => {
         {hero_images.map((image, i) => {
           return (
             <SwiperSlide key={i} className="flex flex-col justify-center items-center relative">
-              <div className="h-[70vh] w-full relative sm:h-[90vh]">
+              <div className="h-[75vh] w-full relative sm:h-[90vh]">
                 <Image src={image.src} alt={image.alt_text} layout="fill" objectFit="cover" />
               </div>
               <div
                 id="home-slide-text"
                 className={
-                  'absolute bottom-10 left-50 text-center text-slide-shadow sm:bottom-20 lg:bottom-40'
+                  'h-5/6 flex flex-col justify-between items-center absolute bottom-10 left-50 text-center text-slide-shadow sm:h-auto sm:block sm:bottom-20 lg:bottom-40'
                 }
               >
-                <span className="text-xl text-primary sm:text-3xl">{image.title}</span>
-                <p className="text-3xl font-bold text-primary sm:mt-4 sm:text-6xl">
-                  {image.collection}
-                </p>
-                <button className="mt-80 mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0">
+                <div className="">
+                  <span className="text-2xl text-primary sm:text-3xl">{image.title}</span>
+                  <p className="text-4xl font-bold text-primary sm:mt-4 sm:text-6xl">
+                    {image.collection}
+                  </p>
+                </div>
+                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0">
                   SHOP NOW
                 </button>
               </div>
