@@ -15,7 +15,7 @@ const HomeHero = () => {
   const { hero_images } = data;
 
   return (
-    <header id="header-hero">
+    <header id="header-hero" className="mb-10">
       <Swiper
         modules={[Pagination, EffectFade, Autoplay]}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
