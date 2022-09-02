@@ -1,6 +1,8 @@
-import Container from '~/layouts/Container';
-import data from '~/data/products.json';
 import ProductCard from './ProductCard';
+
+import data from '~/data/products.json';
+
+import Container from '~/layouts/Container';
 
 const HomeProductSection = () => {
   return (
