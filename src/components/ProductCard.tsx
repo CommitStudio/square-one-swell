@@ -35,7 +35,13 @@ const ProductCard = ({ product }: Props) => {
           />
         </div>
         <div className="flex justify-center cursor-pointer">
-          <Image src={product.image.src} alt={product.image.alt} width={300} height={300} />
+          <Image
+            src={product.image.src}
+            alt={product.image.alt}
+            width={300}
+            height={300}
+            objectFit="cover"
+          />
         </div>
         <p className="text-center text-xl pt-3">{product.name}</p>
         <p className="text-center text-red-600 text-xl">${product.price}</p>

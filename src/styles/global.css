@@ -76,3 +76,15 @@ body {
 .burger-animation-3 {
   opacity: 0;
 }
+
+/* HomeProductSection---------------------------------------------- */
+#title-section::before {
+  content: '';
+  width: 60px;
+  height: 2.5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f63440;
+}
