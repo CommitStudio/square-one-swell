@@ -8,8 +8,8 @@ import Container from '~/layouts/Container';
 
 const CategoriesSlider = () => {
   return (
-    <Container className="mb-10">
-      <Swiper slidesPerView={4} spaceBetween={20} loop={true} className="mySwiper">
+    <Container className="pb-10">
+      <Swiper slidesPerView={4} spaceBetween={20} loop={true} className="mySwiper ">
         {categories.map((category, i) => {
           return (
             <SwiperSlide key={i} className="relative grid place-items-center">
