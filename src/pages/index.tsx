@@ -1,6 +1,5 @@
 import CategoriesSlider from '~/components/CategoriesSlider';
 import HomeHero from '~/components/HomeHero';
-import HomeProductSection from '~/components/HomeProductSection';
 import ProductList from '~/components/ProductList';
 
 const Home = () => {
@@ -8,7 +7,10 @@ const Home = () => {
     <>
       <HomeHero />
       <CategoriesSlider />
-      <HomeProductSection />
+      <div className="flex flex-col text-center py-4 mb-8">
+        <p className="text-4xl py-4">New Product</p>
+        <span className="w-[60px] h-[2.5px] bg-secondary mx-auto"></span>
+      </div>
       <ProductList />
     </>
   );
