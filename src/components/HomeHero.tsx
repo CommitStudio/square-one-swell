@@ -36,13 +36,13 @@ const HomeHero = () => {
                   'h-5/6 flex flex-col justify-between items-center absolute bottom-10 left-50 text-center text-slide-shadow sm:h-auto sm:block sm:bottom-20 lg:bottom-40'
                 }
               >
-                <div className="">
+                <div>
                   <span className="text-2xl text-primary sm:text-3xl">{image.title}</span>
                   <p className="text-4xl font-bold text-primary sm:mt-4 sm:text-6xl">
                     {image.collection}
                   </p>
                 </div>
-                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0">
+                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary">
                   SHOP NOW
                 </button>
               </div>
