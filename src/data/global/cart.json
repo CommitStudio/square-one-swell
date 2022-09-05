@@ -3,7 +3,7 @@
     "products": [
       {
         "name": "Product one",
-        "image": { "src": "/img/bag-picture.webp", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/cocktail-dress-off-shoulder.jpg", "alt": "product picture" },
         "size": "M",
         "color": "red",
         "quantity": 3,
@@ -11,7 +11,7 @@
       },
       {
         "name": "Product two",
-        "image": { "src": "/img/bag-picture-2.jpeg", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/little-black-dress.jpg", "alt": "product picture" },
         "size": "L",
         "color": "blue",
         "quantity": 2,
@@ -19,7 +19,7 @@
       },
       {
         "name": "Product three",
-        "image": { "src": "/img/t-shirt-picture.jpeg", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/mens-spring-fall-jacket-with-zipper.jpg", "alt": "product picture" },
         "size": "S",
         "color": "green",
         "quantity": 5,
@@ -27,7 +27,7 @@
       },
       {
         "name": "Product four",
-        "image": { "src": "/img/bag-picture-2.jpeg", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/mens-wind-rain-jacket.jpg", "alt": "product picture" },
         "size": "XXL",
         "color": "violet",
         "quantity": 1,
@@ -35,7 +35,7 @@
       },
       {
         "name": "Product five",
-        "image": { "src": "/img/bag-picture.webp", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/polka-dot-summer-dress.jpg", "alt": "product picture" },
         "size": "XL",
         "color": "pink",
         "quantity": 6,
@@ -43,11 +43,27 @@
       },
       {
         "name": "Product six",
-        "image": { "src": "/img/t-shirt-picture.jpeg", "alt": "product picture" },
+        "image": { "src": "/img/test-product-pictures/red-plaid-shirt.jpg", "alt": "product picture" },
         "size": "XS",
         "color": "brown",
         "quantity": 5,
         "price": 23.00
+      },
+      {
+        "name": "Product seven",
+        "image": { "src": "/img/test-product-pictures/simple-red-t-shirt.jpg", "alt": "product picture" },
+        "size": "XL",
+        "color": "black",
+        "quantity": 2,
+        "price": 113.00
+      },
+      {
+        "name": "Product eight",
+        "image": { "src": "/img/test-product-pictures/white-flowers-on-summer-dress.jpg", "alt": "product picture" },
+        "size": "XS",
+        "color": "white",
+        "quantity": 1,
+        "price": 49.00
       }
     ]
   }
