@@ -42,7 +42,7 @@ const HomeHero = () => {
                     {image.collection}
                   </p>
                 </div>
-                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary">
+                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] transition-all duration-300 sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary">
                   SHOP NOW
                 </button>
               </div>
