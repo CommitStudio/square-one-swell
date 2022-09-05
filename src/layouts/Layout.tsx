@@ -9,7 +9,7 @@ export default function Layout({ children }: Props) {
   return (
     <>
       <Navbar />
-      {children}
+      <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">{children}</div>
       <Footer />
     </>
   );
