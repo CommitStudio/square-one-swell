@@ -1,13 +1,11 @@
 import Image from 'next/image';
 
-import cartJson from '~/data/global/cart.json';
+import data from '~/data/products.json';
 
 type Props = {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-const { cart } = cartJson;
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const closeCart = () => {
@@ -24,7 +22,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
       >
         <nav className="border h-full bg-white text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
-            <h3 className="mb-6 text-xl font-bold">Cart ({cart.products.length})</h3>
+            <h3 className="mb-6 text-xl font-bold">Cart ({data.products.length})</h3>
             <Image
               src="/img/close-logo.svg"
               alt="Close icon"
@@ -37,7 +35,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           <div className="overflow-y-auto px-7 mb-auto">
             <hr className="mb-5 opacity-20" />
-            {cart.products.map((product, i) => (
+            {data.products.map((product, i) => (
               <div
                 key={i}
                 className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
@@ -67,13 +65,13 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             <div className="grid grid-cols-2 text-base mb-3 text-white">
               <p>Subtotal</p>
               <p className="text-right">
-                ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
+                ${data.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
               </p>
               <p>Shipping</p>
               <p className="text-right">$0.00</p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
-                ${cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
+                ${data.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
               </p>
             </div>
             <button className="bg-primary text-secondary p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
