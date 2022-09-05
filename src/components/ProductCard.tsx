@@ -22,7 +22,7 @@ const ProductCard = ({ product }: Props) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`max-w-xs border-l lg:border-l-0 border-r transition-all duration-300 ${
+      className={`max-w-xs border-l lg:border-l-0 border-r transition-all duration-300 w-full ${
         isHovered ? 'lg:shadow-[0px_-5px_40px_-15px_rgba(0,0,0,0.3)]' : ''
       }`}
     >
@@ -47,7 +47,7 @@ const ProductCard = ({ product }: Props) => {
         <p className="text-center text-red-600 text-xl">${product.price}</p>
       </div>
       <button
-        className={`w-full bg-red-600 hover:bg-gray-700 text-white h-12 font-bold transition-all duration-300 ${
+        className={`w-full bg-secondary hover:bg-primary hover:text-secondary text-white h-12 font-bold transition-all duration-300 ${
           isHovered ? '' : 'lg:opacity-0'
         }`}
       >

@@ -1,0 +1,51 @@
+{
+    "filter": {
+      "categories": [
+        {
+          "title": "Sort By",
+          "attribute1": "Default",
+          "attribute2": "Popularity",
+          "attribute3": "Avarage rating",
+          "attribute4": "Newness",
+          "attribute5": "Price: low to high",
+          "attribute6": "Price: high to low"
+        },
+        {
+          "title": "Price",
+          "attribute1": "$0.00 - $50.00",
+          "attribute2": "$50.00 - $100.00",
+          "attribute3": "$100.00 - $150.00",
+          "attribute4": "$150.00 - $200.00",
+          "attribute5": "$200.00 - 250.00",
+          "attribute6": "250.00+"
+        },
+        {
+          "title": "Colors",
+          "attribute1": "Yellow",
+          "attribute2": "White",
+          "attribute3": "Red",
+          "attribute4": "Black",
+          "attribute5": "Green",
+          "attribute6": "Orange"
+        },
+        {
+          "title": "Size",
+          "attribute1": "L",
+          "attribute2": "M",
+          "attribute3": "S",
+          "attribute4": "XL",
+          "attribute5": "XXL",
+          "attribute6": "Over Size"
+        },
+        {
+          "title": "Tags",
+          "attribute1": "All products",
+          "attribute2": "Bags",
+          "attribute3": "Chair",
+          "attribute4": "Decoration",
+          "attribute5": "Fashion",
+          "attribute6": "Accesories"
+        }
+      ]
+    }
+  }

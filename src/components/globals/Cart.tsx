@@ -42,7 +42,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                 key={i}
                 className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
               >
-                <Image src={product.image.src} alt={product.image.alt} width={100} height={100} />
+                <div className="relative h-24 w-24">
+                  <Image
+                    src={product.image.src}
+                    alt={product.image.alt}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
                 <div>
                   <p>{product.name}</p>
                   <p>Size: {product.size}</p>
