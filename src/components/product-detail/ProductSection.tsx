@@ -5,7 +5,7 @@ import ProductInfo from './ProductInfo';
 
 const ProductSection = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <ProductImageGallery />
       <ProductInfo />
     </div>
