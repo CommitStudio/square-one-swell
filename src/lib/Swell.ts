@@ -17,8 +17,15 @@ export default class Swell {
     });
 
     return results.map((product) => ({
+      id: product.id,
       name: product.name,
-      enabled: product.active
+      active: product.active,
+      description: product.description,
+      slug: product.slug,
+      tags: product.tags,
+      price: product.price,
+      sale: product.sale,
+      sku: product.sku
     }));
   }
 }
