@@ -9,7 +9,7 @@ const UserButtons = ({ toggleCart }: Props) => {
     <div className="flex lg:order-2">
       <button
         type="button"
-        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
+        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
         title="Search"
       >
         <FaSearch />
@@ -17,7 +17,7 @@ const UserButtons = ({ toggleCart }: Props) => {
 
       <button
         type="button"
-        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
+        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
         title="Cart"
         onClick={toggleCart}
       >
@@ -26,7 +26,7 @@ const UserButtons = ({ toggleCart }: Props) => {
 
       <button
         type="button"
-        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center hidden lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
+        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
         title="Login"
       >
         <FaUser />

@@ -113,12 +113,12 @@ body {
 .swiper-slide-active > #home-slide-text {
   -webkit-animation-name: slideInUp;
   animation-name: slideInUp;
-  -webkit-animation-duration: 700ms;
-  animation-duration: 700ms;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  animation-delay: 1000ms;
-  -webkit-animation-delay: 1000ms;
+  animation-delay: 150ms;
+  -webkit-animation-delay: 150ms;
 }
 
 @-webkit-keyframes slideInUp {
