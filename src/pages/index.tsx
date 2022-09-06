@@ -1,15 +1,13 @@
 import CategoriesSlider from '~/components/CategoriesSlider';
 import HomeHero from '~/components/HomeHero';
-import HomeProductSection from '~/components/HomeProductSection';
-import ProductList from '~/components/ProductList';
+import ProductHighlight from '~/components/product-listing/ProductHighlight';
 
 const Home = () => {
   return (
     <>
       <HomeHero />
       <CategoriesSlider />
-      <HomeProductSection />
-      <ProductList />
+      <ProductHighlight />
     </>
   );
 };
