@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -32,6 +33,8 @@ const ProductImageGallery = () => {
         showNav={false}
         isRTL={false}
         useTranslate3D={false}
+        useBrowserFullscreen={true}
+        showFullscreenButton={true}
       />
     </div>
   );
