@@ -1,6 +1,6 @@
-import CategoriesSlider from '~/components/CategoriesSlider';
-import HomeHero from '~/components/HomeHero';
-import ProductHighlight from '~/components/product-listing/ProductHighlight';
+import CategoriesSlider from '~/components/home/CategoriesSlider';
+import HomeHero from '~/components/home/HomeHero';
+import ProductHighlight from '~/components/home/ProductHighlight';
 
 const Home = () => {
   return (
