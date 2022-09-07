@@ -148,7 +148,7 @@ body {
 
 #product-gallery .image-gallery-slide img {
   width: 100%;
-  height: 320px;
+  height: 260px;
   object-fit: cover;
   overflow: hidden;
   object-position: center center;
@@ -191,9 +191,15 @@ body {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
-  #product-gallery .image-gallery-thumbnails-container {
-    display: block;
+@media (min-width: 375px) {
+  #product-gallery .image-gallery-slide img {
+    height: 360px;
+  }
+}
+
+@media (min-width: 640px) {
+  #product-gallery .image-gallery-slide img {
+    height: 410px;
   }
 }
 
