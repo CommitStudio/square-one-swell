@@ -4,6 +4,7 @@
   "categories": [
     { "name": "WOMEN", "slug": "women" },
     { "name": "MEN", "slug": "men" },
+    { "name": "PRODUCTS", "slug": "products" },
     { "name": "ABOUT US", "slug": "about-us" },
     { "name": "CONTACT", "slug": "contact" }
   ]
