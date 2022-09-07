@@ -24,7 +24,7 @@ const ProductImageGallery = () => {
   });
 
   return (
-    <div id="product-gallery" className="h-full mt-10">
+    <div id="product-gallery" className="h-full w-full mt-10">
       <ImageGallery
         items={images}
         thumbnailPosition="left"
