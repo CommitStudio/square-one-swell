@@ -15,7 +15,6 @@ const ProductHighlight = () => {
           LOAD MORE
         </button>
       </div>
-      ;
     </>
   );
 };
