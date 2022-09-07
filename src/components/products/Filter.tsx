@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
-import filterJson from '~/data/product-listing/filter.json';
+import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
 const { filter } = filterJson;
 
