@@ -8,7 +8,7 @@ const ProductListing = () => {
     <>
       <Hero />
       <Filter />
-      <ProductList />
+      <ProductList threeColumns />
       <Pagination />
     </>
   );
