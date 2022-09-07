@@ -14,8 +14,8 @@ declare module 'swell-node' {
     port?: string;
     verifyCert?: boolean;
     version?: string;
-    session?: any;
-    route?: any;
+    session?: unknown;
+    route?: unknown;
     timeout?: number;
     routeClientId?: string;
     cache?: boolean;
@@ -23,11 +23,12 @@ declare module 'swell-node' {
   }
 
   interface SwellNodeClient extends EventEmitter {
-    params: any;
-    server: any;
-    cache: any;
+    params: unknown;
+    server: unknown;
+    cache: unknown;
     authed: boolean;
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-new
     new (
       clientId: string,
       clientKey: string,
@@ -42,11 +43,11 @@ declare module 'swell-node' {
     ): SwellNodeClient;
     init(clientId: string, clientKey: string, options?: SwellNodeClientParams): SwellNodeClient;
     connect(callback: (arg: this) => void | Promise<void>): void;
-    request<T = any>(method: string, url: string, data?: any): Promise<T>;
-    get<T = any>(url: string, data?: any): Promise<T>;
-    post<T = any>(url: string, data?: any): Promise<T>;
-    put<T = any>(url: string, data?: any): Promise<T>;
-    delete<T = any>(url: string, data?: any): Promise<T>;
+    request<T = unknown>(method: string, url: string, data?: unknown): Promise<T>;
+    get<T = unknown>(url: string, data?: unknown): Promise<T>;
+    post<T = unknown>(url: string, data?: unknown): Promise<T>;
+    put<T = unknown>(url: string, data?: unknown): Promise<T>;
+    delete<T = unknown>(url: string, data?: unknown): Promise<T>;
   }
 
   export function createClient(
