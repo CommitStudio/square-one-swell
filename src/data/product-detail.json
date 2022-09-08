@@ -1,4 +1,12 @@
 {
-  "sizes": ["L", "M", "S", "XL", "XXL", "Over Size"],
-  "categories": ["Men", "Women", "Kids", "Accessories"]
+  "test_product": {
+    "id": 0,
+    "title": "Best Woolen T-Shirt",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "price": 90.0,
+    "colors": ["#FFFF00", "#FFFF", "#0000FF"],
+    "sizes": ["L", "M", "S", "XL", "XXL", "Over Size"],
+    "characteristics": ["100% cotton", "6 months warranty", "High quality"],
+    "categories": ["Men", "Women", "Kids", "Accessories"]
+  }
 }

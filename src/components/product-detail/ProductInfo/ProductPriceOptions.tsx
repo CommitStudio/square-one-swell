@@ -1,20 +1,21 @@
 import React from 'react';
 
-import data from '~/data/product-detail.json';
+type PriceOptions = {
+  sizes?: string[];
+  price?: number;
+};
 
-const { sizes } = data;
-
-const ProductPriceOptions = () => {
+const ProductPriceOptions = ({ sizes, price }: PriceOptions) => {
   return (
     <div className="space-y-1">
       <div>
-        <span className="line-through text-gray-300 mr-2">$90.00</span>
-        $24.00
+        <span className="line-through text-gray-300 mr-2">U${price?.toFixed(2)}</span>
+        U${price && (price / 2.5).toFixed(2)}
       </div>
       <div className="space-x-0 md:space-x-3">
         <span>Size:</span>
         <span>
-          {sizes.map((size) => {
+          {sizes?.map((size) => {
             return (
               <button className="hover:bg-gray-100 p-3 rounded" key={size}>
                 {size}

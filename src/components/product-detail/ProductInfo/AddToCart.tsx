@@ -9,11 +9,12 @@ const AddToCart = () => {
     <div className="flex space-x-6">
       <div className="flex">
         <input
-          type="text"
+          type="number"
           name="product-quantity"
           value={productAmount}
           id="product-quantity"
-          className="focus-visible:outline-none w-10 p-1 text-center border border-r-0"
+          className="focus-visible:outline-none w-10 p-1 text-center border border-r-0 appearance-none"
+          onChange={(e) => setProductAmount(Number(e.target.value))}
         />
         <div className="flex flex-col">
           <button
