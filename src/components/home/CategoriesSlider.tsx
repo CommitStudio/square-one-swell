@@ -1,31 +1,33 @@
 import Image from 'next/image';
-
 import { Navigation } from 'swiper';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { categories } from '~/data/categories.json';
-import { useViewportWidth } from '~/hooks/useWindowHooks';
+import categoriesJson from '~/data/categories.json';
+
+const { categories } = categoriesJson;
 
 const CategoriesSlider = () => {
-  const viewportWidth = useViewportWidth();
-  const isMobile = viewportWidth <= 768;
-  const enabledSlider = () => {
-    if ((isMobile && categories.length > 2) || (!isMobile && categories.length > 3)) return true;
-    else return false;
-  };
-  const slidesPerViewDesktop = categories.length <= 3 ? categories.length : 4;
-
   return (
-    <div id="slider" className="px-5">
+    <div id="slider" className="px-5 mb-5">
       <Swiper
+        modules={[Navigation]}
         spaceBetween={20}
         loop
-        slidesPerView={isMobile ? 2 : slidesPerViewDesktop}
-        enabled={enabledSlider()}
-        navigation={enabledSlider()}
-        modules={[Navigation]}
+        navigation
+        breakpoints={{
+          768: {
+            slidesPerView: categories.length <= 3 ? categories.length : 4,
+            enabled: categories.length <= 3 ? false : true
+          },
+          375: {
+            slidesPerView: 2,
+            enabled: categories.length <= 2 ? false : true
+          }
+        }}
         className="mySwipe"
       >
         {categories.map((category, i) => {
@@ -39,7 +41,7 @@ const CategoriesSlider = () => {
                   objectFit="cover"
                 />
               </div>
-              <div className="absolute">
+              <div className="absolute bottom-10">
                 <button className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3">
                   {category.name}
                 </button>

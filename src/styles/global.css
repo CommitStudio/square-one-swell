@@ -140,10 +140,11 @@ body {
   text-shadow: 0px 0px 20px #000000, 0px 0px 20px #000000, 0px 0px 6px #000000;
 }
 
-#slider .swiper-button-next {
-  @apply text-secondary;
-}
-
-#slider .swiper-button-prev {
-  @apply text-secondary;
+#slider .swiper-button-next,
+#slider .swiper-button-prev,
+#slider .swiper-button-next::after,
+#slider .swiper-button-prev::after {
+  color: white;
+  font-size: 25px;
+  font-weight: bolder;
 }
