@@ -6,8 +6,8 @@ import { useCountdown } from '~/hooks/useCountdown';
 import Container from '~/layouts/Container';
 
 const DealOfTheWeek = () => {
-  const [days, hours, minutes, seconds] = useCountdown(1663091705812);
-
+  const dateTimeDealWillFinish = new Date('2022-09-09T00:00:00').getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
+  const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
   return (
     <section className="w-full bg-gray-200 relative mb-10">
       <Container>
@@ -25,25 +25,25 @@ const DealOfTheWeek = () => {
             <p className="mb-5 text-center text-gray-600">Special Discount Limited Time Only</p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 justify-between mb-10 md:mb-0">
               <div>
-                <div className="bg-secondary text-primary mx-auto h-20 w-20 flex justify-center items-center text-3xl">
+                <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
                   {days}
                 </div>
                 <p className="text-center text-gray-600">Days</p>
               </div>
               <div>
-                <div className="bg-secondary text-primary mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+                <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
                   {hours}
                 </div>
                 <p className="text-center text-gray-600">Hours</p>
               </div>
               <div>
-                <div className="bg-secondary text-primary mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+                <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
                   {minutes}
                 </div>
                 <p className="text-center text-gray-600">Minutes</p>
               </div>
               <div>
-                <div className="bg-secondary text-primary mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+                <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
                   {seconds}
                 </div>
                 <p className="text-center text-gray-600">Seconds</p>
