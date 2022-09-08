@@ -17,11 +17,13 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.4.0",
     "swell-node": "^4.0.10",
+    "react-image-gallery": "^1.2.9",
     "swiper": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
     "@types/react": "17.0.41",
+    "@types/react-image-gallery": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "autoprefixer": "^10.4.2",
