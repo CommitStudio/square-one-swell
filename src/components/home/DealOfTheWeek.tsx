@@ -6,7 +6,7 @@ import { useCountdown } from '~/hooks/useCountdown';
 import Container from '~/layouts/Container';
 
 const DealOfTheWeek = () => {
-  const dateTimeDealWillFinish = new Date('2022-09-09T00:00:00').getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
+  const dateTimeDealWillFinish = new Date('2022-09-13T00:00:00').getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
   const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
   return (
     <section className="w-full bg-gray-200 relative mb-10">
