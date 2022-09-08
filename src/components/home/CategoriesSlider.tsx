@@ -1,15 +1,35 @@
 import Image from 'next/image';
+import { Navigation } from 'swiper';
+
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { categories } from '~/data/categories.json';
-import Container from '~/layouts/Container';
+import categoriesJson from '~/data/categories.json';
+
+const { categories } = categoriesJson;
 
 const CategoriesSlider = () => {
   return (
-    <Container className="pb-10">
-      <Swiper slidesPerView={4} spaceBetween={20} loop={true} className="mySwiper ">
+    <div id="slider" className="px-5 mb-5">
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={20}
+        loop
+        navigation
+        breakpoints={{
+          768: {
+            slidesPerView: categories.length <= 3 ? categories.length : 4,
+            enabled: categories.length <= 3 ? false : true
+          },
+          375: {
+            slidesPerView: 2,
+            enabled: categories.length <= 2 ? false : true
+          }
+        }}
+        className="mySwipe"
+      >
         {categories.map((category, i) => {
           return (
             <SwiperSlide key={i} className="relative grid place-items-center">
@@ -21,8 +41,8 @@ const CategoriesSlider = () => {
                   objectFit="cover"
                 />
               </div>
-              <div className="absolute">
-                <button className="bg-white px-10 py-3 text-sm hover:bg-primary transition-all duration-200">
+              <div className="absolute bottom-10">
+                <button className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3">
                   {category.name}
                 </button>
               </div>
@@ -30,7 +50,7 @@ const CategoriesSlider = () => {
           );
         })}
       </Swiper>
-    </Container>
+    </div>
   );
 };
 
