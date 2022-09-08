@@ -28,7 +28,13 @@ const HomeHero = () => {
           return (
             <SwiperSlide key={i} className="flex flex-col justify-center items-center relative">
               <div className="h-[75vh] w-full relative sm:h-[90vh]">
-                <Image src={image.src} alt={image.alt_text} layout="fill" objectFit="cover" />
+                <Image
+                  src={image.src}
+                  alt={image.alt_text}
+                  layout="fill"
+                  objectFit="cover"
+                  priority={true}
+                />
               </div>
               <div
                 id="home-slide-text"
