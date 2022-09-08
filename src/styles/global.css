@@ -6,25 +6,6 @@ body {
   @apply mt-24;
 }
 
-/* Navbar links-------------------------------------------------------------- */
-.menu-link:active,
-.menu-link:focus-visible,
-.menu-link:focus-within,
-.menu-link:target {
-  background-color: transparent;
-  background: none;
-  text-decoration: none;
-  box-shadow: none;
-}
-
-@media (min-width: 1024px) {
-  .menu-link:focus {
-    border: #b6da40 solid 2px;
-    border-radius: 8px;
-    padding: 6px 14px 6px 10px;
-  }
-}
-
 /* Navbar burger button------------------------------------------------------ */
 #hamburger-button {
   width: 20px;
