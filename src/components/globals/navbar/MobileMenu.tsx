@@ -17,20 +17,20 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
           return (
             <li key={category.slug}>
               <Link href={`/${category.slug}`}>
-                <a className="menu-link block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary  ">
+                <a className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary focus:bg-secondary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary  ">
                   {category.name}
                 </a>
               </Link>
             </li>
           );
         })}
-        <li className="block py-3 px-4 text-secondary  active:bg-secondary active:text-primary sm:px-6 lg:hidden lg:text-white focus:decoration-primary">
+        <li className="block py-3 px-4 text-secondary  active:bg-secondary active:text-primary focus:bg-secondary sm:px-6 lg:hidden lg:text-white">
           SEARCH
         </li>
-        <li className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary sm:px-6 lg:hidden lg:text-white focus:decoration-primary">
+        <li className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:bg-secondary sm:px-6 lg:hidden lg:text-white">
           CART
         </li>
-        <li className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary sm:px-6 lg:hidden lg:text-white focus:decoration-primary">
+        <li className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:bg-secondary sm:px-6 lg:hidden lg:text-white">
           LOGIN
         </li>
       </ul>

@@ -15,7 +15,7 @@ const DesktopMenu = ({ categories }: Props) => {
           return (
             <li key={category.slug}>
               <Link href={`/${category.slug}`}>
-                <a className="menu-link block py-2 pr-4 pl-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary  ">
+                <a className="block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary">
                   {category.name}
                 </a>
               </Link>
