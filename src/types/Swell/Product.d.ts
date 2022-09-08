@@ -29,7 +29,6 @@ interface SwellProduct {
 }
 
 interface SwellProductImage {
-  shopify_id: number;
   caption?: string;
   file: SwellProductFile;
   id: string;
@@ -47,7 +46,6 @@ interface SwellProductFile {
 }
 
 interface SwellProductOption {
-  shopify_id: number;
   name: string;
   variant: boolean;
   active: boolean;

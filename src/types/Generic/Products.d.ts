@@ -6,7 +6,12 @@ interface Product {
   slug: string;
   tags: string[];
   price: number;
-  images?: string[];
+  images?: ProductImage[];
   sale?: boolean;
   sku?: string;
+}
+
+interface ProductImage {
+  url: string;
+  alt?: string;
 }

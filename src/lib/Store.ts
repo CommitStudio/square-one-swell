@@ -7,7 +7,13 @@ class Store {
   private storeClass;
 
   constructor() {
-    this.storeClass = new Swell();
+    const defaultStore = process.env.DEFAULT_STORE as string;
+
+    if (defaultStore === 'swell') {
+      this.storeClass = new Swell();
+    } else {
+      throw new Error('Store not found');
+    }
   }
 
   async getProducts(): Promise<Product[]> {
