@@ -5,7 +5,7 @@ const Countdown = () => {
   const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 justify-between mb-10 md:mb-0">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 justify-between mb-10 md:mb-0">
       <div>
         <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
           {Number(days) >= 0 ? days : '00'}

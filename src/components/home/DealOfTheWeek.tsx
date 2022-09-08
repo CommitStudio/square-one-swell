@@ -12,7 +12,7 @@ const DealOfTheWeek = () => {
     <section className="w-full bg-gray-200 relative mb-10">
       <Container>
         <div className="grid md:grid-cols-2 gap-y-10 place-items-center">
-          <div className="relative h-96 w-full justify-center">
+          <div className="relative h-96 my-6 w-full justify-center">
             <Image
               src={data.products[0].image.src}
               alt={data.products[0].image.alt}
