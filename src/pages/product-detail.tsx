@@ -7,7 +7,7 @@ import Container from '~/layouts/Container';
 const ProductDetail = () => {
   return (
     <>
-      <Hero />
+      <Hero title="Product detail" />
       <Container>
         <ProductSection />
       </Container>

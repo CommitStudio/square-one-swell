@@ -6,7 +6,7 @@ import Pagination from '~/components/product-listing/Pagination';
 const ProductListing = () => {
   return (
     <>
-      <Hero />
+      <Hero title="Products list" />
       <Filter />
       <ProductList threeColumns />
       <Pagination />
