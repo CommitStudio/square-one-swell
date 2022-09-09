@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard';
+import ProductCard from '~/components/ProductCard';
 
 import data from '~/data/products.json';
 import Container from '~/layouts/Container';
