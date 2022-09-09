@@ -263,7 +263,7 @@ body {
   }
 }
 
-/* Remove appearance from input */
+/* Remove appearance from input for product detail */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -2,6 +2,7 @@
   "test_product": {
     "id": 0,
     "title": "Best Woolen T-Shirt",
+    "rating": 3,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "price": 90.0,
     "colors": ["#FFFF00", "#FFFF", "#0000FF"],

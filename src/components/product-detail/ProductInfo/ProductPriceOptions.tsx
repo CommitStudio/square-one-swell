@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 type PriceOptions = {
   sizes?: string[];
@@ -6,6 +6,7 @@ type PriceOptions = {
 };
 
 const ProductPriceOptions = ({ sizes, price }: PriceOptions) => {
+  const [sizeSelected, setSizeSelected] = useState('');
   return (
     <div className="space-y-1">
       <div>
@@ -14,10 +15,18 @@ const ProductPriceOptions = ({ sizes, price }: PriceOptions) => {
       </div>
       <div className="space-x-0 md:space-x-3">
         <span>Size:</span>
-        <span>
+        <span className="space-x-2">
           {sizes?.map((size) => {
             return (
-              <button className="hover:bg-gray-100 p-3 rounded" key={size}>
+              <button
+                className={`hover:bg-gray-100 p-3 rounded ${
+                  sizeSelected === size ? 'bg-gray-100' : ''
+                }`}
+                onClick={() => {
+                  setSizeSelected(size);
+                }}
+                key={size}
+              >
                 {size}
               </button>
             );
