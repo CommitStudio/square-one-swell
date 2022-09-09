@@ -1,12 +1,12 @@
+import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
 import Filter from '~/components/products/Filter';
-import Hero from '~/components/products/Hero';
 import Pagination from '~/components/products/Pagination';
 
 const Products = () => {
   return (
     <>
-      <Hero />
+      <Hero title="Shop" />
       <Filter />
       <ProductList threeColumns />
       <Pagination />
