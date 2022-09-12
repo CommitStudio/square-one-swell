@@ -7,11 +7,11 @@ interface Product {
   tags: string[];
   price: number;
   images?: ProductImage[];
-  sale?: boolean;
-  sku?: string;
+  sale?: boolean | null;
+  sku?: string | null;
 }
 
 interface ProductImage {
-  url: string;
+  src: string;
   alt?: string;
 }

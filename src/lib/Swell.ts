@@ -24,8 +24,12 @@ export default class Swell {
       slug: product.slug,
       tags: product.tags,
       price: product.price,
-      sale: product.sale,
-      sku: product.sku
+      sale: product.sale || null,
+      sku: product.sku || null,
+      images:
+        product.images.map((image) => {
+          return { src: image.file.url, alt: product.name };
+        }) || []
     }));
   }
 }
