@@ -14,7 +14,7 @@ export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(maxProducts: number): Promise<Product[]> {
+  async getProducts(maxProducts = 10): Promise<Product[]> {
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: Number(maxProducts)
