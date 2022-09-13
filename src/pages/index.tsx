@@ -15,6 +15,7 @@ const Home = ({ products }: HomeProps) => {
     <>
       <HomeHero />
       <CategoriesSlider />
+      {/* TODO: Update call for specific filter */}
       <ProductHighlight products={products} />
       <DealOfTheWeek />
     </>
