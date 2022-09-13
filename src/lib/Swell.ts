@@ -20,11 +20,17 @@ export default class Swell {
       limit: Number(maxProducts)
     });
 
-    // const imageFormatter = (product: Product) => {
-    //   product?.images?.map((image) => {
-    //     return { src: image?.file?.url as, alt: product.name };
-    //   });
-    // };
+    const getImages = (product: SwellProduct) => {
+      const imagesArray = product.images.map((image) => {
+        return (
+          {
+            src: image.file.url,
+            alt: product.name
+          } || []
+        );
+      });
+      return imagesArray;
+    };
 
     return results.map((product) => ({
       id: product.id,
@@ -35,10 +41,7 @@ export default class Swell {
       price: product.price,
       sale: product.sale || null,
       sku: product.sku || null,
-      images:
-        product.images.map((image) => {
-          return { src: image.file.url, alt: product.name };
-        }) || []
+      images: getImages(product)
     }));
   }
 }
