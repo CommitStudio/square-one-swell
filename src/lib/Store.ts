@@ -16,8 +16,8 @@ class Store {
     }
   }
 
-  async getProducts(maxProducts = 10): Promise<Product[]> {
-    return await this.storeClass.getProducts(maxProducts);
+  async getProducts(maxProducts = 10, minPrice = 0, maxPrice = 10000): Promise<Product[]> {
+    return await this.storeClass.getProducts(maxProducts, minPrice, maxPrice);
   }
 }
 
