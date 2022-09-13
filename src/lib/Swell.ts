@@ -14,10 +14,17 @@ export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(): Promise<Product[]> {
+  async getProducts(maxProducts: number): Promise<Product[]> {
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
-      active: true
+      active: true,
+      limit: Number(maxProducts)
     });
+
+    // const imageFormatter = (product: Product) => {
+    //   product?.images?.map((image) => {
+    //     return { src: image?.file?.url as, alt: product.name };
+    //   });
+    // };
 
     return results.map((product) => ({
       id: product.id,

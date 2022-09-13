@@ -22,7 +22,7 @@ const Products = ({ products }: ProductsProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const products = await Store.getProducts();
+  const products = await Store.getProducts(10);
   return {
     props: { products }
   };
