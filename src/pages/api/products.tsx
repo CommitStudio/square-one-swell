@@ -9,7 +9,7 @@ const handler = async (
   minPrice: number,
   maxPrice: number
 ) => {
-  const products = await Store.getProducts(maxProducts, minPrice, maxPrice);
+  const products = await Store.getProducts(minPrice, maxPrice, maxProducts);
   res.status(200).json(products);
 };
 

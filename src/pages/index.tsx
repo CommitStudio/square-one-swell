@@ -13,7 +13,6 @@ type HomeProps = {
 
 const Home = ({ products }: HomeProps) => {
   const router = useRouter();
-  console.log(products);
 
   return (
     <>
@@ -41,6 +40,14 @@ const Home = ({ products }: HomeProps) => {
         }}
       >
         Productos de $100 a $200
+      </button>
+      <button
+        className="bg-primary m-5"
+        onClick={() => {
+          void router.push('/');
+        }}
+      >
+        Traer todos los productos
       </button>
       <CategoriesSlider />
       {/* TODO: Update call for specific filter */}

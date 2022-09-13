@@ -14,12 +14,13 @@ export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(maxProducts = 10, minPrice = 0, maxPrice = 10000): Promise<Product[]> {
+  async getProducts(minPrice = 0, maxPrice = 10000, maxProducts = 10): Promise<Product[]> {
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
       where: {
-        price: { $gte: minPrice, $lte: maxPrice }
+        price:
+          maxPrice && (minPrice || minPrice == 0) ? { $gte: minPrice, $lte: maxPrice } : { $gte: 0 }
       }
     });
 
