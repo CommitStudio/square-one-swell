@@ -5,7 +5,10 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
-const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
+const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY, {
+  host: 'api-staging.swell.store',
+  verifyCert: false
+});
 
 export default class Swell {
   /*****************************************************************************
@@ -22,10 +25,13 @@ export default class Swell {
       active: product.active,
       description: product.description,
       slug: product.slug,
-      tags: product.tags,
       price: product.price,
-      sale: product.sale,
-      sku: product.sku
+      sale: product.sale || null,
+      sku: product.sku || null,
+      images:
+        product.images.map((image) => {
+          return { src: image.file.url, alt: product.name };
+        }) || []
     }));
   }
 }
