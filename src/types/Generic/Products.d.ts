@@ -4,7 +4,7 @@ interface Product {
   active: boolean;
   description: string;
   slug: string;
-  tags: string[];
+  tags?: string[];
   price: number;
   images?: ProductImage[];
   sale?: boolean | null;
