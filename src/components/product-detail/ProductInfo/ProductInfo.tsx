@@ -7,20 +7,7 @@ import ProductPriceOptions from '~/components/product-detail/ProductInfo/Product
 import ProductRating from '~/components/product-detail/ProductInfo/ProductRating';
 import ProductSocialMedia from '~/components/product-detail/ProductInfo/ProductSocialMedia';
 import ProductTitle from '~/components/product-detail/ProductInfo/ProductTitle';
-
-export interface Props {
-  test_product: {
-    id?: number;
-    title?: string;
-    rating?: number;
-    description?: string;
-    price?: number;
-    colors?: string[];
-    sizes?: string[];
-    characteristics?: string[];
-    categories?: string[];
-  };
-}
+import { Props } from '~/components/product-detail/ProductSection';
 
 const ProductInfo = ({ test_product }: Props) => {
   return (
