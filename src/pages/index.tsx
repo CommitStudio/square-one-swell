@@ -57,14 +57,13 @@ const Home = ({ products }: HomeProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const products = await Store.getProducts(
-    Number(context?.query?.maxProducts),
-    Number(context?.query?.minPrice),
-    Number(context?.query?.maxPrice)
-  );
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { maxProducts, minPrice, maxPrice } = query;
+  const products = await Store.getProducts(Number(maxProducts), Number(minPrice), Number(maxPrice));
+
   return {
     props: { products }
   };
 };
+
 export default Home;
