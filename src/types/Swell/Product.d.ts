@@ -56,3 +56,9 @@ interface SwellProductOption {
   required: boolean;
   id: string;
 }
+
+interface FilterParams {
+  minPrice?: number;
+  maxPrice?: number;
+  maxProducts?: number;
+}

@@ -14,11 +14,19 @@ export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(): Promise<Product[]> {
+  async getProducts(filterParams: FilterParams): Promise<Product[]> {
+    // Destructuring filterParams incoming from query string
+    const { minPrice, maxPrice, maxProducts } = filterParams;
+    // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
-      active: true
+      active: true,
+      limit: maxProducts,
+      where: {
+        price:
+          maxPrice && (minPrice || minPrice == 0) ? { $gte: minPrice, $lte: maxPrice } : { $gte: 0 }
+      }
     });
-
+    // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
       name: product.name,
@@ -28,10 +36,18 @@ export default class Swell {
       price: product.price,
       sale: product.sale || null,
       sku: product.sku || null,
-      images:
-        product.images.map((image) => {
-          return { src: image.file.url, alt: product.name };
-        }) || []
+      images: this.parseProductImages(product)
     }));
   }
+
+  // Convert SwellProduct images to a Product images format
+  parseProductImages = (product: SwellProduct) => {
+    const imagesArray = product.images.map((image) => {
+      return {
+        src: image.file.url,
+        alt: product.name
+      };
+    });
+    return imagesArray;
+  };
 }
