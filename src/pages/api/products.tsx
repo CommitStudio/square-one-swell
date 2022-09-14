@@ -2,14 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Store from '~/lib/Store';
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  maxProducts: number,
-  minPrice: number,
-  maxPrice: number
-) => {
-  const products = await Store.getProducts(minPrice, maxPrice, maxProducts);
+const handler = async (req: NextApiRequest, res: NextApiResponse, filterParams: FilterParams) => {
+  const products = await Store.getProducts(filterParams);
   res.status(200).json(products);
 };
 
