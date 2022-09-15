@@ -1,13 +1,29 @@
 import React from 'react';
 
-import ProductImageGallery from './ProductImageGallery';
-import ProductInfo from './ProductInfo/ProductInfo';
+import ProductImageGallery from '~/components/product-detail/ProductImageGallery';
+import ProductInfo from '~/components/product-detail/ProductInfo/ProductInfo';
 
-import data from '~/data/product-detail.json';
+export interface Props {
+  test_product: {
+    id?: number;
+    title?: string;
+    rating?: number;
+    description?: string;
+    price?: number;
+    colors?: string[];
+    sizes?: string[];
+    characteristics?: string[];
+    categories?: string[];
+    additional_information: {
+      Weight?: string;
+      Dimensions?: string;
+      Materials?: string;
+      Size?: string;
+    };
+  };
+}
 
-const { test_product } = data;
-
-const ProductSection = () => {
+const ProductSection = ({ test_product }: Props) => {
   return (
     <div className="flex flex-col md:flex-row my-10">
       <ProductImageGallery />
