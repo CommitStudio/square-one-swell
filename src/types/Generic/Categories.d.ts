@@ -1,4 +1,4 @@
 interface Category {
-    name: string;
-    active: boolean;
+  name: string;
+  active: boolean;
 }

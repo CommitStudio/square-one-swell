@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
 import CategoriesSlider from '~/components/home/CategoriesSlider';
 import DealOfTheWeek from '~/components/home/DealOfTheWeek';
 import HomeHero from '~/components/home/HomeHero';
