@@ -59,8 +59,6 @@ export default class Swell {
       where: {
         active: true
       }
-      // limit: 25,
-      // page: 1
     });
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
