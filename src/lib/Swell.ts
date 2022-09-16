@@ -16,17 +16,15 @@ export default class Swell {
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
     // Destructuring filterParams incoming from query string
-    const { minPrice, maxPrice, maxProducts, category } = filterParams;
+    const { maxProducts, category } = filterParams;
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
       category: category,
-      where: {
-        price:
-          maxPrice && (minPrice || minPrice == 0) ? { $gte: minPrice, $lte: maxPrice } : { $gte: 0 }
-      }
+      where: this.filetringWhere(filterParams)
     });
+
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
@@ -37,19 +35,28 @@ export default class Swell {
       price: product.price,
       sale: product.sale || null,
       sku: product.sku || null,
-      images: this.parseProductImages(product)
+      images: this.parseImages(product)
     }));
   }
 
   // Convert SwellProduct images to a Product images format
-  parseProductImages = (product: SwellProduct) => {
-    const imagesArray = product.images.map((image) => {
+  parseImages = (item: SwellProduct | SwellCategory) => {
+    const imagesArray = item.images.map((image) => {
       return {
         src: image.file.url,
-        alt: product.name
+        alt: item.name
       };
     });
     return imagesArray;
+  };
+
+  // Filtering logic (where: {})) for fetching products from Swell
+  filetringWhere = (filterParams: FilterParams) => {
+    const { minPrice, maxPrice } = filterParams;
+    // Filtering between a min price and a max price
+    if ((minPrice || minPrice === 0) && maxPrice) {
+      return { price: { $gte: minPrice, $lte: maxPrice } };
+    }
   };
 
   /*****************************************************************************
@@ -61,13 +68,15 @@ export default class Swell {
         active: true
       }
     });
+
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
+      id: category.id,
       name: category.name,
+      images: this.parseImages(category),
+      description: category.slug, // TODO: cambiar una vez que agreguemos description de la category
       active: category.active,
-      slug: category.slug,
-      description: category.slug,
-      id: category.id
+      slug: category.slug
     }));
   }
 }

@@ -8,15 +8,16 @@ import Store from '~/lib/Store';
 
 type HomeProps = {
   products: Product[];
+  categories: Category[];
 };
 
-const Home = ({ products }: HomeProps) => {
+const Home = ({ products, categories }: HomeProps) => {
   return (
     <>
       <HomeHero />
-      <CategoriesSlider />
+      <CategoriesSlider categories={categories} />
       {/* TODO: Update call for specific filter */}
-      <ProductHighlight products={products} />
+      <ProductHighlight title="Featured Products" products={products} />
       <DealOfTheWeek />
     </>
   );
@@ -27,8 +28,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
     category: 'featured'
   });
 
+  const categories = await Store.getCategories();
+
   return {
-    props: { products }
+    props: { products, categories }
   };
 };
 
