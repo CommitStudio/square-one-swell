@@ -60,6 +60,7 @@ export default class Swell {
         active: true
       }
     });
+    console.log(results);
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
       name: category.name,
