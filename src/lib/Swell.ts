@@ -50,4 +50,23 @@ export default class Swell {
     });
     return imagesArray;
   };
+
+  /*****************************************************************************
+   * Get categories from Swell and convert to Category object
+   ****************************************************************************/
+  async getCategories(): Promise<Category[] | PromiseLike<Category[]>> {
+    const { results }: { results: SwellCategory[] } = await swell.get('/categories', {
+      where: {
+        active: true
+      }
+    });
+    // Transform SwellCategory data to Category standard data format
+    return results.map((category) => ({
+      name: category.name,
+      active: category.active,
+      slug: category.slug,
+      description: category.slug,
+      id: category.id
+    }));
+  }
 }
