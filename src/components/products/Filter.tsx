@@ -2,11 +2,28 @@ import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
+import { FilterBy } from './FilterBy';
+
 import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
-const { filter } = filterJson;
 
-const Filter = () => {
+// interface FilterItem {
+//   name: string;
+//   slug: string | { minPrice: number; maxPrice: number | string };
+// }
+// interface FilterObject {
+//   title: string;
+//   items: FilterItem[];
+// }
+const { filterBy } = filterJson;
+
+interface FilterProps {
+  products: Product[];
+  categories: Category[];
+}
+
+const Filter = ({ products, categories }: FilterProps) => {
+  //  console.log(categories);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
@@ -37,31 +54,17 @@ const Filter = () => {
           isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'
         }`}
       >
-        {filter.categories.map((category, i) => {
-          return (
-            <div key={i}>
-              <h5 className="font-bold mb-2">{category.title}</h5>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute1}
-              </p>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute2}
-              </p>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute3}
-              </p>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute4}
-              </p>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute5}
-              </p>
-              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute6}
-              </p>
-            </div>
-          );
+        {/* Componente individual para cada lista, y vamos agregando un componente, con su titulo y lo que queremos listar(con un map adentro, ejemplo las categorias) */}
+        {filterBy.map((item, i) => {
+          return <FilterBy key={i} title={item.title} items={item.items} pathname={'products'} />;
         })}
+        {/* <FilterBy title="Sort By" items={filterBy['Sort By']} pathname={'products'} />
+        <FilterBy title="Price" items={filterBy['Price']} pathname={'products'} />
+        <FilterBy title="Colors" items={filterBy['Colors']} pathname={'products'} />
+        <FilterBy title="Size" items={filterBy['Size']} pathname={'products'} /> */}
+        <FilterBy title="Categories" items={categories} pathname={'products'} />
+        {console.log(typeof categories, 'type of categories')}
+        {console.log(typeof filterBy, 'type of Price')}
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
