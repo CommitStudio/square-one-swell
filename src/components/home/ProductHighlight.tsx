@@ -10,7 +10,7 @@ const ProductHighlight = ({ products }: ProductHighlightProps) => {
   return (
     <>
       <div className="flex flex-col text-center py-4 mb-8">
-        <p className="text-4xl py-4">New Product</p>
+        <p className="text-4xl py-4">Featured Products</p>
         <span className="w-[60px] h-[2.5px] bg-secondary mx-auto"></span>
       </div>
       <ProductList products={products} />

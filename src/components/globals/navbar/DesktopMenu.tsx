@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 type Props = {
-  categories: { name: string; slug: string }[];
+  categories: { name: string; slug: string; query?: string }[];
 };
 
 const DesktopMenu = ({ categories }: Props) => {
@@ -14,7 +14,13 @@ const DesktopMenu = ({ categories }: Props) => {
         {categories.map((category) => {
           return (
             <li key={category.slug}>
-              <Link href={`/${category.slug}`}>
+              <Link
+                href={
+                  category.query
+                    ? { pathname: 'products', query: { category: category.slug } }
+                    : category.slug
+                }
+              >
                 <a className="block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary">
                   {category.name}
                 </a>

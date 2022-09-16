@@ -16,11 +16,12 @@ export default class Swell {
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
     // Destructuring filterParams incoming from query string
-    const { minPrice, maxPrice, maxProducts } = filterParams;
+    const { minPrice, maxPrice, maxProducts, category } = filterParams;
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
+      category: category,
       where: {
         price:
           maxPrice && (minPrice || minPrice == 0) ? { $gte: minPrice, $lte: maxPrice } : { $gte: 0 }

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 type Props = {
   isOpen: boolean;
-  categories: { name: string; slug: string }[];
+  categories: { name: string; slug: string; query?: string }[];
 };
 
 const MobileMenu = ({ isOpen, categories }: Props) => {
@@ -16,7 +16,13 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
         {categories.map((category) => {
           return (
             <li key={category.slug}>
-              <Link href={`/${category.slug}`}>
+              <Link
+                href={
+                  category.query
+                    ? { pathname: 'products', query: { category: category.slug } }
+                    : category.slug
+                }
+              >
                 <a className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary focus:bg-secondary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary  ">
                   {category.name}
                 </a>

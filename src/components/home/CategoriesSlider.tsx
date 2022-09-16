@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -42,9 +43,13 @@ const CategoriesSlider = () => {
                 />
               </div>
               <div className="absolute bottom-10">
-                <button className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3">
-                  {category.name}
-                </button>
+                <Link
+                  href={{ pathname: 'products', query: { category: category.name.toLowerCase() } }}
+                >
+                  <a className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3">
+                    {category.name}
+                  </a>
+                </Link>
               </div>
             </SwiperSlide>
           );
