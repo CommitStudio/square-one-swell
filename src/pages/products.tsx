@@ -9,14 +9,15 @@ import Store from '~/lib/Store';
 
 type ProductsProps = {
   products: Product[];
+  categories: Category[];
 };
 
-const Products = ({ products }: ProductsProps) => {
+const Products = ({ products, categories }: ProductsProps) => {
   return (
     <>
       <Hero title="Shop" />
-      <Link href="?maxProducts=3">
-        <a className="bg-primary m-5"> Trae solo 3 productos</a>
+      <Link href="?maxProducts=3" className="bg-primary m-5">
+        <a className="bg-primary m-5">Trae solo 3 productos</a>
       </Link>
       <Link href="?minPrice=0&maxPrice=100">
         <a className="bg-primary m-5"> Productos de 0 a $100</a>
@@ -27,7 +28,7 @@ const Products = ({ products }: ProductsProps) => {
       <Link href="">
         <a className="bg-primary m-5"> Traer todos los productos</a>
       </Link>
-      <Filter />
+      <Filter products={products} categories={categories} />
       <ProductList threeColumns products={products} />
       <Pagination />
     </>
@@ -44,8 +45,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     category: category
   });
 
+  const categories = await Store.getCategories();
+
   return {
-    props: { products }
+    props: { products, categories }
   };
 };
 
