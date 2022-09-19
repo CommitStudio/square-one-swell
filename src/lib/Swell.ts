@@ -22,7 +22,7 @@ export default class Swell {
       active: true,
       limit: maxProducts,
       category: category,
-      where: this.filetringWhere(filterParams)
+      where: this.filteringWhere(filterParams)
     });
 
     // Transform SwellProduct data to Product standard data format
@@ -51,7 +51,7 @@ export default class Swell {
   };
 
   // Filtering logic (where: {})) for fetching products from Swell
-  filetringWhere = (filterParams: FilterParams) => {
+  filteringWhere = (filterParams: FilterParams) => {
     const { minPrice, maxPrice } = filterParams;
     // Filtering between a min price and a max price
     if ((minPrice || minPrice === 0) && maxPrice) {
