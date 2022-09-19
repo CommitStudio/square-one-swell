@@ -3,11 +3,11 @@ import ImageGallery from 'react-image-gallery';
 
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import data from '~/data/products.json';
+interface ProductProp {
+  product: [Product];
+}
 
-const ProductImageGallery = () => {
-  const { products } = data;
-
+const ProductImageGallery = ({ product }: ProductProp) => {
   const images: {
     original: string;
     thumbnail: string;
@@ -15,12 +15,12 @@ const ProductImageGallery = () => {
     thumbnailAlt: string;
   }[] = [];
 
-  products.slice(0, 5).forEach((product) => {
+  product[0].images?.forEach((product) => {
     return images.push({
-      original: `${product.image.src}`,
-      thumbnail: `${product.image.src}`,
-      originalAlt: `${product.image.alt}`,
-      thumbnailAlt: `${product.image.alt}`
+      original: `${product.src}`,
+      thumbnail: `${product.src}`,
+      originalAlt: `${product.alt}`,
+      thumbnailAlt: `${product.alt}`
     });
   });
 

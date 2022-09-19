@@ -13,5 +13,5 @@ interface Product {
 
 interface ProductImage {
   src: string;
-  alt?: string;
+  alt: string;
 }

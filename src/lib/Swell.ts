@@ -16,11 +16,12 @@ export default class Swell {
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
     // Destructuring filterParams incoming from query string
-    const { maxProducts, category } = filterParams;
+    const { maxProducts, category, productSlug } = filterParams;
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
+      slug: productSlug,
       category: category,
       where: this.filteringWhere(filterParams)
     });

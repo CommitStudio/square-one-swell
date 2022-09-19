@@ -7,19 +7,27 @@ import ProductPriceOptions from '~/components/product-detail/ProductInfo/Product
 import ProductRating from '~/components/product-detail/ProductInfo/ProductRating';
 import ProductSocialMedia from '~/components/product-detail/ProductInfo/ProductSocialMedia';
 import ProductTitle from '~/components/product-detail/ProductInfo/ProductTitle';
-import { Props } from '~/components/product-detail/ProductSection';
 
-const ProductInfo = ({ test_product }: Props) => {
+interface ProductProp {
+  product: [Product];
+}
+
+const ProductInfo = ({ product }: ProductProp) => {
   return (
     <div className="w-full ml-0 md:ml-6 space-y-4 mt-5 md:mt-0">
-      <ProductTitle title={test_product.title} />
-      <ProductRating rating={test_product.rating} />
-      <ProductDescription description={test_product.description} />
-      <ProductPriceOptions sizes={test_product.sizes} price={test_product.price} />
-      <ProductColors colors={test_product.colors} />
+      <ProductTitle title={product[0].name} />
+      <ProductRating rating={3} />
+      <ProductDescription description={product[0].description} />
+      <ProductPriceOptions
+        sizes={['L', 'M', 'S', 'XL', 'XXL', 'Over Size']}
+        price={product[0].price}
+      />
+      <ProductColors colors={['#FFFF00', '#FFFF', '#0000FF']} />
       <AddToCart />
-      <ProductCharacteristics characteristics={test_product.characteristics} />
-      <ProductCategories categories={test_product.categories} />
+      <ProductCharacteristics
+        characteristics={['100% cotton', '6 months warranty', 'High quality']}
+      />
+      <ProductCategories categories={['Men', 'Women', 'Kids', 'Accessories']} />
       <ProductSocialMedia />
     </div>
   );
