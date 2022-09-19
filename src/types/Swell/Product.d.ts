@@ -61,4 +61,5 @@ interface FilterParams {
   minPrice?: number;
   maxPrice?: number;
   maxProducts?: number;
+  category?: string;
 }

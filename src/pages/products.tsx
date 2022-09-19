@@ -35,11 +35,13 @@ const Products = ({ products }: ProductsProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { maxProducts, minPrice, maxPrice } = query;
+  const { maxProducts, minPrice, maxPrice, category }: FilterParams = query;
   const products = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
-    minPrice: Number(minPrice)
+    minPrice: Number(minPrice),
+    // TODO: Avisar a Noe
+    category: category
   });
 
   return {
