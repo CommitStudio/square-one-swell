@@ -23,7 +23,6 @@ interface FilterProps {
 }
 
 const Filter = ({ products, categories }: FilterProps) => {
-  //  console.log(categories);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (

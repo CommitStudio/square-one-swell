@@ -2,7 +2,10 @@ import Link from 'next/link';
 
 interface FilterByProps {
   title: string;
-  items: Category[] | FilterBy[];
+  items: {
+    name: string;
+    slug: { minPrice: number; maxPrice?: number } | string;
+  }[];
   pathname: string;
 }
 
