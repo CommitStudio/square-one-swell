@@ -15,10 +15,11 @@ const DesktopMenu = ({ categories }: Props) => {
           return (
             <li key={category.slug}>
               <Link
+                passHref
                 href={
                   category.query
-                    ? { pathname: 'products', query: { category: category.slug } }
-                    : category.slug
+                    ? { pathname: '/products', query: { category: category.slug } }
+                    : `/${category.slug}`
                 }
               >
                 <a className="block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary">

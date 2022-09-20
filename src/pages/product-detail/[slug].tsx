@@ -11,7 +11,7 @@ import Store from '~/lib/Store';
 const { test_product } = data;
 
 interface ProductProp {
-  product: [Product];
+  product: Product;
 }
 
 const ProductDetail = ({ product }: ProductProp) => {
@@ -26,10 +26,12 @@ const ProductDetail = ({ product }: ProductProp) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { productSlug }: FilterParams = query;
-
-  const product = await Store.getProducts({ productSlug });
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  if (!params?.slug) {
+    return { notFound: true };
+  }
+  const { slug } = params;
+  const [product] = await Store.getProducts({ slug } as FilterParams);
 
   return {
     props: { product }

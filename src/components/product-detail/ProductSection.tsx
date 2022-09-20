@@ -4,7 +4,7 @@ import ProductImageGallery from '~/components/product-detail/ProductImageGallery
 import ProductInfo from '~/components/product-detail/ProductInfo/ProductInfo';
 
 interface ProductProp {
-  product: [Product];
+  product: Product;
 }
 
 const ProductSection = ({ product }: ProductProp) => {

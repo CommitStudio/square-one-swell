@@ -27,7 +27,7 @@ const ProductCard = ({ product }: Props) => {
           />
         </div>
         <div className="flex justify-center cursor-pointer">
-          <Link href={{ pathname: 'product-detail', query: { productSlug: product.slug } }}>
+          <Link href={`/product-detail/${product.slug}`}>
             <Image src={image.src} alt={image.alt} width={300} height={300} objectFit="cover" />
           </Link>
         </div>

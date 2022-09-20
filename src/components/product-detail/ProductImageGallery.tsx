@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 interface ProductProp {
-  product: [Product];
+  product: Product;
 }
 
 const ProductImageGallery = ({ product }: ProductProp) => {
@@ -15,7 +15,7 @@ const ProductImageGallery = ({ product }: ProductProp) => {
     thumbnailAlt: string;
   }[] = [];
 
-  product[0].images?.forEach((product) => {
+  product.images?.forEach((product) => {
     return images.push({
       original: `${product.src}`,
       thumbnail: `${product.src}`,

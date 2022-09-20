@@ -16,16 +16,15 @@ export default class Swell {
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
     // Destructuring filterParams incoming from query string
-    const { maxProducts, category, productSlug } = filterParams;
+    const { maxProducts, category, slug } = filterParams;
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
-      slug: productSlug,
+      slug: slug,
       category: category,
       where: this.filteringWhere(filterParams)
     });
-    console.log('results', results);
 
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
@@ -33,9 +32,11 @@ export default class Swell {
       name: product.name,
       active: product.active,
       description: product.description,
+      options: this.parseOptions(product),
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
+      salePrice: product.sale_price || null,
       sku: product.sku || null,
       images: this.parseImages(product)
     }));
@@ -53,6 +54,19 @@ export default class Swell {
       return imagesArray;
     }
     return [{ src: '/img/default-images/image-not-found.webp', alt: 'Category without image' }];
+  };
+
+  // Convert SwellProduct options to a Product options format
+  parseOptions = (item: SwellProduct) => {
+    const options = item.options.map((option) => {
+      return {
+        label: option.name,
+        values: option.values.map((value) => {
+          return value.name;
+        })
+      };
+    });
+    return options;
   };
 
   // Filtering logic (where: {})) for fetching products from Swell
