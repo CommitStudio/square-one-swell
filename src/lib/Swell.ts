@@ -24,6 +24,7 @@ export default class Swell {
       category: category,
       where: this.filteringWhere(filterParams)
     });
+    console.log('results', results);
 
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
@@ -41,13 +42,16 @@ export default class Swell {
 
   // Convert SwellProduct images to a Product images format
   parseImages = (item: SwellProduct | SwellCategory) => {
-    const imagesArray = item.images.map((image) => {
-      return {
-        src: image.file.url,
-        alt: item.name
-      };
-    });
-    return imagesArray;
+    if (item.images) {
+      const imagesArray = item.images.map((image) => {
+        return {
+          src: image.file.url,
+          alt: item.name
+        };
+      });
+      return imagesArray;
+    }
+    return [{ src: '/img/default-images/image-not-found.webp', alt: 'Category without image' }];
   };
 
   // Filtering logic (where: {})) for fetching products from Swell
