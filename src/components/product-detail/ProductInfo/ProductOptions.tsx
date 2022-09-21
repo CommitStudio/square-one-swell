@@ -7,13 +7,13 @@ const ProductOptions = ({ product }: ProductProp) => {
     <>
       {product.options?.map((option, i) => {
         return (
-          <div key={i}>
-            <h3 className="pb-3">{option.label}:</h3>
+          <div key={i} className="flex items-center">
+            <h5 className="pr-3">{option.label}:</h5>
             <ul className="flex gap-x-5">
               {option.values.map((value, i) => {
                 return (
                   <li
-                    className="border border-secondary px-3 cursor-pointer hover:bg-secondary hover:text-primary"
+                    className="border border-secondary px-2 cursor-pointer hover:bg-secondary hover:text-primary"
                     key={i}
                   >
                     {value}
