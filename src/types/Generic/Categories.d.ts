@@ -17,3 +17,8 @@ interface FilterByItems {
   name: string;
   slug: string | { minPrice?: number; maxPrice?: number | string; category?: string };
 }
+
+interface CategoryImage {
+  src: string;
+  alt?: string;
+}
