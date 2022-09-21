@@ -44,7 +44,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
                 />
               </div>
               <div className="absolute bottom-10">
-                <Link href={{ pathname: 'products', query: { category: category.slug } }}>
+                <Link href={{ pathname: 'products', query: category.slug }}>
                   <a className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium">
                     {category.name.toUpperCase()}
                   </a>

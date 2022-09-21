@@ -23,7 +23,6 @@ export default class Swell {
       category: category,
       where: this.filteringWhere(filterParams)
     });
-
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
@@ -86,6 +85,7 @@ export default class Swell {
         active: true
       }
     });
+    console.log(results);
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
       id: category.id,
@@ -93,7 +93,7 @@ export default class Swell {
       images: this.parseImages(category),
       description: category.slug, // TODO: cambiar una vez que agreguemos description de la category
       active: category.active,
-      slug: category.slug
+      slug: { category: category.slug }
     }));
   }
 }
