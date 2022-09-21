@@ -59,6 +59,8 @@ export default class Swell {
     // Filtering between a min price and a max price
     if ((minPrice || minPrice === 0) && maxPrice) {
       return { price: { $gte: minPrice, $lte: maxPrice } };
+    } else if (minPrice) {
+      return { price: { $gte: minPrice } };
     }
   };
 
@@ -72,7 +74,7 @@ export default class Swell {
       }
     });
     // Transform SwellCategory data to Category standard data format
-    console.log(results);
+    // console.log(results);
     return results.map((category) => ({
       id: category.id,
       name: category.name,
