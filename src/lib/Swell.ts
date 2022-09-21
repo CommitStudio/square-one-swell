@@ -34,7 +34,8 @@ export default class Swell {
       price: product.price,
       sale: product.sale || null,
       sku: product.sku || null,
-      images: this.parseImages(product)
+      images: this.parseImages(product),
+      categorySlug: product.slug
     }));
   }
 
@@ -70,8 +71,8 @@ export default class Swell {
         active: true
       }
     });
-    console.log(results);
     // Transform SwellCategory data to Category standard data format
+    console.log(results);
     return results.map((category) => ({
       id: category.id,
       name: category.name,
