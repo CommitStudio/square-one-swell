@@ -7,24 +7,16 @@ import { FilterBy } from './FilterBy';
 import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
 
-// interface FilterItem {
-//   name: string;
-//   slug: string | { minPrice: number; maxPrice: number | string };
-// }
-// interface FilterObject {
-//   title: string;
-//   items: FilterItem[];
-// }
 const { filterBy } = filterJson;
 
 interface FilterProps {
-  products: Product[];
   categories: Category[];
 }
 
-const Filter = ({ products, categories }: FilterProps) => {
+const Filter = ({ categories }: FilterProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <Container className="pt-10">
       <div className="md:flex md:justify-between">
@@ -49,21 +41,15 @@ const Filter = ({ products, categories }: FilterProps) => {
       </div>
       <hr className="my-10" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out ${
-          isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'
-        }`}
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
+        ${isFilterOpen ? 'h-auto' : 'h-0'}`}
       >
-        {/* Componente individual para cada lista, y vamos agregando un componente, con su titulo y lo que queremos listar(con un map adentro, ejemplo las categorias) */}
+        {/* FilterBy component renders each list of filter, regardless where the info is coming. */}
         {filterBy.map((item, i) => {
           return <FilterBy key={i} title={item.title} items={item.items} pathname={'products'} />;
         })}
-        {/* <FilterBy title="Sort By" items={filterBy['Sort By']} pathname={'products'} />
-        <FilterBy title="Price" items={filterBy['Price']} pathname={'products'} />
-        <FilterBy title="Colors" items={filterBy['Colors']} pathname={'products'} />
-        <FilterBy title="Size" items={filterBy['Size']} pathname={'products'} /> */}
+        {/* FilterBy Categories info is coming from the db */}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
-        {console.log(typeof categories, 'type of categories')}
-        {console.log(typeof filterBy, 'type of Price')}
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
