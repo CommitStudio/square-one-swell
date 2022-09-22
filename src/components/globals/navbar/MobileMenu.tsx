@@ -13,9 +13,9 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
       } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
     >
       <ul className="divide-y text-secondary" aria-labelledby="navbarMenu">
-        {categories.map((category) => {
+        {categories.map((category, i) => {
           return (
-            <li key={category.slug}>
+            <li key={i}>
               <Link
                 href={
                   category.query

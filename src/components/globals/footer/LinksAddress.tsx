@@ -21,9 +21,9 @@ const LinksAddress = () => {
         })}
       </div>
       <div className="space-y-3">
-        {items.slice(4, 8).map(function (item) {
+        {items.slice(4, 8).map(function (item, i) {
           return (
-            <p key={item.id}>
+            <p key={i}>
               <a className="hover:text-primary" href="/">
                 {item.name}
               </a>

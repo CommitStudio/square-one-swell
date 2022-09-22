@@ -3,7 +3,25 @@ import React, { useState } from 'react';
 import AdditionalInfo from '~/components/product-detail/ProductReview/AdditionalInfo';
 import ProductRatings from '~/components/product-detail/ProductReview/ProductRatings';
 
-import { Props } from '~/components/product-detail/ProductSection';
+export interface Props {
+  test_product: {
+    id?: number;
+    title?: string;
+    rating?: number;
+    description?: string;
+    price?: number;
+    colors?: string[];
+    sizes?: string[];
+    characteristics?: string[];
+    categories?: string[];
+    additional_information: {
+      Weight?: string;
+      Dimensions?: string;
+      Materials?: string;
+      Size?: string;
+    };
+  };
+}
 
 const ProductReview = ({ test_product }: Props) => {
   const [tabSelected, setTabSelected] = useState('additional');

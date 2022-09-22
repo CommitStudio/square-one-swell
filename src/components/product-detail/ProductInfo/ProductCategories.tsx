@@ -1,18 +1,27 @@
 import Link from 'next/link';
 import React from 'react';
 
-type Categories = {
-  categories?: string[];
-};
+interface ProductProp {
+  product: Product;
+  categories: Category[];
+}
 
-const ProductCategories = ({ categories }: Categories) => {
+const ProductCategories = ({ product, categories }: ProductProp) => {
+  const productCategories = product.categories?.map((categoryId) => {
+    return categories.find((category) => {
+      return category.id == categoryId;
+    });
+  });
+
   return (
-    <div>
+    <div className="flex flex-wrap gap-y-2 items-center">
       <span>Categories:</span>
-      {categories?.map((category) => {
+      {productCategories?.map((category, i) => {
         return (
-          <Link key={category} href="/">
-            <a className="ml-2 cursor-pointer hover:text-primary">{category},</a>
+          <Link key={i} href="/">
+            <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
+              {category?.name}
+            </a>
           </Link>
         );
       })}

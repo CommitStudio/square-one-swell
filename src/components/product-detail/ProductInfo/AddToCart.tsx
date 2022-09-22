@@ -6,7 +6,7 @@ const AddToCart = () => {
   const [productAmount, setProductAmount] = useState(0);
 
   return (
-    <div className="flex space-x-6">
+    <div className="flex space-x-6 py-5">
       <div className="flex">
         <input
           type="number"

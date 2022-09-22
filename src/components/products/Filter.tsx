@@ -40,25 +40,23 @@ const Filter = () => {
         {filter.categories.map((category, i) => {
           return (
             <div key={i}>
-              <h5 className="font-bold mb-2" key={i}>
-                {category.title}
-              </h5>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <h5 className="font-bold mb-2">{category.title}</h5>
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute1}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute2}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute3}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute4}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute5}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute6}
               </p>
             </div>

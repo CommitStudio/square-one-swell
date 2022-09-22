@@ -3,15 +3,23 @@ interface Product {
   name: string;
   active: boolean;
   description: string;
+  options?: ProductOption[];
   slug: string;
   tags?: string[];
   price: number;
   images?: ProductImage[];
   sale?: boolean | null;
+  salePrice?: number | null;
   sku?: string | null;
+  categories?: string[];
 }
 
 interface ProductImage {
   src: string;
-  alt?: string;
+  alt: string;
+}
+
+interface ProductOption {
+  label: string;
+  values: string[];
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { createClient } from 'swell-node';
 
 /*****************************************************************************
@@ -5,10 +6,7 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
-const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY, {
-  host: 'api-staging.swell.store',
-  verifyCert: false
-});
+const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
 
 export default class Swell {
   /*****************************************************************************
@@ -16,15 +14,15 @@ export default class Swell {
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
     // Destructuring filterParams incoming from query string
-    const { maxProducts, category } = filterParams;
+    const { maxProducts, category, slug } = filterParams;
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
       limit: maxProducts,
+      slug: slug,
       category: category,
       where: this.filteringWhere(filterParams)
     });
-    console.log('results', results);
 
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
@@ -32,11 +30,14 @@ export default class Swell {
       name: product.name,
       active: product.active,
       description: product.description,
+      options: this.parseOptions(product),
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
+      salePrice: product.sale_price || null,
       sku: product.sku || null,
-      images: this.parseImages(product)
+      images: this.parseImages(product),
+      categories: product.category_index.id
     }));
   }
 
@@ -52,6 +53,19 @@ export default class Swell {
       return imagesArray;
     }
     return [{ src: '/img/default-images/image-not-found.webp', alt: 'Category without image' }];
+  };
+
+  // Convert SwellProduct options to a Product options format
+  parseOptions = (item: SwellProduct) => {
+    const options = item.options.map((option) => {
+      return {
+        label: option.name,
+        values: option.values.map((value) => {
+          return value.name;
+        })
+      };
+    });
+    return options;
   };
 
   // Filtering logic (where: {})) for fetching products from Swell
@@ -72,7 +86,6 @@ export default class Swell {
         active: true
       }
     });
-
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
       id: category.id,
