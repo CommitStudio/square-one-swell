@@ -6,10 +6,7 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
-const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY, {
-  host: 'api-staging.swell.store',
-  verifyCert: false
-});
+const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
 
 export default class Swell {
   /*****************************************************************************
@@ -39,7 +36,8 @@ export default class Swell {
       sale: product.sale || null,
       salePrice: product.sale_price || null,
       sku: product.sku || null,
-      images: this.parseImages(product)
+      images: this.parseImages(product),
+      categories: product.category_index.id
     }));
   }
 
@@ -88,7 +86,6 @@ export default class Swell {
         active: true
       }
     });
-
     // Transform SwellCategory data to Category standard data format
     return results.map((category) => ({
       id: category.id,

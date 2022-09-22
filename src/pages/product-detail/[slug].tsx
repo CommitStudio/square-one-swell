@@ -12,14 +12,15 @@ const { test_product } = data;
 
 interface ProductProp {
   product: Product;
+  categories: Category[];
 }
 
-const ProductDetail = ({ product }: ProductProp) => {
+const ProductDetail = ({ product, categories }: ProductProp) => {
   return (
     <>
       <Hero title="Product detail" />
       <Container>
-        <ProductSection product={product} />
+        <ProductSection product={product} categories={categories} />
         <ProductReview test_product={test_product} />
       </Container>
     </>
@@ -33,8 +34,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params;
   const [product] = await Store.getProducts({ slug } as FilterParams);
 
+  const categories = await Store.getCategories();
+
   return {
-    props: { product }
+    props: { product, categories }
   };
 };
 

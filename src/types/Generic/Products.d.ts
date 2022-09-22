@@ -11,6 +11,7 @@ interface Product {
   sale?: boolean | null;
   salePrice?: number | null;
   sku?: string | null;
+  categories?: string[];
 }
 
 interface ProductImage {

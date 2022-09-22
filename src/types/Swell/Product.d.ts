@@ -25,6 +25,7 @@ interface SwellProduct {
   sale: boolean;
   sale_price?: number | null;
   sku?: string;
+  category_index: CategoryIndex;
   id: string;
 }
 
@@ -63,4 +64,8 @@ interface FilterParams {
   maxProducts?: number;
   category?: string;
   slug?: string;
+}
+
+interface CategoryIndex {
+  id: string[];
 }

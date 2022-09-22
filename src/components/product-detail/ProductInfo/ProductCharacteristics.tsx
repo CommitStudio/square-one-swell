@@ -7,8 +7,8 @@ type Characteristics = {
 const ProductCharacteristics = ({ characteristics }: Characteristics) => {
   return (
     <ul className="space-y-2">
-      {characteristics?.map((characteristic) => {
-        return <li key={characteristic}>• {characteristic}</li>;
+      {characteristics?.map((characteristic, i) => {
+        return <li key={i}>• {characteristic}</li>;
       })}
     </ul>
   );

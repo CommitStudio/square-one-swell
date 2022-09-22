@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import Image from 'next/image';
 import ImageGallery from 'react-image-gallery';
 
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -25,18 +26,20 @@ const ProductImageGallery = ({ product }: ProductProp) => {
   });
 
   return (
-    <div id="product-gallery" className="h-full w-full">
-      <ImageGallery
-        items={images}
-        thumbnailPosition="left"
-        showPlayButton={false}
-        showNav={false}
-        isRTL={false}
-        useTranslate3D={false}
-        useBrowserFullscreen={true}
-        showFullscreenButton={true}
-      />
-    </div>
+    <>
+      <div id="product-gallery" className="h-full w-full">
+        <ImageGallery
+          items={images}
+          thumbnailPosition="left"
+          showPlayButton={false}
+          showNav={false}
+          isRTL={false}
+          useTranslate3D={false}
+          useBrowserFullscreen={true}
+          showFullscreenButton={true}
+        />
+      </div>
+    </>
   );
 };
 

@@ -10,9 +10,10 @@ import ProductTitle from '~/components/product-detail/ProductInfo/ProductTitle';
 
 interface ProductProp {
   product: Product;
+  categories: Category[];
 }
 
-const ProductInfo = ({ product }: ProductProp) => {
+const ProductInfo = ({ product, categories }: ProductProp) => {
   return (
     <div className="w-full ml-0 md:ml-6 space-y-4 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
@@ -24,7 +25,7 @@ const ProductInfo = ({ product }: ProductProp) => {
       <ProductCharacteristics
         characteristics={['100% cotton', '6 months warranty', 'High quality']}
       />
-      <ProductCategories categories={['Men', 'Women', 'Kids', 'Accessories']} />
+      <ProductCategories product={product} categories={categories} />
       <ProductSocialMedia />
     </div>
   );

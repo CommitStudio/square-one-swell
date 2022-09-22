@@ -8,7 +8,6 @@ interface Props {
 }
 
 const ProductList = ({ threeColumns, products }: Props) => {
-  console.log(products);
   return (
     <Container className="mb-10">
       <div
