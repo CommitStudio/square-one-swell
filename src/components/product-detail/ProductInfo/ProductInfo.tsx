@@ -1,6 +1,5 @@
 import AddToCart from '~/components/product-detail/ProductInfo/AddToCart';
 import ProductCategories from '~/components/product-detail/ProductInfo/ProductCategories';
-import ProductCharacteristics from '~/components/product-detail/ProductInfo/ProductCharacteristics';
 import ProductDescription from '~/components/product-detail/ProductInfo/ProductDescription';
 import ProductOptions from '~/components/product-detail/ProductInfo/ProductOptions';
 import ProductPriceOptions from '~/components/product-detail/ProductInfo/ProductPriceOptions';
@@ -22,9 +21,6 @@ const ProductInfo = ({ product, categories }: ProductProp) => {
       <ProductPriceOptions price={product.price} />
       <ProductOptions product={product} />
       <AddToCart />
-      <ProductCharacteristics
-        characteristics={['100% cotton', '6 months warranty', 'High quality']}
-      />
       <ProductCategories product={product} categories={categories} />
       <ProductSocialMedia />
     </div>
