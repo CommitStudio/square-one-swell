@@ -14,12 +14,12 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
   });
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-y-2 items-center">
       <span>Categories:</span>
       {productCategories?.map((category, i) => {
         return (
           <Link key={i} href="/">
-            <a className="border border-secondary px-2 py-1 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
+            <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
               {category?.name}
             </a>
           </Link>
