@@ -1,7 +1,7 @@
 interface Category {
   images: CategoryImage[];
   name: string;
-  active: boolean; //TODO: Think if this is necessary?
+  active: boolean;
   slug: { category: string };
   description: string;
   id: string;

@@ -88,7 +88,6 @@ export default class Swell {
       }
     });
     // Transform SwellCategory data to Category standard data format
-    // console.log(results);
     return results.map((category) => ({
       id: category.id,
       name: category.name,
