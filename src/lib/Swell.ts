@@ -23,7 +23,6 @@ export default class Swell {
       category: category,
       where: this.filteringWhere(filterParams)
     });
-
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
@@ -74,6 +73,8 @@ export default class Swell {
     // Filtering between a min price and a max price
     if ((minPrice || minPrice === 0) && maxPrice) {
       return { price: { $gte: minPrice, $lte: maxPrice } };
+    } else if (minPrice) {
+      return { price: { $gte: minPrice } };
     }
   };
 
@@ -93,7 +94,7 @@ export default class Swell {
       images: this.parseImages(category),
       description: category.slug, // TODO: cambiar una vez que agreguemos description de la category
       active: category.active,
-      slug: category.slug
+      slug: { category: category.slug }
     }));
   }
 }
