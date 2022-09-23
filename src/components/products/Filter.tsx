@@ -43,11 +43,8 @@ const Filter = ({ categories }: FilterProps) => {
         className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
         ${isFilterOpen ? 'h-auto' : 'h-0'}`}
       >
-        {/* FilterBy component renders each list of filter, regardless where the info is coming. */}
-        {filterBy.map((item, i) => {
-          return <FilterBy key={i} title={item.title} items={item.items} pathname={'products'} />;
-        })}
-        {/* FilterBy Categories info is coming from the db */}
+        {/* FilterBy Categories info is coming from the store */}
+        {/* TODO: Add others filters coming from the Store*/}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
       </div>
       <div

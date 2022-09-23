@@ -12,7 +12,6 @@ interface FilterByProps {
 
 export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   const router = useRouter();
-
   return (
     <div>
       <h5 className="font-bold mb-2">{title}</h5>
@@ -24,7 +23,9 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
             <div>
               <a
                 className={`cursor-pointer w-fit hover:text-secondary ${
-                  router.query.category == item.slug?.category ? 'text-red-500' : 'text-gray-500'
+                  router.query.category == item.slug?.category
+                    ? 'text-secondary font-semibold text'
+                    : 'text-gray-500'
                 }`}
               >
                 {item.name}
