@@ -1,47 +1,49 @@
 {
   "filterBy": [
     {
-      "title": "Sort By",
-      "items": [
-        { "name": "Default", "slug": "" },
-        { "name": "Popularity", "slug": "" },
-        { "name": "Average rating", "slug": "" },
-        { "name": "Newness", "slug": "" },
-        { "name": "Price: low to hi", "slug": "" },
-        { "name": "Price: high to low", "slug": "" }
-      ]
-    },
-    {
       "title": "Price",
       "items": [
-        { "name": "$0.00 - $50.00", "slug": { "minPrice": 0, "maxPrice": 50 } },
-        { "name": "$50.00 - $100.00", "slug": { "minPrice": 50, "maxPrice": 100 } },
-        { "name": "$100.00 - $150.00", "slug": { "minPrice": 100, "maxPrice": 150 } },
-        { "name": "$150.00 - $200.00", "slug": { "minPrice": 150, "maxPrice": 200 } },
-        { "name": "$200.00 - $250.00", "slug": { "minPrice": 200, "maxPrice": 250 } },
-        { "name": "$250.00+", "slug": { "minPrice": 250 } }
-      ]
-    },
-    {
-      "title": "Colors",
-      "items": [
-        { "name": "Yellow", "slug": "" },
-        { "name": "White", "slug": "" },
-        { "name": "Red", "slug": "" },
-        { "name": "Black", "slug": "" },
-        { "name": "Green", "slug": "" },
-        { "name": "Orange", "slug": "" }
-      ]
-    },
-    {
-      "title": "Size",
-      "items": [
-        { "name": "L", "slug": "" },
-        { "name": "M", "slug": "" },
-        { "name": "S", "slug": "" },
-        { "name": "XL", "slug": "" },
-        { "name": "XXL", "slug": "" },
-        { "name": "Over Size", "slug": "" }
+        {
+          "name": "$0.00 - $50.00",
+          "slug": {
+            "minPrice": 0,
+            "maxPrice": 50
+          }
+        },
+        {
+          "name": "$50.00 - $100.00",
+          "slug": {
+            "minPrice": 50,
+            "maxPrice": 100
+          }
+        },
+        {
+          "name": "$100.00 - $150.00",
+          "slug": {
+            "minPrice": 100,
+            "maxPrice": 150
+          }
+        },
+        {
+          "name": "$150.00 - $200.00",
+          "slug": {
+            "minPrice": 150,
+            "maxPrice": 200
+          }
+        },
+        {
+          "name": "$200.00 - $250.00",
+          "slug": {
+            "minPrice": 200,
+            "maxPrice": 250
+          }
+        },
+        {
+          "name": "$250.00+",
+          "slug": {
+            "minPrice": 250
+          }
+        }
       ]
     }
   ]

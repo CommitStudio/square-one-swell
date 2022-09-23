@@ -28,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
     minPrice: Number(minPrice),
-    // TODO: Avisar a Noe
     category: category
   });
 
