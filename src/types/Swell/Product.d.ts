@@ -9,7 +9,7 @@ interface SwellProduct {
   meta_title?: string;
   meta_description?: string;
   options: SwellProductOption[];
-  variants: Variants;
+  variants: SwellVariants;
   slug: string;
   stock_tracking: boolean;
   tags: string[];
@@ -78,12 +78,12 @@ interface SwellProductWhere {
   };
 }
 
-interface Variants {
+interface SwellVariants {
   count: number;
-  results: Variant[];
+  results: SwellVariant[];
   page: number;
 }
-interface Variant {
+interface SwellVariant {
   parent_id: string;
   name: string;
   active: boolean;
