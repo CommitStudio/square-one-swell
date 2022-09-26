@@ -1,4 +1,3 @@
-import React from 'react';
 import { createClient } from 'swell-node';
 
 /*****************************************************************************
@@ -20,6 +19,7 @@ export default class Swell {
       active: true,
       limit: maxProducts,
       slug: slug,
+      expand: ['variants:*'],
       category: category,
       where: this.filteringWhere(filterParams)
     });
@@ -30,6 +30,7 @@ export default class Swell {
       active: product.active,
       description: product.description,
       options: this.parseOptions(product),
+      variants: product.variants,
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
