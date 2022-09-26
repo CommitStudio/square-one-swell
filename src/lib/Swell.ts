@@ -68,6 +68,7 @@ export default class Swell {
     return options;
   };
 
+  // Convert SwellProduct variants to a Product variants format format
   parseVariants = (item: SwellProduct) => {
     const variants = item.variants.results.map((variant) => {
       return {
