@@ -16,8 +16,6 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
     <div>
       <h5 className="font-bold mb-2">{title}</h5>
       {items.map((item, i) => {
-        console.log(item.slug);
-        console.log(router.query.category == item.slug.category);
         return (
           <Link key={i} href={{ pathname: pathname, query: item.slug }}>
             <div>
