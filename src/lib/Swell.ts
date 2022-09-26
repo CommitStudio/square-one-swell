@@ -60,6 +60,7 @@ export default class Swell {
     const options = item.options.map((option) => {
       return {
         label: option.name,
+        active: option.active,
         values: option.values.map((value) => {
           return value.name;
         })
@@ -68,7 +69,7 @@ export default class Swell {
     return options;
   };
 
-  // Convert SwellProduct variants to a Product variants format format
+  // Convert SwellProduct variants to a Product variants format
   parseVariants = (item: SwellProduct) => {
     const variants = item.variants.results.map((variant) => {
       return {
