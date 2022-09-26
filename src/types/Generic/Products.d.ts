@@ -22,6 +22,7 @@ interface ProductImage {
 
 interface ProductOption {
   label: string;
+  active: boolean;
   values: string[];
 }
 
