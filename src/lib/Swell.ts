@@ -20,6 +20,7 @@ export default class Swell {
       category: category,
       limit: maxProducts,
       slug: slug,
+      expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
 
