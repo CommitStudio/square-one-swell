@@ -41,7 +41,7 @@ const CategoriesSlider = () => {
         {categories.map((category) => {
           return (
             <SwiperSlide key={uuidv4()} className="relative grid place-items-center">
-              <div className={`h-[250px] w-[350px]`}>
+              <div className={'h-[250px] w-full relative'}>
                 <Image
                   src={category.image.src}
                   alt={category.image.alt}
