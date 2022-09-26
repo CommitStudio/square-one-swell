@@ -30,7 +30,7 @@ export default class Swell {
       active: product.active,
       description: product.description,
       options: this.parseOptions(product),
-      variants: product.variants,
+      variants: this.parseVariants(product),
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
@@ -66,6 +66,16 @@ export default class Swell {
       };
     });
     return options;
+  };
+
+  parseVariants = (item: SwellProduct) => {
+    const variants = item.variants.results.map((variant) => {
+      return {
+        name: variant.name,
+        active: variant.active
+      };
+    });
+    return variants;
   };
 
   // Filtering logic (where: {})) for fetching products from Swell
