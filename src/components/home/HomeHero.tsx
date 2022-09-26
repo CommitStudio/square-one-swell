@@ -6,6 +6,8 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
+import { v4 as uuidv4 } from 'uuid';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -26,7 +28,10 @@ const HomeHero = () => {
       >
         {hero_images.map((image, i) => {
           return (
-            <SwiperSlide key={i} className="flex flex-col justify-center items-center relative">
+            <SwiperSlide
+              key={uuidv4()}
+              className="flex flex-col justify-center items-center relative"
+            >
               <div className="h-[75vh] w-full relative sm:h-[90vh]">
                 <Image
                   src={image.src}

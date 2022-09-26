@@ -19,12 +19,14 @@
     "react-image-gallery": "^1.2.9",
     "react-rater": "^6.0.5",
     "swell-node": "^4.0.10",
-    "swiper": "^8.3.2"
+    "swiper": "^8.3.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
     "@types/react": "17.0.41",
     "@types/react-image-gallery": "^1.0.5",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "autoprefixer": "^10.4.2",

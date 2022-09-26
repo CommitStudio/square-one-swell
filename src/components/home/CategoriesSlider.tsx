@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import categoriesJson from '~/data/categories.json';
 const { categories } = categoriesJson;
 
@@ -39,7 +41,7 @@ const CategoriesSlider = () => {
         >
           {categories.map((category, i) => {
             return (
-              <SwiperSlide key={i} className="relative grid place-items-center">
+              <SwiperSlide key={uuidv4()} className="relative grid place-items-center">
                 <div className={`h-[250px] w-[350px]`}>
                   <Image
                     src={category.image.src}

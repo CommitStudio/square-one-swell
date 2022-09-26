@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 type Colors = {
   colors?: string[];
 };
@@ -11,7 +13,7 @@ const ProductColors = ({ colors }: Colors) => {
       <span>Colors:</span>
       {colors?.map((color) => {
         return (
-          <div key={color} className="w-4 flex justify-center">
+          <div key={uuidv4()} className="w-4 flex justify-center">
             <button
               onClick={() => setColorSelected(color)}
               className={`bg-[${color}] ${

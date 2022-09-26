@@ -3,6 +3,8 @@ import ProductCard from '~/components/ProductCard';
 import data from '~/data/products.json';
 import Container from '~/layouts/Container';
 
+import { v4 as uuidv4 } from 'uuid';
+
 interface Props {
   threeColumns?: boolean;
 }
@@ -16,7 +18,7 @@ const ProductList = ({ threeColumns }: Props) => {
         }  gap-y-4 justify-items-center`}
       >
         {data.products.map((product, i) => {
-          return <ProductCard product={product} key={i} />;
+          return <ProductCard product={product} key={uuidv4()} />;
         })}
       </div>
     </Container>

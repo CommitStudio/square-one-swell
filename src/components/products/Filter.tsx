@@ -4,6 +4,9 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
+
+import { v4 as uuidv4 } from 'uuid';
+
 const { filter } = filterJson;
 
 const Filter = () => {
@@ -39,26 +42,26 @@ const Filter = () => {
       >
         {filter.categories.map((category, i) => {
           return (
-            <div key={i}>
-              <h5 className="font-bold mb-2" key={i}>
+            <div key={uuidv4()}>
+              <h5 className="font-bold mb-2" key={uuidv4()}>
                 {category.title}
               </h5>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute1}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute2}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute3}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute4}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute5}
               </p>
-              <p key={i} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
+              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
                 {category.attribute6}
               </p>
             </div>

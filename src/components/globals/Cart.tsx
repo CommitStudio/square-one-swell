@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import data from '~/data/products.json';
 
 type Props = {
@@ -37,7 +39,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             <hr className="mb-5 opacity-20" />
             {data.products.map((product, i) => (
               <div
-                key={i}
+                key={uuidv4()}
                 className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
               >
                 <div className="relative h-24 w-24">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 type PriceOptions = {
   sizes?: string[];
   price?: number;
@@ -25,7 +27,7 @@ const ProductPriceOptions = ({ sizes, price }: PriceOptions) => {
                 onClick={() => {
                   setSizeSelected(size);
                 }}
-                key={size}
+                key={uuidv4()}
               >
                 {size}
               </button>

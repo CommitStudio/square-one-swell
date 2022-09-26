@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 type Categories = {
   categories?: string[];
 };
@@ -11,7 +13,7 @@ const ProductCategories = ({ categories }: Categories) => {
       <span>Categories:</span>
       {categories?.map((category) => {
         return (
-          <Link key={category} href="/">
+          <Link key={uuidv4()} href="/">
             <a className="ml-2 cursor-pointer hover:text-primary">{category},</a>
           </Link>
         );
