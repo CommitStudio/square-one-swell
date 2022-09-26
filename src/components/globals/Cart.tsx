@@ -37,7 +37,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           <div className="overflow-y-auto px-7 mb-auto">
             <hr className="mb-5 opacity-20" />
-            {data.products.map((product, i) => (
+            {data.products.map((product) => (
               <div
                 key={uuidv4()}
                 className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"

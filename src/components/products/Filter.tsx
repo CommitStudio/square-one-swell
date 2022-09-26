@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
-
-import { v4 as uuidv4 } from 'uuid';
 
 const { filter } = filterJson;
 
@@ -40,7 +40,7 @@ const Filter = () => {
           isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'
         }`}
       >
-        {filter.categories.map((category, i) => {
+        {filter.categories.map((category) => {
           return (
             <div key={uuidv4()}>
               <h5 className="font-bold mb-2" key={uuidv4()}>

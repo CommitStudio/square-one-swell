@@ -6,10 +6,10 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
-import { v4 as uuidv4 } from 'uuid';
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import data from '~/data/home-hero.json';
 
@@ -26,7 +26,7 @@ const HomeHero = () => {
         effect={'fade'}
         pagination={{ clickable: true }}
       >
-        {hero_images.map((image, i) => {
+        {hero_images.map((image) => {
           return (
             <SwiperSlide
               key={uuidv4()}
