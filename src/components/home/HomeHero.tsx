@@ -9,6 +9,8 @@ import 'swiper/css/pagination';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import data from '~/data/home-hero.json';
 
 const HomeHero = () => {
@@ -24,9 +26,12 @@ const HomeHero = () => {
         effect={'fade'}
         pagination={{ clickable: true }}
       >
-        {hero_images.map((image, i) => {
+        {hero_images.map((image) => {
           return (
-            <SwiperSlide key={i} className="flex flex-col justify-center items-center relative">
+            <SwiperSlide
+              key={uuidv4()}
+              className="flex flex-col justify-center items-center relative"
+            >
               <div className="h-[75vh] w-full relative sm:h-[90vh]">
                 <Image
                   src={image.src}

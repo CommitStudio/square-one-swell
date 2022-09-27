@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { v4 as uuidv4 } from 'uuid';
+
 type Props = {
   isOpen: boolean;
   categories: { name: string; slug: string; query?: string }[];
@@ -13,9 +15,9 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
       } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
     >
       <ul className="divide-y text-secondary" aria-labelledby="navbarMenu">
-        {categories.map((category, i) => {
+        {categories.map((category) => {
           return (
-            <li key={i}>
+            <li key={uuidv4()}>
               <Link
                 href={
                   category.query

@@ -2,6 +2,8 @@
 import React from 'react';
 import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-icons/ai';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import footer from '~/data/footer.json';
 
 const { items } = footer;
@@ -12,7 +14,7 @@ const LinksAddress = () => {
       <div className="space-y-3">
         {items.slice(0, 4).map(function (item) {
           return (
-            <p key={item.id}>
+            <p key={uuidv4()}>
               <a className="hover:text-primary" href="/">
                 {item.name}
               </a>
@@ -21,9 +23,9 @@ const LinksAddress = () => {
         })}
       </div>
       <div className="space-y-3">
-        {items.slice(4, 8).map(function (item, i) {
+        {items.slice(4, 8).map(function (item) {
           return (
-            <p key={i}>
+            <p key={uuidv4()}>
               <a className="hover:text-primary" href="/">
                 {item.name}
               </a>

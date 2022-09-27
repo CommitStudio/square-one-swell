@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -7,12 +8,19 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 interface CategoriesProps {
   categories: Category[];
 }
-
 const CategoriesSlider = ({ categories }: CategoriesProps) => {
-  return (
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  return isMounted ? (
     <div id="slider" className="px-5 mb-5">
       <Swiper
         modules={[Navigation]}
@@ -32,10 +40,10 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         }}
         className="mySwipe"
       >
-        {categories.map((category, i) => {
+        {categories.map((category) => {
           return (
-            <SwiperSlide key={i} className="relative grid place-items-center">
-              <div className={`h-[250px] w-[350px]`}>
+            <SwiperSlide key={uuidv4()} className="relative grid place-items-center">
+              <div className={'h-[250px] w-full relative'}>
                 <Image
                   src={category.images[0].src}
                   alt={category.name}
@@ -55,7 +63,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         })}
       </Swiper>
     </div>
-  );
+  ) : null;
 };
 
 export default CategoriesSlider;

@@ -16,6 +16,7 @@ const Logo = ({ brandLogo, brandName }: Props) => {
           src={brandLogo}
           objectFit="contain"
           layout="fixed"
+          priority={true}
         />
       ) : (
         <span className="self-center text-2xl py-1 font-semibold whitespace-nowrap text-primary">

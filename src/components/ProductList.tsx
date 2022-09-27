@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import ProductCard from '~/components/ProductCard';
 
 import Container from '~/layouts/Container';
@@ -15,8 +17,8 @@ const ProductList = ({ threeColumns, products }: Props) => {
           threeColumns ? 'lg:grid-cols-3 max-w-4xl mx-auto' : 'lg:grid-cols-4'
         }  gap-y-4 justify-items-center`}
       >
-        {products?.map((product, i) => {
-          return <ProductCard product={product} key={i} />;
+        {products?.map((product) => {
+          return <ProductCard product={product} key={uuidv4()} />;
         })}
       </div>
     </Container>
