@@ -23,8 +23,9 @@ interface SwellProduct {
   popularity: number;
   prices: [];
   sale: boolean;
-  sale_price?: string;
+  sale_price?: number | null;
   sku?: string;
+  category_index: CategoryIndex;
   id: string;
 }
 
@@ -55,4 +56,16 @@ interface SwellProductOption {
   }[];
   required: boolean;
   id: string;
+}
+
+interface FilterParams {
+  minPrice?: number;
+  maxPrice?: number;
+  maxProducts?: number;
+  category?: string;
+  slug?: string;
+}
+
+interface CategoryIndex {
+  id: string[];
 }

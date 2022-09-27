@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
-import { v4 as uuidv4 } from 'uuid';
+import { FilterBy } from './FilterBy';
 
 import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
+const { filterBy } = filterJson;
 
-const { filter } = filterJson;
+interface FilterProps {
+  categories: Category[];
+}
 
-const Filter = () => {
+const Filter = ({ categories }: FilterProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <Container className="pt-10">
       <div className="md:flex md:justify-between">
@@ -36,37 +40,12 @@ const Filter = () => {
       </div>
       <hr className="my-10" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out ${
-          isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'
-        }`}
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
+        ${isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'}`}
       >
-        {filter.categories.map((category) => {
-          return (
-            <div key={uuidv4()}>
-              <h5 className="font-bold mb-2" key={uuidv4()}>
-                {category.title}
-              </h5>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute1}
-              </p>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute2}
-              </p>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute3}
-              </p>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute4}
-              </p>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute5}
-              </p>
-              <p key={uuidv4()} className="cursor-pointer w-fit text-gray-500 hover:text-secondary">
-                {category.attribute6}
-              </p>
-            </div>
-          );
-        })}
+        {/* FilterBy Categories info is coming from the store */}
+        {/* TODO: Add others filters coming from the Store*/}
+        <FilterBy title="Categories" items={categories} pathname={'products'} />
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${

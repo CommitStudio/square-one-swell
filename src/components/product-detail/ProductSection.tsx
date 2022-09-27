@@ -1,17 +1,18 @@
 import React from 'react';
 
-import ProductImageGallery from './ProductImageGallery';
-import ProductInfo from './ProductInfo/ProductInfo';
+import ProductImageGallery from '~/components/product-detail/ProductImageGallery';
+import ProductInfo from '~/components/product-detail/ProductInfo/ProductInfo';
 
-import data from '~/data/product-detail.json';
+interface ProductProp {
+  product: Product;
+  categories: Category[];
+}
 
-const { test_product } = data;
-
-const ProductSection = () => {
+const ProductSection = ({ product, categories }: ProductProp) => {
   return (
     <div className="flex flex-col md:flex-row my-10">
-      <ProductImageGallery />
-      <ProductInfo test_product={test_product} />
+      <ProductImageGallery product={product} />
+      <ProductInfo product={product} categories={categories} />
     </div>
   );
 };

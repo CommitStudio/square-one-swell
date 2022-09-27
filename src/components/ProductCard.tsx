@@ -1,23 +1,15 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 
 interface Props {
-  product: {
-    name: string;
-    image: {
-      src: string;
-      alt: string;
-    };
-    size: string;
-    color: string;
-    quantity: number;
-    price: number;
-  };
+  product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
+  const image = product.images?.[0] || { src: '', alt: 'Not Found' };
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -35,13 +27,9 @@ const ProductCard = ({ product }: Props) => {
           />
         </div>
         <div className="flex justify-center cursor-pointer">
-          <Image
-            src={product.image.src}
-            alt={product.image.alt}
-            width={300}
-            height={300}
-            objectFit="cover"
-          />
+          <Link href={`/product-detail/${product.slug}`}>
+            <Image src={image.src} alt={image.alt} width={300} height={300} objectFit="cover" />
+          </Link>
         </div>
         <p className="text-center text-xl pt-3">{product.name}</p>
         <p className="text-center text-red-600 text-xl">${product.price}</p>

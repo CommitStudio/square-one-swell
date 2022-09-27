@@ -2,14 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ProductCard from '~/components/ProductCard';
 
-import data from '~/data/products.json';
 import Container from '~/layouts/Container';
 
 interface Props {
   threeColumns?: boolean;
+  products?: Product[];
 }
 
-const ProductList = ({ threeColumns }: Props) => {
+const ProductList = ({ threeColumns, products }: Props) => {
   return (
     <Container className="mb-10">
       <div
@@ -17,7 +17,7 @@ const ProductList = ({ threeColumns }: Props) => {
           threeColumns ? 'lg:grid-cols-3 max-w-4xl mx-auto' : 'lg:grid-cols-4'
         }  gap-y-4 justify-items-center`}
       >
-        {data.products.map((product) => {
+        {products?.map((product) => {
           return <ProductCard product={product} key={uuidv4()} />;
         })}
       </div>

@@ -16,8 +16,12 @@ class Store {
     }
   }
 
-  async getProducts(): Promise<Product[]> {
-    return await this.storeClass.getProducts();
+  async getProducts(filterParams: FilterParams): Promise<Product[]> {
+    return await this.storeClass.getProducts(filterParams);
+  }
+
+  async getCategories(): Promise<Category[]> {
+    return await this.storeClass.getCategories();
   }
 }
 

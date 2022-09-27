@@ -1,11 +1,11 @@
-import React from 'react';
+import parse from 'html-react-parser';
 
 type Description = {
   description?: string;
 };
 
 const ProductDescription = ({ description }: Description) => {
-  return <div className="font-light">{description}</div>;
+  return <>{description && <div className="font-light">{parse(description)}</div>}</>;
 };
 
 export default ProductDescription;

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper';
 
@@ -9,10 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import categoriesJson from '~/data/categories.json';
-const { categories } = categoriesJson;
-
-const CategoriesSlider = () => {
+interface CategoriesProps {
+  categories: Category[];
+}
+const CategoriesSlider = ({ categories }: CategoriesProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const CategoriesSlider = () => {
         modules={[Navigation]}
         spaceBetween={20}
         loop
+        watchSlidesProgress
         navigation
         breakpoints={{
           768: {
@@ -43,16 +45,18 @@ const CategoriesSlider = () => {
             <SwiperSlide key={uuidv4()} className="relative grid place-items-center">
               <div className={'h-[250px] w-full relative'}>
                 <Image
-                  src={category.image.src}
-                  alt={category.image.alt}
+                  src={category.images[0].src}
+                  alt={category.name}
                   layout="fill"
                   objectFit="cover"
                 />
               </div>
               <div className="absolute bottom-10">
-                <button className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3">
-                  {category.name}
-                </button>
+                <Link href={{ pathname: 'products', query: category.slug }}>
+                  <a className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium">
+                    {category.name.toUpperCase()}
+                  </a>
+                </Link>
               </div>
             </SwiperSlide>
           );

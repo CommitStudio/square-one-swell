@@ -8,6 +8,12 @@
     "colors": ["#FFFF00", "#FFFF", "#0000FF"],
     "sizes": ["L", "M", "S", "XL", "XXL", "Over Size"],
     "characteristics": ["100% cotton", "6 months warranty", "High quality"],
-    "categories": ["Men", "Women", "Kids", "Accessories"]
+    "categories": ["Men", "Women", "Kids", "Accessories"],
+    "additional_information": {
+      "Weight": "1.72 kg",
+      "Dimensions": "100 x 37 x 100 cm",
+      "Materials": "80% cotton, 20% linen",
+      "Size": "One Size, XL, L, M, S"
+    }
   }
 }
