@@ -4,9 +4,7 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import { FilterBy } from './FilterBy';
 
-import filterJson from '~/data/products/filter.json';
 import Container from '~/layouts/Container';
-const { filterBy } = filterJson;
 
 interface FilterProps {
   categories: Category[];

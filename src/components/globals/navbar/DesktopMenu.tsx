@@ -13,11 +13,10 @@ const DesktopMenu = ({ categories }: Props) => {
       id="navbar-sticky"
     >
       <ul className="hidden bg-secondary mt-6 lg:flex lg:flex-row lg:p-4 lg:space-x-8 lg:mt-0">
-        {categories.map((category, i) => {
+        {categories.map((category) => {
           return (
             <li key={uuidv4()}>
               <Link
-                passHref
                 href={
                   category.query
                     ? { pathname: '/products', query: { category: category.slug } }

@@ -18,7 +18,7 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
   return (
     <div className="flex flex-wrap gap-y-2 items-center">
       <span>Categories:</span>
-      {productCategories?.map((category, i) => {
+      {productCategories?.map((category) => {
         return (
           <Link key={uuidv4()} href="/">
             <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
