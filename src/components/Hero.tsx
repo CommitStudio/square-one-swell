@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Breadcrumb from './Breadcrumb';
 
 interface HeroProps {
   title: string;
@@ -19,7 +20,7 @@ function Hero({ title }: HeroProps) {
       <div className="absolute flex flex-col justify-center items-center top-0 left-0 w-full h-full">
         <h1 className="font-bold text-5xl text-secondary mb-6">{title}</h1>
         {/* ---- Breadcrumb */}
-        <nav className="flex" aria-label="Breadcrumb">
+        {/* <nav className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
               <Link href="/">
@@ -67,7 +68,8 @@ function Hero({ title }: HeroProps) {
               </div>
             </li>
           </ol>
-        </nav>
+        </nav> */}
+        <Breadcrumb />
       </div>
     </section>
   );
