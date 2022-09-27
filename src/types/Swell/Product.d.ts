@@ -69,3 +69,10 @@ interface FilterParams {
 interface CategoryIndex {
   id: string[];
 }
+
+interface SwellProductWhere {
+  price?: {
+    $gte?: number;
+    $lte?: number;
+  };
+}
