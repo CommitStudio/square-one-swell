@@ -13,7 +13,6 @@ type ProductsProps = {
 };
 
 const Products = ({ products, categories }: ProductsProps) => {
-  console.log(!products);
   return (
     <>
       <Hero title="Shop" />
