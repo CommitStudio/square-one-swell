@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import { v4 as uuidv4 } from 'uuid';
 
 const Breadcrumb = () => {
@@ -21,7 +22,6 @@ const Breadcrumb = () => {
   // Ex:"/my/nested/path" --> ["my", "nested", "path"]
   const asPathNestedRoutes = asPathWithoutQuery.split('/').filter((v) => v.length > 0);
   console.log('NESTED ROUTES', asPathNestedRoutes);
-
 
   return (
     <nav className="flex" aria-label="Breadcrumb">
@@ -48,7 +48,7 @@ const Breadcrumb = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <Link href={`/${category}`}>
+              <Link href={'/'}>
                 <a className="ml-1 text-sm font-medium text-secondary hover:text-primary md:ml-2">
                   {category}
                 </a>
