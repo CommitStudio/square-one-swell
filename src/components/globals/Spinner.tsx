@@ -1,13 +1,14 @@
-type SpinnerProp = {
+interface SpinnerProp {
   position?: 'center' | 'left' | 'right';
-};
+  size?: number; //one of 4, 6, 8, 10
+}
 
-export const Spinner = ({ position = 'center' }: SpinnerProp) => {
+export const Spinner = ({ position = 'center', size = 8 }: SpinnerProp) => {
   return (
     <div className={`text-${position} mb-16`}>
       <div role="status">
         <svg
-          className="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-secondary"
+          className={`inline mr-2 w-${size} h-${size} text-gray-200 animate-spin dark:text-gray-600 fill-secondary`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
