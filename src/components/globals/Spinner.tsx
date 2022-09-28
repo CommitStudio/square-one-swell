@@ -3,7 +3,7 @@ interface SpinnerProp {
   size?: 4 | 6 | 8 | 10;
 }
 
-export const Spinner = ({ position = 'center', size = 8 }: SpinnerProp) => {
+export const Spinner = ({ position = 'center', size = 10 }: SpinnerProp) => {
   return (
     <div className={`text-${position} mb-16`}>
       <div role="status">
