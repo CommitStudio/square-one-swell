@@ -28,7 +28,9 @@ const ProductCard = ({ product }: Props) => {
         </div>
         <div className="flex justify-center cursor-pointer">
           <Link href={`/product-detail/${product.slug}`}>
-            <Image src={image.src} alt={image.alt} width={300} height={300} objectFit="cover" />
+            <a>
+              <Image src={image.src} alt={image.alt} width={300} height={300} objectFit="cover" />
+            </a>
           </Link>
         </div>
         <p className="text-center text-xl pt-3">{product.name}</p>
