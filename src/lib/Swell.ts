@@ -12,23 +12,24 @@ export default class Swell {
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
-    // Destructuring filterParams incoming from query string
     const { maxProducts, category, slug } = filterParams;
+
     // Fetch filtered products from Swell
     const { results }: { results: SwellProduct[] } = await swell.get('/products', {
       active: true,
+      category: category,
       limit: maxProducts,
       slug: slug,
-      category: category,
-      where: this.filteringWhere(filterParams)
+      where: this.parseProductsFilter(filterParams)
     });
+
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
       name: product.name,
       active: product.active,
       description: product.description,
-      options: this.parseOptions(product),
+      options: this.parseProductOptions(product),
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
@@ -39,42 +40,47 @@ export default class Swell {
     }));
   }
 
-  // Convert SwellProduct images to a Product images format
+  /*****************************************************************************
+   * Convert Swell images list to a generic format
+   ****************************************************************************/
   parseImages = (item: SwellProduct | SwellCategory) => {
     if (item.images) {
-      const imagesArray = item.images.map((image) => {
-        return {
-          src: image.file.url,
-          alt: item.name
-        };
-      });
-      return imagesArray;
+      return item.images.map((image) => ({
+        src: image.file.url,
+        alt: item.name
+      }));
     }
-    return [{ src: '/img/default-images/image-not-found.webp', alt: 'Category without image' }];
+
+    return [{ src: '/img/default-images/image-not-found.webp', alt: 'No image available' }];
   };
 
-  // Convert SwellProduct options to a Product options format
-  parseOptions = (item: SwellProduct) => {
-    const options = item.options.map((option) => {
-      return {
-        label: option.name,
-        values: option.values.map((value) => {
-          return value.name;
-        })
-      };
-    });
-    return options;
+  /*****************************************************************************
+   * Convert Swell product options to generic format
+   ****************************************************************************/
+  parseProductOptions = (product: SwellProduct) => {
+    return product.options.map((option) => ({
+      label: option.name,
+      values: option.values.map((value) => value.name)
+    }));
   };
 
-  // Filtering logic (where: {})) for fetching products from Swell
-  filteringWhere = (filterParams: FilterParams) => {
+  /*****************************************************************************
+   * Parse a list of filters parameters expected Swell where format
+   ****************************************************************************/
+  parseProductsFilter = (filterParams: FilterParams): SwellProductWhere => {
     const { minPrice, maxPrice } = filterParams;
-    // Filtering between a min price and a max price
-    if ((minPrice || minPrice === 0) && maxPrice) {
-      return { price: { $gte: minPrice, $lte: maxPrice } };
-    } else if (minPrice) {
-      return { price: { $gte: minPrice } };
+
+    const where: SwellProductWhere = {};
+
+    // Add price filter
+    if (minPrice || maxPrice) {
+      where['price'] = {
+        $gte: minPrice || undefined,
+        $lte: maxPrice || undefined
+      };
     }
+
+    return where;
   };
 
   /*****************************************************************************
@@ -86,7 +92,7 @@ export default class Swell {
         active: true
       }
     });
-    // Transform SwellCategory data to Category standard data format
+
     return results.map((category) => ({
       id: category.id,
       name: category.name,
