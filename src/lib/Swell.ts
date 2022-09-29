@@ -22,6 +22,7 @@ export default class Swell {
       category: category,
       limit: maxProducts,
       slug: slug,
+      expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
 
@@ -32,6 +33,7 @@ export default class Swell {
       active: product.active,
       description: product.description,
       options: this.parseProductOptions(product),
+      variants: this.parseVariants(product),
       slug: product.slug,
       price: product.price,
       sale: product.sale || null,
@@ -62,7 +64,18 @@ export default class Swell {
   parseProductOptions = (product: SwellProduct) => {
     return product.options.map((option) => ({
       label: option.name,
+      active: option.active,
       values: option.values.map((value) => value.name)
+    }));
+  };
+
+  /*****************************************************************************
+   * Convert SwellProduct variants to a Product variants format
+   ****************************************************************************/
+  parseVariants = (item: SwellProduct) => {
+    return item.variants.results.map((variant) => ({
+      name: variant.name,
+      active: variant.active
     }));
   };
 
