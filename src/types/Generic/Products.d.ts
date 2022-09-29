@@ -4,6 +4,7 @@ interface Product {
   active: boolean;
   description: string;
   options?: ProductOption[];
+  variants?: Variant[];
   slug: string;
   tags?: string[];
   price: number;
@@ -21,5 +22,11 @@ interface ProductImage {
 
 interface ProductOption {
   label: string;
+  active: boolean;
   values: string[];
+}
+
+interface Variant {
+  name: string;
+  active: boolean;
 }
