@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
+import { NoResults } from '~/components/globals/NoResults';
 import Filter from '~/components/products/Filter';
 import Pagination from '~/components/products/Pagination';
 import Store from '~/lib/Store';
@@ -16,8 +17,14 @@ const Products = ({ products, categories }: ProductsProps) => {
     <>
       <Hero title="Shop" />
       <Filter categories={categories} />
-      <ProductList threeColumns products={products} />
-      <Pagination />
+      {products.length > 0 ? (
+        <>
+          <ProductList threeColumns products={products} />
+          <Pagination />
+        </>
+      ) : (
+        <NoResults />
+      )}
     </>
   );
 };
