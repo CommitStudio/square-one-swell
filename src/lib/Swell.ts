@@ -67,7 +67,9 @@ export default class Swell {
     }));
   };
 
-  // Convert SwellProduct variants to a Product variants format
+  /*****************************************************************************
+   * Convert SwellProduct variants to a Product variants format
+   ****************************************************************************/
   parseVariants = (item: SwellProduct) => {
     return item.variants.results.map((variant) => ({
       name: variant.name,
