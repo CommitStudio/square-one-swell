@@ -5,7 +5,15 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
+
+// para free trial de store nueva:
 const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
+
+// para staging store:
+// const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY, {
+//   host: 'api-staging.swell.store',
+//   verifyCert: false
+// });
 
 export default class Swell {
   /*****************************************************************************
@@ -19,9 +27,11 @@ export default class Swell {
       active: true,
       limit: maxProducts,
       slug: slug,
+      expand: ['categories'],
       category: category,
       where: this.filteringWhere(filterParams)
     });
+    // console.log(results[0].categories.results);
     // Transform SwellProduct data to Product standard data format
     return results.map((product) => ({
       id: product.id,
