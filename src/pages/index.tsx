@@ -24,7 +24,7 @@ const Home = ({ products, categories }: HomeProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const products = await Store.getProducts({
+  const { products } = await Store.getProducts({
     category: 'featured'
   });
 
