@@ -23,7 +23,7 @@ const Products = ({ products, count, swellPage, pages, categories }: ProductsPro
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
-          <Pagination pages={pages} />
+          {pages && <Pagination pages={pages} />}
         </>
       ) : (
         <NoResults />
@@ -34,14 +34,19 @@ const Products = ({ products, count, swellPage, pages, categories }: ProductsPro
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
-
-  const { products, count, swellPage, pages } = await Store.getProducts({
+  // Se rompe porque cuando no hay pages no manda pages y aca no puede destructurarlo
+  const results = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
     page: Number(page),
     minPrice: Number(minPrice),
     category: category
   });
+
+  const products = results.products;
+  const count = results.count;
+  const swellPage = results.swellPage;
+  const pages = results.pages || null;
 
   const categories = await Store.getCategories();
 

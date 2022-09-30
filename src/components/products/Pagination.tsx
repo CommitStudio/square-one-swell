@@ -51,7 +51,6 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                 </a>
               </Link>
               {Object.keys(pages).map((page, i) => {
-                console.log('hola');
                 return (
                   <Link key={i} href={{ pathname: '/products', query: { page: page } }}>
                     <a
