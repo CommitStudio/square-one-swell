@@ -30,3 +30,17 @@ interface Variant {
   name: string;
   active: boolean;
 }
+
+interface SwellProductResult {
+  results: SwellProduct[];
+  page: number;
+  count: number;
+  pages: { start: number; end: number }[];
+}
+
+interface GenericProductResult {
+  products: Product[];
+  swellPage: number;
+  count: number;
+  pages: { start: number; end: number }[];
+}

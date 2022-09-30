@@ -9,10 +9,13 @@ import Store from '~/lib/Store';
 
 type ProductsProps = {
   products: Product[];
+  swellPage: number;
+  count: number;
+  pages: { start: number; end: number }[];
   categories: Category[];
 };
 
-const Products = ({ products, categories }: ProductsProps) => {
+const Products = ({ products, count, swellPage, pages, categories }: ProductsProps) => {
   return (
     <>
       <Hero title="Shop" />
@@ -20,7 +23,7 @@ const Products = ({ products, categories }: ProductsProps) => {
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
-          <Pagination />
+          <Pagination pages={pages} />
         </>
       ) : (
         <NoResults />
@@ -30,10 +33,12 @@ const Products = ({ products, categories }: ProductsProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { maxProducts, minPrice, maxPrice, category }: FilterParams = query;
-  const products = await Store.getProducts({
+  const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
+
+  const { products, count, swellPage, pages } = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
+    page: Number(page),
     minPrice: Number(minPrice),
     category: category
   });
@@ -41,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const categories = await Store.getCategories();
 
   return {
-    props: { products, categories }
+    props: { products, count, swellPage, pages, categories }
   };
 };
 

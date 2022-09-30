@@ -32,7 +32,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return { notFound: true };
   }
   const { slug } = params;
-  const [product] = await Store.getProducts({ slug } as FilterParams);
+  const { products } = await Store.getProducts({ slug } as FilterParams);
+  const [product] = products;
 
   const categories = await Store.getCategories();
 

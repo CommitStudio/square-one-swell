@@ -65,6 +65,7 @@ interface FilterParams {
   maxProducts?: number;
   category?: string;
   slug?: string;
+  page?: number;
 }
 
 interface CategoryIndex {

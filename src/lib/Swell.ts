@@ -5,26 +5,35 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
-const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
+const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY, {
+  host: 'api-staging.swell.store',
+  verifyCert: false
+});
+
 export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(filterParams: FilterParams): Promise<Product[]> {
-    const { maxProducts, category, slug } = filterParams;
+  async getProducts(filterParams: FilterParams): Promise<GenericProductResult> {
+    const { maxProducts, category, slug, page } = filterParams;
 
     // Fetch filtered products from Swell
-    const { results }: { results: SwellProduct[] } = await swell.get('/products', {
+    const {
+      results,
+      count,
+      pages,
+      page: swellPage
+    }: SwellProductResult = await swell.get('/products', {
       active: true,
       category: category,
-      limit: maxProducts,
+      limit: maxProducts || 6,
       slug: slug,
+      page: page || 1,
       expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
 
-    // Transform SwellProduct data to Product standard data format
-    return results.map((product) => ({
+    const products = results.map((product) => ({
       id: product.id,
       name: product.name,
       active: product.active,
@@ -39,6 +48,13 @@ export default class Swell {
       images: this.parseImages(product),
       categories: product.category_index.id
     }));
+
+    return {
+      products,
+      count,
+      swellPage,
+      pages
+    };
   }
 
   /*****************************************************************************
