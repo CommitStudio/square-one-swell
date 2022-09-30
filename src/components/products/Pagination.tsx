@@ -5,6 +5,7 @@ import Container from '~/layouts/Container';
 
 const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
   const router = useRouter();
+  const numberOfPages = Object.keys(pages).length;
 
   return (
     <Container className="flex justify-center mb-5">
@@ -67,7 +68,12 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
               })}
               <Link
                 href={
-                  Number(router.query.page) !== 3
+                  !router.query.page
+                    ? {
+                        pathname: '/products',
+                        query: { page: 2 }
+                      }
+                    : Number(router.query.page) !== numberOfPages
                     ? {
                         pathname: '/products',
                         query: { page: Number(router.query.page) + 1 }
@@ -76,9 +82,11 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                 }
               >
                 <a
-                  onClick={(ev) => (Number(router.query.page) !== 3 ? null : ev.preventDefault())}
+                  onClick={(ev) =>
+                    Number(router.query.page) !== numberOfPages ? null : ev.preventDefault()
+                  }
                   className={`${
-                    Number(router.query.page) !== 3
+                    Number(router.query.page) !== numberOfPages
                       ? 'hover:bg-gray-50'
                       : 'bg-gray-200 cursor-default'
                   } relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500`}
