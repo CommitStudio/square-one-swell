@@ -24,12 +24,8 @@ class Store {
     return await this.storeClass.getCategories();
   }
 
-  async getProductBySlug(slug: string): Promise<Product> {
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
     return await this.storeClass.getProductBySlug(slug);
-  }
-
-  async getProductById(id: string): Promise<Product> {
-    return await this.storeClass.getProductById(id);
   }
 }
 
