@@ -9,13 +9,13 @@ import Store from '~/lib/Store';
 
 type ProductsProps = {
   products: Product[];
-  swellPage: number;
+  backEndPage: number;
   count: number;
   pages: { start: number; end: number }[];
   categories: Category[];
 };
 
-const Products = ({ products, count, swellPage, pages, categories }: ProductsProps) => {
+const Products = ({ products, count, backEndPage, pages, categories }: ProductsProps) => {
   return (
     <>
       <Hero title="Shop" />
@@ -45,13 +45,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const products = results.products;
   const count = results.count;
-  const swellPage = results.swellPage;
+  const backEndPage = results.backEndPage;
   const pages = results.pages || null;
 
   const categories = await Store.getCategories();
 
   return {
-    props: { products, count, swellPage, pages, categories }
+    props: { products, count, backEndPage, pages, categories }
   };
 };
 

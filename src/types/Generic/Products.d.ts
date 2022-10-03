@@ -40,7 +40,7 @@ interface SwellProductResult {
 
 interface GenericProductResult {
   products: Product[];
-  swellPage: number;
+  backEndPage: number;
   count: number;
   pages?: { start: number; end: number }[];
 }

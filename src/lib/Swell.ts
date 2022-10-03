@@ -22,7 +22,7 @@ export default class Swell {
       results,
       count,
       pages,
-      page: swellPage
+      page: backEndPage
     }: SwellProductResult = await swell.get('/products', {
       active: true,
       category: category,
@@ -52,7 +52,7 @@ export default class Swell {
     return {
       products,
       count,
-      swellPage,
+      backEndPage,
       pages
     };
   }
