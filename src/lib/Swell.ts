@@ -1,4 +1,7 @@
+import { ApiError } from 'next/dist/server/api-utils';
 import { createClient } from 'swell-node';
+
+//import productId from '~/pages/api/products/[id]';
 
 /*****************************************************************************
  * Initialize Swell client
@@ -91,7 +94,6 @@ export default class Swell {
         $lte: maxPrice || undefined
       };
     }
-
     return where;
   };
 
@@ -113,5 +115,73 @@ export default class Swell {
       active: category.active,
       slug: { category: category.slug }
     }));
+  }
+
+  /*****************************************************************************
+   * Get Product by slug from Swell and convert to individual Product object
+   ****************************************************************************/
+  async getProductBySlug(slug: string): Promise<Product> {
+    if (slug) {
+      //const { product }: { product: SwellProduct } = await swell.get(`/products`, {
+      const { results }: { results: SwellProduct[] } = await swell.get('/products', {
+        active: true,
+        expand: ['variants:*'],
+        where: {
+          slug: slug
+        }
+      });
+      if (results.length > 0) {
+        const product: SwellProduct = results[0]; // First result. See other way to extract the product
+
+        if (product) {
+          return <Product>{
+            id: product.id,
+            name: product.name,
+            active: product.active,
+            description: product.description,
+            options: this.parseProductOptions(product),
+            variants: this.parseVariants(product),
+            slug: product.slug,
+            price: product.price,
+            sale: product.sale || null,
+            salePrice: product.sale_price || null,
+            sku: product.sku || null,
+            images: this.parseImages(product),
+            categories: product.category_index.id
+          };
+        } //extract this type to a generic one
+      }
+    } // ver como resolver la promisa
+  }
+
+  /*****************************************************************************
+   * Get Product by id from Swell and convert to individual Product object
+   ****************************************************************************/
+  async getProductById(id: string): Promise<Product> {
+    if (id) {
+      // Getting product by Id from Swell
+      const product: SwellProduct = await swell.get(`/products/${id}`, {
+        active: true,
+        expand: ['variants:*']
+      });
+
+      if (product) {
+        return <Product>{
+          id: product.id,
+          name: product.name,
+          active: product.active,
+          description: product.description,
+          options: this.parseProductOptions(product),
+          variants: this.parseVariants(product),
+          slug: product.slug,
+          price: product.price,
+          sale: product.sale || null,
+          salePrice: product.sale_price || null,
+          sku: product.sku || null,
+          images: this.parseImages(product),
+          categories: product.category_index.id
+        };
+      } //extract this type to a generic one
+    }
   }
 }
