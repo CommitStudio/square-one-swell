@@ -8,6 +8,26 @@ const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
 const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
 export default class Swell {
   /*****************************************************************************
+   * Definition of One Individual Product
+   ****************************************************************************/
+  parseOneProduct = (product: SwellProduct) => {
+    return <Product>{
+      id: product.id,
+      name: product.name,
+      active: product.active,
+      description: product.description,
+      options: this.parseProductOptions(product),
+      variants: this.parseVariants(product),
+      slug: product.slug,
+      price: product.price,
+      sale: product.sale || null,
+      salePrice: product.sale_price || null,
+      sku: product.sku || null,
+      images: this.parseImages(product),
+      categories: product.category_index.id
+    };
+  };
+  /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<Product[]> {
@@ -24,21 +44,7 @@ export default class Swell {
     });
 
     // Transform SwellProduct data to Product standard data format
-    return results.map((product) => ({
-      id: product.id,
-      name: product.name,
-      active: product.active,
-      description: product.description,
-      options: this.parseProductOptions(product),
-      variants: this.parseVariants(product),
-      slug: product.slug,
-      price: product.price,
-      sale: product.sale || null,
-      salePrice: product.sale_price || null,
-      sku: product.sku || null,
-      images: this.parseImages(product),
-      categories: product.category_index.id
-    }));
+    return results.map((product) => this.parseOneProduct(product));
   }
 
   /*****************************************************************************
@@ -125,22 +131,8 @@ export default class Swell {
         expand: ['variants:*']
       });
       if (product) {
-        return <Product>{
-          id: product.id,
-          name: product.name,
-          active: product.active,
-          description: product.description,
-          options: this.parseProductOptions(product),
-          variants: this.parseVariants(product),
-          slug: product.slug,
-          price: product.price,
-          sale: product.sale || null,
-          salePrice: product.sale_price || null,
-          sku: product.sku || null,
-          images: this.parseImages(product),
-          categories: product.category_index.id
-        };
-      } // TODO://extract this type to a generic one
+        return this.parseOneProduct(product);
+      }
     }
   }
 }
