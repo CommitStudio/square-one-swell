@@ -23,8 +23,7 @@ export default class Swell {
     }: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
-      limit: 1,
-      // limit: maxProducts || 6,
+      limit: maxProducts || 6,
       slug: slug,
       page: page || 1,
       expand: ['variants:*'],
