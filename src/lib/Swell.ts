@@ -7,6 +7,7 @@ const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
 
 const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
+
 export default class Swell {
   /*****************************************************************************
    * Definition of One Individual Product
@@ -31,21 +32,36 @@ export default class Swell {
   /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
-  async getProducts(filterParams: FilterParams): Promise<Product[]> {
-    const { maxProducts, category, slug } = filterParams;
+  async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
+    const { maxProducts, category, slug, page } = filterParams;
 
     // Fetch filtered products from Swell
-    const { results }: { results: SwellProduct[] } = await swell.get('/products', {
+    const {
+      results,
+      count,
+      pages,
+      page: currentPage
+    }: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
-      limit: maxProducts,
+      limit: maxProducts || 6,
       slug: slug,
+      page: page || 1,
       expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
 
     // Transform SwellProduct data to Product standard data format
-    return results.map((product) => this.parseOneProduct(product));
+    const products = results.map((product) => this.parseOneProduct(product));
+
+    return {
+      products,
+      pagination: {
+        total: count,
+        pages: pages ? Object.keys(pages).map(Number) : [],
+        current: currentPage
+      }
+    };
   }
 
   /*****************************************************************************

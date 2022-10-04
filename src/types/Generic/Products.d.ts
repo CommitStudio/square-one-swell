@@ -30,3 +30,8 @@ interface Variant {
   name: string;
   active: boolean;
 }
+
+interface GenericProductsList {
+  products: Product[];
+  pagination: Pagination;
+}
