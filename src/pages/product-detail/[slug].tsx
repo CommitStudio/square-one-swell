@@ -18,7 +18,7 @@ interface ProductProp {
 const ProductDetail = ({ product, categories }: ProductProp) => {
   return (
     <>
-      <Hero title="Product detail" />
+      <Hero title={product.name} />
       <Container>
         <ProductSection product={product} categories={categories} />
         <ProductReview test_product={test_product} />
