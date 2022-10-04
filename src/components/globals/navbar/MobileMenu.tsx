@@ -2,12 +2,19 @@ import Link from 'next/link';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { useStore } from '~/hooks/useStore';
+
 type Props = {
   isOpen: boolean;
   categories: { name: string; slug: string; query?: string }[];
 };
 
 const MobileMenu = ({ isOpen, categories }: Props) => {
+  const { state, updateState } = useStore();
+  const handleClick = () => {
+    updateState({ ...state, isFilterOpen: false, breadcrumbSelectedCategory: '' });
+  };
+
   return (
     <div
       className={`${
@@ -18,14 +25,11 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
         {categories.map((category) => {
           return (
             <li key={uuidv4()}>
-              <Link
-                href={
-                  category.query
-                    ? { pathname: 'products', query: { category: category.slug } }
-                    : category.slug
-                }
-              >
-                <a className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary focus:bg-secondary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary  ">
+              <Link href={`/${category.slug}`}>
+                <a
+                  onClick={handleClick}
+                  className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary focus:bg-secondary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary  "
+                >
                   {category.name}
                 </a>
               </Link>
