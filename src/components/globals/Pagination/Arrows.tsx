@@ -17,7 +17,7 @@ export const ArrowLeft = ({ current, pathname }: { current: number; pathname: st
   return (
     <Link
       href={{
-        pathname: pathname,
+        pathname,
         query: { ...router.query, page: current - 1 }
       }}
     >
@@ -52,7 +52,7 @@ export const ArrowRight = ({
   return (
     <Link
       href={{
-        pathname: pathname,
+        pathname,
         query: { ...router.query, page: current + 1 }
       }}
     >
