@@ -3,8 +3,8 @@ import { GetServerSideProps } from 'next';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
 import { NoResults } from '~/components/globals/NoResults';
+import Pagination from '~/components/globals/Pagination';
 import Filter from '~/components/products/Filter';
-import Pagination from '~/components/products/Pagination';
 import Store from '~/lib/Store';
 
 type ProductsProps = {
