@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { useStore } from '~/hooks/useStore';
+
 interface FilterByProps {
   title: string;
   items: {
@@ -14,6 +16,10 @@ interface FilterByProps {
 
 export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   const router = useRouter();
+  const { updateStateProp } = useStore();
+  const handleClick = (itemName: string) => {
+    updateStateProp('breadcrumbSelectedCategory', itemName);
+  };
   return (
     <div>
       <h5 className="font-bold mb-2">{title}</h5>
@@ -22,6 +28,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
           <Link key={uuidv4()} href={{ pathname: pathname, query: item.slug }}>
             <div>
               <a
+                onClick={() => handleClick(item.name)}
                 className={`cursor-pointer w-fit hover:text-secondary ${
                   router.query.category == item.slug?.category
                     ? 'text-secondary font-semibold text'

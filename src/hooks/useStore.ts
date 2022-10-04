@@ -2,10 +2,16 @@ import { atom, useAtom } from 'jotai';
 
 type Store = {
   testVariable: boolean;
+  isFilterOpen: boolean;
+  breadcrumbSelectedCategory: string;
+  breadcrumbMainRoute: string;
 };
 
 export const store = atom({
-  testVariable: false // Here we need to initialize de viariable we want on the store, the testVariable is just as example it may be removed
+  testVariable: false, // Here we need to initialize de variable we want on the store, the testVariable is just as example it may be removed
+  isFilterOpen: false,
+  breadcrumbSelectedCategory: '',
+  breadcrumbMainRoute: ''
 });
 
 export function useStore(): {

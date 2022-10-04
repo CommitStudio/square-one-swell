@@ -10,15 +10,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { useStore } from '~/hooks/useStore';
+
 interface CategoriesProps {
   categories: Category[];
 }
+
 const CategoriesSlider = ({ categories }: CategoriesProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const { updateStateProp } = useStore();
+  const handleClick = (categoryName: string) => {
+    updateStateProp('breadcrumbSelectedCategory', categoryName);
+  };
 
   return isMounted ? (
     <div id="slider" className="px-5 mb-5">
@@ -53,7 +61,10 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
               </div>
               <div className="absolute bottom-10">
                 <Link href={{ pathname: 'products', query: category.slug }}>
-                  <a className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium">
+                  <a
+                    onClick={() => handleClick(category.name)}
+                    className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium"
+                  >
                     {category.name.toUpperCase()}
                   </a>
                 </Link>

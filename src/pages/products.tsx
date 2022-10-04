@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
 
+import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
 import { NoResults } from '~/components/globals/NoResults';
 import Filter from '~/components/products/Filter';
 import Pagination from '~/components/products/Pagination';
+import { useStore } from '~/hooks/useStore';
 import Store from '~/lib/Store';
 
 type ProductsProps = {
@@ -13,9 +15,15 @@ type ProductsProps = {
 };
 
 const Products = ({ products, categories }: ProductsProps) => {
+  const { state } = useStore();
+  const selectedCategory = state.breadcrumbSelectedCategory;
+  const mainRoute = state.breadcrumbMainRoute;
   return (
     <>
-      <Hero title="Shop" />
+      <Hero
+        title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
+        breadcrumb={<Breadcrumb />}
+      />
       <Filter categories={categories} />
       {products.length > 0 ? (
         <>
