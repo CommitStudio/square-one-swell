@@ -5,6 +5,7 @@ import { createClient } from 'swell-node';
  ****************************************************************************/
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
 const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
+
 const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
 export default class Swell {
   /*****************************************************************************

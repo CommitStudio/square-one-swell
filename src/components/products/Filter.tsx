@@ -4,6 +4,8 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import { FilterBy } from './FilterBy';
 
+import { useStore } from '~/hooks/useStore';
+
 import Container from '~/layouts/Container';
 
 interface FilterProps {
@@ -11,7 +13,8 @@ interface FilterProps {
 }
 
 const Filter = ({ categories }: FilterProps) => {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const { state } = useStore();
+  const { updateStateProp } = useStore();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
@@ -19,7 +22,10 @@ const Filter = ({ categories }: FilterProps) => {
       <div className="md:flex md:justify-between">
         <p className="mb-2 md:mb-0">Showing 1-8 of 56 Products</p>
         <div className="flex">
-          <button onClick={() => setIsFilterOpen((prev) => !prev)} className="mr-2">
+          <button
+            onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
+            className="mr-2"
+          >
             Filters
           </button>
           /
@@ -39,7 +45,7 @@ const Filter = ({ categories }: FilterProps) => {
       <hr className="my-10" />
       <div
         className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
-        ${isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'}`}
+        ${state.isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'}`}
       >
         {/* FilterBy Categories info is coming from the store */}
         {/* TODO: Add others filters coming from the Store*/}
