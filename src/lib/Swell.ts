@@ -91,7 +91,6 @@ export default class Swell {
         $lte: maxPrice || undefined
       };
     }
-
     return where;
   };
 
@@ -113,5 +112,35 @@ export default class Swell {
       active: category.active,
       slug: { category: category.slug }
     }));
+  }
+
+  /*****************************************************************************
+   * Get Product by Slug from Swell and convert to individual Product object
+   ****************************************************************************/
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
+    if (slug) {
+      // Getting product by slug from Swell
+      const product: SwellProduct = await swell.get(`/products/${slug}`, {
+        active: true,
+        expand: ['variants:*']
+      });
+      if (product) {
+        return <Product>{
+          id: product.id,
+          name: product.name,
+          active: product.active,
+          description: product.description,
+          options: this.parseProductOptions(product),
+          variants: this.parseVariants(product),
+          slug: product.slug,
+          price: product.price,
+          sale: product.sale || null,
+          salePrice: product.sale_price || null,
+          sku: product.sku || null,
+          images: this.parseImages(product),
+          categories: product.category_index.id
+        };
+      } // TODO://extract this type to a generic one
+    }
   }
 }
