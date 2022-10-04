@@ -19,11 +19,12 @@ export default class Swell {
       results,
       count,
       pages,
-      page: backEndPage
+      page: currentPage
     }: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
-      limit: maxProducts || 6,
+      limit: 1,
+      // limit: maxProducts || 6,
       slug: slug,
       page: page || 1,
       expand: ['variants:*'],
@@ -48,9 +49,11 @@ export default class Swell {
 
     return {
       products,
-      count,
-      backEndPage,
-      pages
+      pagination: {
+        total: count,
+        pages: pages ? Object.keys(pages).map(Number) : [],
+        current: currentPage
+      }
     };
   }
 

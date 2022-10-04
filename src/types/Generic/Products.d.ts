@@ -33,7 +33,5 @@ interface Variant {
 
 interface GenericProductsList {
   products: Product[];
-  backEndPage: number;
-  count: number;
-  pages?: { start: number; end: number }[];
+  pagination: Pagination;
 }

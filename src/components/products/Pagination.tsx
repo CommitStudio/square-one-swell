@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 
 import Container from '~/layouts/Container';
 
-const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
+const Pagination = ({ pagination }: { pagination: Pagination }) => {
   const router = useRouter();
-  const numberOfPages = Object.keys(pages).length;
+
+  const { total, pages, current } = pagination;
 
   return (
     <Container className="flex justify-center mb-5">
@@ -18,7 +19,7 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
             >
               <Link
                 href={
-                  Number(router.query.page) > 1
+                  current > 1
                     ? {
                         pathname: '/products',
                         query: { page: Number(router.query.page) - 1 }
@@ -27,11 +28,9 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                 }
               >
                 <a
-                  onClick={(ev) => (Number(router.query.page) > 1 ? null : ev.preventDefault())}
+                  onClick={(ev) => (current > 1 ? null : ev.preventDefault())}
                   className={`${
-                    Number(router.query.page) > 1
-                      ? 'hover:bg-gray-50'
-                      : 'bg-gray-200 cursor-default'
+                    current > 1 ? 'hover:bg-gray-50' : 'bg-gray-200 cursor-default'
                   } relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500`}
                 >
                   <span className="sr-only">Previous</span>
@@ -51,21 +50,27 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                   </svg>
                 </a>
               </Link>
-              {Object.keys(pages).map((page, i) => {
+
+              {pages.map((page, i) => {
+                if (current === page) {
+                  return (
+                    <div
+                      key={i}
+                      className="'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600'"
+                    >
+                      {page}
+                    </div>
+                  );
+                }
                 return (
                   <Link key={i} href={{ pathname: '/products', query: { page: page } }}>
-                    <a
-                      className={`${
-                        (Number(router.query.page) || 1) == Number(page)
-                          ? 'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600'
-                          : 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50'
-                      }`}
-                    >
+                    <a className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
                       {page}
                     </a>
                   </Link>
                 );
               })}
+
               <Link
                 href={
                   !router.query.page
@@ -73,7 +78,7 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                         pathname: '/products',
                         query: { page: 2 }
                       }
-                    : Number(router.query.page) !== numberOfPages
+                    : current !== pages.length
                     ? {
                         pathname: '/products',
                         query: { page: Number(router.query.page) + 1 }
@@ -82,13 +87,9 @@ const Pagination = ({ pages }: { pages: { start: number; end: number }[] }) => {
                 }
               >
                 <a
-                  onClick={(ev) =>
-                    Number(router.query.page) !== numberOfPages ? null : ev.preventDefault()
-                  }
+                  onClick={(ev) => (current !== pages.length ? null : ev.preventDefault())}
                   className={`${
-                    Number(router.query.page) !== numberOfPages
-                      ? 'hover:bg-gray-50'
-                      : 'bg-gray-200 cursor-default'
+                    current !== pages.length ? 'hover:bg-gray-50' : 'bg-gray-200 cursor-default'
                   } relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500`}
                 >
                   <span className="sr-only">Next</span>

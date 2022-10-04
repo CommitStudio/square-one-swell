@@ -8,14 +8,12 @@ import Pagination from '~/components/products/Pagination';
 import Store from '~/lib/Store';
 
 type ProductsProps = {
-  products: Product[];
-  backEndPage: number;
-  count: number;
-  pages: { start: number; end: number }[];
   categories: Category[];
+  products: Product[];
+  pagination: Pagination;
 };
 
-const Products = ({ products, count, backEndPage, pages, categories }: ProductsProps) => {
+const Products = ({ categories, products, pagination }: ProductsProps) => {
   return (
     <>
       <Hero title="Shop" />
@@ -23,7 +21,7 @@ const Products = ({ products, count, backEndPage, pages, categories }: ProductsP
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
-          {pages && <Pagination pages={pages} />}
+          {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
         </>
       ) : (
         <NoResults />
@@ -34,8 +32,10 @@ const Products = ({ products, count, backEndPage, pages, categories }: ProductsP
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
-  // Se rompe porque cuando no hay pages no manda pages y aca no puede destructurarlo
-  const results = await Store.getProducts({
+
+  const categories = await Store.getCategories();
+
+  const { products, pagination } = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
     page: Number(page),
@@ -43,15 +43,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     category: category
   });
 
-  const products = results.products;
-  const count = results.count;
-  const backEndPage = results.backEndPage;
-  const pages = results.pages || null;
-
-  const categories = await Store.getCategories();
-
   return {
-    props: { products, count, backEndPage, pages, categories }
+    props: { categories, products, pagination }
   };
 };
 
