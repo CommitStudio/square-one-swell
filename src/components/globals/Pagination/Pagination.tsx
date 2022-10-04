@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { ActiveButton, PageLink } from './PagesButton';
+
 import Container from '~/layouts/Container';
 
 const Pagination = ({ pagination }: { pagination: Pagination }) => {
   const router = useRouter();
 
-  const { total, pages, current } = pagination;
+  const { pages, current } = pagination;
 
   return (
     <Container className="flex justify-center mb-5">
@@ -51,25 +53,13 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
                 </a>
               </Link>
 
-              {pages.map((page, i) => {
-                if (current === page) {
-                  return (
-                    <div
-                      key={i}
-                      className="'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600'"
-                    >
-                      {page}
-                    </div>
-                  );
-                }
-                return (
-                  <Link key={i} href={{ pathname: '/products', query: { page: page } }}>
-                    <a className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
-                      {page}
-                    </a>
-                  </Link>
-                );
-              })}
+              {pages.map((page, i) =>
+                current === page ? (
+                  <ActiveButton key={i} page={page} />
+                ) : (
+                  <PageLink key={i} page={page} />
+                )
+              )}
 
               <Link
                 href={
