@@ -1,3 +1,10 @@
+interface SwellProductResponse {
+  results: SwellProduct[];
+  page: number;
+  count: number;
+  pages: { start: number; end: number }[];
+}
+
 interface SwellProduct {
   name: string;
   active: boolean;

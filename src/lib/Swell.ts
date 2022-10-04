@@ -23,7 +23,7 @@ export default class Swell {
       count,
       pages,
       page: backEndPage
-    }: SwellProductResult = await swell.get('/products', {
+    }: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
       limit: maxProducts || 6,

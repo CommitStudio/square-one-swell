@@ -31,13 +31,6 @@ interface Variant {
   active: boolean;
 }
 
-interface SwellProductResult {
-  results: SwellProduct[];
-  page: number;
-  count: number;
-  pages: { start: number; end: number }[];
-}
-
 interface GenericProductResult {
   products: Product[];
   backEndPage: number;
