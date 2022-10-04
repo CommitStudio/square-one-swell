@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-// import Breadcrumb from './Breadcrumb';
-
 interface HeroProps {
   title: string;
   breadcrumb?: React.ReactNode;
