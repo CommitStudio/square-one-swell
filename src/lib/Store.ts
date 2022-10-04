@@ -16,7 +16,7 @@ class Store {
     }
   }
 
-  async getProducts(filterParams: FilterParams): Promise<GenericProductResult> {
+  async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
     return await this.storeClass.getProducts(filterParams);
   }
 

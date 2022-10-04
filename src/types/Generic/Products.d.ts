@@ -31,7 +31,7 @@ interface Variant {
   active: boolean;
 }
 
-interface GenericProductResult {
+interface GenericProductsList {
   products: Product[];
   backEndPage: number;
   count: number;
