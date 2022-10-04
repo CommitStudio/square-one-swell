@@ -9,6 +9,7 @@ interface SwellProduct {
   meta_title?: string;
   meta_description?: string;
   options: SwellProductOption[];
+  variants: SwellVariants;
   slug: string;
   stock_tracking: boolean;
   tags: string[];
@@ -68,4 +69,28 @@ interface FilterParams {
 
 interface CategoryIndex {
   id: string[];
+}
+
+interface SwellProductWhere {
+  price?: {
+    $gte?: number;
+    $lte?: number;
+  };
+}
+
+interface SwellVariants {
+  count: number;
+  results: SwellVariant[];
+  page: number;
+}
+interface SwellVariant {
+  parent_id: string;
+  name: string;
+  active: boolean;
+  option_value_ids: string[];
+  currency: string;
+  date_created: string;
+  date_updated: string;
+  sku?: string;
+  id: string;
 }

@@ -23,6 +23,10 @@ class Store {
   async getCategories(): Promise<Category[]> {
     return await this.storeClass.getCategories();
   }
+
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
+    return await this.storeClass.getProductBySlug(slug);
+  }
 }
 
 export default new Store();

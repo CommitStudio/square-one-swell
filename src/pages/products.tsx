@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
+import { NoResults } from '~/components/globals/NoResults';
 import Filter from '~/components/products/Filter';
 import Pagination from '~/components/products/Pagination';
 import { useStore } from '~/hooks/useStore';
@@ -24,8 +25,14 @@ const Products = ({ products, categories }: ProductsProps) => {
         breadcrumb={<Breadcrumb />}
       />
       <Filter categories={categories} />
-      <ProductList threeColumns products={products} />
-      <Pagination />
+      {products.length > 0 ? (
+        <>
+          <ProductList threeColumns products={products} />
+          <Pagination />
+        </>
+      ) : (
+        <NoResults />
+      )}
     </>
   );
 };
