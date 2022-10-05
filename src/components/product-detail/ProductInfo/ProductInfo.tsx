@@ -15,8 +15,6 @@ interface ProductProp {
 }
 
 const ProductInfo = ({ product, categories }: ProductProp) => {
-  console.log(product.variants);
-
   return (
     <div className="w-full ml-0 md:ml-6 space-y-4 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
