@@ -1,3 +1,4 @@
+import { NodeWithChildren } from 'domhandler';
 import { createClient } from 'swell-node';
 
 /*****************************************************************************
@@ -151,5 +152,32 @@ export default class Swell {
         return this.parseOneProduct(product);
       }
     }
+  }
+  /*****************************************************************************
+   * Get active Promotions from Swell and convert to Promotions array
+   ****************************************************************************/
+  async getActivePromotions(): Promise<Promotion[] | undefined> {
+    const { results }: { results: SwellPromotion[] } = await swell.get('/promotions', {
+      where: {
+        date_end: { $gte: new Date() }
+      },
+      sort: 'date_updated desc'
+    });
+    return results;
+  }
+
+  /*****************************************************************************
+   * Get last created Promotion from Swell and convert to last promotion
+   ****************************************************************************/
+  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
+    const { results }: { results: SwellPromotion[] } = await swell.get('/promotions', {
+      where: {
+        date_end: { $gte: new Date() }
+      },
+      sort: 'date_end asc',
+      limit: 1
+    });
+
+    return results[0];
   }
 }

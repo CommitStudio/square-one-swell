@@ -27,6 +27,14 @@ class Store {
   async getProductBySlug(slug: string): Promise<Product | undefined> {
     return await this.storeClass.getProductBySlug(slug);
   }
+
+  // async getActivePromotions(): Promise<Promotion | undefined> {
+  //   return await this.storeClass.getActivePromotions();
+  // }
+
+  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
+    return await this.storeClass.getNextPromotionToBeExpired();
+  }
 }
 
 export default new Store();

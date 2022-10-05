@@ -7,7 +7,15 @@ import data from '~/data/products.json';
 
 import Container from '~/layouts/Container';
 
-const DealOfTheWeek = () => {
+type DealOfTheWeekProps = {
+  promotion: Promotion;
+};
+
+const DealOfTheWeek = ({ promotion }: DealOfTheWeekProps) => {
+  const name = promotion.name;
+  const description = promotion.description;
+  //const promotionProductId = promotion?.discounts[0].product_id;
+
   return (
     <section className="w-full bg-gray-200 relative mb-10">
       <Container>
@@ -21,9 +29,13 @@ const DealOfTheWeek = () => {
             />
           </div>
           <div className="">
-            <h4 className="text-secondary text-4xl mb-3 text-center">Deal Of The Week</h4>
-            <p className="mb-5 text-center text-gray-600">Special Discount Limited Time Only</p>
-            <Countdown />
+            <h4 className="text-secondary text-4xl mb-3 text-center">
+              {name ? name : 'Next Promo will be soon!'}
+            </h4>
+            <p className="mb-5 text-center text-gray-600">
+              {description ? description : "Stay tuned so you won't miss it!"}
+            </p>
+            <Countdown promotion={promotion} />
           </div>
         </div>
       </Container>
