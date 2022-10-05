@@ -3,7 +3,7 @@ import { ActiveButton, PageLink } from './PagesButton';
 
 import Container from '~/layouts/Container';
 
-const Pagination = ({ pagination }: { pagination: Pagination }) => {
+const Pagination = ({ pagination, pathname }: { pagination: Pagination; pathname: string }) => {
   const { pages, current } = pagination;
 
   return (
@@ -15,17 +15,17 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
               className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
               aria-label="Pagination"
             >
-              <ArrowLeft current={current} />
+              <ArrowLeft current={current} pathname={pathname} />
 
               {pages.map((page, i) =>
                 current === page ? (
                   <ActiveButton key={i} page={page} />
                 ) : (
-                  <PageLink key={i} page={page} />
+                  <PageLink key={i} page={page} pathname={pathname} />
                 )
               )}
 
-              <ArrowRight current={current} pages={pages} />
+              <ArrowRight current={current} pages={pages} pathname={pathname} />
             </nav>
           </div>
         </div>
