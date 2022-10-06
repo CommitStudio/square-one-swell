@@ -19,6 +19,7 @@ interface Discounts {
   value_type: string;
   value_fixed: number;
   product_id: string;
+  buy_items: BuyItems[];
 }
 
-///UPDATE THIS TO OUR PROMOTION REQUIREMENTES
+type BuyItems = { product_id?: 'string' };
