@@ -24,13 +24,9 @@ class Store {
     return await this.storeClass.getCategories();
   }
 
-  async getProductBySlug(slug: string): Promise<Product | undefined> {
+  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
     return await this.storeClass.getProductBySlug(slug);
   }
-
-  // async getActivePromotions(): Promise<Promotion | undefined> {
-  //   return await this.storeClass.getActivePromotions();
-  // }
 
   async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
     return await this.storeClass.getNextPromotionToBeExpired();

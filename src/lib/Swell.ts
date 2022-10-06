@@ -1,4 +1,3 @@
-import { NodeWithChildren } from 'domhandler';
 import { createClient } from 'swell-node';
 
 /*****************************************************************************
@@ -141,7 +140,7 @@ export default class Swell {
   /*****************************************************************************
    * Get Product by Slug from Swell and convert to individual Product object
    ****************************************************************************/
-  async getProductBySlug(slug: string): Promise<Product | undefined> {
+  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
     if (slug) {
       // Getting product by slug from Swell
       const product: SwellProduct = await swell.get(`/products/${slug}`, {
@@ -153,24 +152,12 @@ export default class Swell {
       }
     }
   }
-  /*****************************************************************************
-   * Get active Promotions from Swell and convert to Promotions array
-   ****************************************************************************/
-  async getActivePromotions(): Promise<Promotion[] | undefined> {
-    const { results }: { results: SwellPromotion[] } = await swell.get('/promotions', {
-      where: {
-        date_end: { $gte: new Date() }
-      },
-      sort: 'date_updated desc'
-    });
-    return results;
-  }
 
   /*****************************************************************************
    * Get last created Promotion from Swell and convert to last promotion
    ****************************************************************************/
   async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
-    const { results }: { results: SwellPromotion[] } = await swell.get('/promotions', {
+    const { results }: { results: Promotion[] } = await swell.get('/promotions', {
       where: {
         date_end: { $gte: new Date() }
       },
@@ -178,6 +165,10 @@ export default class Swell {
       limit: 1
     });
 
-    return results[0];
+    return (
+      results[0] || {
+        discounts: [{ buy_items: [{ product_id: '' }] }]
+      }
+    );
   }
 }
