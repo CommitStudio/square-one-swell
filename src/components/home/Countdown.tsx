@@ -5,9 +5,9 @@ type CountdownProps = {
 };
 
 const Countdown = ({ promotion }: CountdownProps) => {
-  const date_end = promotion.date_end || new Date(); // TODO: improve this
+  const dateEnd = promotion.date_end || new Date();
 
-  const dateTimeDealWillFinish = new Date(date_end).getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
+  const dateTimeDealWillFinish = new Date(dateEnd).getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
   const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
 
   return (
