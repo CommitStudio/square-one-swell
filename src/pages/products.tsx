@@ -26,7 +26,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
         title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
         breadcrumb={<Breadcrumb />}
       />
-      <Filter categories={categories} />
+      <Filter categories={categories} pagination={pagination} />
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
