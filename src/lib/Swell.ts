@@ -140,7 +140,7 @@ export default class Swell {
   /*****************************************************************************
    * Get Product by Slug from Swell and convert to individual Product object
    ****************************************************************************/
-  async getProductBySlug(slug: string): Promise<Product | undefined> {
+  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
     if (slug) {
       // Getting product by slug from Swell
       const product: SwellProduct = await swell.get(`/products/${slug}`, {
@@ -151,5 +151,24 @@ export default class Swell {
         return this.parseOneProduct(product);
       }
     }
+  }
+
+  /*****************************************************************************
+   * Get last created Promotion from Swell and convert to last promotion
+   ****************************************************************************/
+  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
+    const { results }: { results: Promotion[] } = await swell.get('/promotions', {
+      where: {
+        date_end: { $gte: new Date() }
+      },
+      sort: 'date_end asc',
+      limit: 1
+    });
+
+    return (
+      results[0] || {
+        discounts: [{ buy_items: [{ product_id: '' }] }]
+      }
+    );
   }
 }
