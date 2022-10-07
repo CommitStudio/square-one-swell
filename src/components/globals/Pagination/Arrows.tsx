@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
  * Draw left arrow button
  ****************************************************************************/
 export const ArrowLeft = ({ current }: { current: number }) => {
-  const router = useRouter();
+  const { pathname, query } = useRouter();
+
   if (current === 1) {
     return (
       <div className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
@@ -17,8 +18,8 @@ export const ArrowLeft = ({ current }: { current: number }) => {
   return (
     <Link
       href={{
-        pathname: router.pathname,
-        query: { ...router.query, page: current - 1 }
+        pathname,
+        query: { ...query, page: current - 1 }
       }}
     >
       <a className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -32,7 +33,8 @@ export const ArrowLeft = ({ current }: { current: number }) => {
  * Draw left arrow button
  ****************************************************************************/
 export const ArrowRight = ({ current, pages }: { current: number; pages: number[] }) => {
-  const router = useRouter();
+  const { pathname, query } = useRouter();
+
   if (current === pages.length) {
     return (
       <div className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
@@ -44,8 +46,8 @@ export const ArrowRight = ({ current, pages }: { current: number; pages: number[
   return (
     <Link
       href={{
-        pathname: router.pathname,
-        query: { ...router.query, page: current + 1 }
+        pathname,
+        query: { ...query, page: current + 1 }
       }}
     >
       <a className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
