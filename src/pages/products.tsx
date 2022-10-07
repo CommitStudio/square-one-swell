@@ -1,7 +1,5 @@
 import { GetServerSideProps } from 'next';
 
-import { useRouter } from 'next/router';
-
 import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
@@ -18,7 +16,6 @@ type ProductsProps = {
 };
 
 const Products = ({ products, categories, pagination }: ProductsProps) => {
-  const router = useRouter();
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
@@ -33,9 +30,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
-          {pagination.pages.length > 0 && (
-            <Pagination pagination={pagination} pathname={router.pathname} />
-          )}
+          {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
         </>
       ) : (
         <NoResults />

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 /*****************************************************************************
  * Draw left arrow button
  ****************************************************************************/
-export const ArrowLeft = ({ current, pathname }: { current: number; pathname: string }) => {
+export const ArrowLeft = ({ current }: { current: number }) => {
   const router = useRouter();
   if (current === 1) {
     return (
@@ -17,7 +17,7 @@ export const ArrowLeft = ({ current, pathname }: { current: number; pathname: st
   return (
     <Link
       href={{
-        pathname,
+        pathname: router.pathname,
         query: { ...router.query, page: current - 1 }
       }}
     >
@@ -31,15 +31,7 @@ export const ArrowLeft = ({ current, pathname }: { current: number; pathname: st
 /*****************************************************************************
  * Draw left arrow button
  ****************************************************************************/
-export const ArrowRight = ({
-  current,
-  pages,
-  pathname
-}: {
-  current: number;
-  pages: number[];
-  pathname: string;
-}) => {
+export const ArrowRight = ({ current, pages }: { current: number; pages: number[] }) => {
   const router = useRouter();
   if (current === pages.length) {
     return (
@@ -52,7 +44,7 @@ export const ArrowRight = ({
   return (
     <Link
       href={{
-        pathname,
+        pathname: router.pathname,
         query: { ...router.query, page: current + 1 }
       }}
     >

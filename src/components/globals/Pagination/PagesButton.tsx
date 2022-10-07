@@ -15,10 +15,11 @@ export const ActiveButton = ({ page }: { page: number }) => {
 /*****************************************************************************
  * Button used to navigate to other pages
  ****************************************************************************/
-export const PageLink = ({ page, pathname }: { page: number; pathname: string }) => {
+export const PageLink = ({ page }: { page: number }) => {
   const router = useRouter();
+
   return (
-    <Link href={{ pathname, query: { ...router.query, page: page } }}>
+    <Link href={{ pathname: router.pathname, query: { ...router.query, page: page } }}>
       <a className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
         {page}
       </a>
