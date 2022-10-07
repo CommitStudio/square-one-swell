@@ -35,21 +35,19 @@ export default class Swell {
   async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
     const { maxProducts, category, slug, page } = filterParams;
 
-    // Fetch filtered products from Swell
-    const {
-      results,
-      count,
-      pages,
-      page: currentPage
-    }: SwellProductResponse = await swell.get('/products', {
+    const limit = maxProducts || 6;
+
+    const response: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
-      limit: maxProducts || 6,
+      limit,
       slug: slug,
       page: page || 1,
       expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
+
+    const { results, count, pages, page: currentPage } = response;
 
     // Transform SwellProduct data to Product standard data format
     const products = results.map((product) => this.parseOneProduct(product));
@@ -59,7 +57,8 @@ export default class Swell {
       pagination: {
         total: count,
         pages: pages ? Object.keys(pages).map(Number) : [],
-        current: currentPage
+        current: currentPage,
+        limit
       }
     };
   }
