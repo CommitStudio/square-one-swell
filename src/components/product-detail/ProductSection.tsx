@@ -1,7 +1,5 @@
 import React from 'react';
 
-import RelatedProducts from './RelatedProducts';
-
 import ProductImageGallery from '~/components/product-detail/ProductImageGallery';
 
 import ProductInfo from '~/components/product-detail/ProductInfo/ProductInfo';
@@ -18,7 +16,6 @@ const ProductSection = ({ product, categories }: ProductProp) => {
         <ProductImageGallery product={product} />
         <ProductInfo product={product} categories={categories} />
       </div>
-      <RelatedProducts />
     </div>
   );
 };
