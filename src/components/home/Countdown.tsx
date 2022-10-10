@@ -1,7 +1,13 @@
 import { useCountdown } from '~/hooks/useCountdown';
 
-const Countdown = () => {
-  const dateTimeDealWillFinish = new Date('2022-09-14T00:00:00').getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
+type CountdownProps = {
+  promotion: Promotion;
+};
+
+const Countdown = ({ promotion }: CountdownProps) => {
+  const dateEnd = promotion.date_end || new Date();
+
+  const dateTimeDealWillFinish = new Date(dateEnd).getTime(); // new Date('Year-Month-DayTHour:Minutes:Seconds').getTime();
   const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
 
   return (

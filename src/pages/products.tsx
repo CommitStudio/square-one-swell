@@ -19,13 +19,14 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
+
   return (
     <>
       <Hero
         title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
         breadcrumb={<Breadcrumb />}
       />
-      <Filter categories={categories} />
+      <Filter categories={categories} pagination={pagination} />
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />

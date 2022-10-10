@@ -3,6 +3,7 @@ import { BsSearch } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
 import { FilterBy } from './FilterBy';
+import Showing from './Showing';
 
 import { useStore } from '~/hooks/useStore';
 
@@ -10,9 +11,10 @@ import Container from '~/layouts/Container';
 
 interface FilterProps {
   categories: Category[];
+  pagination: Pagination;
 }
 
-const Filter = ({ categories }: FilterProps) => {
+const Filter = ({ categories, pagination }: FilterProps) => {
   const { state } = useStore();
   const { updateStateProp } = useStore();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -20,7 +22,7 @@ const Filter = ({ categories }: FilterProps) => {
   return (
     <Container className="pt-10">
       <div className="md:flex md:justify-between">
-        <p className="mb-2 md:mb-0">Showing 1-8 of 56 Products</p>
+        <Showing className="mb-2 md:mb-0" pagination={pagination} />
         <div className="flex">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
@@ -44,7 +46,7 @@ const Filter = ({ categories }: FilterProps) => {
       </div>
       <hr className="my-10" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'}`}
       >
         {/* FilterBy Categories info is coming from the store */}

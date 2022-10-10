@@ -35,21 +35,19 @@ export default class Swell {
   async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
     const { maxProducts, category, slug, page } = filterParams;
 
-    // Fetch filtered products from Swell
-    const {
-      results,
-      count,
-      pages,
-      page: currentPage
-    }: SwellProductResponse = await swell.get('/products', {
+    const limit = maxProducts || 6;
+
+    const response: SwellProductResponse = await swell.get('/products', {
       active: true,
       category: category,
-      limit: maxProducts || 6,
+      limit,
       slug: slug,
       page: page || 1,
       expand: ['variants:*'],
       where: this.parseProductsFilter(filterParams)
     });
+
+    const { results, count, pages, page: currentPage } = response;
 
     // Transform SwellProduct data to Product standard data format
     const products = results.map((product) => this.parseOneProduct(product));
@@ -59,7 +57,8 @@ export default class Swell {
       pagination: {
         total: count,
         pages: pages ? Object.keys(pages).map(Number) : [],
-        current: currentPage
+        current: currentPage,
+        limit
       }
     };
   }
@@ -140,7 +139,7 @@ export default class Swell {
   /*****************************************************************************
    * Get Product by Slug from Swell and convert to individual Product object
    ****************************************************************************/
-  async getProductBySlug(slug: string): Promise<Product | undefined> {
+  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
     if (slug) {
       // Getting product by slug from Swell
       const product: SwellProduct = await swell.get(`/products/${slug}`, {
@@ -151,5 +150,24 @@ export default class Swell {
         return this.parseOneProduct(product);
       }
     }
+  }
+
+  /*****************************************************************************
+   * Get last created Promotion from Swell and convert to last promotion
+   ****************************************************************************/
+  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
+    const { results }: { results: Promotion[] } = await swell.get('/promotions', {
+      where: {
+        date_end: { $gte: new Date() }
+      },
+      sort: 'date_end asc',
+      limit: 1
+    });
+
+    return (
+      results[0] || {
+        discounts: [{ buy_items: [{ product_id: '' }] }]
+      }
+    );
   }
 }
