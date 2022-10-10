@@ -13,18 +13,22 @@ const { test_product } = data;
 
 interface ProductProp {
   product: Product;
-  relatedProducts: Product[];
+  sameCategoryProducts: Product[];
   categories: Category[];
 }
 
-const ProductDetail = ({ product, relatedProducts, categories }: ProductProp) => {
+const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductProp) => {
   return (
     <>
       <Hero title={product.name} />
       <Container>
         <ProductSection product={product} categories={categories} />
         <ProductReview test_product={test_product} />
-        <RelatedProducts title={'Related Products'} product={product} products={relatedProducts} />
+        <RelatedProducts
+          title={'Related Products'}
+          product={product}
+          products={sameCategoryProducts}
+        />
       </Container>
     </>
   );
@@ -38,13 +42,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const product = await Store.getProductBySlug(slug as string);
   const categories = await Store.getCategories();
 
-  const { products: relatedProducts } = await Store.getProducts({
+  const { products: sameCategoryProducts } = await Store.getProducts({
     maxProducts: 4,
     category: product?.categories?.[0]
   });
 
   return {
-    props: { product, relatedProducts, categories }
+    props: { product, sameCategoryProducts, categories }
   };
 };
 
