@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Container from '~/layouts/Container';
 
 const CreateAccount = () => {
