@@ -7,7 +7,6 @@ interface ProductProp {
 
 const RelatedProducts = ({ title, product, products }: ProductProp) => {
   const relatedProducts = products.filter((prod) => prod.id !== product.id);
-  console.log(relatedProducts.length);
 
   return relatedProducts.length > 0 ? (
     <div className="mb-20">
