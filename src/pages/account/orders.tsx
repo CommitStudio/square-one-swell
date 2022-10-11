@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BiShoppingBag } from 'react-icons/Bi';
+import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 

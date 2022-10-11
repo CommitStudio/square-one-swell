@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { HiOutlineLogout } from 'react-icons/Hi';
-import { TbEdit } from 'react-icons/Tb';
+import { HiOutlineLogout } from 'react-icons/hi';
+import { TbEdit } from 'react-icons/tb';
 
 import Container from '~/layouts/Container';
 
