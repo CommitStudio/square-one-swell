@@ -62,7 +62,7 @@ const CreateAccount = () => {
           <button
             type="button"
             aria-label=""
-            className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 hover:text-primary"
+            className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-primary"
           >
             CREATE ACCOUNT
           </button>
@@ -70,7 +70,7 @@ const CreateAccount = () => {
           <button
             type="button"
             aria-label=""
-            className="w-full bg-gray-200 text-black text-xs font-bold rounded py-3 px-6 mt-4 hover:text-secondary hover:bg-primary"
+            className="w-full bg-gray-200 text-black text-xs font-bold rounded py-3 px-6 mt-4 transition-all duration-300 hover:text-secondary hover:bg-primary"
           >
             LOG IN
           </button>
