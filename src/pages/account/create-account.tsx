@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import Container from '~/layouts/Container';
@@ -67,13 +68,11 @@ const CreateAccount = () => {
             CREATE ACCOUNT
           </button>
 
-          <button
-            type="button"
-            aria-label=""
-            className="w-full bg-gray-200 text-black text-xs font-bold rounded py-3 px-6 mt-4 transition-all duration-300 hover:text-secondary hover:bg-primary"
-          >
-            LOG IN
-          </button>
+          <Link href="/account/login">
+            <a className="block w-full bg-gray-200 text-black text-xs text-center font-bold rounded py-3 px-6 mt-4 transition-all duration-300 hover:text-secondary hover:bg-primary">
+              LOG IN
+            </a>
+          </Link>
         </div>
       </div>
     </Container>
