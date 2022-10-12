@@ -14,7 +14,7 @@ const RelatedProducts = ({ title, product, products }: ProductProp) => {
         <p className="text-4xl py-4">{title}</p>
         <span className="w-[60px] h-[2.5px] bg-secondary mx-auto"></span>
       </div>
-      <ProductList relatedProductsAmount={relatedProducts.length} products={relatedProducts} />
+      <ProductList relatedProducts={true} products={relatedProducts} />
     </div>
   ) : null;
 };
