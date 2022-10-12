@@ -19,6 +19,14 @@ const Filter = ({ categories, pagination }: FilterProps) => {
   const { updateStateProp } = useStore();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  const filteringPricesRanges = [
+    { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
+    { name: '$10 - $20', slug: { minPrice: 10, maxPrice: 20 } },
+    { name: '$20 - $30', slug: { minPrice: 20, maxPrice: 30 } },
+    { name: '$30 - $40', slug: { minPrice: 30, maxPrice: 40 } },
+    { name: '+$40', slug: { minPrice: 40, maxPrice: '' } }
+  ];
+
   return (
     <Container className="pt-10">
       <div className="md:flex md:justify-between">
@@ -46,12 +54,13 @@ const Filter = ({ categories, pagination }: FilterProps) => {
       </div>
       <hr className="my-10" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10
-        ${state.isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-52 mb-10' : 'max-h-0'}`}
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
+        ${state.isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-72 mb-10' : 'max-h-0'}`}
       >
         {/* FilterBy Categories info is coming from the store */}
         {/* TODO: Add others filters coming from the Store*/}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
+        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
