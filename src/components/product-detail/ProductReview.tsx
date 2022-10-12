@@ -24,7 +24,7 @@ const ProductReview = ({ test_product }: Props) => {
   return (
     <div className="my-16">
       <div className="flex space-x-10 -mb-[1px]">
-        <span className="border border-secondary py-1 px-3 flex items-center cursor-pointer rounded-tl rounded-tr border-b-white text-2xl">
+        <span className="border border-secondary py-1 px-3 flex items-center cursor-pointer rounded-tl rounded-tr border-b-white text-lg">
           Reviews
         </span>
       </div>
