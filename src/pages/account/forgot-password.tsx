@@ -1,5 +1,7 @@
 import Link from 'next/link';
+
 import React from 'react';
+
 import Container from '~/layouts/Container';
 
 const forgotPassword = () => {
@@ -8,7 +10,7 @@ const forgotPassword = () => {
       <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-2/4 lg:w-1/3">
         <h1 className="font-bold text-3xl pb-6 mb-4">Forgot your password?</h1>
         <p className="text-sm pb-6 mb-4">
-          Enter your email address and we'll send you an email on how to reset your password.
+          Enter your email address and we’ll send you an email on how to reset your password.
         </p>
         <div className="pb-6">
           <div className="mb-2">
