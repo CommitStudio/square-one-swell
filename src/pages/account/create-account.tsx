@@ -5,8 +5,8 @@ import Container from '~/layouts/Container';
 
 const CreateAccount = () => {
   return (
-    <Container className="flex flex-grow flex-col justify-center items-center">
-      <div className="pt-6 pb-24 md:pt-24">
+    <Container className="h-full flex flex-grow flex-col justify-center items-center">
+      <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-2/4 lg:w-1/3">
         <h1 className="font-bold text-3xl pb-6 mb-4">Create account</h1>
         <div className="pb-6">
           <div className="mb-2">
@@ -16,7 +16,7 @@ const CreateAccount = () => {
               placeholder=""
               name="firstname"
               autoComplete="off"
-              className="border rounded py-3 px-6"
+              className="w-full border rounded py-3 px-6"
             />
           </div>
         </div>
@@ -28,7 +28,7 @@ const CreateAccount = () => {
               placeholder=""
               name="lastname"
               autoComplete="off"
-              className="border rounded py-3 px-6"
+              className="w-full border rounded py-3 px-6"
             />
           </div>
         </div>
@@ -40,7 +40,7 @@ const CreateAccount = () => {
               placeholder="E-mail"
               name="email"
               autoComplete="off"
-              className="border rounded py-3 px-6"
+              className="w-full border rounded py-3 px-6"
             />
           </div>
         </div>
@@ -52,11 +52,11 @@ const CreateAccount = () => {
               placeholder="Your password"
               name="password"
               autoComplete="off"
-              className="border rounded py-3 px-6"
+              className="w-full border rounded py-3 px-6"
             />
           </div>
         </div>
-        <span className="inline-block text-sm text-gray-500">
+        <span className="inline-block text-xs text-gray-500">
           Must include a minimum of 6 characters.
         </span>
         <div className="mt-8 mb-4">
