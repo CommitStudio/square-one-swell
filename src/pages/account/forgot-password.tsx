@@ -2,21 +2,22 @@ import Link from 'next/link';
 
 import React from 'react';
 
-import Container from '~/layouts/Container';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
+
+import Container from '~/layouts/Container';
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
@@ -34,7 +35,7 @@ const forgotPassword = () => {
                 type="email"
                 placeholder="E-mail"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', { required: '*Email Address is required', minLength: 2 })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
@@ -65,4 +66,4 @@ const forgotPassword = () => {
   );
 };
 
-export default forgotPassword;
+export default ForgotPassword;

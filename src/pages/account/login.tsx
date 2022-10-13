@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import React from 'react';
 
-import Container from '~/layouts/Container';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
+
+import Container from '~/layouts/Container';
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-const login = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ const login = () => {
                 type="email"
                 placeholder="E-mail"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', { required: '*Email Address is required', minLength: 2 })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
@@ -48,8 +48,11 @@ const login = () => {
                 type="password"
                 placeholder="Your password"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
-                {...register('password', { required: '*Password is required', minLength: 6 })}
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                {...register('password', {
+                  required: '*A valid password is required',
+                  minLength: 6
+                })}
                 aria-invalid={errors.password ? 'true' : 'false'}
               />
               {errors.password && (
@@ -84,4 +87,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

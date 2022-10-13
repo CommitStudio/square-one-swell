@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 import React from 'react';
 
-import Container from '~/layouts/Container';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
+
+import Container from '~/layouts/Container';
 
 type Inputs = {
   firstname: string;
@@ -33,7 +33,7 @@ const CreateAccount = () => {
                 type="text"
                 placeholder="Your first name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('firstname', { required: '*First name is required', minLength: 2 })}
                 aria-invalid={errors.firstname ? 'true' : 'false'}
               />
@@ -51,7 +51,7 @@ const CreateAccount = () => {
                 type="text"
                 placeholder="Your last name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('lastname', { required: '*Last name is required', minLength: 2 })}
                 aria-invalid={errors.lastname ? 'true' : 'false'}
               />
@@ -69,7 +69,7 @@ const CreateAccount = () => {
                 type="email"
                 placeholder="E-mail"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', { required: '*Email Address is required', minLength: 2 })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
@@ -87,8 +87,11 @@ const CreateAccount = () => {
                 type="password"
                 placeholder="Your password"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6"
-                {...register('password', { required: '*Password is required', minLength: 6 })}
+                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                {...register('password', {
+                  required: '*A valid password is required',
+                  minLength: 6
+                })}
                 aria-invalid={errors.password ? 'true' : 'false'}
               />
               {errors.password && (
