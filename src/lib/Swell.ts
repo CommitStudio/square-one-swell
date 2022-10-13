@@ -44,7 +44,7 @@ export default class Swell {
       expand: ['variants:*']
     });
 
-    return this.tranformProduct(product);
+    return product ? this.tranformProduct(product) : undefined;
   }
 
   /*****************************************************************************

@@ -28,11 +28,13 @@ const ProductDetail = ({ product, categories }: ProductProp) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  if (!params?.slug) {
+  const slug = String(params?.slug);
+  const product = await Store.getProduct(slug);
+
+  if (!product) {
     return { notFound: true };
   }
-  const { slug } = params;
-  const product = await Store.getProduct(slug as string);
+
   const categories = await Store.getCategories();
 
   return {
