@@ -27,20 +27,12 @@ export default class Swell {
       where: this.parseProductsFilter(filterParams)
     });
 
-    const { results, count, pages, page: currentPage } = response;
+    const { results } = response;
 
-    // Transform SwellProduct data to Product standard data format
     const products = results.map((product) => this.tranformProduct(product));
+    const pagination = this.makePagination(response, limit);
 
-    return {
-      products,
-      pagination: {
-        total: count,
-        pages: pages ? Object.keys(pages).map(Number) : [],
-        current: currentPage,
-        limit
-      }
-    };
+    return { products, pagination };
   }
 
   /*****************************************************************************
@@ -169,5 +161,19 @@ export default class Swell {
         discounts: [{ buy_items: [{ product_id: '' }] }]
       }
     );
+  }
+
+  /*****************************************************************************
+   * Make a generic pagination object
+   ****************************************************************************/
+  makePagination(response: SwellProductResponse, limit: number): Pagination {
+    const { count, pages, page } = response;
+
+    return {
+      total: count,
+      pages: pages ? Object.keys(pages).map(Number) : [],
+      current: page,
+      limit
+    };
   }
 }
