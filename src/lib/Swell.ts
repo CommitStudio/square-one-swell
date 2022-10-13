@@ -38,17 +38,13 @@ export default class Swell {
   /*****************************************************************************
    * Get Product by Slug from Swell and convert to individual Product object
    ****************************************************************************/
-  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
-    if (slug) {
-      // Getting product by slug from Swell
-      const product: SwellProduct = await swell.get(`/products/${slug}`, {
-        active: true,
-        expand: ['variants:*']
-      });
-      if (product) {
-        return this.tranformProduct(product);
-      }
-    }
+  async getProduct(slug: string): Promise<Product | undefined> {
+    const product: SwellProduct = await swell.get(`/products/${slug}`, {
+      active: true,
+      expand: ['variants:*']
+    });
+
+    return this.tranformProduct(product);
   }
 
   /*****************************************************************************
