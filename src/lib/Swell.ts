@@ -70,9 +70,28 @@ export default class Swell {
   }
 
   /*****************************************************************************
+   * Get last created Promotion from Swell and convert to last promotion
+   ****************************************************************************/
+  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
+    const { results }: { results: Promotion[] } = await swell.get('/promotions', {
+      where: {
+        date_end: { $gte: new Date() }
+      },
+      sort: 'date_end asc',
+      limit: 1
+    });
+
+    return (
+      results[0] || {
+        discounts: [{ buy_items: [{ product_id: '' }] }]
+      }
+    );
+  }
+
+  /*****************************************************************************
    * Definition of One Individual Product
    ****************************************************************************/
-  tranformProduct = (product: SwellProduct) => {
+  tranformProduct(product: SwellProduct) {
     return <Product>{
       id: product.id,
       name: product.name,
@@ -88,10 +107,10 @@ export default class Swell {
       images: this.transformImages(product),
       categories: product.category_index.id
     };
-  };
+  }
 
   /*****************************************************************************
-   * Convert Swell images list to a generic format
+   * Convert a list of images into a generic format list
    ****************************************************************************/
   transformImages = (item: SwellProduct | SwellCategory) => {
     if (item.images) {
@@ -118,8 +137,8 @@ export default class Swell {
   /*****************************************************************************
    * Convert SwellProduct variants to a Product variants format
    ****************************************************************************/
-  transformProductVariants(item: SwellProduct) {
-    return item.variants.results.map((variant) => ({
+  transformProductVariants(product: SwellProduct) {
+    return product.variants.results.map((variant) => ({
       name: variant.name,
       active: variant.active
     }));
@@ -142,25 +161,6 @@ export default class Swell {
     }
 
     return where;
-  }
-
-  /*****************************************************************************
-   * Get last created Promotion from Swell and convert to last promotion
-   ****************************************************************************/
-  async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {
-    const { results }: { results: Promotion[] } = await swell.get('/promotions', {
-      where: {
-        date_end: { $gte: new Date() }
-      },
-      sort: 'date_end asc',
-      limit: 1
-    });
-
-    return (
-      results[0] || {
-        discounts: [{ buy_items: [{ product_id: '' }] }]
-      }
-    );
   }
 
   /*****************************************************************************
