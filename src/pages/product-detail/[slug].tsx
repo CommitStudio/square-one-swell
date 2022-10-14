@@ -35,11 +35,13 @@ const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductPro
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  if (!params?.slug) {
+  const slug = String(params?.slug);
+  const product = await Store.getProduct(slug);
+
+  if (!product) {
     return { notFound: true };
   }
-  const { slug } = params;
-  const product = await Store.getProductBySlug(slug as string);
+
   const categories = await Store.getCategories();
 
   const { products: sameCategoryProducts } = await Store.getProducts({

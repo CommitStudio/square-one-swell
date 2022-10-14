@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const promotion = await Store.getNextPromotionToBeExpired();
   //get first product of the promotion
   const firstProductPromotion = promotion?.discounts[0]?.buy_items[0]?.product_id
-    ? await Store.getProductBySlug(promotion?.discounts[0]?.buy_items[0]?.product_id)
+    ? await Store.getProduct(promotion?.discounts[0]?.buy_items[0]?.product_id)
     : {};
   return {
     props: { products, categories, promotion, firstProductPromotion }
