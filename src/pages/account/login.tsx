@@ -14,8 +14,10 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors }
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
@@ -35,14 +37,29 @@ const Login = () => {
                 placeholder="E-mail"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('email', { required: '*Email Address is required', minLength: 2 })}
+                {...register('email', {
+                  required: 'Email address is required',
+                  pattern: {
+                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: 'Please enter a valid email address'
+                  }
+                })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
-              {errors.email && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.email?.message}
-                </p>
-              )}
+              {errors.email ? (
+                <>
+                  {errors.email.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                  {errors.email.type === 'pattern' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div>
@@ -54,16 +71,28 @@ const Login = () => {
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('password', {
-                  required: '*A valid password is required',
-                  minLength: 6
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Please enter a valid password'
+                  }
                 })}
                 aria-invalid={errors.password ? 'true' : 'false'}
               />
-              {errors.password && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.password?.message}
-                </p>
-              )}
+              {errors.password ? (
+                <>
+                  {errors.password.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                  {errors.password.type === 'minLength' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <Link href={'/account/forgot-password'}>
