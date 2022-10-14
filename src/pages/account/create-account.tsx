@@ -38,14 +38,30 @@ const CreateAccount = () => {
                 placeholder="Your first name"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('firstname', { required: '*First name is required', minLength: 2 })}
+                {...register('firstname', {
+                  required: 'First name is required',
+                  minLength: {
+                    value: 2,
+                    message: 'Please enter a valid first name'
+                  }
+                })}
                 aria-invalid={errors.firstname ? 'true' : 'false'}
               />
-              {errors.firstname && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.firstname?.message}
-                </p>
-              )}
+
+              {errors.firstname ? (
+                <>
+                  {errors.firstname.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.firstname.message}
+                    </p>
+                  )}
+                  {errors.firstname.type === 'minLength' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.firstname.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div className="pb-6">
@@ -56,14 +72,30 @@ const CreateAccount = () => {
                 placeholder="Your last name"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('lastname', { required: '*Last name is required', minLength: 2 })}
+                {...register('lastname', {
+                  required: 'Last name is required',
+                  minLength: {
+                    value: 2,
+                    message: 'Please enter a valid last name'
+                  }
+                })}
                 aria-invalid={errors.lastname ? 'true' : 'false'}
               />
-              {errors.lastname && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.lastname?.message}
-                </p>
-              )}
+
+              {errors.lastname ? (
+                <>
+                  {errors.lastname.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.lastname.message}
+                    </p>
+                  )}
+                  {errors.lastname.type === 'minLength' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.lastname.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div className="pb-6">
@@ -74,14 +106,29 @@ const CreateAccount = () => {
                 placeholder="E-mail"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('email', { required: '*Email Address is required', minLength: 2 })}
+                {...register('email', {
+                  required: 'Email address is required',
+                  pattern: {
+                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: 'Please enter a valid email address'
+                  }
+                })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
-              {errors.email && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.email?.message}
-                </p>
-              )}
+              {errors.email ? (
+                <>
+                  {errors.email.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                  {errors.email.type === 'pattern' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div>
@@ -93,16 +140,28 @@ const CreateAccount = () => {
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('password', {
-                  required: '*A valid password is required',
-                  minLength: 6
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Please enter a valid password'
+                  }
                 })}
                 aria-invalid={errors.password ? 'true' : 'false'}
               />
-              {errors.password && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.password?.message}
-                </p>
-              )}
+              {errors.password ? (
+                <>
+                  {errors.password.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                  {errors.password.type === 'minLength' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
               <span className="inline-block text-xs text-gray-500">
                 Must include a minimum of 6 characters.
               </span>
