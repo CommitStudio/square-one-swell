@@ -40,14 +40,29 @@ const ForgotPassword = () => {
                 placeholder="E-mail"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('email', { required: '*Email Address is required', minLength: 2 })}
+                {...register('email', {
+                  required: 'Email address is required',
+                  pattern: {
+                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: 'Please enter a valid email address'
+                  }
+                })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
-              {errors.email && (
-                <p role="alert" className="text-red-500 text-xs mt-1">
-                  {errors.email?.message}
-                </p>
-              )}
+              {errors.email ? (
+                <>
+                  {errors.email.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                  {errors.email.type === 'pattern' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div className="mb-4">
