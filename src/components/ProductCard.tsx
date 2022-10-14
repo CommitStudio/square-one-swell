@@ -14,7 +14,7 @@ const ProductCard = ({ product }: Props) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`max-w-xs border-l lg:border-l-0 border-r transition-all duration-300 w-full ${
+      className={`flex flex-col justify-between max-w-xs border-l lg:border-l-0 border-r transition-all duration-300 w-full ${
         isHovered ? 'lg:shadow-[0px_-5px_40px_-15px_rgba(0,0,0,0.3)]' : ''
       }`}
     >
