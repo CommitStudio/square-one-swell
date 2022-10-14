@@ -28,8 +28,9 @@ const ForgotPassword = () => {
           Enter your email address and we’ll send you an email on how to reset your password.
         </p>
         <form
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
         >
           <div className="pb-6">
             <div className="mb-2">

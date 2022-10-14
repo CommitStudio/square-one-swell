@@ -26,8 +26,9 @@ const CreateAccount = () => {
       <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
         <h1 className="font-bold text-3xl pb-6 mb-4">Create account</h1>
         <form
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
         >
           <div className="pb-6">
             <div className="mb-2">
