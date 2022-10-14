@@ -14,7 +14,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    clearErrors,
     formState: { errors }
   } = useForm<Inputs>();
 
