@@ -27,7 +27,10 @@ const ForgotPassword = () => {
         <p className="text-sm pb-6 mb-4">
           Enter your email address and we’ll send you an email on how to reset your password.
         </p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="pb-6">
             <div className="mb-2">
               <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>

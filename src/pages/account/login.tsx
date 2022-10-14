@@ -22,7 +22,10 @@ const Login = () => {
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
         <h1 className="font-bold text-3xl pb-6 mb-4">Log in</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="pb-6">
             <div className="mb-2">
               <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>
