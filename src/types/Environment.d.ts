@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       SWELL_STORE_ID?: string;
       SWELL_SECRET_KEY?: string;
+      NEXT_PUBLIC_BASE_URL: string;
     }
   }
 }

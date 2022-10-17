@@ -4,8 +4,9 @@ import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-
 
 import { v4 as uuidv4 } from 'uuid';
 
-import footer from '~/data/footer.json';
 import Logo from '../navbar/Logo';
+
+import footer from '~/data/footer.json';
 
 import data from '~/data/partials.json';
 
