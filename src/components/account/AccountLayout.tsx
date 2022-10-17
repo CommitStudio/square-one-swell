@@ -15,7 +15,7 @@ const AccountLayout = ({ children }: Props) => {
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
-        <div className="lg:col-span-3 lg:border-r mr-3">
+        <div className="lg:col-span-3 lg:border-r mr-10">
           <h4 className="font-semibold text-xl mb-2">John Doe</h4>
           <p className="mb-2">john_doe@gmail.com</p>
           <button className="flex items-center gap-1 hover:text-red-600 mb-4">
