@@ -37,13 +37,13 @@ const ForgotPassword = () => {
               <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>
               <input
                 type="email"
-                placeholder="E-mail"
+                placeholder="example@mail.com"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', {
                   required: 'Email address is required',
                   pattern: {
-                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: 'Please enter a valid email address'
                   }
                 })}

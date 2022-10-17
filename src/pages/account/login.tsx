@@ -24,7 +24,9 @@ const Login = () => {
       <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Log in</h1>
-          <span className="text-sm">* Indicates a required field</span>
+          <span className="text-sm">
+            <span className="text-red-500">*</span> Indicates a required field
+          </span>
         </div>
         <form
           onSubmit={(e) => {
@@ -33,16 +35,18 @@ const Login = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">* E-MAIL</label>
+              <label className="font-bold text-xs text-gray-500 mb-2 block">
+                E-MAIL <span className="text-red-500">*</span>
+              </label>
               <input
                 type="email"
-                placeholder="E-mail"
+                placeholder="example@mail.com"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', {
                   required: 'Email address is required',
                   pattern: {
-                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: 'Please enter a valid email address'
                   }
                 })}
@@ -66,7 +70,9 @@ const Login = () => {
           </div>
           <div>
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">* PASSWORD</label>
+              <label className="font-bold text-xs text-gray-500 mb-2 block">
+                PASSWORD <span className="text-red-500">*</span>
+              </label>
               <input
                 type="password"
                 placeholder="Your password"
