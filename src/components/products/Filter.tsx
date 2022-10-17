@@ -54,8 +54,8 @@ const Filter = ({ categories, pagination }: FilterProps) => {
       </div>
       <hr className="my-10" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10 
-        ${state.isFilterOpen ? 'max-h-[1000px] md:max-h-96 lg:max-h-72 mb-10' : 'max-h-0'}`}
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10
+        ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
       >
         {/* FilterBy Categories info is coming from the store */}
         {/* TODO: Add others filters coming from the Store*/}
