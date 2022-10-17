@@ -1,17 +1,19 @@
 import Image from 'next/image';
 
 type Props = {
+  height: number;
+  width: number;
   brandLogo: string;
   brandName: string;
 };
 
-const Logo = ({ brandLogo, brandName }: Props) => {
+const Logo = ({ height, width, brandLogo, brandName }: Props) => {
   return (
     <>
       {brandLogo !== '' ? (
         <Image
-          width={165}
-          height={40}
+          height={height}
+          width={width}
           alt="brand-logo"
           src={brandLogo}
           objectFit="contain"
