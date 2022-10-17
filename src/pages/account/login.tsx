@@ -22,7 +22,10 @@ const Login = () => {
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
-        <h1 className="font-bold text-3xl pb-6 mb-4">Log in</h1>
+        <div className="pb-6 mb-4">
+          <h1 className="font-bold text-3xl mb-2">Log in</h1>
+          <span className="text-sm">* Indicates a required field</span>
+        </div>
         <form
           onSubmit={(e) => {
             void handleSubmit(onSubmit)(e);
@@ -30,7 +33,7 @@ const Login = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>
+              <label className="font-bold text-xs text-gray-500 mb-2 block">* E-MAIL</label>
               <input
                 type="email"
                 placeholder="E-mail"
@@ -63,7 +66,7 @@ const Login = () => {
           </div>
           <div>
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">PASSWORD</label>
+              <label className="font-bold text-xs text-gray-500 mb-2 block">* PASSWORD</label>
               <input
                 type="password"
                 placeholder="Your password"
