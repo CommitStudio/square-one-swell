@@ -3,11 +3,18 @@ import { GetServerSideProps } from 'next';
 import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
+import Head from '~/components/globals/Head';
 import { NoResults } from '~/components/globals/NoResults';
 import Pagination from '~/components/globals/Pagination';
 import Filter from '~/components/products/Filter';
+
+import keywords from '~/data/keywords.json';
+
 import { useStore } from '~/hooks/useStore';
+
 import Store from '~/lib/Store';
+
+const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 type ProductsProps = {
   categories: Category[];
@@ -22,6 +29,12 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
 
   return (
     <>
+      <Head
+        title="SquareOne - Products"
+        description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
+        keywords={keywords.products}
+        url={`${NEXT_PUBLIC_BASE_URL}/products`}
+      />
       <Hero
         title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
         breadcrumb={<Breadcrumb />}
