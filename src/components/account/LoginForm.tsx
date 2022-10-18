@@ -44,6 +44,10 @@ const LoginForm = () => {
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', {
                   required: 'Email address is required',
+                  maxLength: {
+                    value: 100,
+                    message: 'The email address is too long'
+                  },
                   pattern: {
                     value: /^.{1,}[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: 'Please enter a valid email address'
@@ -54,6 +58,11 @@ const LoginForm = () => {
               {errors.email ? (
                 <>
                   {errors.email.type === 'required' && (
+                    <p role="alert" className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                  {errors.email.type === 'maxLength' && (
                     <p role="alert" className="text-red-500 text-xs mt-1">
                       {errors.email.message}
                     </p>
