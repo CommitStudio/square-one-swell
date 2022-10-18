@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { FaRegAddressCard } from 'react-icons/fa';
-import { GrClose } from 'react-icons/gr';
 
 import AccountLayout from '~/components/account/AccountLayout';
 import AddressModal from '~/components/account/AddressModal';
