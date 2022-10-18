@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import ProductCard from '~/components/ProductCard';
-
 import Container from '~/layouts/Container';
 
 interface Props {

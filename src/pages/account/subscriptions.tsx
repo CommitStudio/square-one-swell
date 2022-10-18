@@ -3,7 +3,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-const subscriptions = () => {
+const Subscriptions = () => {
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Subscriptions</h4>
@@ -18,4 +18,4 @@ const subscriptions = () => {
   );
 };
 
-export default subscriptions;
+export default Subscriptions;
