@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import Container from '~/layouts/Container';
 
@@ -10,6 +12,8 @@ type Inputs = {
 };
 
 const LoginForm = () => {
+  const [isHidden, setIsHidden] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -20,7 +24,7 @@ const LoginForm = () => {
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
-      <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
+      <div className="w-11/12 pt-6 pb-24 px-2 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-5/12 lg:px-6">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Log in</h1>
           <span className="text-sm">
@@ -81,20 +85,30 @@ const LoginForm = () => {
               <label className="font-bold text-xs text-gray-500 mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
-              <input
-                type="password"
-                placeholder="Your password"
-                autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline-secondary"
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Please enter a valid password'
-                  }
-                })}
-                aria-invalid={errors.password ? 'true' : 'false'}
-              />
+              <div className="flex">
+                <input
+                  type={`${isHidden ? 'password' : 'text'}`}
+                  placeholder="••••••"
+                  autoComplete="off"
+                  className="w-full border border-r-0 rounded rounded-r-none py-3 px-6 focus:outline-secondary"
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Please enter a valid password'
+                    }
+                  })}
+                  aria-invalid={errors.password ? 'true' : 'false'}
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsHidden(!isHidden)}
+                  className="inline-flex items-center px-3 text-2xl text-gray-700 rounded-r border border-l-0 border-gray-200"
+                >
+                  {isHidden ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                </button>
+              </div>
+
               {errors.password ? (
                 <>
                   {errors.password.type === 'required' && (
@@ -112,23 +126,19 @@ const LoginForm = () => {
             </div>
           </div>
           <Link href={'/account/forgot-password'}>
-            <a className="inline-block text-xs text-gray-500 mt-4 md:mt-6 hover:text-secondary">
-              Did you forgot your password?
-            </a>
+            <span className="inline-block text-sm mt-4 md:mt-6">
+              Forgot your password?
+              <a className="text-blue-700 cursor-pointer hover:underline"> Reset it</a>.
+            </span>
           </Link>
-          <div className="mt-8 mb-4">
+          <div className="mt-7 mb-4">
             <button
               type="submit"
               aria-label=""
-              className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-primary"
+              className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
             >
               LOG IN
             </button>
-            <Link href="/account/create-account">
-              <a className="block w-full bg-gray-200 text-black text-xs text-center font-bold rounded py-3 px-6 mt-4 transition-all duration-300 hover:text-secondary hover:bg-primary">
-                CREATE ACCOUNT
-              </a>
-            </Link>
           </div>
         </form>
       </div>
