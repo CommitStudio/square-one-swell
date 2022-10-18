@@ -3,7 +3,7 @@ import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
 
-export type Inputs = {
+type Inputs = {
   firstName: string;
   lastName: string;
   address: string;
