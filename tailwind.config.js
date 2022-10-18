@@ -15,7 +15,8 @@ module.exports = {
       gray: colors.neutral,
       indigo: colors.indigo,
       red: colors.rose,
-      yellow: colors.amber
+      yellow: colors.amber,
+      blue: colors.blue
     },
     extend: {
       screens: {
