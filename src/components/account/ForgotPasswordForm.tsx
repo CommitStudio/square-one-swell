@@ -20,7 +20,7 @@ const ForgotPasswordForm = () => {
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
-      <div className="w-11/12 pt-6 pb-24 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-4/12">
+      <div className="w-11/12 pt-6 pb-24 px-2 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-5/12 lg:px-6">
         <h1 className="font-bold text-3xl pb-6 mb-4">Forgot your password?</h1>
         <p className="text-sm pb-6 mb-4">
           Enter your email address and we’ll send you an email on how to reset your password.
@@ -35,7 +35,7 @@ const ForgotPasswordForm = () => {
               <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>
               <input
                 type="email"
-                placeholder=""
+                placeholder="example@mail.com"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline-secondary"
                 {...register('email', {
@@ -76,13 +76,13 @@ const ForgotPasswordForm = () => {
             <button
               type="submit"
               aria-label=""
-              className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-primary"
+              className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
             >
               SEND EMAIL
             </button>
-            <Link href="/account/login">
-              <a className="block w-full bg-gray-200 text-black text-xs text-center font-bold rounded py-3 px-6 mt-4 transition-all duration-300 hover:text-secondary hover:bg-primary">
-                BACK TO LOG IN
+            <Link href={'/account/login'}>
+              <a className="block text-center text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
+                <span>&#10229;</span> Log in
               </a>
             </Link>
           </div>
