@@ -6,6 +6,10 @@ type Props = {
 export default function Showing({ pagination, className }: Props) {
   const { limit, current, total } = pagination;
 
+  if (total === 0) {
+    return <p className={className} />;
+  }
+
   const fromProduct = limit * (current - 1) + 1;
   const toProductRaw = limit * current;
   const toProduct = toProductRaw > total ? total : toProductRaw;
