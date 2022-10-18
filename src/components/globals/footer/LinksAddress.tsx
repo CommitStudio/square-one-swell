@@ -4,8 +4,6 @@ import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-
 
 import { v4 as uuidv4 } from 'uuid';
 
-import Logo from '../navbar/Logo';
-
 import footer from '~/data/footer.json';
 
 import data from '~/data/partials.json';
@@ -38,8 +36,8 @@ const LinksAddress = () => {
         })}
       </div>
       <div className="space-y-3">
-        <div className="text-2xl text-primary">
-          <Logo height={40} width={120} brandLogo={data.brand_logo} brandName={data.brand_name} />
+        <div className="text-xl font-semibold whitespace-nowrap text-primary">
+          {data.brand_name}
         </div>
         <div className="flex flex-col space-y-3">
           <span className="text-lg font-bold">Montevideo, Uruguay</span>
