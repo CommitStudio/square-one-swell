@@ -80,11 +80,13 @@ const ForgotPasswordForm = () => {
             >
               SEND EMAIL
             </button>
-            <Link href={'/account/login'}>
-              <a className="block text-center text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
-                <span>&#10229;</span> Log in
-              </a>
-            </Link>
+            <div className="flex items-center justify-center">
+              <Link href={'/account/login'}>
+                <a className="text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
+                  <span>&#10229;</span> Log in
+                </a>
+              </Link>
+            </div>
           </div>
         </form>
       </div>
