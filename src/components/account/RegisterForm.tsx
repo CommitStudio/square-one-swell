@@ -219,6 +219,7 @@ const RegisterForm = () => {
               <a
                 href={'/terms-conditions'}
                 target="_blank"
+                rel="noreferrer"
                 className="text-blue-700 cursor-pointer hover:underline"
               >
                 Terms of Service
@@ -227,6 +228,7 @@ const RegisterForm = () => {
               <a
                 href={'/privacy-policy'}
                 target="_blank"
+                rel="noreferrer"
                 className="text-blue-700 cursor-pointer hover:underline"
               >
                 Privacy Policy
