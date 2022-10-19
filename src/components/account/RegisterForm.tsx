@@ -216,13 +216,21 @@ const RegisterForm = () => {
             </div>
             <label htmlFor="terms-policy" className="ml-3 text-sm">
               By signing up, you accept our&nbsp;
-              <Link href={'#'}>
-                <a className="text-blue-700 cursor-pointer hover:underline">Terms of Service</a>
-              </Link>
+              <a
+                href={'/terms-conditions'}
+                target="_blank"
+                className="text-blue-700 cursor-pointer hover:underline"
+              >
+                Terms of Service
+              </a>
               &nbsp;and&nbsp;
-              <Link href={'#'}>
-                <a className="text-blue-700 cursor-pointer hover:underline">Privacy Policy</a>
-              </Link>
+              <a
+                href={'/privacy-policy'}
+                target="_blank"
+                className="text-blue-700 cursor-pointer hover:underline"
+              >
+                Privacy Policy
+              </a>
               .
             </label>
           </div>
