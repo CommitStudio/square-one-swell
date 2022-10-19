@@ -2,6 +2,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import countriesJSON from '~/data/countries.json';
+
+const { countries } = countriesJSON;
 
 type Inputs = {
   firstName: string;
@@ -39,6 +42,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
           <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
         </div>
         <form
+          className="overflow-y-auto max-h-[80vh]"
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -128,9 +132,17 @@ const AddressModal = ({ open, setOpen }: Props) => {
                   maxLength: { value: 50, message: 'Country is too long.' }
                 })}
               >
-                <option value="uruguay">Uruguay</option>
-                <option value="argentina">Argentina</option>
-                <option value="brasil">Brasil</option>
+                {countries.map((country, i) =>
+                  country.name === '------' ? (
+                    <option value="------" disabled key="------">
+                      ------
+                    </option>
+                  ) : (
+                    <option key={i} value={`${country.name}`}>
+                      {`${country.name}`}
+                    </option>
+                  )
+                )}
               </select>
               {errors.country && (
                 <p className="text-red-600 text-xs -mt-4 mb-4">{errors.country.message}</p>
