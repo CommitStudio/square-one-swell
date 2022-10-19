@@ -5,6 +5,7 @@ import Container from '~/layouts/Container';
 const TermsConditions = () => {
   return (
     <Container className="py-16">
+      {/* TODO: TEXT TO BE REVISED */}
       <div className="font-bold text-align text-center pb-6 text-lg">TERMS OF SERVICE </div>
       <div>
         This website is operated by Square One. Throughout the site, the terms “we”, “us” and “our”
