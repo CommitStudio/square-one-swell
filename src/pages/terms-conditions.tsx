@@ -81,7 +81,7 @@ const TermsConditions = () => {
         exchange only according to our Return Policy. To view our Return Policy, please visit [LINK
         TO RETURN POLICY] We have made every effort to display as accurately as possible the colors
         and images of our products that appear at the store. We cannot guarantee that your computer
-        monitor's display of any color will be accurate. We reserve the right, but are not
+        monitor’s display of any color will be accurate. We reserve the right, but are not
         obligated, to limit the sales of our products or Services to any person, geographic region
         or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to
         limit the quantities of any products or Services that we offer. All descriptions of products
@@ -128,7 +128,7 @@ const TermsConditions = () => {
         third-party materials or websites, or for any other materials, products, or Services of
         third-parties. We are not liable for any harm or damages related to the purchase or use of
         goods, Services, resources, content, or any other transactions made in connection with any
-        third-party websites. Please review carefully the third-party's policies and practices and
+        third-party websites. Please review carefully the third-party’s policies and practices and
         make sure you understand them before you engage in any transaction. Complaints, claims,
         concerns, or questions regarding third-party products should be directed to the third-party.
       </div>
@@ -137,7 +137,7 @@ const TermsConditions = () => {
         If, at our request, you send certain specific submissions (for example contest entries) or
         without a request from us you send creative ideas, suggestions, proposals, plans, or other
         materials, whether online, by email, by postal mail, or otherwise (collectively,
-        'comments'), you agree that we may, at any time, without restriction, edit, copy, publish,
+        ’comments’), you agree that we may, at any time, without restriction, edit, copy, publish,
         distribute, translate and otherwise use in any medium any comments that you forward to us.
         We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to
         pay compensation for any comments; or (3) to respond to any comments. We may, but have no
@@ -206,8 +206,8 @@ const TermsConditions = () => {
         to time we may remove the service for indefinite periods of time or cancel the service at
         any time, without notice to you. You expressly agree that your use of, or inability to use,
         the service is at your sole risk. The service and all products and Services delivered to you
-        through the service are (except as expressly stated by us) provided 'as is' and 'as
-        available' for your use, without any representation, warranties or conditions of any kind,
+        through the service are (except as expressly stated by us) provided ’as is’ and ’as
+        available’ for your use, without any representation, warranties or conditions of any kind,
         either express or implied, including all implied warranties or conditions of
         merchantability, merchantable quality, fitness for a particular purpose, durability, title,
         and non-infringement. In no case shall Square One, our directors, officers, employees,
