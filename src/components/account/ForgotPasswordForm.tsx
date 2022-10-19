@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { BsArrowLeft } from 'react-icons/bs';
 
 import Container from '~/layouts/Container';
 
@@ -20,7 +21,7 @@ const ForgotPasswordForm = () => {
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
-      <div className="w-11/12 pt-6 pb-24 px-2 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-5/12 lg:px-6">
+      <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <h1 className="font-bold text-3xl pb-6 mb-4">Forgot your password?</h1>
         <p className="text-sm pb-6 mb-4">
           Enter your email address and we’ll send you an email on how to reset your password.
@@ -37,7 +38,7 @@ const ForgotPasswordForm = () => {
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
                 {...register('email', {
                   required: 'Email address is required',
                   maxLength: {
@@ -76,14 +77,15 @@ const ForgotPasswordForm = () => {
             <button
               type="submit"
               aria-label=""
-              className="w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
+              className="w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
             >
               SEND EMAIL
             </button>
             <div className="flex items-center justify-center">
               <Link href={'/account/login'}>
-                <a className="text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
-                  <span>&#10229;</span> Log in
+                <a className="flex items-center justify-center text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
+                  <BsArrowLeft className="text-lg mr-1" />
+                  Log in
                 </a>
               </Link>
             </div>

@@ -27,7 +27,7 @@ const RegisterForm = () => {
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
-      <div className="w-11/12 pt-6 pb-24 px-2 sm:w-9/12 md:pt-24 md:w-6/12 lg:w-5/12 lg:px-6">
+      <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Create account</h1>
           <span className="text-sm">
@@ -48,7 +48,7 @@ const RegisterForm = () => {
                 type="text"
                 placeholder="Your first name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
                 {...register('firstname', {
                   required: 'First name is required',
                   minLength: {
@@ -84,7 +84,7 @@ const RegisterForm = () => {
                 type="text"
                 placeholder="Your last name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
                 {...register('lastname', {
                   required: 'Last name is required',
                   minLength: {
@@ -120,7 +120,7 @@ const RegisterForm = () => {
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
                 {...register('email', {
                   required: 'Email address is required',
                   maxLength: {
@@ -161,12 +161,12 @@ const RegisterForm = () => {
               <label className="font-bold text-xs text-gray-500 mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
-              <div className="flex">
+              <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
                 <input
                   type={`${isHidden ? 'password' : 'text'}`}
                   placeholder="••••••"
                   autoComplete="off"
-                  className="w-full border border-r-0 rounded rounded-r-none py-3 px-6 focus:outline-secondary"
+                  className="w-full rounded rounded-r-none py-3 px-6 focus:outline-none"
                   {...register('password', {
                     required: 'Password is required',
                     minLength: {
@@ -179,7 +179,7 @@ const RegisterForm = () => {
                 <button
                   type="button"
                   onClick={() => setIsHidden(!isHidden)}
-                  className="inline-flex items-center px-3 text-2xl text-gray-700 rounded-r border border-l-0 border-gray-200"
+                  className="inline-flex h-fit my-auto mx-3 text-2xl text-gray-700 rounded-r"
                 >
                   {isHidden ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </button>
@@ -215,13 +215,13 @@ const RegisterForm = () => {
               />
             </div>
             <label htmlFor="terms-policy" className="ml-3 text-sm">
-              By signing up, you accept our
+              By signing up, you accept our&nbsp;
               <Link href={'#'}>
-                <a className="text-blue-700 cursor-pointer hover:underline"> Terms of Service </a>
+                <a className="text-blue-700 cursor-pointer hover:underline">Terms of Service</a>
               </Link>
-              and
+              &nbsp;and&nbsp;
               <Link href={'#'}>
-                <a className="text-blue-700 cursor-pointer hover:underline"> Privacy Policy</a>
+                <a className="text-blue-700 cursor-pointer hover:underline">Privacy Policy</a>
               </Link>
               .
             </label>
@@ -231,7 +231,7 @@ const RegisterForm = () => {
             <button
               type="submit"
               aria-label=""
-              className={`w-full bg-secondary text-white text-xs font-bold rounded py-3 px-6 transition-all duration-300 ${
+              className={`w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 ${
                 isChecked
                   ? 'cursor-not-allowed opacity-60'
                   : 'hover:text-secondary hover:bg-primary'
@@ -241,12 +241,12 @@ const RegisterForm = () => {
               CREATE ACCOUNT
             </button>
 
-            <span className="block text-center text-sm mt-4">
-              Already have an account?
-              <Link href={'/account/login'}>
-                <a className="text-blue-700 cursor-pointer hover:underline"> Log in</a>
-              </Link>
-            </span>
+            <Link href={'/account/login'}>
+              <span className="block text-center text-sm mt-4">
+                Already have an account?&nbsp;
+                <a className="text-blue-700 cursor-pointer hover:underline">Log in</a>.
+              </span>
+            </Link>
           </div>
         </form>
       </div>
