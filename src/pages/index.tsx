@@ -10,6 +10,8 @@ import keywords from '~/data/keywords.json';
 
 import Store from '~/lib/Store';
 
+const { NEXT_PUBLIC_BASE_URL } = process.env;
+
 type HomeProps = {
   products: Product[];
   categories: Category[];
@@ -25,6 +27,7 @@ const Home = ({ products, categories, promotion, firstProductPromotion }: HomePr
         title="SquareOne - Home"
         description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
         keywords={keywords.home}
+        url={`${NEXT_PUBLIC_BASE_URL}/`}
       />
       <HomeHero />
       <CategoriesSlider categories={categories} />
