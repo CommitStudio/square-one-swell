@@ -1,15 +1,22 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+
 import React from 'react';
 
 import Hero from '~/components/Hero';
+import Head from '~/components/globals/Head';
 import ProductReview from '~/components/product-detail/ProductReview';
 import ProductSection from '~/components/product-detail/ProductSection';
 import RelatedProducts from '~/components/product-detail/RelatedProducts';
+
+import keywords from '~/data/keywords.json';
 import data from '~/data/product-detail.json';
 import Container from '~/layouts/Container';
 import Store from '~/lib/Store';
 
 const { test_product } = data;
+
+const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 interface ProductProp {
   product: Product;
@@ -18,8 +25,15 @@ interface ProductProp {
 }
 
 const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductProp) => {
+  const router = useRouter();
   return (
     <>
+      <Head
+        title={`SquareOne - ${product.name}`}
+        description={product.description}
+        keywords={keywords.product_detail}
+        url={`${NEXT_PUBLIC_BASE_URL}${router.asPath}`}
+      />
       <Hero title={product.name} />
       <Container>
         <ProductSection product={product} categories={categories} />

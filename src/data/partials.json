@@ -1,6 +1,6 @@
 {
-  "brand_name": "STORE FRONT",
-  "brand_logo": "/img/logo/logo.png",
+  "brand_name": "SQUARE ONE",
+  "brand_logo": "",
   "categories": [
     { "name": "PRODUCTS", "slug": "products" },
     { "name": "ABOUT US", "slug": "about-us" },
