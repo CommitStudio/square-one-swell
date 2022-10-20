@@ -5,6 +5,9 @@ import Container from '~/layouts/Container';
 const TermsConditions = () => {
   return (
     <Container className="py-16">
+      <Link href="/account/create-account">
+        <a className="text-secondary text-lg hover:underline font-bold">Back</a>
+      </Link>
       {/* TODO: TEXT TO BE REVISED */}
       <div className="font-bold text-align text-center pb-6 text-lg">TERMS OF SERVICE </div>
       <div>
