@@ -24,8 +24,8 @@ class Store {
     return await this.storeClass.getCategories();
   }
 
-  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
-    return await this.storeClass.getProductBySlug(slug);
+  async getProduct(slug: string): Promise<Product | undefined> {
+    return await this.storeClass.getProduct(slug);
   }
 
   async getNextPromotionToBeExpired(): Promise<Promotion | undefined> {

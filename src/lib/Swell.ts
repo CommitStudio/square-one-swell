@@ -10,26 +10,6 @@ const swell = createClient(SWELL_STORE_ID, SWELL_SECRET_KEY);
 
 export default class Swell {
   /*****************************************************************************
-   * Definition of One Individual Product
-   ****************************************************************************/
-  parseOneProduct = (product: SwellProduct) => {
-    return <Product>{
-      id: product.id,
-      name: product.name,
-      active: product.active,
-      description: product.description,
-      options: this.parseProductOptions(product),
-      variants: this.parseVariants(product),
-      slug: product.slug,
-      price: product.price,
-      sale: product.sale || null,
-      salePrice: product.sale_price || null,
-      sku: product.sku || null,
-      images: this.parseImages(product),
-      categories: product.category_index.id
-    };
-  };
-  /*****************************************************************************
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
@@ -47,109 +27,42 @@ export default class Swell {
       where: this.parseProductsFilter(filterParams)
     });
 
-    const { results, count, pages, page: currentPage } = response;
+    const { results } = response;
 
-    // Transform SwellProduct data to Product standard data format
-    const products = results.map((product) => this.parseOneProduct(product));
+    const products = results.map((product) => this.tranformProduct(product));
+    const pagination = this.makePagination(response, limit);
 
-    return {
-      products,
-      pagination: {
-        total: count,
-        pages: pages ? Object.keys(pages).map(Number) : [],
-        current: currentPage,
-        limit
-      }
-    };
+    return { products, pagination };
   }
 
   /*****************************************************************************
-   * Convert Swell images list to a generic format
+   * Get Product by Slug from Swell and convert to individual Product object
    ****************************************************************************/
-  parseImages = (item: SwellProduct | SwellCategory) => {
-    if (item.images) {
-      return item.images.map((image) => ({
-        src: image.file.url,
-        alt: item.name
-      }));
-    }
+  async getProduct(slug: string): Promise<Product | undefined> {
+    const product: SwellProduct = await swell.get(`/products/${slug}`, {
+      active: true,
+      expand: ['variants:*']
+    });
 
-    return [{ src: '/img/default-images/image-not-found.webp', alt: 'No image available' }];
-  };
-
-  /*****************************************************************************
-   * Convert Swell product options to generic format
-   ****************************************************************************/
-  parseProductOptions = (product: SwellProduct) => {
-    return product.options.map((option) => ({
-      label: option.name,
-      active: option.active,
-      values: option.values.map((value) => value.name)
-    }));
-  };
-
-  /*****************************************************************************
-   * Convert SwellProduct variants to a Product variants format
-   ****************************************************************************/
-  parseVariants = (item: SwellProduct) => {
-    return item.variants.results.map((variant) => ({
-      name: variant.name,
-      active: variant.active
-    }));
-  };
-
-  /*****************************************************************************
-   * Parse a list of filters parameters expected Swell where format
-   ****************************************************************************/
-  parseProductsFilter = (filterParams: FilterParams): SwellProductWhere => {
-    const { minPrice, maxPrice } = filterParams;
-
-    const where: SwellProductWhere = {};
-
-    // Add price filter
-    if (minPrice || maxPrice) {
-      where['price'] = {
-        $gte: minPrice || undefined,
-        $lte: maxPrice || undefined
-      };
-    }
-    return where;
-  };
+    return product ? this.tranformProduct(product) : undefined;
+  }
 
   /*****************************************************************************
    * Get categories from Swell and convert to Category object
    ****************************************************************************/
   async getCategories(): Promise<Category[] | PromiseLike<Category[]>> {
     const { results }: { results: SwellCategory[] } = await swell.get('/categories', {
-      where: {
-        active: true
-      }
+      where: { active: true }
     });
 
     return results.map((category) => ({
       id: category.id,
       name: category.name,
-      images: this.parseImages(category),
-      description: category.slug, // TODO: cambiar una vez que agreguemos description de la category
+      images: this.transformImages(category),
+      description: category.slug,
       active: category.active,
       slug: { category: category.slug }
     }));
-  }
-
-  /*****************************************************************************
-   * Get Product by Slug from Swell and convert to individual Product object
-   ****************************************************************************/
-  async getProductBySlug(slug: string | undefined): Promise<Product | undefined> {
-    if (slug) {
-      // Getting product by slug from Swell
-      const product: SwellProduct = await swell.get(`/products/${slug}`, {
-        active: true,
-        expand: ['variants:*']
-      });
-      if (product) {
-        return this.parseOneProduct(product);
-      }
-    }
   }
 
   /*****************************************************************************
@@ -169,5 +82,94 @@ export default class Swell {
         discounts: [{ buy_items: [{ product_id: '' }] }]
       }
     );
+  }
+
+  /*****************************************************************************
+   * Definition of One Individual Product
+   ****************************************************************************/
+  tranformProduct(product: SwellProduct) {
+    return <Product>{
+      id: product.id,
+      name: product.name,
+      active: product.active,
+      description: product.description,
+      options: this.transformProductOptions(product),
+      variants: this.transformProductVariants(product),
+      slug: product.slug,
+      price: product.price,
+      sale: product.sale || null,
+      salePrice: product.sale_price || null,
+      sku: product.sku || null,
+      images: this.transformImages(product),
+      categories: product.category_index.id
+    };
+  }
+
+  /*****************************************************************************
+   * Convert a list of images into a generic format list
+   ****************************************************************************/
+  transformImages = (item: SwellProduct | SwellCategory) => {
+    if (item.images) {
+      return item.images.map((image) => ({
+        src: image.file.url,
+        alt: item.name
+      }));
+    }
+
+    return [{ src: '/img/default-images/image-not-found.webp', alt: 'No image available' }];
+  };
+
+  /*****************************************************************************
+   * Convert Swell product options to generic format
+   ****************************************************************************/
+  transformProductOptions(product: SwellProduct) {
+    return product.options.map((option) => ({
+      label: option.name,
+      active: option.active,
+      values: option.values.map((value) => value.name)
+    }));
+  }
+
+  /*****************************************************************************
+   * Convert SwellProduct variants to a Product variants format
+   ****************************************************************************/
+  transformProductVariants(product: SwellProduct) {
+    return product.variants.results.map((variant) => ({
+      name: variant.name,
+      active: variant.active
+    }));
+  }
+
+  /*****************************************************************************
+   * Parse a list of filters parameters expected Swell where format
+   ****************************************************************************/
+  parseProductsFilter(filterParams: FilterParams): SwellProductWhere {
+    const { minPrice, maxPrice } = filterParams;
+
+    const where: SwellProductWhere = {};
+
+    // Add price filter
+    if (minPrice || maxPrice) {
+      where['price'] = {
+        $gte: minPrice || undefined,
+        $lte: maxPrice || undefined
+      };
+    }
+
+    return where;
+  }
+
+  /*****************************************************************************
+   * Make a generic pagination object
+   ****************************************************************************/
+  makePagination(response: SwellProductResponse, limit: number): Pagination {
+    const { count, pages, page } = response;
+
+    return {
+      total: count,
+      pages: pages ? Object.keys(pages).map(Number) : [],
+      current: page,
+      limit
+    };
   }
 }

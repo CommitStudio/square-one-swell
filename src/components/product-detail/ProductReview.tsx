@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-
-import AdditionalInfo from '~/components/product-detail/ProductReview/AdditionalInfo';
 import ProductRatings from '~/components/product-detail/ProductReview/ProductRatings';
 
 export interface Props {
@@ -24,32 +21,15 @@ export interface Props {
 }
 
 const ProductReview = ({ test_product }: Props) => {
-  const [tabSelected, setTabSelected] = useState('additional');
   return (
     <div className="my-16">
-      <div className="flex justify-center space-x-10 -mb-[1px]">
-        <span
-          onClick={() => setTabSelected('additional')}
-          className={`border border-secondary py-1 px-3 flex items-center cursor-pointer rounded-t ${
-            tabSelected === 'additional' ? 'border-b-white font-bold' : ''
-          }`}
-        >
-          Additional information
-        </span>
-        <span
-          onClick={() => setTabSelected('reviews')}
-          className={`border border-secondary py-1 px-3 flex items-center cursor-pointer rounded-t ${
-            tabSelected === 'reviews' ? 'border-b-white font-bold' : ''
-          }`}
-        >
+      <div className="flex space-x-10 -mb-[1px]">
+        <span className="border border-secondary py-1 px-3 flex items-center cursor-pointer rounded-tl rounded-tr border-b-white text-lg">
           Reviews
         </span>
       </div>
-      <div className="border border-secondary rounded">
-        {tabSelected === 'additional' && (
-          <AdditionalInfo additional_information={test_product.additional_information} />
-        )}
-        {tabSelected === 'reviews' && <ProductRatings />}
+      <div className="border border-secondary rounded-bl rounded-br rounded-tr">
+        <ProductRatings />
       </div>
     </div>
   );

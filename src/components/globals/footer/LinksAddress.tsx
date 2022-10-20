@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import footer from '~/data/footer.json';
 
+import data from '~/data/partials.json';
+
 const { items } = footer;
 
 const LinksAddress = () => {
@@ -34,7 +36,9 @@ const LinksAddress = () => {
         })}
       </div>
       <div className="space-y-3">
-        <div className="text-2xl text-primary">STORE FRONT</div>
+        <div className="text-xl font-semibold whitespace-nowrap text-primary">
+          {data.brand_name}
+        </div>
         <div className="flex flex-col space-y-3">
           <span className="text-lg font-bold">Montevideo, Uruguay</span>
           <span>Blvr. Artigas 1182 +598 2706 5597</span>
