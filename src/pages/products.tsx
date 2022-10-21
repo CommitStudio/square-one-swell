@@ -8,6 +8,7 @@ import { NoResults } from '~/components/globals/NoResults';
 import Pagination from '~/components/globals/Pagination';
 import Filter from '~/components/products/Filter';
 
+import Showing from '~/components/products/Showing';
 import keywords from '~/data/keywords.json';
 
 import { useStore } from '~/hooks/useStore';
@@ -44,6 +45,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
         <>
           <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
+          <Showing className="mb-2 md:my-10 text-center" pagination={pagination} />
         </>
       ) : (
         <NoResults />
