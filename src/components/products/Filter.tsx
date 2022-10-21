@@ -52,9 +52,20 @@ const Filter = ({ categories, pagination }: FilterProps) => {
               <BsSearch className="ml-2" />
             )}
           </button>
+          <div
+            className={` items-center overflow-hidden transition-all ease-in-out duration-300 origin-left ${
+              isSearchOpen ? 'max-h-10 ' : 'max-h-0'
+            }`}
+          >
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full ml-4  outline-none text-l focus:border-b-secondary"
+            />
+          </div>
         </div>
       </div>
-      <hr className="my-4" />
+      <hr className="my-6" />
       <div
         className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
@@ -64,17 +75,6 @@ const Filter = ({ categories, pagination }: FilterProps) => {
         <FilterBy title="Categories" items={categories} pathname={'products'} />
 
         <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
-      </div>
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
-          isSearchOpen ? 'max-h-52 mb-10 pb-2' : 'max-h-0'
-        }`}
-      >
-        <input
-          type="text"
-          placeholder="Search..."
-          className="border-b w-full outline-none text-xl focus:border-b-secondary pb-2"
-        />
       </div>
     </Container>
   );
