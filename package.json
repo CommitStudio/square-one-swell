@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
     "@tailwindcss/line-clamp": "^0.4.0",
     "html-react-parser": "^3.0.4",
     "jotai": "^1.8.0",
