@@ -9,6 +9,7 @@ import { FilterBy } from './FilterBy';
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
+import SortBy from './SortBy';
 
 interface FilterProps {
   categories: Category[];
@@ -76,6 +77,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               />
             </Transition>
           </div>
+          <SortBy />
         </div>
       </div>
       <hr className="my-6" />
