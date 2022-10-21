@@ -34,8 +34,9 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
         <form
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
         >
           <label className="block font-light text-sm" htmlFor="cardNumber">
             Card number

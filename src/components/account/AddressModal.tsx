@@ -43,8 +43,9 @@ const AddressModal = ({ open, setOpen }: Props) => {
         </div>
         <form
           className="overflow-y-auto max-h-[80vh]"
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
         >
           <label className="block font-light text-sm" htmlFor="firstName">
             First Name
