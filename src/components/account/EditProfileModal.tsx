@@ -30,7 +30,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-4 rounded">
+      <div className="bg-gray-200 p-4 rounded w-80">
         <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Edit profile</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
@@ -125,7 +125,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
-            ADD NEW PAYMENT METHOD
+            SAVE CHANGES
           </button>
         </form>
       </div>
