@@ -92,6 +92,7 @@ export default class Swell {
       id: product.id,
       name: product.name,
       active: product.active,
+      dateCreated: product.date_created,
       description: product.description,
       options: this.transformProductOptions(product),
       variants: this.transformProductVariants(product),

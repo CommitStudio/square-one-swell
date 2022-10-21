@@ -2,6 +2,7 @@ interface Product {
   id: string;
   name: string;
   active: boolean;
+  dateCreated: string;
   description: string;
   options?: ProductOption[];
   variants?: Variant[];
