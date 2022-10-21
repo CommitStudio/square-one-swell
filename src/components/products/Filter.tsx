@@ -116,14 +116,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
       >
         {/* FilterBy CATEGORIES info is coming from the store */}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
-        {/*FilterBy OPTIONS of the products, coming form the store */}
-        {Object.keys(optionsList).forEach((key: string) => {
-          const title = key;
-          const items: FilterItem[] = optionsList[title].items;
-          optionsRendered.push(<FilterBy title={title} items={items} pathname={'products'} />);
-        })}
-        {optionsRendered}
-        {/*FilterBy PRICE*/}
+
         <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
       </div>
     </Container>
