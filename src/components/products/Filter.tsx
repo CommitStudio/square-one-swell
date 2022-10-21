@@ -8,6 +8,7 @@ import Showing from './Showing';
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
+import SortBy from './SortBy';
 
 interface FilterProps {
   categories: Category[];
@@ -31,7 +32,7 @@ const Filter = ({ categories, pagination }: FilterProps) => {
     <Container className="pt-10">
       <div className="md:flex md:justify-between">
         <Showing className="mb-2 md:mb-0" pagination={pagination} />
-        <div className="flex">
+        <div className="flex items-center">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
             className="mr-2"
@@ -50,6 +51,7 @@ const Filter = ({ categories, pagination }: FilterProps) => {
               <BsSearch className="ml-2" />
             )}
           </button>
+          <SortBy />
         </div>
       </div>
       <hr className="my-10" />

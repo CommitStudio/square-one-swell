@@ -26,6 +26,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
+  console.log(products);
 
   return (
     <>
