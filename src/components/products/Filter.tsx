@@ -5,10 +5,11 @@ import { MdOutlineClose } from 'react-icons/md';
 import { FilterBy } from './FilterBy';
 import Showing from './Showing';
 
+import SortBy from './SortBy';
+
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
-import SortBy from './SortBy';
 
 interface FilterProps {
   categories: Category[];
