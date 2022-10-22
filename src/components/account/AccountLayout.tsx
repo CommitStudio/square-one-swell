@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
-import { useLogout } from '~/hooks/useSwellAccount';
+import { useIsLogged, useLogout } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -14,6 +14,10 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
   const handleLogout = useLogout();
+
+  if (useIsLogged() === null) {
+    return null;
+  }
 
   return (
     <Container className="mb-10">

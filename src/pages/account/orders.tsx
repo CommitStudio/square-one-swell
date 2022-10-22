@@ -3,13 +3,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-import { useIsLogged } from '~/hooks/useSwellAccount';
-
 export default function Orders() {
-  if (useIsLogged() === null) {
-    return null;
-  }
-
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Orders & Returns</h4>
