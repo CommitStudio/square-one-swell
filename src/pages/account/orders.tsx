@@ -1,21 +1,12 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-import { useSwellAccount } from '~/hooks/useSwellAccount';
+import { useIsLogged } from '~/hooks/useSwellAccount';
 
 export default function Orders() {
-  const router = useRouter();
-  const logged = useSwellAccount();
-
-  if (logged === null) {
-    return null;
-  }
-
-  if (logged === false) {
-    router.push('/account/login').catch(() => null);
+  if (useIsLogged() === null) {
     return null;
   }
 

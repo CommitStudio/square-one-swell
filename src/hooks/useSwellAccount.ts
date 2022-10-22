@@ -4,19 +4,29 @@ import swell from 'swell-js';
 
 swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
 
-export const useSwellAccount = () => {
+/*****************************************************************************
+ * Check if the user is logged in
+ ****************************************************************************/
+export const useIsLogged = () => {
+  const router = useRouter();
   const [isLogged, setIsLogged] = useState<boolean | null>(null);
 
+  // Check if the user is logged in
   useEffect(() => {
     swell.account
       .get()
       .then((logged) => {
-        logged?.id ? setIsLogged(true) : setIsLogged(false);
+        setIsLogged(logged ? true : false);
       })
       .catch(() => {
         setIsLogged(false);
       });
   }, []);
+
+  // Redirect to login page if not logged in
+  if (isLogged === false) {
+    void router.push('/account/login');
+  }
 
   return isLogged;
 };
