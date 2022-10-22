@@ -1,9 +1,24 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-const orders = () => {
+import { useSwellAccount } from '~/hooks/useSwellAccount';
+
+export default function Orders() {
+  const router = useRouter();
+  const logged = useSwellAccount();
+
+  if (logged === null) {
+    return null;
+  }
+
+  if (logged === false) {
+    router.push('/account/login').catch(() => null);
+    return null;
+  }
+
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Orders & Returns</h4>
@@ -16,6 +31,4 @@ const orders = () => {
       </Link>
     </AccountLayout>
   );
-};
-
-export default orders;
+}
