@@ -4,6 +4,7 @@ declare module 'swell-js' {
   interface Account {
     login(email, password): Promise<unknown>;
     get(): Promise<AccountInformation | null>;
+    logout(): Promise<unknown>;
   }
 
   interface AccountInformation {

@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
+import { useLogout } from '~/hooks/useSwellAccount';
+
 import Container from '~/layouts/Container';
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
 
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
+  const handleLogout = useLogout();
 
   return (
     <Container className="mb-10">
@@ -25,7 +28,7 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/orders">
             <a
               className={`block ${
-                router.pathname.includes('account/orders') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/orders') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Orders & Returns
@@ -34,7 +37,9 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/subscriptions">
             <a
               className={`block ${
-                router.pathname.includes('account/subscriptions') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/subscriptions')
+                  ? 'font-semibold bg-gray-100'
+                  : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Subscriptions
@@ -43,7 +48,7 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/addresses">
             <a
               className={`block ${
-                router.pathname.includes('account/addresses') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/addresses') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Addresses
@@ -52,13 +57,18 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/payments">
             <a
               className={`block ${
-                router.pathname.includes('account/payments') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/payments') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2`}
             >
               Payment methods
             </a>
           </Link>
-          <button className="flex items-center gap-1 hover:text-red-600 mt-10">
+          <button
+            className="flex items-center gap-1 hover:text-red-600 mt-10"
+            onClick={() => {
+              void handleLogout();
+            }}
+          >
             <HiOutlineLogout />
             Log out
           </button>
