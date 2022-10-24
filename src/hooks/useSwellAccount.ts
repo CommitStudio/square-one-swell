@@ -7,6 +7,20 @@ import type { AccountInformation } from 'swell-js';
 swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
 
 /*****************************************************************************
+ * Login user and return account information
+ ****************************************************************************/
+export const useLogin = (credentials: { email: string; password: string } | null) => {
+  const { data, error } = useSWR<unknown, Error>(
+    credentials,
+    async ({ email, password }: { email: string; password: string }) =>
+      swell.account.login(email, password),
+    { revalidateOnFocus: false }
+  );
+
+  return { data, error };
+};
+
+/*****************************************************************************
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {

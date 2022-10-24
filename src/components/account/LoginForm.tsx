@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import swell from 'swell-js';
-import useSWR from 'swr';
+
+import { useLogin } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -13,27 +13,11 @@ type Inputs = {
   password: string;
 };
 
-swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
-
 const LoginForm = () => {
   const router = useRouter();
 
-  const [doLogin, setDoLogin] = useState<Inputs | null>(null);
   const [isHidden, setIsHidden] = useState(true);
-
-  const { data, error } = useSWR(
-    doLogin,
-    async ({ email, password }) => {
-      const login = await swell.account.login(email, password);
-
-      if (!login) {
-        return { errors: true };
-      }
-
-      return { login };
-    },
-    { revalidateOnFocus: false }
-  );
+  const [loginCredentials, setLoginCredentials] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -41,9 +25,18 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
+  // Login mutation
+  const { data } = useLogin(loginCredentials);
+
+  // If login is successful, redirect to the account page
+  if (data) {
+    void router.push('/account/orders');
+    return null;
+  }
+
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setDoLogin(data);
+    setLoginCredentials(data);
   };
 
   return (
@@ -52,7 +45,7 @@ const LoginForm = () => {
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Log in</h1>
 
-          {data?.errors === true && (
+          {data === null && (
             <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
           )}
 
