@@ -3,7 +3,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-export default function Orders() {
+const orders = () => {
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Orders & Returns</h4>
@@ -16,4 +16,6 @@ export default function Orders() {
       </Link>
     </AccountLayout>
   );
-}
+};
+
+export default orders;
