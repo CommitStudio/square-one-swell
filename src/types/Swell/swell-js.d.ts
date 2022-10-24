@@ -7,7 +7,7 @@ declare module 'swell-js' {
     logout(): Promise<unknown>;
   }
 
-  interface AccountInformation {
+  export interface AccountInformation {
     type: string;
     shipping: {
       account_address_id: string;

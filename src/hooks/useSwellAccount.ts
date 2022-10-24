@@ -1,34 +1,20 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import swell from 'swell-js';
+import useSWR from 'swr';
+
+import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
 
 /*****************************************************************************
  * Check if the user is logged in
  ****************************************************************************/
-export const useIsLogged = () => {
-  const router = useRouter();
-  const [isLogged, setIsLogged] = useState<boolean | null>(null);
+export const useUserLogged = () => {
+  const { data, error } = useSWR<AccountInformation | null, Error>('swell.account.get', async () =>
+    swell.account.get()
+  );
 
-  // Check if the user is logged in
-  useEffect(() => {
-    swell.account
-      .get()
-      .then((logged) => {
-        setIsLogged(logged ? true : false);
-      })
-      .catch(() => {
-        setIsLogged(false);
-      });
-  }, []);
-
-  // Redirect to login page if not logged in
-  if (isLogged === false) {
-    void router.push('/account/login');
-  }
-
-  return isLogged;
+  return { data, error };
 };
 
 /*****************************************************************************
