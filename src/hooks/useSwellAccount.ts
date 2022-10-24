@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import swell from 'swell-js';
 import useSWR from 'swr';
 
@@ -24,11 +25,16 @@ export const useLogin = (credentials: { email: string; password: string } | null
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {
-  const { data, error } = useSWR<AccountInformation | null, Error>('swell.account.get', async () =>
-    swell.account.get()
-  );
+  const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
-  return { data, error };
+  useEffect(() => {
+    swell.account
+      .get()
+      .then((account) => setUser(account))
+      .catch(() => setUser(null));
+  }, []);
+
+  return { data: user };
 };
 
 /*****************************************************************************
