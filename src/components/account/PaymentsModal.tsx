@@ -4,6 +4,7 @@ import { GrClose } from 'react-icons/gr';
 import Modal from '~/components/account/Modal';
 
 type Inputs = {
+  cardName: string;
   cardNumber: string;
   expiryDate: string;
   cvc: string;
@@ -29,17 +30,36 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
   return (
     <Modal open={open} setOpen={setOpen}>
       <div className="bg-gray-200 p-6 rounded md:w-[500px]">
-        <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
+        <div className="flex items-center justify-between mb-2 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Add new payment method</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
+        <span className="text-xs font-extralight">
+          <span className="text-red-500">*</span> Indicates a required field
+        </span>
         <form
+          className="mt-3"
           onSubmit={(e) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
+          <label className="block font-light text-sm" htmlFor="cardName">
+            <span className="text-red-500">*</span> Name on card
+          </label>
+          <input
+            className="w-full mb-4 p-2"
+            id="cardName"
+            type="text"
+            {...register('cardName', {
+              required: 'Please enter your card name.',
+              maxLength: { value: 50, message: 'name is too long.' }
+            })}
+          />
+          {errors.cardNumber && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.cardName?.message}</p>
+          )}
           <label className="block mb-2 text-sm" htmlFor="cardNumber">
-            Card number
+            <span className="text-red-500">*</span> Card number
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -56,7 +76,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           <div className="flex gap-5 justify-between">
             <div>
               <label className="block mb-2 text-sm" htmlFor="expiryDate">
-                Card expiry
+                <span className="text-red-500">*</span> Card expiry
               </label>
               <input
                 className="w-full mb-4 p-2"
@@ -72,7 +92,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             </div>
             <div>
               <label className="block mb-2 text-sm" htmlFor="cvc">
-                CVC
+                <span className="text-red-500">*</span> CVC
               </label>
               <input
                 className="w-full mb-4 p-2"

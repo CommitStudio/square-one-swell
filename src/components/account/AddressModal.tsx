@@ -10,6 +10,7 @@ type Inputs = {
   firstName: string;
   lastName: string;
   address: string;
+  additionalAddressInfo: string;
   apartment: string;
   city: string;
   country: string;
@@ -41,14 +42,17 @@ const AddressModal = ({ open, setOpen }: Props) => {
           <h3 className="font-medium text-3xl">Add new address</h3>{' '}
           <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
         </div>
+        <span className="text-xs font-extralight">
+          <span className="text-red-500">*</span> Indicates a required field
+        </span>
         <form
-          className="overflow-y-auto max-h-[80vh]"
+          className="overflow-y-auto max-h-[80vh] mt-3"
           onSubmit={(e) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
           <label className="block text-sm mb-2" htmlFor="firstName">
-            First Name
+            <span className="text-red-500">*</span> First Name
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -63,7 +67,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.firstName.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="lastName">
-            Last Name
+            <span className="text-red-500">*</span> Last Name
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -78,7 +82,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.lastName.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="address">
-            Address
+            <span className="text-red-500">*</span> Address
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -92,6 +96,20 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.address && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address.message}</p>
           )}
+          <label className="block font-light text-sm" htmlFor="additionalAddressInfo">
+            Additional address information
+          </label>
+          <input
+            className="w-full mb-4"
+            id="additionalAddressInfo"
+            type="text"
+            {...register('additionalAddressInfo', {})}
+          />
+          {errors.address && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">
+              {errors.additionalAddressInfo?.message}
+            </p>
+          )}
           <label className="block text-sm mb-2" htmlFor="apartment">
             Apartment / Floor / Suite
           </label>
@@ -100,7 +118,6 @@ const AddressModal = ({ open, setOpen }: Props) => {
             id="apartment"
             type="text"
             {...register('apartment', {
-              required: 'Please enter your apartment / floor / suite.',
               maxLength: { value: 50, message: 'Apartment / floor / suite is too long.' }
             })}
           />
@@ -108,7 +125,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.apartment.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="city">
-            City
+            <span className="text-red-500">*</span> City
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -151,7 +168,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
             </div>
             <div className="w-full">
               <label className="block text-sm mb-2" htmlFor="zipCode">
-                Zip code
+                <span className="text-red-500">*</span> Zip code
               </label>
               <input
                 className="mb-4 p-2"
@@ -175,7 +192,6 @@ const AddressModal = ({ open, setOpen }: Props) => {
             id="phone"
             type="number"
             {...register('phone', {
-              required: 'Please enter your phone',
               maxLength: { value: 50, message: 'Phone is too long.' }
             })}
           />
