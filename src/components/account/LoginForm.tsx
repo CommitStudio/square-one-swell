@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import swell from 'swell-js';
+import useSWR from 'swr';
 
 import Container from '~/layouts/Container';
 
@@ -11,8 +13,27 @@ type Inputs = {
   password: string;
 };
 
+swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
+
 const LoginForm = () => {
+  const router = useRouter();
+
+  const [doLogin, setDoLogin] = useState<Inputs | null>(null);
   const [isHidden, setIsHidden] = useState(true);
+
+  const { data, error } = useSWR(
+    doLogin,
+    async ({ email, password }) => {
+      const login = await swell.account.login(email, password);
+
+      if (!login) {
+        return { errors: true };
+      }
+
+      return { login };
+    },
+    { revalidateOnFocus: false }
+  );
 
   const {
     register,
@@ -20,13 +41,21 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  // Submit login form
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setDoLogin(data);
+  };
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Log in</h1>
+
+          {data?.errors === true && (
+            <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
+          )}
+
           <span className="text-sm">
             <span className="text-red-500">*</span> Indicates a required field
           </span>
