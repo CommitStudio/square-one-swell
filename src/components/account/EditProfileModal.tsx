@@ -30,8 +30,8 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-4 rounded w-80">
-        <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
+      <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
+        <div className="flex items-center justify-between mb-6 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Edit profile</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
@@ -40,11 +40,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <label className="block font-light text-sm" htmlFor="firstName">
+          <label className="block text-sm mb-2" htmlFor="firstName">
             First name
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="firstName"
             type="text"
             {...register('firstName', {
@@ -55,11 +55,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
           {errors.firstName && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.firstName.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="lastName">
+          <label className="block text-sm mb-2" htmlFor="lastName">
             Last Name
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="lastName"
             type="text"
             {...register('lastName', {
@@ -70,11 +70,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
           {errors.lastName && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.lastName.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="email">
+          <label className="block text-sm mb-2" htmlFor="email">
             E-mail
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="email"
             type="text"
             {...register('email', {
@@ -85,11 +85,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
           {errors.email && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.email.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="password">
+          <label className="block text-sm mb-2" htmlFor="password">
             Password
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="password"
             type="password"
             {...register('password', {
@@ -100,11 +100,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
           {errors.password && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="confirmPassword">
+          <label className="block text-sm mb-2" htmlFor="confirmPassword">
             Confirm password
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="confirmPassword"
             type="password"
             {...register('confirmPassword', {
@@ -116,7 +116,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
           )}
           <div className="flex items-center gap-4">
-            <label className="block font-light text-sm" htmlFor="createAccount">
+            <label className="block text-sm" htmlFor="createAccount">
               Create account
             </label>
             <input className="" id="createAccount" type="checkbox" {...register('createAccount')} />

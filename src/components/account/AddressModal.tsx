@@ -36,7 +36,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-4 rounded w-full">
+      <div className="bg-gray-200 p-6 rounded w-full">
         <div className="flex items-center justify-between mb-4 w-full">
           <h3 className="font-medium text-3xl">Add new address</h3>{' '}
           <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
@@ -47,11 +47,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <label className="block font-light text-sm" htmlFor="firstName">
+          <label className="block text-sm mb-2" htmlFor="firstName">
             First Name
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="firstName"
             type="text"
             {...register('firstName', {
@@ -62,11 +62,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.firstName && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.firstName.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="lastName">
+          <label className="block text-sm mb-2" htmlFor="lastName">
             Last Name
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="lastName"
             type="text"
             {...register('lastName', {
@@ -77,11 +77,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.lastName && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.lastName.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="address">
+          <label className="block text-sm mb-2" htmlFor="address">
             Address
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="address"
             type="text"
             {...register('address', {
@@ -92,11 +92,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.address && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="apartment">
+          <label className="block text-sm mb-2" htmlFor="apartment">
             Apartment / Floor / Suite
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="apartment"
             type="text"
             {...register('apartment', {
@@ -107,11 +107,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.apartment && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.apartment.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="city">
+          <label className="block text-sm mb-2" htmlFor="city">
             City
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="city"
             type="text"
             {...register('city', {
@@ -122,11 +122,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.city && <p className="text-red-600 text-xs -mt-4 mb-4">{errors.city.message}</p>}
           <div className="flex gap-4">
             <div className="w-full">
-              <label className="block font-light text-sm" htmlFor="country">
+              <label className="block text-sm mb-2" htmlFor="country">
                 Country
               </label>
               <select
-                className="w-full py-[2px]"
+                className="w-full py-2"
                 id="country"
                 {...register('country', {
                   required: 'Please enter your country',
@@ -150,11 +150,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
               )}
             </div>
             <div className="w-full">
-              <label className="block font-light text-sm" htmlFor="zipCode">
+              <label className="block text-sm mb-2" htmlFor="zipCode">
                 Zip code
               </label>
               <input
-                className="mb-4"
+                className="mb-4 p-2"
                 id="zipCode"
                 type="text"
                 {...register('zipCode', {
@@ -167,11 +167,11 @@ const AddressModal = ({ open, setOpen }: Props) => {
               )}
             </div>
           </div>
-          <label className="block font-light text-sm" htmlFor="phone">
+          <label className="block text-sm mb-2" htmlFor="phone">
             Phone
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="phone"
             type="number"
             {...register('phone', {
@@ -183,15 +183,10 @@ const AddressModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
           <div className="flex items-center gap-4">
-            <label className="block font-light text-sm" htmlFor="isDefaultAddress">
+            <label className="block text-sm" htmlFor="isDefaultAddress">
               Make this my default shipping address
             </label>
-            <input
-              className=""
-              id="isDefaultAddress"
-              type="checkbox"
-              {...register('isDefaultAddress')}
-            />
+            <input id="isDefaultAddress" type="checkbox" {...register('isDefaultAddress')} />
           </div>
           <button
             type="submit"

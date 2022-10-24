@@ -28,7 +28,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-4 rounded">
+      <div className="bg-gray-200 p-6 rounded md:w-[500px]">
         <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Add new payment method</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
@@ -38,11 +38,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <label className="block font-light text-sm" htmlFor="cardNumber">
+          <label className="block mb-2 text-sm" htmlFor="cardNumber">
             Card number
           </label>
           <input
-            className="w-full mb-4"
+            className="w-full mb-4 p-2"
             id="cardNumber"
             type="text"
             {...register('cardNumber', {
@@ -55,11 +55,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           )}
           <div className="flex gap-5 justify-between">
             <div>
-              <label className="block font-light text-sm" htmlFor="expiryDate">
+              <label className="block mb-2 text-sm" htmlFor="expiryDate">
                 Card expiry
               </label>
               <input
-                className="w-full mb-4"
+                className="w-full mb-4 p-2"
                 id="expiryDate"
                 type="date"
                 {...register('expiryDate', {
@@ -71,11 +71,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
               )}
             </div>
             <div>
-              <label className="block font-light text-sm" htmlFor="cvc">
+              <label className="block mb-2 text-sm" htmlFor="cvc">
                 CVC
               </label>
               <input
-                className="w-full mb-4"
+                className="w-full mb-4 p-2"
                 id="cvc"
                 type="number"
                 {...register('cvc', {
