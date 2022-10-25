@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import swell from 'swell-js';
-import useSWR from 'swr';
 
 import type { AccountInformation } from 'swell-js';
 
@@ -11,14 +10,22 @@ swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL
  * Login user and return account information
  ****************************************************************************/
 export const useLogin = (credentials: { email: string; password: string } | null) => {
-  const { data, error } = useSWR<unknown, Error>(
-    credentials,
-    async ({ email, password }: { email: string; password: string }) =>
-      swell.account.login(email, password),
-    { revalidateOnFocus: false }
-  );
+  const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
-  return { data, error };
+  useEffect(() => {
+    if (!credentials) {
+      return setUser(undefined);
+    }
+
+    const { email, password } = credentials;
+
+    swell.account
+      .login(email, password)
+      .then((account) => setUser(account))
+      .catch(() => setUser(null));
+  }, [credentials]);
+
+  return { user };
 };
 
 /*****************************************************************************

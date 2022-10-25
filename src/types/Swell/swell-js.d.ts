@@ -2,7 +2,7 @@ declare module 'swell-js' {
   export function init(store, key, opt = {});
 
   interface Account {
-    login(email, password): Promise<unknown>;
+    login(email, password): Promise<AccountInformation | null>;
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
   }
