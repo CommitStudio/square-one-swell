@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useStore } from '~/hooks/useStore';
+
 import ProductList from '../ProductList';
+
+import { useStore } from '~/hooks/useStore';
 
 type SortProps = {
   products: Product[];
@@ -49,7 +51,7 @@ const Sort = ({ products }: SortProps) => {
 
   useEffect(() => {
     sortProducts();
-  }, [sortProducts, sortParam]);
+  }, [sortParam]);
 
   return <ProductList threeColumns products={sortProducts()} />;
 };

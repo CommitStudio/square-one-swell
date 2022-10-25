@@ -16,7 +16,6 @@ import keywords from '~/data/keywords.json';
 import { useStore } from '~/hooks/useStore';
 
 import Store from '~/lib/Store';
-import Sort from '~/components/products/Sort';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
