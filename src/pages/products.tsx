@@ -16,6 +16,7 @@ import keywords from '~/data/keywords.json';
 import { useStore } from '~/hooks/useStore';
 
 import Store from '~/lib/Store';
+import Sort from '~/components/products/Sort';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
@@ -31,51 +32,8 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const mainRoute = state.breadcrumbMainRoute;
 
   console.log('ORIGINAL', products);
-  // ######################################################################################################################
   const sortParam = state.sortBy;
 
-  const sortProducts = () => {
-    const sortedProducts = [...products];
-
-    sortParam === 'Min. Price' &&
-      sortedProducts.sort((a, b) => {
-        return a.price - b.price;
-      });
-
-    sortParam === 'Max. Price' &&
-      sortedProducts.sort((a, b) => {
-        return b.price - a.price;
-      });
-
-    sortParam === 'Older' &&
-      sortedProducts.sort((a, b) => {
-        return Date.parse(a.dateCreated) - Date.parse(b.dateCreated);
-      });
-
-    sortParam === 'Newer' &&
-      sortedProducts.sort((a, b) => {
-        return Date.parse(b.dateCreated) - Date.parse(a.dateCreated);
-      });
-
-    sortParam === 'A to Z' &&
-      sortedProducts.sort((a, b) => {
-        return a.name.toLowerCase().charCodeAt(0) - b.name.toLowerCase().charCodeAt(0);
-      });
-
-    sortParam === 'Z to A' &&
-      sortedProducts.sort((a, b) => {
-        return b.name.toLowerCase().charCodeAt(0) - a.name.toLowerCase().charCodeAt(0);
-      });
-
-    console.log('SORTED', sortedProducts);
-    return sortedProducts;
-  };
-
-  useEffect(() => {
-    sortProducts();
-  }, [sortProducts, sortParam]);
-
-  // ######################################################################################################################
   return (
     <>
       <Head
@@ -91,10 +49,11 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} pagination={pagination} products={products} />
       {products.length > 0 ? (
         <>
-          <ProductList
-            threeColumns
-            products={sortParam === 'Relevant' ? products : sortProducts()}
-          />
+          {sortParam === 'Relevant' ? (
+            <ProductList threeColumns products={products} />
+          ) : (
+            <Sort products={products} />
+          )}
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center" pagination={pagination} />
         </>
