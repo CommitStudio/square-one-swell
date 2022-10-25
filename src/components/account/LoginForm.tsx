@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
+import { useLogin } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -12,7 +14,10 @@ type Inputs = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const [isHidden, setIsHidden] = useState(true);
+  const [loginCredentials, setLoginCredentials] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -20,13 +25,28 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  // Perform login when credentials are set
+  const { user } = useLogin(loginCredentials);
+
+  // If login is successful, redirect to the account page
+  if (user) {
+    void router.push('/account/orders');
+    return null;
+  }
+
+  // Submit login form
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setLoginCredentials(data);
+  };
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Log in</h1>
+          {user === null && (
+            <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
+          )}
           <span className="text-sm">
             <span className="text-red-500">*</span> Indicates a required field
           </span>

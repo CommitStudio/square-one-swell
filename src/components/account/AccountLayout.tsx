@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
+import { useUserLogged, useLogout } from '~/hooks/useSwellAccount';
+
 import Container from '~/layouts/Container';
 
 type Props = {
@@ -11,13 +13,29 @@ type Props = {
 
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
+  const { data } = useUserLogged();
+  const handleLogout = useLogout();
 
+  // User not logged, redirect to login page
+  if (data === null) {
+    void router.push('/account/login');
+    return null;
+  }
+
+  // Waiting for logged user data
+  if (!data) {
+    return null;
+  }
+
+  // User logged, render account page
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
-          <h4 className="font-semibold text-xl mb-2">John Doe</h4>
-          <p className="mb-2">john_doe@gmail.com</p>
+          <h4 className="font-semibold text-xl mb-2">
+            {data.first_name} {data.last_name}
+          </h4>
+          <p className="mb-2">{data.email}</p>
           <button className="flex items-center gap-1 hover:text-red-600 mb-4">
             <TbEdit />
             Edit profile
@@ -25,7 +43,7 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/orders">
             <a
               className={`block ${
-                router.pathname.includes('account/orders') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/orders') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Orders & Returns
@@ -34,7 +52,9 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/subscriptions">
             <a
               className={`block ${
-                router.pathname.includes('account/subscriptions') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/subscriptions')
+                  ? 'font-semibold bg-gray-100'
+                  : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Subscriptions
@@ -43,7 +63,7 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/addresses">
             <a
               className={`block ${
-                router.pathname.includes('account/addresses') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/addresses') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
               Addresses
@@ -52,13 +72,18 @@ const AccountLayout = ({ children }: Props) => {
           <Link href="/account/payments">
             <a
               className={`block ${
-                router.pathname.includes('account/payments') ? 'font-semibold bg-gray-100' : ''
+                router.pathname.includes('/account/payments') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2`}
             >
               Payment methods
             </a>
           </Link>
-          <button className="flex items-center gap-1 hover:text-red-600 mt-10">
+          <button
+            className="flex items-center gap-1 hover:text-red-600 mt-10"
+            onClick={() => {
+              void handleLogout();
+            }}
+          >
             <HiOutlineLogout />
             Log out
           </button>
