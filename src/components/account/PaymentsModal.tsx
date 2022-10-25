@@ -43,7 +43,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <label className="block font-light text-sm" htmlFor="cardName">
+          <label className="block text-sm" htmlFor="cardName">
             <span className="text-red-500">*</span> Name on card
           </label>
           <input
@@ -109,7 +109,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <label className="block font-light text-sm" htmlFor="isDefaultCard">
+            <label className="block text-sm" htmlFor="isDefaultCard">
               Use as default card
             </label>
             <input className="" id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />

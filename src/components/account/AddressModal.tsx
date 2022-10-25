@@ -96,13 +96,12 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.address && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address.message}</p>
           )}
-          <label className="block font-light text-sm" htmlFor="additionalAddressInfo">
+          <label className="block text-sm mb-2" htmlFor="additionalAddressInfo">
             Additional address information
           </label>
-          <input
+          <textarea
             className="w-full mb-4"
             id="additionalAddressInfo"
-            type="text"
             {...register('additionalAddressInfo', {})}
           />
           {errors.address && (

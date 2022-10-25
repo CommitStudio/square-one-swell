@@ -31,11 +31,15 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
   return (
     <Modal open={open} setOpen={setOpen}>
       <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
-        <div className="flex items-center justify-between mb-6 gap-x-4 w-full">
+        <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Edit profile</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
+        <span className="text-xs font-extralight">
+          <span className="text-red-500">*</span> Indicates a required field
+        </span>
         <form
+          className="mt-3"
           onSubmit={(e) => {
             void handleSubmit(onSubmit)(e);
           }}
@@ -86,7 +90,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.email.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="password">
-            Password
+            <span className="text-red-500">*</span> Password
           </label>
           <input
             className="w-full mb-4 p-2"
@@ -101,7 +105,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="confirmPassword">
-            Confirm password
+            <span className="text-red-500">*</span> Confirm password
           </label>
           <input
             className="w-full mb-4 p-2"
