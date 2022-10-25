@@ -13,7 +13,7 @@ const Login = () => {
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/account/login`}
       />
-      <LoginForm />;
+      <LoginForm />
     </>
   );
 };
