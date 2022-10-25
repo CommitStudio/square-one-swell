@@ -5,13 +5,15 @@ type Store = {
   isFilterOpen: boolean;
   breadcrumbSelectedCategory: string;
   breadcrumbMainRoute: string;
+  sortBy: string;
 };
 
 export const store = atom({
   testVariable: false, // Here we need to initialize de variable we want on the store, the testVariable is just as example it may be removed
   isFilterOpen: false,
   breadcrumbSelectedCategory: '',
-  breadcrumbMainRoute: ''
+  breadcrumbMainRoute: '',
+  sortBy: 'Relevant'
 });
 
 export function useStore(): {
