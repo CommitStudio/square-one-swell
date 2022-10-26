@@ -1,71 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { variants } from 'tailwind.config';
+import { useStore } from '~/hooks/useStore';
 
 interface ProductProp {
   product: Product;
 }
 
 const ProductOptions = ({ product }: ProductProp) => {
-  const [checkingOptions, setCheckingOptions] = useState({});
-  console.log(product.variants, 'TOTAL PRODUCT VARIANTS');
-  console.log('*************************************************');
-  console.log('*************************************************');
-  console.log(product.options, 'TOTAL PRODUCT OPTIONS');
-  let activeVariants = [];
-  let filteringParams = {};
+  // Declare useStates
+  const [selectedIds, setSelectedIds] = useState({});
+  const { state, updateState } = useStore();
 
-  const checkAvailability = (value, option) => {
-    console.log(option);
-    activeVariants = [];
+  // Save only the variants with active states
+  const activeProductVariants = product.variants?.filter((variant) => variant.active);
+  // To compare selected ids with the sets of active ids we transform the object of selected into an array
+  const availableIdsArr = Object.entries(selectedIds).map(([key, value]) => value);
 
-    filteringParams = { ...filteringParams, [option.label]: value.id };
-    const filterinParamsArrayOfIds = Object.values(filteringParams);
-
-    product.variants.forEach((variant) => {
-      const multipleExist = filterinParamsArrayOfIds.every((value) => {
-        return variant?.value_ids?.includes(value);
-      });
-      multipleExist && variant.active ? console.log(variant) : '';
-    });
-
-    console.log(
-      filterinParamsArrayOfIds.map((id) => {
-        return product.variants.map((variant) => {
-          if (
-            variant.value_ids.every((optionId) => {
-              return optionId == id;
-            })
-          ) {
-            return variant;
-          }
+  // Declare useEffect to 'listen' for variant selections
+  useEffect(() => {
+    // When the all options have a item clicked we ask if the selected ids are the same in the active variant
+    if (availableIdsArr.length === product.options?.length) {
+      // Declare a variable to save the value of the comparison
+      const arrMap = activeProductVariants?.map((variant) => {
+        return variant.value_ids.every((id) => {
+          return availableIdsArr?.includes(id);
         });
-      })
-    );
-
-    // product.variants?.map((variant) => {
-    //   if (
-    //     variant.value_ids.find((optionId) => {
-    //       return optionId == value.id;
-    //     }) &&
-    //     variant.active
-    //   ) {
-    //     activeVariants.push(variant);
-    //   }
-    // });
-
-    console.log(filterinParamsArrayOfIds);
-    console.log(activeVariants);
-    console.log(checkingOptions, 'CHECKING OPTIONS');
-  };
-
-  // console.log(activeVariants);
-
-  // console.log(product.name, product.variants, product.variants[0].value_ids);
-
-  // console.log('==================');
-  // console.log(product.options[0]);
-  // console.log('==================');
+      });
+      // Set global state accordingly if its active or not
+      if (arrMap?.includes(true)) {
+        updateState({ ...state, isVariantActive: true });
+      } else {
+        updateState({ ...state, isVariantActive: false });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedIds]);
 
   return (
     <>
@@ -79,10 +48,12 @@ const ProductOptions = ({ product }: ProductProp) => {
                   {option.values.map((value, index) => {
                     return (
                       <li
-                        className="border border-secondary px-2 cursor-pointer hover:bg-secondary hover:text-primary"
+                        className={`border border-secondary px-2 cursor-pointer hover:bg-secondary hover:text-primary ${
+                          availableIdsArr.includes(value.id) ? 'bg-secondary text-primary' : ''
+                        }`}
                         key={index}
                         onClick={() => {
-                          checkAvailability(value, option);
+                          setSelectedIds({ ...selectedIds, [option.label]: value.id });
                         }}
                       >
                         {value.name}
