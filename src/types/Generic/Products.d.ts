@@ -23,12 +23,13 @@ interface ProductImage {
 interface ProductOption {
   label: string;
   active: boolean;
-  values: string[];
+  values: { id: string; name: string }[];
 }
 
 interface Variant {
   name: string;
   active: boolean;
+  value_ids: string[];
 }
 
 interface GenericProductsList {
