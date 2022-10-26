@@ -1,5 +1,3 @@
-import ProductVariants from './ProductVariants';
-
 import AddToCart from '~/components/product-detail/ProductInfo/AddToCart';
 import ProductCategories from '~/components/product-detail/ProductInfo/ProductCategories';
 import ProductDescription from '~/components/product-detail/ProductInfo/ProductDescription';
@@ -22,7 +20,6 @@ const ProductInfo = ({ product, categories }: ProductProp) => {
       <ProductDescription description={product.description} />
       <ProductPriceOptions price={product.price} />
       <ProductOptions product={product} />
-      <ProductVariants product={product} />
       <AddToCart />
       <ProductCategories product={product} categories={categories} />
       <ProductSocialMedia />
