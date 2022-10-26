@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
 
   return {
-    props: { categories, products, pagination }
+    props: { categories, products, pagination, options }
   };
 };
 
