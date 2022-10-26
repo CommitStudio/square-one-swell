@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
+
+import EditProfileModal from './EditProfileModal';
 
 import { useUserLogged, useLogout } from '~/hooks/useSwellAccount';
 
@@ -13,6 +16,7 @@ type Props = {
 
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const { data } = useUserLogged();
   const handleLogout = useLogout();
 
@@ -36,10 +40,14 @@ const AccountLayout = ({ children }: Props) => {
             {data.first_name} {data.last_name}
           </h4>
           <p className="mb-2">{data.email}</p>
-          <button className="flex items-center gap-1 hover:text-red-600 mb-4">
+          <button
+            className="flex items-center gap-1 hover:text-red-600 mb-4"
+            onClick={() => setOpen(true)}
+          >
             <TbEdit />
             Edit profile
           </button>
+          <EditProfileModal open={open} setOpen={setOpen} />
           <Link href="/account/orders">
             <a
               className={`block ${

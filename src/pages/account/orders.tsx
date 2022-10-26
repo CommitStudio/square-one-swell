@@ -1,9 +1,10 @@
 import Link from 'next/link';
+
 import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 
-const orders = () => {
+const Orders = () => {
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Orders & Returns</h4>
@@ -18,4 +19,4 @@ const orders = () => {
   );
 };
 
-export default orders;
+export default Orders;
