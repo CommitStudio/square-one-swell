@@ -40,7 +40,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
         title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
         breadcrumb={<Breadcrumb />}
       />
-      <Filter categories={categories} pagination={pagination} />
+      <Filter categories={categories} pagination={pagination} products={products} />
       {products.length > 0 ? (
         <>
           <ProductList threeColumns products={products} />
@@ -58,7 +58,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
 
   const categories = await Store.getCategories();
-
+  const options = await Store.getOptions();
+  console.log(options);
   const { products, pagination } = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
@@ -68,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
 
   return {
-    props: { categories, products, pagination }
+    props: { categories, products, pagination, options }
   };
 };
 

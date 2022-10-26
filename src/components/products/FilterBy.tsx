@@ -3,14 +3,18 @@ import { useRouter } from 'next/router';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { toPascalCase } from '../Breadcrumb';
+
 import { useStore } from '~/hooks/useStore';
 
-interface FilterByProps {
+export interface FilterItem {
+  name: string;
+  slug: { minPrice?: number; maxPrice?: number | string; category?: string };
+}
+
+export interface FilterByProps {
   title: string;
-  items: {
-    name: string;
-    slug: { minPrice?: number; maxPrice?: number | string; category?: string };
-  }[];
+  items: FilterItem[];
   pathname: string;
 }
 
@@ -41,7 +45,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                     : 'text-gray-500'
                 }`}
               >
-                {item.name}
+                {title != 'Size' ? toPascalCase(item.name) : item.name}
               </a>
             </div>
           </Link>
