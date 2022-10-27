@@ -30,9 +30,6 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
 
-  // console.log('ORIGINAL', products);
-  const sortParam = state.sortBy;
-
   return (
     <>
       <Head
@@ -48,11 +45,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} pagination={pagination} products={products} />
       {products.length > 0 ? (
         <>
-          {sortParam === 'Relevant' ? (
-            <ProductList threeColumns products={products} />
-          ) : (
-            <Sort products={products} />
-          )}
+          <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center" pagination={pagination} />
         </>
