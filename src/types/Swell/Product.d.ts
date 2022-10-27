@@ -73,6 +73,7 @@ interface FilterParams {
   category?: string;
   slug?: string;
   page?: number;
+  sort?: string;
 }
 
 interface CategoryIndex {

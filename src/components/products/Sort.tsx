@@ -45,7 +45,7 @@ const Sort = ({ products }: SortProps) => {
         return b.name.toLowerCase().charCodeAt(0) - a.name.toLowerCase().charCodeAt(0);
       });
 
-    console.log('SORTED', sortedProducts);
+    // console.log('SORTED', sortedProducts);
     return sortedProducts;
   };
 
