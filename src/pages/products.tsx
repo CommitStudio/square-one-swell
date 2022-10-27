@@ -30,7 +30,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
 
-  console.log('ORIGINAL', products);
+  // console.log('ORIGINAL', products);
   const sortParam = state.sortBy;
 
   return (
@@ -63,7 +63,8 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
+  const { maxProducts, minPrice, maxPrice, category, page, sort }: FilterParams = query;
+  console.log(query);
 
   const categories = await Store.getCategories();
 
@@ -71,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
     page: Number(page),
+    sort: sort,
     minPrice: Number(minPrice),
     category: category
   });

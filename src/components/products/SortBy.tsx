@@ -1,4 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
 
@@ -7,20 +9,22 @@ import { v4 as uuidv4 } from 'uuid';
 import { useStore } from '~/hooks/useStore';
 
 const sortParams = [
-  { value: 'Relevant' },
-  { value: 'Min. Price' },
-  { value: 'Max. Price' },
-  { value: 'Newer' },
-  { value: 'Older' },
-  { value: 'A to Z' },
-  { value: 'Z to A' }
+  // { value: 'Relevant' },
+  // { value: 'Min. Price' },
+  // { value: 'Max. Price' },
+  // { value: 'Newer' },
+  // { value: 'Older' },
+  { value: 'A to Z', slug: { sort: 'name asc' } },
+  { value: 'Z to A', slug: { sort: 'name desc' } }
 ];
 
 const SortBy = () => {
+  const router = useRouter();
+
   const [selected, setSelected] = useState(sortParams[0]);
   const { state } = useStore();
   const { updateStateProp } = useStore();
-  console.log(state.sortBy);
+  // console.log(state.sortBy);
 
   return (
     <div className="flex items-center">
@@ -53,14 +57,18 @@ const SortBy = () => {
                   >
                     {({ selected }) => (
                       <>
-                        <span
+                        <Link
+                          href={{
+                            pathname: 'products',
+                            query: { ...router.query, ...param.slug }
+                          }}
                           onClick={() => updateStateProp('sortBy', param.value)}
                           className={`block truncate ${
                             selected ? 'font-bold text-secondary' : 'font-normal'
                           }`}
                         >
                           {param.value}
-                        </span>
+                        </Link>
                       </>
                     )}
                   </Listbox.Option>
