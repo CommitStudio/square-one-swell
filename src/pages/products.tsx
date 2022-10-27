@@ -10,7 +10,6 @@ import { NoResults } from '~/components/globals/NoResults';
 import Pagination from '~/components/globals/Pagination';
 import Filter from '~/components/products/Filter';
 
-import Sort from '~/components/products/Sort';
 import keywords from '~/data/keywords.json';
 
 import { useStore } from '~/hooks/useStore';
@@ -30,9 +29,6 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
 
-  // console.log('ORIGINAL', products);
-  const sortParam = state.sortBy;
-
   return (
     <>
       <Head
@@ -48,11 +44,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} pagination={pagination} />
       {products.length > 0 ? (
         <>
-          {sortParam === 'Relevant' ? (
-            <ProductList threeColumns products={products} />
-          ) : (
-            <Sort products={products} />
-          )}
+          <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
         </>
       ) : (
