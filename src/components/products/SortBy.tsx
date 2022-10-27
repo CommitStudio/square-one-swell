@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 const sortParams = [
   { value: 'Choose one' },
-  { value: 'Min. Price', slug: { sort: 'price desc' } },
-  { value: 'Max. Price', slug: { sort: 'price asc' } },
+  { value: 'Min. Price', slug: { sort: 'price asc' } },
+  { value: 'Max. Price', slug: { sort: 'price desc' } },
   { value: 'A to Z', slug: { sort: 'name asc' } },
   { value: 'Z to A', slug: { sort: 'name desc' } },
   { value: 'Older', slug: { sort: 'date_created asc' } },
