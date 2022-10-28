@@ -56,10 +56,10 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
           .map((item: string) => {
             return { name: item, slug: { category: item } };
           });
-        // object expected in Filter (o FilterBy (fijarese)) component
+        // object expected in FilterBy component
         filters[label] = {
           title: label,
-          pathname: '', //ver que poner aca
+          pathname: '/products',
           items: cleanList
         };
       }
@@ -116,15 +116,15 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
       >
         {/* FilterBy CATEGORIES info is coming from the store */}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
-        {/*FilterBy OPTIONS of the products, coming form the store */}
+        {/*FilterBy PRICE*/}
+        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+        {/*FilterBy OPTIONS of the products, coming form the store FILTER NOT WORKING YET. JUST SHOWING THE OPTIONS*/}
         {Object.keys(optionsList).forEach((key: string) => {
           const title = key;
           const items: FilterItem[] = optionsList[title].items;
           optionsRendered.push(<FilterBy title={title} items={items} pathname={'products'} />);
         })}
         {optionsRendered}
-        {/*FilterBy PRICE*/}
-        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
       </div>
     </Container>
   );
