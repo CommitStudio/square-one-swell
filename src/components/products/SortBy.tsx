@@ -11,8 +11,8 @@ const sortParams = [
   { value: 'Choose one' },
   { value: 'Min. Price', slug: { sort: 'price asc' } },
   { value: 'Max. Price', slug: { sort: 'price desc' } },
-  { value: 'A to Z', slug: { sort: 'name asc' } },
-  { value: 'Z to A', slug: { sort: 'name desc' } },
+  { value: 'A - Z', slug: { sort: 'name asc' } },
+  { value: 'Z - A', slug: { sort: 'name desc' } },
   { value: 'Older', slug: { sort: 'date_created asc' } },
   { value: 'Newer', slug: { sort: 'date_created desc' } },
   { value: 'Remove' }
@@ -43,7 +43,7 @@ const SortBy = () => {
             </Listbox.Button>
             <Transition
               as={Fragment}
-              leave="transition ease-in duration-100"
+              leave="transition ease-in- duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
@@ -68,6 +68,7 @@ const SortBy = () => {
                               pathname: 'products',
                               query: { ...router.query, ...param.slug }
                             }}
+                            scroll={false}
                           >
                             <span
                               onClick={() => {
@@ -87,16 +88,17 @@ const SortBy = () => {
                             href={{
                               pathname: 'products'
                             }}
-                            // className={``}
+                            scroll={false}
                           >
                             <span
                               onClick={() => {
                                 setSelected(sortParams[0]);
                                 setIsVisible(false);
+                                setIsOpen(false);
                               }}
                               className={`flex items-center truncate py-2 px-4 font-normal ${
-                                isVisible ? 'block' : 'hidden'
-                              }`}
+                                !isOpen ? 'hidden' : ''
+                              } ${isVisible ? 'block' : 'hidden'}`}
                             >
                               {param.value}
                               <MdOutlineRemoveCircle className="text-red-600 ml-1" />
