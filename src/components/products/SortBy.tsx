@@ -55,9 +55,7 @@ const SortBy = () => {
                 {sortParams.slice(1).map((param) => (
                   <Listbox.Option
                     key={uuidv4()}
-                    className={
-                      'relative select-none cursor-pointer text-gray-500 hover:text-secondary'
-                    }
+                    className={'relative select-none cursor-pointer text-gray-500'}
                     value={param}
                   >
                     {({ selected }) => (
@@ -76,7 +74,7 @@ const SortBy = () => {
                                 setIsVisible(true);
                                 setIsOpen(false);
                               }}
-                              className={`block truncate py-2 px-4 ${
+                              className={`block truncate py-2 px-4 hover:text-secondary ${
                                 selected ? `font-bold text-secondary` : 'font-normal'
                               }`}
                             >
