@@ -45,7 +45,7 @@ const SortBy = () => {
                   <Listbox.Option
                     key={uuidv4()}
                     className={({ active }) =>
-                      `relative select-none py-2 px-4 cursor-pointer ${
+                      `relative select-none cursor-pointer ${
                         active ? 'bg-amber-100 text-amber-900' : 'text-gray-500'
                       }`
                     }
@@ -64,7 +64,7 @@ const SortBy = () => {
                               onClick={() => {
                                 setSelected(param);
                               }}
-                              className={`block truncate ${
+                              className={`block truncate py-2 px-4 ${
                                 selected ? 'font-bold text-secondary' : 'font-normal'
                               }`}
                             >
@@ -81,7 +81,7 @@ const SortBy = () => {
                               onClick={() => {
                                 setSelected(sortParams[0]);
                               }}
-                              className={'block truncate font-normal'}
+                              className={'block truncate py-2 px-4 font-normal'}
                             >
                               {param.value}
                             </span>
