@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
+import { MdOutlineRemoveCircle } from 'react-icons/md';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -19,8 +20,8 @@ const sortParams = [
 
 const SortBy = () => {
   const router = useRouter();
-
   const [selected, setSelected] = useState(sortParams[0]);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="flex items-center">
@@ -40,14 +41,12 @@ const SortBy = () => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {sortParams.slice(1).map((param) => (
                   <Listbox.Option
                     key={uuidv4()}
                     className={({ active }) =>
-                      `relative select-none cursor-pointer ${
-                        active ? 'bg-amber-100 text-amber-900' : 'text-gray-500'
-                      }`
+                      `relative select-none cursor-pointer ${!active && 'text-gray-500'}`
                     }
                     value={param}
                   >
@@ -63,6 +62,7 @@ const SortBy = () => {
                             <span
                               onClick={() => {
                                 setSelected(param);
+                                setIsVisible(true);
                               }}
                               className={`block truncate py-2 px-4 ${
                                 selected ? 'font-bold text-secondary' : 'font-normal'
@@ -76,14 +76,19 @@ const SortBy = () => {
                             href={{
                               pathname: 'products'
                             }}
+                            // className={``}
                           >
                             <span
                               onClick={() => {
                                 setSelected(sortParams[0]);
+                                setIsVisible(false);
                               }}
-                              className={'block truncate py-2 px-4 font-normal'}
+                              className={`flex items-center truncate py-2 px-4 font-normal ${
+                                isVisible ? 'block' : 'hidden'
+                              }`}
                             >
                               {param.value}
+                              <MdOutlineRemoveCircle className="text-red-600 ml-1" />
                             </span>
                           </Link>
                         )}
