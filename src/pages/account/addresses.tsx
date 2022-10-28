@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FaRegAddressCard } from 'react-icons/fa';
 
 import AccountLayout from '~/components/account/AccountLayout';
+import AddressCard from '~/components/account/AddressCard';
 import AddressModal from '~/components/account/AddressModal';
 
 const Addresses = () => {
@@ -11,6 +12,7 @@ const Addresses = () => {
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Addresses</h4>
+      <AddressCard />
       <p className="text-gray-400">There are no addresses associated with this account.</p>
 
       <button
