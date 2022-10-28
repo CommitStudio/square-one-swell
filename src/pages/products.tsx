@@ -56,7 +56,6 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { maxProducts, minPrice, maxPrice, category, page, sort }: FilterParams = query;
-  console.log(query);
 
   const categories = await Store.getCategories();
 
