@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
-import { FilterBy, FilterItem, FilterByProps } from './FilterBy';
+import { FilterBy } from './FilterBy';
 
 import { useStore } from '~/hooks/useStore';
 
@@ -27,53 +28,10 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
     { name: '+$40', slug: { minPrice: 40, maxPrice: '' } }
   ];
 
-  type OptionsList = {
-    [k: string]: string[];
-  };
-  type OptionsFilter = { [k: string]: FilterByProps };
-
-  function getOptionsFilter(products: Product[]): OptionsFilter {
-    const optionList: OptionsList = {};
-    const filters: OptionsFilter = {};
-
-    products.forEach((product: Product) => {
-      const options = product.options;
-      options?.map((option) => {
-        //if the option doesn't exist under Option, create it
-        if (!(option.label in optionList)) {
-          optionList[option.label] = [];
-        }
-        //push the values for each label.
-        optionList[option.label].push(...option.values);
-      });
-      //remove duplicates values and convert result to the object expected in the component
-      for (const label in optionList) {
-        const cleanList = optionList[label]
-          .filter((value, index, self) => {
-            return self.indexOf(value) === index;
-          })
-          // generate clean list
-          .map((item: string) => {
-            return { name: item, slug: { category: item } };
-          });
-        // object expected in FilterBy component
-        filters[label] = {
-          title: label,
-          pathname: '/products',
-          items: cleanList
-        };
-      }
-    });
-    return filters;
-  }
-
-  const optionsList = getOptionsFilter(products);
-  const optionsRendered: JSX.Element[] = [];
-
   return (
     <Container className="pt-10">
-      <div className="md:flex md:justify-between">
-        <div className="flex">
+      <div className="flex md:flex-row md:justify-between">
+        <div className="flex flex-col md:flex-row align-left md:items-center">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
             className="flex items-center"
@@ -87,7 +45,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
           </button>
           <button
             onClick={() => setIsSearchOpen((prev) => !prev)}
-            className="flex items-center ml-4"
+            className="flex items-center md:ml-4 my-4"
           >
             Search
             {isSearchOpen ? (
@@ -96,35 +54,35 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               <BsSearch className="ml-2" />
             )}
           </button>
-          <div
-            className={` items-center overflow-hidden transition-all ease-in-out duration-300 origin-left ${
-              isSearchOpen ? 'max-h-10 ' : 'max-h-0'
-            }`}
-          >
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full ml-4  outline-none text-l focus:border-b-secondary"
-            />
+          <div className="">
+            <Transition
+              as={Fragment}
+              show={isSearchOpen}
+              enter="transition-all ease-in-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition-all ease-in-out duration-300"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <input
+                type="text"
+                placeholder="Search..."
+                className={'md:ml-4 my-2 px-4 text-l border border-solid border-gray-300 rounded'}
+              />
+            </Transition>
           </div>
         </div>
       </div>
       <hr className="my-6" />
       <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all duration-500 ease-in-out mb-10
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
       >
         {/* FilterBy CATEGORIES info is coming from the store */}
         <FilterBy title="Categories" items={categories} pathname={'products'} />
         {/*FilterBy PRICE*/}
         <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
-        {/*FilterBy OPTIONS of the products, coming form the store FILTER NOT WORKING YET. JUST SHOWING THE OPTIONS*/}
-        {Object.keys(optionsList).forEach((key: string) => {
-          const title = key;
-          const items: FilterItem[] = optionsList[title].items;
-          optionsRendered.push(<FilterBy title={title} items={items} pathname={'products'} />);
-        })}
-        {optionsRendered}
       </div>
     </Container>
   );
