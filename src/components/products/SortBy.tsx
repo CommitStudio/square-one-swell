@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
-import { MdOutlineRemoveCircle } from 'react-icons/md';
+import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -25,8 +25,9 @@ const SortBy = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex items-center">
-      <span className="ml-10 mr-2 text-sm">Sort by:</span>
+    <div className="flex items-center ml-10">
+      <MdSort className="text-xl" />
+      <span className="ml-1 mr-2 text-sm">Sort by:</span>
       <div className="min-w-fit w-32">
         <Listbox value={selected} onChange={setSelected}>
           <div className="relative">
