@@ -19,6 +19,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
+  const [productAddedMessage, setProductAddedMessage] = useState('');
   const { state, updateStateProp } = useStore();
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       }))
     });
     updateStateProp('triggerFetchCart', !state.triggerFetchCart);
+    setProductAddedMessage(`${productAmount} x ${product.name} added to cart`);
   };
 
   return (
@@ -93,6 +95,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         </button>
       </div>
       {pleaseSelectAllOptions && <p className="text-red-500">{pleaseSelectAllOptions}</p>}
+      {productAddedMessage && <p className="text-green">{productAddedMessage}</p>}
     </>
   );
 };
