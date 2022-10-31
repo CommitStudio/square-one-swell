@@ -1,7 +1,5 @@
 import { GetServerSideProps } from 'next';
 
-import { useEffect } from 'react';
-
 import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
 import ProductList from '~/components/ProductList';
