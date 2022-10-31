@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Hero from '~/components/Hero';
 import Head from '~/components/globals/Head';
@@ -13,7 +13,6 @@ import keywords from '~/data/keywords.json';
 import data from '~/data/product-detail.json';
 import Container from '~/layouts/Container';
 import Store from '~/lib/Store';
-import { swell as initializedSwell } from '~/lib/SwellClient';
 
 const { test_product } = data;
 
@@ -27,14 +26,6 @@ interface ProductProp {
 
 const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductProp) => {
   const router = useRouter();
-
-  useEffect(() => {
-    const getCart = async () => {
-      const cart = (await initializedSwell.cart.get()) as Cart;
-      console.log(cart);
-    };
-    getCart().catch((err) => console.log(err));
-  }, []);
 
   return (
     <>

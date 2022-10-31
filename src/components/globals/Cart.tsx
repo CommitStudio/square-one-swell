@@ -11,24 +11,17 @@ type Props = {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-interface initializedSwell {
-  cart: {
-    get: () => Promise<Cart>;
-    removeItem: (cartItemId: string) => Promise<void>;
-  };
-}
-
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { state, updateStateProp } = useStore();
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [cart, setCart] = useState<initializedSwell.Cart | null>(null);
+
   const closeCart = () => {
     setIsCartOpen(false);
   };
-  console.log(initializedSwell.cart.get());
 
   useEffect(() => {
     const getCart = async () => {
-      const cart: Cart = (await initializedSwell.cart.get()) as Cart;
+      const cart = await initializedSwell.cart.get();
       setCart(cart);
     };
     getCart().catch((err) => console.log(err));
