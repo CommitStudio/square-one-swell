@@ -30,13 +30,14 @@ const SortBy = () => {
   const [selected, setSelected] = useState(selectedParam || sortParams[0]);
   const [isOpen, setIsOpen] = useState(false);
 
+  /*****************************************************************************
+   * Handle sort changes
+   ****************************************************************************/
   const handleFilter = (param: SortParam) => {
     setSelected(param);
-
-    void router.push({
-      pathname: router.pathname,
-      query: { ...router.query, sort: param.sort }
-    });
+    const query = { ...router.query };
+    param.value !== sortParams[0].value ? (query.sort = param.sort) : delete query.sort;
+    void router.push({ pathname: router.pathname, query });
   };
 
   return (
@@ -73,9 +74,6 @@ const SortBy = () => {
                     >
                       {({ selected }) => (
                         <span
-                          onClick={() => {
-                            handleFilter(param);
-                          }}
                           className={`block truncate py-2 px-4 hover:text-secondary ${
                             selected ? `font-bold text-secondary` : 'font-normal'
                           }`}
@@ -85,6 +83,16 @@ const SortBy = () => {
                       )}
                     </Listbox.Option>
                   ))}
+
+                  <Listbox.Option
+                    key={uuidv4()}
+                    className={'relative select-none cursor-pointer text-gray-500'}
+                    value={sortParams[0]}
+                  >
+                    <span className="block truncate py-2 px-4 hover:text-secondary font-normal">
+                      Remove
+                    </span>
+                  </Listbox.Option>
                 </Listbox.Options>
               </Transition>
             ) : null}
