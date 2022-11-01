@@ -1,5 +1,4 @@
 import { Listbox, Transition } from '@headlessui/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
@@ -7,37 +6,48 @@ import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const sortParams = [
+type SortParam = {
+  value: string;
+  sort?: string;
+};
+
+const sortParams: SortParam[] = [
   { value: 'Choose one' },
-  { value: 'Min. Price', slug: { sort: 'price asc' } },
-  { value: 'Max. Price', slug: { sort: 'price desc' } },
-  { value: 'A - Z', slug: { sort: 'name asc' } },
-  { value: 'Z - A', slug: { sort: 'name desc' } },
-  { value: 'Older', slug: { sort: 'date_created asc' } },
-  { value: 'Newer', slug: { sort: 'date_created desc' } },
-  { value: 'Remove' }
+  { value: 'Min. Price', sort: 'price asc' },
+  { value: 'Max. Price', sort: 'price desc' },
+  { value: 'A - Z', sort: 'name asc' },
+  { value: 'Z - A', sort: 'name desc' },
+  { value: 'Older', sort: 'date_created asc' },
+  { value: 'Newer', sort: 'date_created desc' }
 ];
 
 const SortBy = () => {
   const router = useRouter();
+
   const [selected, setSelected] = useState(sortParams[0]);
-  const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('>>> Default: ', isOpen);
+  const handleFilter = (param: SortParam) => {
+    setSelected(param);
+
+    void router.push({
+      pathname: router.pathname,
+      query: { ...router.query, sort: param.sort }
+    });
+  };
+
+  const isDefaultSort = selected.value === sortParams[0].value;
 
   return (
     <div className="flex items-center ml-10">
       <MdSort className="text-xl" />
       <span className="ml-1 mr-2 text-sm">Sort by:</span>
       <div className="min-w-fit w-32">
-        <Listbox value={selected} onChange={setSelected}>
+        <Listbox value={selected} onChange={handleFilter}>
           <div className="relative">
             <Listbox.Button
               onClick={() => {
-                console.log('>>> before: ', isOpen);
                 setIsOpen(true);
-                console.log('>>> after: ', isOpen);
               }}
               className="relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             >
@@ -61,51 +71,16 @@ const SortBy = () => {
                       value={param}
                     >
                       {({ selected }) => (
-                        <>
-                          {param.value !== 'Remove' ? (
-                            <Link
-                              href={{
-                                pathname: 'products',
-                                query: { ...router.query, ...param.slug }
-                              }}
-                              scroll={false}
-                            >
-                              <span
-                                onClick={() => {
-                                  setSelected(param);
-                                  setIsVisible(true);
-                                  setIsOpen(false);
-                                }}
-                                className={`block truncate py-2 px-4 hover:text-secondary ${
-                                  selected ? `font-bold text-secondary` : 'font-normal'
-                                }`}
-                              >
-                                {param.value}
-                              </span>
-                            </Link>
-                          ) : (
-                            <Link
-                              href={{
-                                pathname: 'products'
-                              }}
-                              scroll={false}
-                            >
-                              <span
-                                onClick={() => {
-                                  setSelected(sortParams[0]);
-                                  setIsVisible(false);
-                                  setIsOpen(false);
-                                }}
-                                className={`flex items-center truncate py-2 px-4 font-normal hover:text-red-600 ${
-                                  isVisible ? 'block' : 'hidden'
-                                }`}
-                              >
-                                {param.value}
-                                <MdOutlineRemoveCircle className="text-red-600 ml-1" />
-                              </span>
-                            </Link>
-                          )}
-                        </>
+                        <span
+                          onClick={() => {
+                            handleFilter(param);
+                          }}
+                          className={`block truncate py-2 px-4 hover:text-secondary ${
+                            selected ? `font-bold text-secondary` : 'font-normal'
+                          }`}
+                        >
+                          {param.value}
+                        </span>
                       )}
                     </Listbox.Option>
                   ))}
