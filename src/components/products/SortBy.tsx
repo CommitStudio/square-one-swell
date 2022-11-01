@@ -4,8 +4,6 @@ import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
 import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
 
-import { v4 as uuidv4 } from 'uuid';
-
 type SortParam = {
   value: string;
   sort?: string;
@@ -66,9 +64,9 @@ const SortBy = () => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-20 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {sortParams.slice(1).map((param) => (
+                  {sortParams.slice(1).map((param, index) => (
                     <Listbox.Option
-                      key={uuidv4()}
+                      key={index}
                       className={'relative select-none cursor-pointer text-gray-500'}
                       value={param}
                     >
@@ -85,7 +83,6 @@ const SortBy = () => {
                   ))}
 
                   <Listbox.Option
-                    key={uuidv4()}
                     className={'relative select-none cursor-pointer text-gray-500'}
                     value={sortParams[0]}
                   >
