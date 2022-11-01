@@ -1,0 +1,22 @@
+{
+  "addresses": [
+    {
+      "parent_id": "6296b0ad8f4d1100129e16c3",
+      "name": "John Doe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "address1": "The Arena",
+      "address2": "Arena District",
+      "city": "Imperial City",
+      "state": "CA",
+      "zip": "94104",
+      "country": "US",
+      "phone": null,
+      "company": null,
+      "fingerprint": "92f130033566d9846522759d54cbf5e5",
+      "date_created": "2022-06-07T13:35:12.281Z",
+      "active": true,
+      "id": "62acbbe0d69a3b0012c7eae5"
+    }
+  ]
+}
