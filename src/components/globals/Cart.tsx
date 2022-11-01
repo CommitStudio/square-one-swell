@@ -35,8 +35,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   return (
     <>
       {/* CART BODY */}
+      {isCartOpen && (
+        <div
+          onClick={closeCart}
+          className="fixed inset-0 top-24 w-[100vw] h-[100vh] bg-black/40 z-20"
+        ></div>
+      )}
       <div
-        className={`fixed inset-0 top-24 z-30 transition-transform duration-700 ${
+        className={`fixed right-0 bottom-0 top-24 z-30 transition-transform duration-700 ${
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
