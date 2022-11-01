@@ -6,6 +6,7 @@ type Store = {
   breadcrumbSelectedCategory: string;
   breadcrumbMainRoute: string;
   isVariantActive: boolean;
+  triggerFetchCart: boolean;
 };
 
 export const store = atom({
@@ -13,7 +14,8 @@ export const store = atom({
   isFilterOpen: false,
   breadcrumbSelectedCategory: '',
   breadcrumbMainRoute: '',
-  isVariantActive: true
+  isVariantActive: true,
+  triggerFetchCart: false
 });
 
 export function useStore(): {

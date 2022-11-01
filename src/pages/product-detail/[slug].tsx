@@ -26,6 +26,7 @@ interface ProductProp {
 
 const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductProp) => {
   const router = useRouter();
+
   return (
     <>
       <Head

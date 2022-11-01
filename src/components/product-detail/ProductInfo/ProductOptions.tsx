@@ -4,9 +4,11 @@ import { useStore } from '~/hooks/useStore';
 
 interface ProductProp {
   product: Product;
+  chosenOptions: { [key: string]: string };
+  setChosenOptions: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
 }
 
-const ProductOptions = ({ product }: ProductProp) => {
+const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductProp) => {
   // Declare useStates
   const [selectedIds, setSelectedIds] = useState({});
   const { state, updateState } = useStore();
@@ -53,6 +55,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                         }`}
                         key={index}
                         onClick={() => {
+                          setChosenOptions({ ...chosenOptions, [option.label]: value.name });
                           setSelectedIds({ ...selectedIds, [option.label]: value.id });
                         }}
                       >
