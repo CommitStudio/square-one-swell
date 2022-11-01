@@ -97,7 +97,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         <button
           onClick={
             !areAllOptionsSelected
-              ? () => setPleaseSelectAllOptions('Please select the options wanted')
+              ? () => setPleaseSelectAllOptions('Please select the wanted options.')
               : state.isVariantActive
               ? () =>
                   void addProduct({
