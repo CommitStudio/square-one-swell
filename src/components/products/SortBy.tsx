@@ -28,10 +28,13 @@ const SortBy = () => {
   const [selected, setSelected] = useState(selectedParam || sortParams[0]);
   const [isOpen, setIsOpen] = useState(false);
 
+  const isDefaultSort = selected.value === sortParams[0].value;
+
   /*****************************************************************************
    * Handle sort changes
    ****************************************************************************/
   const handleFilter = (param: SortParam) => {
+    setIsOpen(false);
     setSelected(param);
     const query = { ...router.query };
     param.value !== sortParams[0].value ? (query.sort = param.sort) : delete query.sort;
@@ -82,15 +85,17 @@ const SortBy = () => {
                     </Listbox.Option>
                   ))}
 
-                  <Listbox.Option
-                    className={'relative select-none cursor-pointer text-gray-500'}
-                    value={sortParams[0]}
-                  >
-                    <span className="flex items-center truncate py-2 px-4 hover:text-secondary font-normal">
-                      Remove
-                      <MdOutlineRemoveCircle className="text-red-600 ml-1" />
-                    </span>
-                  </Listbox.Option>
+                  {isDefaultSort === false && (
+                    <Listbox.Option
+                      className={'relative select-none cursor-pointer text-gray-500'}
+                      value={sortParams[0]}
+                    >
+                      <span className="flex items-center truncate py-2 px-4 hover:text-secondary font-normal">
+                        Remove
+                        <MdOutlineRemoveCircle className="text-red-600 ml-1" />
+                      </span>
+                    </Listbox.Option>
+                  )}
                 </Listbox.Options>
               </Transition>
             ) : null}
