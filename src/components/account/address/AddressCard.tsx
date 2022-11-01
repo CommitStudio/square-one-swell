@@ -1,6 +1,25 @@
-import { AddressProps } from './AddressesBody';
+interface Props {
+  address: {
+    parent_id: string;
+    name: string;
+    first_name: string;
+    last_name: string;
+    address1: string;
+    address2: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    phone: string | null;
+    company: string | null;
+    fingerprint: string;
+    date_created: string;
+    active: boolean;
+    id: string;
+  };
+}
 
-const AddressCard = ({ address }: AddressProps) => {
+const AddressCard = ({ address }: Props) => {
   return (
     <div className="flex rounded bg-primary-lightest p-4 shadow-md border border-gray-50 justify-between mb-2">
       <div className="space-y-2">

@@ -1,34 +1,15 @@
 import { FaRegAddressCard } from 'react-icons/fa';
 
 import AddressCard from '~/components/account/address/AddressCard';
+import data from '~/data/addresses.json';
 
-export interface AddressProps {
-  address: {
-    parent_id: string;
-    name: string;
-    first_name: string;
-    last_name: string;
-    address1: string;
-    address2: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
-    phone: string | null;
-    company: string | null;
-    fingerprint: string;
-    date_created: string;
-    active: boolean;
-    id: string;
-  };
-}
+const { addresses } = data;
 
 interface Props {
-  addresses: AddressProps[];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddressesBody = ({ addresses, setOpen }: Props) => {
+const AddressesBody = ({ setOpen }: Props) => {
   return (
     <>
       <h4 className="text-3xl font-medium mb-5">Addresses</h4>
