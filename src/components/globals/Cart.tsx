@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useStore } from '~/hooks/useStore';
-import { swell as initializedSwell } from '~/lib/SwellClient';
+import { swell } from '~/hooks/useSwellCart';
 
 type Props = {
   isCartOpen: boolean;
@@ -13,7 +13,7 @@ type Props = {
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { state, updateStateProp } = useStore();
-  const [cart, setCart] = useState<initializedSwell.Cart | null>(null);
+  const [cart, setCart] = useState<swell.Cart | null>(null);
 
   const closeCart = () => {
     setIsCartOpen(false);
@@ -21,14 +21,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
 
   useEffect(() => {
     const getCart = async () => {
-      const cart = await initializedSwell.cart.get();
+      const cart = await swell.cart.get();
       setCart(cart);
     };
     getCart().catch((err) => console.log(err));
   }, [state.triggerFetchCart]);
 
   const removeProductFromCart = async (cartItemId: string) => {
-    await initializedSwell.cart.removeItem(cartItemId);
+    await swell.cart.removeItem(cartItemId);
     updateStateProp('triggerFetchCart', !state.triggerFetchCart);
   };
 

@@ -3,7 +3,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 import { useStore } from '~/hooks/useStore';
-import { swell as initializedSwell } from '~/lib/SwellClient';
+import { swell } from '~/hooks/useSwellCart';
 
 interface ProductProp {
   product: Product;
@@ -28,7 +28,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   }, [Object.keys(chosenOptions).length]);
 
   const addProduct = async ({ id, quantity }: AddProductProps) => {
-    await initializedSwell.cart.addItem({
+    await swell.cart.addItem({
       product_id: id,
       quantity: quantity,
       options: Object.keys(chosenOptions).map((optionName) => ({
@@ -38,6 +38,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     });
     updateStateProp('triggerFetchCart', !state.triggerFetchCart);
     setProductAddedMessage(`${productAmount} x ${product.name} added to cart`);
+    setTimeout(() => setProductAddedMessage(''), 3000);
   };
 
   return (
