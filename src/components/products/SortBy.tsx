@@ -1,43 +1,56 @@
 import { Listbox, Transition } from '@headlessui/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
 import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
 
-import { v4 as uuidv4 } from 'uuid';
+type SortParam = {
+  value: string;
+  sort?: string;
+};
 
-const sortParams = [
+const sortParams: SortParam[] = [
   { value: 'Choose one' },
-  { value: 'Min. Price', slug: { sort: 'price asc' } },
-  { value: 'Max. Price', slug: { sort: 'price desc' } },
-  { value: 'A - Z', slug: { sort: 'name asc' } },
-  { value: 'Z - A', slug: { sort: 'name desc' } },
-  { value: 'Older', slug: { sort: 'date_created asc' } },
-  { value: 'Newer', slug: { sort: 'date_created desc' } },
-  { value: 'Remove' }
+  { value: 'Min. Price', sort: 'price asc' },
+  { value: 'Max. Price', sort: 'price desc' },
+  { value: 'A - Z', sort: 'name asc' },
+  { value: 'Z - A', sort: 'name desc' },
+  { value: 'Older', sort: 'date_created asc' },
+  { value: 'Newer', sort: 'date_created desc' }
 ];
 
 const SortBy = () => {
   const router = useRouter();
-  const [selected, setSelected] = useState(sortParams[0]);
-  const [isVisible, setIsVisible] = useState(false);
+
+  const selectedQuery = router.query.sort as string;
+  const selectedParam = sortParams.find((param) => param.sort === selectedQuery);
+
+  const [selected, setSelected] = useState(selectedParam || sortParams[0]);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('>>> Default: ', isOpen);
+  const isDefaultSort = selected.value === sortParams[0].value;
+
+  /*****************************************************************************
+   * Handle sort changes
+   ****************************************************************************/
+  const handleFilter = (param: SortParam) => {
+    setIsOpen(false);
+    setSelected(param);
+    const query = { ...router.query };
+    param.value !== sortParams[0].value ? (query.sort = param.sort) : delete query.sort;
+    void router.push({ pathname: router.pathname, query });
+  };
 
   return (
     <div className="flex items-center ml-10">
       <MdSort className="text-xl" />
       <span className="ml-1 mr-2 text-sm">Sort by:</span>
       <div className="min-w-fit w-32">
-        <Listbox value={selected} onChange={setSelected}>
+        <Listbox value={selected} onChange={handleFilter}>
           <div className="relative">
             <Listbox.Button
               onClick={() => {
-                console.log('>>> before: ', isOpen);
                 setIsOpen(true);
-                console.log('>>> after: ', isOpen);
               }}
               className="relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             >
@@ -46,7 +59,7 @@ const SortBy = () => {
                 <BsChevronExpand className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
             </Listbox.Button>
-            {isOpen ? (
+            {isOpen && (
               <Transition
                 as={Fragment}
                 leave="transition ease-in- duration-100"
@@ -54,64 +67,38 @@ const SortBy = () => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-20 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {sortParams.slice(1).map((param) => (
+                  {sortParams.slice(1).map((param, index) => (
                     <Listbox.Option
-                      key={uuidv4()}
+                      key={index}
                       className={'relative select-none cursor-pointer text-gray-500'}
                       value={param}
                     >
                       {({ selected }) => (
-                        <>
-                          {param.value !== 'Remove' ? (
-                            <Link
-                              href={{
-                                pathname: 'products',
-                                query: { ...router.query, ...param.slug }
-                              }}
-                              scroll={false}
-                            >
-                              <span
-                                onClick={() => {
-                                  setSelected(param);
-                                  setIsVisible(true);
-                                  setIsOpen(false);
-                                }}
-                                className={`block truncate py-2 px-4 hover:text-secondary ${
-                                  selected ? `font-bold text-secondary` : 'font-normal'
-                                }`}
-                              >
-                                {param.value}
-                              </span>
-                            </Link>
-                          ) : (
-                            <Link
-                              href={{
-                                pathname: 'products'
-                              }}
-                              scroll={false}
-                            >
-                              <span
-                                onClick={() => {
-                                  setSelected(sortParams[0]);
-                                  setIsVisible(false);
-                                  setIsOpen(false);
-                                }}
-                                className={`flex items-center truncate py-2 px-4 font-normal hover:text-red-600 ${
-                                  isVisible ? 'block' : 'hidden'
-                                }`}
-                              >
-                                {param.value}
-                                <MdOutlineRemoveCircle className="text-red-600 ml-1" />
-                              </span>
-                            </Link>
-                          )}
-                        </>
+                        <span
+                          className={`block truncate py-2 px-4 hover:text-secondary ${
+                            selected ? `font-bold text-secondary` : 'font-normal'
+                          }`}
+                        >
+                          {param.value}
+                        </span>
                       )}
                     </Listbox.Option>
                   ))}
+
+                  {isDefaultSort === false && (
+                    <Listbox.Option
+                      className={'relative select-none cursor-pointer text-gray-500'}
+                      value={sortParams[0]}
+                    >
+                      <span className="flex items-center truncate py-2 px-4 hover:text-secondary font-normal">
+                        Remove
+                        <MdOutlineRemoveCircle className="text-red-600 ml-1" />
+                      </span>
+                    </Listbox.Option>
+                  )}
                 </Listbox.Options>
               </Transition>
-            ) : null}
+            )}
           </div>
         </Listbox>
       </div>
