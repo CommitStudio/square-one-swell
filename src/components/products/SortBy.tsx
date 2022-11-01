@@ -89,8 +89,9 @@ const SortBy = () => {
                     className={'relative select-none cursor-pointer text-gray-500'}
                     value={sortParams[0]}
                   >
-                    <span className="block truncate py-2 px-4 hover:text-secondary font-normal">
+                    <span className="flex items-center truncate py-2 px-4 hover:text-secondary font-normal">
                       Remove
+                      <MdOutlineRemoveCircle className="text-red-600 ml-1" />
                     </span>
                   </Listbox.Option>
                 </Listbox.Options>
