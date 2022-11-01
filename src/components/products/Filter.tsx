@@ -1,4 +1,5 @@
 import { Transition } from '@headlessui/react';
+import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
@@ -83,6 +84,9 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
         <FilterBy title="Categories" items={categories} pathname={'products'} />
         {/*FilterBy PRICE*/}
         <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+        <Link href={{ pathname: '/products' }} scroll={false}>
+          <a className="font-bold mb-2">Clear Filters</a>
+        </Link>
       </div>
     </Container>
   );
