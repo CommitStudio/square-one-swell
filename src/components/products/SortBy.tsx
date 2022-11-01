@@ -59,7 +59,7 @@ const SortBy = () => {
                 <BsChevronExpand className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
             </Listbox.Button>
-            {isOpen ? (
+            {isOpen && (
               <Transition
                 as={Fragment}
                 leave="transition ease-in- duration-100"
@@ -98,7 +98,7 @@ const SortBy = () => {
                   )}
                 </Listbox.Options>
               </Transition>
-            ) : null}
+            )}
           </div>
         </Listbox>
       </div>
