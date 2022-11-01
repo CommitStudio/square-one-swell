@@ -38,7 +38,7 @@ const SortBy = () => {
     setSelected(param);
     const query = { ...router.query };
     param.value !== sortParams[0].value ? (query.sort = param.sort) : delete query.sort;
-    void router.push({ pathname: router.pathname, query });
+    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
   };
 
   return (
@@ -90,7 +90,7 @@ const SortBy = () => {
                       className={'relative select-none cursor-pointer text-gray-500'}
                       value={sortParams[0]}
                     >
-                      <span className="flex items-center truncate py-2 px-4 hover:text-secondary font-normal">
+                      <span className="flex items-center truncate py-2 px-4 hover:text-red-600 font-normal">
                         Remove
                         <MdOutlineRemoveCircle className="text-red-600 ml-1" />
                       </span>

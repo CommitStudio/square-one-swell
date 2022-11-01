@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { toPascalCase } from '../Breadcrumb';
-
 import { useStore } from '~/hooks/useStore';
 
 export interface FilterItem {
