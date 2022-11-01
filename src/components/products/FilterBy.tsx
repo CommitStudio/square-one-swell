@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,6 +22,8 @@ export interface FilterByProps {
 export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   const router = useRouter();
   const { updateStateProp } = useStore();
+  const [filterSelected, setFilterSelected] = useState('');
+
   const handleClick = (itemName: string) => {
     updateStateProp('breadcrumbSelectedCategory', itemName);
   };
@@ -30,29 +33,26 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
       {items.map((item) => {
         return (
           <>
-            {title === 'Categories' || title === 'Prices' ? (
-              <Link
-                key={uuidv4()}
-                href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
-              >
-                <div>
-                  <a
-                    onClick={() => handleClick(item.name)}
-                    className={`cursor-pointer w-fit hover:text-secondary ${
-                      Object.values(item.slug)
-                        .map(String)
-                        .every((v) => Object.values(router.query).map(String).includes(v))
-                        ? 'text-secondary font-semibold text'
-                        : 'text-gray-500'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              </Link>
-            ) : (
-              <div className="text-gray-500">{item.name}</div>
-            )}
+            <Link
+              key={uuidv4()}
+              href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
+              scroll={false}
+            >
+              <div>
+                <a
+                  onClick={() => handleClick(item.name)}
+                  className={`cursor-pointer w-fit hover:text-secondary ${
+                    Object.values(item.slug)
+                      .map(String)
+                      .every((v) => Object.values(router.query).map(String).includes(v))
+                      ? 'text-secondary font-semibold text'
+                      : 'text-gray-500'
+                  }`}
+                >
+                  {item.name}
+                </a>
+              </div>
+            </Link>
           </>
         );
       })}
