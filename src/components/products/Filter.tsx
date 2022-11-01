@@ -79,21 +79,20 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
         </div>
       </div>
       <hr className="my-6" />
-      <div className="">
-        <div
-          className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
+
+      <div
+        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
-        >
-          <div>
-            <Link href={{ pathname: '/products' }} scroll={false}>
-              <a className="font-bold mb-2 hover:text-red-500">Clear filters</a>
-            </Link>
-          </div>
-          {/* FilterBy CATEGORIES info is coming from the store */}
-          <FilterBy title="Categories" items={categories} pathname={'products'} />
-          {/*FilterBy PRICE*/}
-          <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+      >
+        <div>
+          <Link href={{ pathname: '/products' }} scroll={false}>
+            <a className="font-bold mb-2 hover:text-red-500">Clear filters</a>
+          </Link>
         </div>
+        {/* FilterBy CATEGORIES info is coming from the store */}
+        <FilterBy title="Categories" items={categories} pathname={'products'} />
+        {/*FilterBy PRICE*/}
+        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
       </div>
     </Container>
   );
