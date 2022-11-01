@@ -36,13 +36,15 @@ const ProductCard = ({ product }: Props) => {
         <p className="text-center text-xl pt-3">{product.name}</p>
         <p className="text-center text-red-600 text-xl">${product.price}</p>
       </div>
-      <button
-        className={`w-full bg-secondary hover:bg-primary hover:text-secondary text-white h-12 font-bold transition-all duration-300 ${
-          isHovered ? '' : 'lg:opacity-0'
-        }`}
-      >
-        ADD TO CART
-      </button>
+      <Link href={`/product-detail/${product.slug}`}>
+        <a
+          className={`w-full flex justify-center items-center bg-secondary hover:bg-primary hover:text-secondary text-white h-12 font-bold transition-all duration-300 ${
+            isHovered ? '' : 'lg:opacity-0'
+          }`}
+        >
+          VIEW PRODUCT
+        </a>
+      </Link>
     </div>
   );
 };

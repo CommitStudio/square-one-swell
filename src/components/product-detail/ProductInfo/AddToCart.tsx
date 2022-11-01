@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 
@@ -13,21 +16,33 @@ interface ProductProp {
 interface AddProductProps {
   id: string;
   quantity: number;
+  toastifyMessage: string;
 }
 
 const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
-  const [productAddedMessage, setProductAddedMessage] = useState('');
   const { state, updateStateProp } = useStore();
+
+  const notify = (message: string) =>
+    toast.success(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
   }, [Object.keys(chosenOptions).length]);
 
-  const addProduct = async ({ id, quantity }: AddProductProps) => {
+  const addProduct = async ({ id, quantity, toastifyMessage }: AddProductProps) => {
     await swell.cart.addItem({
       product_id: id,
       quantity: quantity,
@@ -37,12 +52,23 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       }))
     });
     updateStateProp('triggerFetchCart', !state.triggerFetchCart);
-    setProductAddedMessage(`${productAmount} x ${product.name} added to cart`);
-    setTimeout(() => setProductAddedMessage(''), 3000);
+    notify(toastifyMessage);
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex space-x-6 py-5">
         <div className="flex">
           <input
@@ -71,12 +97,13 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         <button
           onClick={
             !areAllOptionsSelected
-              ? () => setPleaseSelectAllOptions('Please select all options')
+              ? () => setPleaseSelectAllOptions('Please select the options wanted')
               : state.isVariantActive
               ? () =>
                   void addProduct({
                     id: product.id,
-                    quantity: productAmount
+                    quantity: productAmount,
+                    toastifyMessage: `${productAmount} x ${product.name} added to cart`
                   })
               : void null
           }
@@ -96,7 +123,6 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         </button>
       </div>
       {pleaseSelectAllOptions && <p className="text-red-500">{pleaseSelectAllOptions}</p>}
-      {productAddedMessage && <p className="text-green">{productAddedMessage}</p>}
     </>
   );
 };

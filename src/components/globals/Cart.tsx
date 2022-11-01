@@ -74,7 +74,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                   <p>{product.product.name}</p>
                   <p>Variant: {product.variant?.name}</p>
                   <p>
-                    {product.quantity} x ${product.price}
+                    {product.quantity} x ${product.price.toFixed(2)}
                   </p>
                 </div>
                 <button
@@ -91,16 +91,21 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             <div className="grid grid-cols-2 text-base mb-3 text-white">
               <p>Subtotal</p>
               <p className="text-right">
-                $ {cart?.items?.reduce((acc, product) => acc + product.price * product.quantity, 0)}
+                ${' '}
+                {cart?.items
+                  ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
+                  .toFixed(2)}
               </p>
               <p>Taxes</p>
-              <p className="text-right">$ {cart?.tax_total}</p>
+              <p className="text-right">$ {cart?.tax_total.toFixed(2)}</p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
-                {Number(
-                  cart?.items?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                ) + Number(cart?.tax_total)}
+                {(
+                  Number(
+                    cart?.items?.reduce((acc, product) => acc + product.price * product.quantity, 0)
+                  ) + Number(cart?.tax_total)
+                ).toFixed(2)}
               </p>
             </div>
             <button className="bg-primary text-secondary p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
