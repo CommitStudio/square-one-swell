@@ -24,7 +24,10 @@ const sortParams: SortParam[] = [
 const SortBy = () => {
   const router = useRouter();
 
-  const [selected, setSelected] = useState(sortParams[0]);
+  const selectedQuery = router.query.sort as string;
+  const selectedParam = sortParams.find((param) => param.sort === selectedQuery);
+
+  const [selected, setSelected] = useState(selectedParam || sortParams[0]);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFilter = (param: SortParam) => {
@@ -35,8 +38,6 @@ const SortBy = () => {
       query: { ...router.query, sort: param.sort }
     });
   };
-
-  const isDefaultSort = selected.value === sortParams[0].value;
 
   return (
     <div className="flex items-center ml-10">
