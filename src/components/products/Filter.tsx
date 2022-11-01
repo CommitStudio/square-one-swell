@@ -70,7 +70,9 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               <input
                 type="text"
                 placeholder="Search..."
-                className={'md:ml-4 my-2 px-4 text-l border border-solid border-gray-300 rounded'}
+                className={
+                  'md:ml-4 my-2 px-4 py-1 text-l border border-solid border-gray-300 rounded'
+                }
               />
             </Transition>
           </div>
