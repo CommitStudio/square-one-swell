@@ -7,16 +7,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useStore } from '~/hooks/useStore';
 
+// Transform each word to PascalCase format - Ex: "product" --> "Product"
+export const toPascalCase = (word: string) => {
+  return word.replace(/\w+/g, function (w) {
+    return w[0].toUpperCase() + w.slice(1).toLowerCase();
+  });
+};
+
 const Breadcrumb = () => {
   const { state, updateStateProp, updateState } = useStore();
   const router = useRouter();
-
-  // Transform each word to PascalCase format - Ex: "product" --> "Product"
-  const toPascalCase = (word: string) => {
-    return word.replace(/\w+/g, function (w) {
-      return w[0].toUpperCase() + w.slice(1).toLowerCase();
-    });
-  };
 
   // Break down the path between "/"s, removing empty entities - Ex:"/my/nested/path" --> ["my", "nested", "path"]
   const mainRoute: string = router.pathname

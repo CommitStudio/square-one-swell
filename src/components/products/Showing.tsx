@@ -1,3 +1,5 @@
+import Container from '~/layouts/Container';
+
 type Props = {
   pagination: Pagination;
   className?: string;
@@ -15,8 +17,10 @@ export default function Showing({ pagination, className }: Props) {
   const toProduct = toProductRaw > total ? total : toProductRaw;
 
   return (
-    <p className={className}>
-      Showing {fromProduct} - {toProduct} of {total} Products
-    </p>
+    <Container>
+      <p className={className}>
+        Showing {fromProduct} - {toProduct} of {total} Products
+      </p>
+    </Container>
   );
 }

@@ -7,7 +7,7 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
   const { pages, current } = pagination;
 
   return (
-    <Container className="flex justify-center mb-5">
+    <Container className="flex justify-center">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
         <div className="flex flex-1 items-center justify-between">
           <div>
