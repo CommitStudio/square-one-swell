@@ -23,7 +23,8 @@ const SortBy = () => {
   const [selected, setSelected] = useState(sortParams[0]);
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  // console.log(isOpen);
+
+  console.log('>>> Default: ', isOpen);
 
   return (
     <div className="flex items-center ml-10">
@@ -34,8 +35,9 @@ const SortBy = () => {
           <div className="relative">
             <Listbox.Button
               onClick={() => {
+                console.log('>>> before: ', isOpen);
                 setIsOpen(true);
-                // console.log(isOpen);
+                console.log('>>> after: ', isOpen);
               }}
               className="relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             >
@@ -51,9 +53,7 @@ const SortBy = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options
-                  className={`absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-20 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
-                >
+                <Listbox.Options className="absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-20 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                   {sortParams.slice(1).map((param) => (
                     <Listbox.Option
                       key={uuidv4()}
@@ -75,7 +75,6 @@ const SortBy = () => {
                                   setSelected(param);
                                   setIsVisible(true);
                                   setIsOpen(false);
-                                  // console.log(isOpen);
                                 }}
                                 className={`block truncate py-2 px-4 hover:text-secondary ${
                                   selected ? `font-bold text-secondary` : 'font-normal'
@@ -96,7 +95,6 @@ const SortBy = () => {
                                   setSelected(sortParams[0]);
                                   setIsVisible(false);
                                   setIsOpen(false);
-                                  // console.log(isOpen);
                                 }}
                                 className={`flex items-center truncate py-2 px-4 font-normal hover:text-red-600 ${
                                   isVisible ? 'block' : 'hidden'
