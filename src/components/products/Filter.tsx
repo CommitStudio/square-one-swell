@@ -26,7 +26,8 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
     { name: '$10 - $20', slug: { minPrice: 10, maxPrice: 20 } },
     { name: '$20 - $30', slug: { minPrice: 20, maxPrice: 30 } },
     { name: '$30 - $40', slug: { minPrice: 30, maxPrice: 40 } },
-    { name: '+$40', slug: { minPrice: 40, maxPrice: '' } }
+    { name: '+$40', slug: { minPrice: 40, maxPrice: '' } },
+    { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
   ];
 
   return (
