@@ -34,7 +34,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
 
   return (
     <Container className="pt-10">
-      <div className="flex md:flex-row md:justify-between">
+      <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
