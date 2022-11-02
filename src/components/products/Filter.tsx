@@ -44,7 +44,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
             {state.isFilterOpen ? (
               <MdOutlineClose className="text-2xl pl-[4px] text-red-700" />
             ) : (
-              <BsFilter className="ml-2" />
+              <BsFilter className="ml-2 text-lg" />
             )}
           </button>
           <button
@@ -78,8 +78,8 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               />
             </Transition>
           </div>
-          <SortBy />
         </div>
+        <SortBy />
       </div>
       <hr className="my-6" />
 
