@@ -5,7 +5,7 @@ import swell from 'swell-js';
 import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
-
+export { swell };
 /*****************************************************************************
  * Login user and return account information
  ****************************************************************************/
