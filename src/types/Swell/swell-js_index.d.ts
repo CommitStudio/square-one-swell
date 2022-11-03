@@ -18,6 +18,19 @@ declare module 'swell-js' {
     password?: string;
   }
 
+  export interface NewAccountRegister {
+    type: string;
+    order_value: number;
+    order_count: number;
+    name: string;
+    last_name: string;
+    first_name: string;
+    email: string;
+    date_created: string;
+    balance: number;
+    id: string;
+  }
+
   export type PurchaseOptions = 'subscription' | 'standard';
 
   export interface ProductCamelCase {

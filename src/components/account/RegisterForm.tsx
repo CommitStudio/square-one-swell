@@ -1,21 +1,29 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
+import { useStore } from '~/hooks/useStore';
+
+import { swell } from '~/hooks/useSwellAccount';
+
 import Container from '~/layouts/Container';
 
 type Inputs = {
-  firstname: string;
-  lastname: string;
   email: string;
   password: string;
+  first_name: string;
+  last_name: string;
 };
 
 const RegisterForm = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
+  const [user, setUser] = useState({});
+  const { updateStateProp } = useStore();
+  const router = useRouter();
 
   const {
     register,
@@ -23,7 +31,19 @@ const RegisterForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  //Creating a new account
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(user);
+    const user: swell.NewAccountRegister = await swell.account.create({
+      email: data.email,
+      password: data.password,
+      first_name: data.first_name,
+      last_name: data.last_name
+    });
+    setUser(user);
+    updateStateProp('user', user);
+    await router.push('/account/orders');
+  };
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
@@ -49,26 +69,26 @@ const RegisterForm = () => {
                 placeholder="Your first name"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
-                {...register('firstname', {
+                {...register('first_name', {
                   required: 'First name is required',
                   minLength: {
                     value: 2,
                     message: 'Please enter a valid first name'
                   }
                 })}
-                aria-invalid={errors.firstname ? 'true' : 'false'}
+                aria-invalid={errors.first_name ? 'true' : 'false'}
               />
 
-              {errors.firstname ? (
+              {errors.first_name ? (
                 <>
-                  {errors.firstname.type === 'required' && (
+                  {errors.first_name.type === 'required' && (
                     <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.firstname.message}
+                      {errors.first_name.message}
                     </p>
                   )}
-                  {errors.firstname.type === 'minLength' && (
+                  {errors.first_name.type === 'minLength' && (
                     <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.firstname.message}
+                      {errors.first_name.message}
                     </p>
                   )}
                 </>
@@ -85,26 +105,26 @@ const RegisterForm = () => {
                 placeholder="Your last name"
                 autoComplete="off"
                 className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
-                {...register('lastname', {
+                {...register('last_name', {
                   required: 'Last name is required',
                   minLength: {
                     value: 2,
                     message: 'Please enter a valid last name'
                   }
                 })}
-                aria-invalid={errors.lastname ? 'true' : 'false'}
+                aria-invalid={errors.last_name ? 'true' : 'false'}
               />
 
-              {errors.lastname ? (
+              {errors.last_name ? (
                 <>
-                  {errors.lastname.type === 'required' && (
+                  {errors.last_name.type === 'required' && (
                     <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.lastname.message}
+                      {errors.last_name.message}
                     </p>
                   )}
-                  {errors.lastname.type === 'minLength' && (
+                  {errors.last_name.type === 'minLength' && (
                     <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.lastname.message}
+                      {errors.last_name.message}
                     </p>
                   )}
                 </>
