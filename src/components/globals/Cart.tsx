@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -114,9 +115,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                 ).toFixed(2)}
               </p>
             </div>
-            <button className="bg-primary text-secondary p-3 w-full rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
-              CHECKOUT
-            </button>
+            <Link href={`https://square-one.swell.store/checkout/${cart?.checkout_id || ''}`}>
+              <a className="bg-primary text-secondary p-3 w-full block text-center rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
+                CHECKOUT
+              </a>
+            </Link>
           </div>
         </nav>
       </div>

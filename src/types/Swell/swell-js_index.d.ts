@@ -129,7 +129,7 @@ declare module 'swell-js' {
     authTotal: number;
     billing: unknown;
     captureTotal: number;
-    checkoutId: string;
+    checkout_id: string;
     checkoutUrl: string;
     coupon: unknown;
     currency: string;
