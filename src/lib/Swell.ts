@@ -13,7 +13,7 @@ export default class Swell {
    * Get products from Swell and transform into a list of Product objects
    ****************************************************************************/
   async getProducts(filterParams: FilterParams): Promise<GenericProductsList> {
-    const { maxProducts, category, slug, page } = filterParams;
+    const { maxProducts, category, slug, page, sort } = filterParams;
 
     const limit = maxProducts || 6;
 
@@ -24,6 +24,7 @@ export default class Swell {
       slug: slug,
       page: page || 1,
       expand: ['variants:*'],
+      sort: sort,
       where: this.parseProductsFilter(filterParams)
     });
 
@@ -92,6 +93,7 @@ export default class Swell {
       id: product.id,
       name: product.name,
       active: product.active,
+      dateCreated: product.date_created,
       description: product.description,
       options: this.transformProductOptions(product),
       variants: this.transformProductVariants(product),

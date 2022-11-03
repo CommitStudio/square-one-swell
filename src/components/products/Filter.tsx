@@ -6,6 +6,8 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import { FilterBy } from './FilterBy';
 
+import SortBy from './SortBy';
+
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
@@ -32,7 +34,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
 
   return (
     <Container className="pt-10">
-      <div className="flex md:flex-row md:justify-between">
+      <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
@@ -42,7 +44,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
             {state.isFilterOpen ? (
               <MdOutlineClose className="text-2xl pl-[4px] text-red-700" />
             ) : (
-              <BsFilter className="ml-2" />
+              <BsFilter className="ml-2 text-lg" />
             )}
           </button>
           <button
@@ -77,6 +79,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
             </Transition>
           </div>
         </div>
+        <SortBy />
       </div>
       <hr className="my-6" />
 

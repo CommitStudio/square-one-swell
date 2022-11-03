@@ -55,13 +55,14 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { maxProducts, minPrice, maxPrice, category, page }: FilterParams = query;
+  const { maxProducts, minPrice, maxPrice, category, page, sort }: FilterParams = query;
 
   const categories = await Store.getCategories();
   const { products, pagination } = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),
     page: Number(page),
+    sort: sort,
     minPrice: Number(minPrice),
     category: category
   });
