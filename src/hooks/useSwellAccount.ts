@@ -5,7 +5,29 @@ import swell from 'swell-js';
 import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.NEXT_PUBLIC_SWELL_STORE_ID, process.env.NEXT_PUBLIC_SWELL_PUBLIC_KEY);
-export { swell };
+
+/*****************************************************************************
+ * Register new user and return account information
+ ****************************************************************************/
+export const useRegister = (
+  credentials: { first_name: string; last_name: string; email: string; password: string } | null
+) => {
+  const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
+
+  useEffect(() => {
+    if (!credentials) {
+      return setUser(undefined);
+    }
+
+    swell.account
+      .create(credentials)
+      .then((account) => setUser(account))
+      .catch(() => setUser(null));
+  }, [credentials]);
+
+  return { user };
+};
+
 /*****************************************************************************
  * Login user and return account information
  ****************************************************************************/

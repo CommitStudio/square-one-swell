@@ -5,9 +5,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import { useStore } from '~/hooks/useStore';
-
-import { swell } from '~/hooks/useSwellAccount';
+import { useRegister } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -19,11 +17,11 @@ type Inputs = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
-  const [user, setUser] = useState({});
-  const { updateStateProp } = useStore();
-  const router = useRouter();
+  const [registerCredentials, setRegisterCredentials] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -31,18 +29,17 @@ const RegisterForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  //Creating a new account
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(user);
-    const user: swell.NewAccountRegister = await swell.account.create({
-      email: data.email,
-      password: data.password,
-      first_name: data.first_name,
-      last_name: data.last_name
-    });
-    setUser(user);
-    updateStateProp('user', user);
-    await router.push('/account/orders');
+  const { user } = useRegister(registerCredentials);
+
+  // If register is successful, redirect to the account page
+  if (user?.id) {
+    void router.push('/account/orders');
+    return null;
+  }
+
+  // Submit register form
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setRegisterCredentials(data);
   };
 
   return (
@@ -50,6 +47,11 @@ const RegisterForm = () => {
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Create account</h1>
+          {user && (
+            <p className="text-red-500 text-sm">
+              There was an error trying to create the user. Email already exists.
+            </p>
+          )}
           <span className="text-sm">
             <span className="text-red-500">*</span> Indicates a required field
           </span>
