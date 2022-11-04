@@ -32,7 +32,7 @@ const RegisterForm = () => {
   const { user } = useRegister(registerCredentials);
 
   // If register is successful, redirect to the account page
-  if (user) {
+  if (user?.id) {
     void router.push('/account/orders');
     return null;
   }
@@ -47,6 +47,11 @@ const RegisterForm = () => {
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-bold text-3xl mb-2">Create account</h1>
+          {user && (
+            <p className="text-red-500 text-sm">
+              There was an error trying to create the user. Email already exists.
+            </p>
+          )}
           <span className="text-sm">
             <span className="text-red-500">*</span> Indicates a required field
           </span>
