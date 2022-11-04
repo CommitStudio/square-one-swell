@@ -13,8 +13,7 @@ export const store = atom({
   breadcrumbSelectedCategory: '',
   breadcrumbMainRoute: '',
   isVariantActive: true,
-  triggerFetchCart: false,
-  user: {}
+  triggerFetchCart: false
 });
 
 export function useStore(): {
