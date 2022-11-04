@@ -13,25 +13,6 @@ declare module 'swell-js' {
     logout(): Promise<unknown>;
   }
 
-  export interface AccountRegister {
-    email: string;
-    first_name: string;
-    last_name: string;
-  }
-
-  export interface NewAccountRegister {
-    type: string;
-    order_value: number;
-    order_count: number;
-    name: string;
-    last_name: string;
-    first_name: string;
-    email: string;
-    date_created: string;
-    balance: number;
-    id: string;
-  }
-
   export interface AccountInformation {
     type: string;
     shipping: {
