@@ -5,9 +5,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import { useStore } from '~/hooks/useStore';
-
-import { swell } from '~/hooks/useSwellAccount';
+import { useRegister } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -19,11 +17,11 @@ type Inputs = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
-  const [user, setUser] = useState({});
-  const { updateStateProp } = useStore();
-  const router = useRouter();
+  const [registerCredentials, setRegisterCredentials] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -31,18 +29,17 @@ const RegisterForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  //Creating a new account
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(user);
-    const user: swell.NewAccountRegister = await swell.account.create({
-      email: data.email,
-      password: data.password,
-      first_name: data.first_name,
-      last_name: data.last_name
-    });
-    setUser(user);
-    updateStateProp('user', user);
-    await router.push('/account/orders');
+  const { user } = useRegister(registerCredentials);
+
+  // If register is successful, redirect to the account page
+  if (user) {
+    void router.push('/account/orders');
+    return null;
+  }
+
+  // Submit register form
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setRegisterCredentials(data);
   };
 
   return (
