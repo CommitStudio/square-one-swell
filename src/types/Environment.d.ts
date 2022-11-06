@@ -1,10 +1,11 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      NEXT_PUBLIC_BASE_URL: string;
+      PUBLIC_STORE_URL: string;
       SWELL_STORE_ID?: string;
       SWELL_SECRET_KEY?: string;
       SWELL_PUBLIC_KEY?: string;
-      PUBLIC_STORE_URL: string;
       PUBLIC_SWELL_STORE_ID?: string;
       PUBLIC_SWELL_PUBLIC_KEY?: string;
     }
