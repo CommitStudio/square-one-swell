@@ -52,6 +52,11 @@ const RegisterForm = () => {
               There was an error trying to create the user. Email already exists.
             </p>
           )}
+          {user && (
+            <p className="text-red-500 text-sm">
+              There was an error trying to create the user. Email already exists.
+            </p>
+          )}
           <span className="text-sm">
             <span className="text-red-500">*</span> Indicates a required field
           </span>
