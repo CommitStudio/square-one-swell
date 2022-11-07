@@ -21,12 +21,6 @@ const AccountLayout = ({ children }: Props) => {
   const { data } = useUserLogged();
   const handleLogout = useLogout();
 
-  // User not logged, redirect to login page
-  if (data === null) {
-    void router.push('/account/login');
-    return null;
-  }
-
   // Waiting for logged user data
   if (!data) {
     return null;
