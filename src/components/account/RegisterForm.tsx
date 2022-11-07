@@ -33,7 +33,7 @@ const RegisterForm = () => {
 
   // If register is successful, redirect to the account page
   if (user?.id) {
-    void router.push('/account/orders');
+    void router.push('/');
     return null;
   }
 
