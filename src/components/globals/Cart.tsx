@@ -115,7 +115,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                 ).toFixed(2)}
               </p>
             </div>
-            <Link href={`https://square-one.swell.store/checkout/${cart?.checkout_id || ''}`}>
+            <Link
+              href={`${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart?.checkout_id || ''}`}
+            >
               <a className="bg-primary text-secondary p-3 w-full block text-center rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
                 CHECKOUT
               </a>
