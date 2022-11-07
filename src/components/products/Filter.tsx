@@ -39,30 +39,19 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
     { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
   ];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<Input>();
+  const { register, handleSubmit, reset } = useForm<Input>();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data);
-    // const query =
-    //   data.search !== '' ? { ...router.query, search: data.search } : delete router.query.search;
+    const query = { ...router.query };
+    data.search !== '' ? (query.search = data.search) : delete query.search;
+    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
+  };
 
-    // void router.push({ pathname: router.pathname, query }, undefined, {
-    //   scroll: false
-    // });
-    // };
-
-    //     ? void router.push(
-    //         { pathname: router.pathname, query: { ...query, search: data.search } },
-    //         undefined,
-    //         {
-    //           scroll: false
-    //         }
-    //       )
-    //     : delete query.search;
+  const cleanSearchInput = () => {
+    const query = { ...router.query };
+    delete query.search;
+    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
+    reset({ search: '' });
   };
 
   return (
@@ -81,7 +70,10 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
             )}
           </button>
           <button
-            onClick={() => setIsSearchOpen((prev) => !prev)}
+            onClick={() => {
+              setIsSearchOpen((prev) => !prev);
+              isSearchOpen && cleanSearchInput();
+            }}
             className="flex items-center md:ml-4 my-4"
           >
             Search
@@ -103,7 +95,6 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               leaveTo="opacity-0"
             >
               <form
-                action=""
                 onSubmit={(e) => {
                   void handleSubmit(onSubmit)(e);
                 }}
@@ -112,28 +103,14 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
                   type="text"
                   placeholder="Search..."
                   autoComplete="off"
+                  autoFocus={true}
                   className={
                     'md:ml-4 my-2 px-4 py-1 text-l border border-solid border-gray-300 rounded'
                   }
-                  {...register('search', {
-                    minLength: {
-                      value: 1,
-                      message: 'Please try again'
-                    }
-                  })}
-                  aria-invalid={errors.search ? 'true' : 'false'}
+                  {...register('search')}
                 />
               </form>
             </Transition>
-            {errors.search && (
-              <>
-                {errors.search.type === 'minLength' && (
-                  <p role="alert" className="text-red-500 text-xs mt-1">
-                    {errors.search.message}
-                  </p>
-                )}
-              </>
-            )}
           </div>
         </div>
         <SortBy />
