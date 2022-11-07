@@ -36,7 +36,7 @@ const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
             <p className="mb-5 text-center text-gray-600">
               {description ? description : promotions[0].description}
             </p>
-            <Countdown promotion={promotion} />
+            {promotion.name && <Countdown promotion={promotion} />}
           </div>
         </div>
       </Container>
