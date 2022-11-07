@@ -5,14 +5,14 @@ import type { NextRequest } from 'next/server';
 import { getLoggedUser } from '~/lib/SwellGraphQL';
 
 export async function middleware(request: NextRequest) {
+  const { data } = await getLoggedUser(request);
+
   if (
     request.nextUrl.pathname === '/account/login' ||
     request.nextUrl.pathname === '/account/register'
   ) {
-    return;
+    return NextResponse.redirect(new URL('/account/orders', request.url));
   }
-
-  const { data } = await getLoggedUser(request);
 
   if (!data.session.accountId) {
     return NextResponse.redirect(new URL('/account/login', request.url));
