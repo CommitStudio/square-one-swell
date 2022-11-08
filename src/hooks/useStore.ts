@@ -19,7 +19,11 @@ export const store = atom({
   breadcrumbMainRoute: '',
   isVariantActive: true,
   triggerFetchCart: false,
-  user: {}
+  user: {
+    first_name: '',
+    last_name: '',
+    email: ''
+  }
 });
 
 export function useStore(): {
