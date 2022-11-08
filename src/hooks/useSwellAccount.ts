@@ -90,7 +90,7 @@ export const useUserLogged = () => {
       .catch(() => setUser(null));
   }, []);
 
-  return { data: user };
+  return { user };
 };
 
 /*****************************************************************************
