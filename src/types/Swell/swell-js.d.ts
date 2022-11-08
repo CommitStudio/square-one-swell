@@ -14,15 +14,6 @@ declare module 'swell-js' {
     logout(): Promise<unknown>;
   }
 
-  interface AccountUpdate {
-    update({
-      first_name: string,
-      last_name: string,
-      email: string,
-      password: string
-    }): Promise<AccountInformation>;
-  }
-
   export interface AccountInformation {
     type: string;
     shipping: {
