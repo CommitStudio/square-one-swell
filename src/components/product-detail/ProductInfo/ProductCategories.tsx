@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 interface ProductProp {
   product: Product;
   categories: Category[];
@@ -18,9 +16,9 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
   return (
     <div className="flex flex-wrap gap-y-2 items-center">
       <span>Categories:</span>
-      {productCategories?.map((category) => {
+      {productCategories?.map((category, i) => {
         return (
-          <Link key={uuidv4()} href="/">
+          <Link key={`product-category-${i}`} href="/">
             <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
               {category?.name}
             </a>

@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 
@@ -64,9 +62,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           <div className="overflow-y-auto px-7 mb-auto">
             <hr className="mb-5 opacity-20" />
-            {cart?.items?.map((product) => (
+            {cart?.items?.map((product, i) => (
               <div
-                key={uuidv4()}
+                key={`cart-item-${i}`}
                 className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
               >
                 <div className="relative h-24 w-24">

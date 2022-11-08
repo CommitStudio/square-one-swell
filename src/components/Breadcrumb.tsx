@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 
 import { useEffect } from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 
 // Transform each word to PascalCase format - Ex: "product" --> "Product"
@@ -52,7 +50,7 @@ const Breadcrumb = () => {
         </li>
         {breadcrumbRoute.map((route, i) => {
           return (
-            <li key={uuidv4()}>
+            <li key={`route-${i}`}>
               <div className="flex items-center">
                 <svg
                   className="w-6 h-6 text-secondary"

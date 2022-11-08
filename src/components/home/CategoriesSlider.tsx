@@ -8,8 +8,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 
 interface CategoriesProps {
@@ -48,9 +46,9 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         }}
         className="mySwipe"
       >
-        {categories.map((category) => {
+        {categories.map((category, i) => {
           return (
-            <SwiperSlide key={uuidv4()} className="relative grid place-items-center">
+            <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
               <div className={'h-[250px] w-full relative'}>
                 <Image
                   src={category.images[0].src}
