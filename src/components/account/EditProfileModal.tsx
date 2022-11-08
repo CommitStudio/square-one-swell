@@ -1,35 +1,53 @@
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
+import { Spinner } from '../globals/Spinner';
+
 import Modal from '~/components/account/Modal';
+import { updateAccount } from '~/hooks/useSwellAccount';
+//import swell from 'swell-js';
 
 type Inputs = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  createAccount: boolean;
 };
 
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo: { email: string };
 };
 
-const EditProfileModal = ({ open, setOpen }: Props) => {
+const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
+  const router = useRouter();
+
+  console.log(userInfo);
+  const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
+
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm<Inputs>();
+  //{ defaultValues: { ...userInfo } }
+  const user = updateAccount(updateUser);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    setUpdateUser(data);
+
+    setOpen(false);
+    // console.log(data);
   };
 
   return (
     <Modal open={open} setOpen={setOpen}>
+      {console.log(errors)}
       <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
         <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Edit profile</h3>
@@ -44,36 +62,38 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <label className="block text-sm mb-2" htmlFor="firstName">
+          <label className="block text-sm mb-2" htmlFor="first_name">
             First name
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="firstName"
+            id="first_name"
             type="text"
-            {...register('firstName', {
+            // value={userInfo.first_name}
+            {...register('first_name', {
               required: 'Please enter your first name.',
               maxLength: { value: 50, message: 'first name is too long.' }
             })}
           />
-          {errors.firstName && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.firstName.message}</p>
+          {errors.first_name && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.first_name.message}</p>
           )}
-          <label className="block text-sm mb-2" htmlFor="lastName">
+          <label className="block text-sm mb-2" htmlFor="last_name">
             Last Name
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="lastName"
+            id="last_name"
             type="text"
-            {...register('lastName', {
+            {...register('last_name', {
               required: 'Please enter your last name.',
               maxLength: { value: 50, message: 'Last name is too long.' }
             })}
           />
-          {errors.lastName && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.lastName.message}</p>
+          {errors.last_name && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.last_name.message}</p>
           )}
+
           <label className="block text-sm mb-2" htmlFor="email">
             E-mail
           </label>
@@ -104,27 +124,24 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
           {errors.password && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
           )}
-          <label className="block text-sm mb-2" htmlFor="confirmPassword">
+          {/* <label className="block text-sm mb-2" htmlFor="confirmPassword">
             <span className="text-red-500">*</span> Confirm password
           </label>
           <input
             className="w-full mb-4 p-2"
             id="confirmPassword"
             type="password"
-            {...register('confirmPassword', {
-              required: 'Please enter your password.',
-              minLength: { value: 6, message: 'Must include a minimum of 6 characters.' }
-            })}
+            {...register(
+              'confirmPassword'
+              //  {
+              //   required: 'Please enter your password.',
+              //   minLength: { value: 6, message: 'Must include a minimum of 6 characters.' }
+              // }
+            )}
           />
           {errors.confirmPassword && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
-          )}
-          <div className="flex items-center gap-4">
-            <label className="block text-sm" htmlFor="createAccount">
-              Create account
-            </label>
-            <input className="" id="createAccount" type="checkbox" {...register('createAccount')} />
-          </div>
+          )} */}
           <button
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
