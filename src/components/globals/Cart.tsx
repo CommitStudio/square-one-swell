@@ -100,23 +100,36 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p className="text-right">
                 ${' '}
                 {cart?.items
-                  ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                  .toFixed(2)}
+                  ? cart?.items
+                      ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
+                      .toFixed(2)
+                  : Number(0).toFixed(2)}
               </p>
               <p>Taxes</p>
-              <p className="text-right">$ {cart?.tax_total.toFixed(2)}</p>
+              <p className="text-right">
+                $ {cart?.tax_total ? cart?.tax_total.toFixed(2) : Number(0).toFixed(2)}
+              </p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
-                {(
-                  Number(
-                    cart?.items?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                  ) + Number(cart?.tax_total)
-                ).toFixed(2)}
+                {cart?.items
+                  ? (
+                      Number(
+                        cart?.items?.reduce(
+                          (acc, product) => acc + product.price * product.quantity,
+                          0
+                        )
+                      ) + Number(cart?.tax_total)
+                    ).toFixed(2)
+                  : Number(0).toFixed(2)}
               </p>
             </div>
             <Link
-              href={`${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart?.checkout_id || ''}`}
+              href={
+                cart?.items?.length
+                  ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart?.checkout_id}`
+                  : '#'
+              }
             >
               <a className="bg-primary text-secondary p-3 w-full block text-center rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
                 CHECKOUT
