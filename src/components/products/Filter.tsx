@@ -83,7 +83,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
               <BsSearch className="ml-2" />
             )}
           </button>
-          <div className="">
+          <div>
             <Transition
               as={Fragment}
               show={isSearchOpen}
