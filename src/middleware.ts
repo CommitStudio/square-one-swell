@@ -4,21 +4,20 @@ import type { NextRequest } from 'next/server';
 
 import { getLoggedUser } from '~/lib/SwellGraphQL';
 
-export async function middleware(request: NextRequest) {
-  const { data } = await getLoggedUser(request);
-
-  if (
-    request.nextUrl.pathname === '/account/login' ||
-    request.nextUrl.pathname === '/account/register'
-  ) {
-    return NextResponse.redirect(new URL('/account/orders', request.url));
-  }
-
-  if (!data.session.accountId) {
-    return NextResponse.redirect(new URL('/account/login', request.url));
-  }
-}
-
 export const config = {
   matcher: ['/account/:path*']
 };
+
+const allowedRoutes = ['/account/login', '/account/register'];
+
+export async function middleware(request: NextRequest) {
+  const { data } = await getLoggedUser(request);
+
+  if (allowedRoutes.includes(request.nextUrl.pathname) && data.session.accountId) {
+    return NextResponse.redirect(new URL('/account/orders', request.url));
+  }
+
+  if (!data.session.accountId && !allowedRoutes.includes(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL('/account/login', request.url));
+  }
+}
