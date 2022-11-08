@@ -47,7 +47,7 @@ const AccountLayout = ({ children }: Props) => {
             <TbEdit />
             Edit profile
           </button>
-          <EditProfileModal open={open} setOpen={setOpen} />
+          <EditProfileModal open={open} setOpen={setOpen} userInfo={data} />
           <Link href="/account/orders">
             <a
               className={`block ${
