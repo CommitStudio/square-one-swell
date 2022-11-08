@@ -43,7 +43,9 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
           CART
         </li>
         <li className="block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:bg-secondary sm:px-6 lg:hidden lg:text-white">
-          LOGIN
+          <Link href={'/account/login'}>
+            <a>LOGIN</a>
+          </Link>
         </li>
       </ul>
     </div>
