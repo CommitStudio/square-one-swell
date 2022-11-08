@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import swell from 'swell-js';
+import swell, { Account } from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
@@ -31,7 +31,7 @@ export const useRegister = (
 /*****************************************************************************
  * Update Account Info
  ****************************************************************************/
-export const updateAccount = (
+export const useUpdateAccount = (
   credentials: {
     first_name: string;
     last_name: string;
@@ -39,13 +39,12 @@ export const updateAccount = (
     password: string;
   } | null
 ) => {
-  const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
+  const [user, setUser] = useState<Account | null | undefined>(undefined);
 
   useEffect(() => {
     if (!credentials) {
       return setUser(undefined);
     }
-
     swell.account
       .update(credentials)
       .then((account) => setUser(account))
