@@ -6,7 +6,7 @@ import { GrClose } from 'react-icons/gr';
 import { Spinner } from '../globals/Spinner';
 
 import Modal from '~/components/account/Modal';
-import { updateAccount } from '~/hooks/useSwellAccount';
+import { useUpdateAccount } from '~/hooks/useSwellAccount';
 //import swell from 'swell-js';
 
 type Inputs = {
@@ -14,7 +14,7 @@ type Inputs = {
   last_name: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  //confirmPassword: string;
 };
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 };
 
 const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
-  const router = useRouter();
+  //const router = useRouter();
 
   console.log(userInfo);
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
@@ -36,13 +36,13 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
     formState: { errors }
   } = useForm<Inputs>();
   //{ defaultValues: { ...userInfo } }
-  const user = updateAccount(updateUser);
+  const user = useUpdateAccount(updateUser);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setUpdateUser(data);
 
     setOpen(false);
-    // console.log(data);
+    console.log(user);
   };
 
   return (
