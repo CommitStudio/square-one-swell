@@ -14,6 +14,7 @@ import { useStore } from '~/hooks/useStore';
 export const useRegister = (
   credentials: { first_name: string; last_name: string; email: string; password: string } | null
 ) => {
+  const { updateStateProp } = useStore();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -23,8 +24,13 @@ export const useRegister = (
 
     swell.account
       .create(credentials)
-      .then((account) => setUser(account))
+      .then((account) => {
+        updateStateProp('user', account);
+        setUser(account);
+      })
       .catch(() => setUser(null));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
   return { user };

@@ -8,7 +8,7 @@ export const config = {
   matcher: ['/account/:path*']
 };
 
-const allowedRoutes = ['/account/login', '/account/register'];
+const allowedRoutes = ['/account/login', '/account/create-account'];
 
 export async function middleware(request: NextRequest) {
   const { data } = await getLoggedUser(request);
