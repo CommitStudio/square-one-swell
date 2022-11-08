@@ -6,6 +6,8 @@ import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
+import { useStore } from '~/hooks/useStore';
+
 /*****************************************************************************
  * Register new user and return account information
  ****************************************************************************/
@@ -59,6 +61,7 @@ export const useUpdateAccount = (
  * Login user and return account information
  ****************************************************************************/
 export const useLogin = (credentials: { email: string; password: string } | null) => {
+  const { updateStateProp } = useStore();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -70,8 +73,13 @@ export const useLogin = (credentials: { email: string; password: string } | null
 
     swell.account
       .login(email, password)
-      .then((account) => setUser(account))
+      .then((account) => {
+        updateStateProp('user', account);
+        setUser(account);
+      })
       .catch(() => setUser(null));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
   return { user };
@@ -81,13 +89,19 @@ export const useLogin = (credentials: { email: string; password: string } | null
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {
+  const { updateStateProp } = useStore();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
     swell.account
       .get()
-      .then((account) => setUser(account))
+      .then((account) => {
+        updateStateProp('user', account);
+        setUser(account);
+      })
       .catch(() => setUser(null));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { user };

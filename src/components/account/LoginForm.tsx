@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   // If login is successful, redirect to the account page
   if (user) {
-    void router.push('/account/orders');
+    void router.push('/');
     return null;
   }
 
