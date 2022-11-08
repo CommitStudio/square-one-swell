@@ -15,8 +15,8 @@ const sortParams: SortParam[] = [
   { value: 'Max. Price', sort: 'price desc' },
   { value: 'A - Z', sort: 'name asc' },
   { value: 'Z - A', sort: 'name desc' },
-  { value: 'Older', sort: 'date_created asc' },
-  { value: 'Newer', sort: 'date_created desc' }
+  { value: 'Oldest', sort: 'date_created asc' },
+  { value: 'Newest', sort: 'date_created desc' }
 ];
 
 const SortBy = () => {
