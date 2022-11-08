@@ -29,6 +29,33 @@ export const useRegister = (
 };
 
 /*****************************************************************************
+ * Update Account Info
+ ****************************************************************************/
+export const updateAccount = (
+  credentials: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+  } | null
+) => {
+  const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
+
+  useEffect(() => {
+    if (!credentials) {
+      return setUser(undefined);
+    }
+
+    swell.account
+      .update(credentials)
+      .then((account) => setUser(account))
+      .catch(() => setUser(null));
+  }, [credentials]);
+
+  return { user };
+};
+
+/*****************************************************************************
  * Login user and return account information
  ****************************************************************************/
 export const useLogin = (credentials: { email: string; password: string } | null) => {
