@@ -1,4 +1,4 @@
-interface SwellGraphQL_LoggedResponse {
+interface SwellGraphQL_AuthResponse {
   data: {
     session: {
       accountId: string;

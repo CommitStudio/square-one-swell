@@ -29,7 +29,7 @@ export const getLoggedUser = async (request: NextRequest) => {
     })
   });
 
-  const data = (await response.json()) as SwellGraphQL_LoggedResponse;
+  const data = (await response.json()) as SwellGraphQL_AuthResponse;
 
   return data;
 };
