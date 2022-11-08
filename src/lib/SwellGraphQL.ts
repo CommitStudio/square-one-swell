@@ -1,9 +1,13 @@
 import { NextRequest } from 'next/server';
 
+type RequestBody = {
+  query: string;
+};
+
 /*****************************************************************************
- * Check if the user is logged in
+ * Make GraphQL requests to Swell API
  ****************************************************************************/
-export const getLoggedUser = async (request: NextRequest) => {
+const makeRequest = async (request: NextRequest, body: RequestBody) => {
   const session = request.cookies.get('swell-session') as string;
 
   const requestHeaders: HeadersInit = new Headers();
@@ -11,25 +15,30 @@ export const getLoggedUser = async (request: NextRequest) => {
   requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
   requestHeaders.set('X-Session', session);
 
-  const response = await fetch('https://square-one.swell.store/graphql', {
+  return fetch('https://square-one.swell.store/graphql', {
     method: 'POST',
     headers: requestHeaders,
-    body: JSON.stringify({
-      query: `query checkTokenValidity {
-        session {
-          accountId
-        }
-        account {
-          name
-          firstName
-          lastName
-          email
-        }
-      }`
-    })
+    body: JSON.stringify(body)
+  });
+};
+
+/*****************************************************************************
+ * Check if the user is logged in
+ ****************************************************************************/
+export const getLoggedUser = async (request: NextRequest): Promise<SwellGraphQL_AuthResponse> => {
+  const response = await makeRequest(request, {
+    query: `query checkTokenValidity {
+      session {
+        accountId
+      }
+      account {
+        name
+        firstName
+        lastName
+        email
+      }
+    }`
   });
 
-  const data = (await response.json()) as SwellGraphQL_AuthResponse;
-
-  return data;
+  return response.json() as Promise<SwellGraphQL_AuthResponse>;
 };
