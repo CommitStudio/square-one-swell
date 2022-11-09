@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-
-import { Spinner } from '../globals/Spinner';
 
 import Modal from '~/components/account/Modal';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
@@ -20,7 +17,7 @@ type Inputs = {
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo: { email: string };
+  userInfo: { first_name: string; last_name: string; email: string; password: string };
 };
 
 const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
@@ -32,30 +29,34 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
   const {
     register,
     handleSubmit,
-    getValues,
-    formState: { errors }
-  } = useForm<Inputs>();
-  //{ defaultValues: { ...userInfo } }
-  const user = useUpdateAccount(updateUser);
+    formState: { errors, dirtyFields }
+  } = useForm<Inputs>({
+    mode: 'onChange',
+    defaultValues: {
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
+      email: userInfo.email,
+      password: userInfo.password
+    }
+  });
+
+  const { user } = useUpdateAccount(updateUser);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setUpdateUser(data);
-
+    location.reload();
     setOpen(false);
-    console.log(user);
   };
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      {console.log(errors)}
+      {console.log(errors, 'error')}
+      {console.log(dirtyFields, 'dirtyFields')}
       <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
         <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-3xl">Edit profile</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
-        <span className="text-xs font-extralight">
-          <span className="text-red-500">*</span> Indicates a required field
-        </span>
         <form
           className="mt-3"
           onSubmit={(e) => {
@@ -69,9 +70,8 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             className="w-full mb-4 p-2"
             id="first_name"
             type="text"
-            // value={userInfo.first_name}
+            placeholder={userInfo.first_name}
             {...register('first_name', {
-              required: 'Please enter your first name.',
               maxLength: { value: 50, message: 'first name is too long.' }
             })}
           />
@@ -85,8 +85,8 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             className="w-full mb-4 p-2"
             id="last_name"
             type="text"
+            placeholder={userInfo.last_name}
             {...register('last_name', {
-              required: 'Please enter your last name.',
               maxLength: { value: 50, message: 'Last name is too long.' }
             })}
           />
@@ -101,8 +101,8 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             className="w-full mb-4 p-2"
             id="email"
             type="text"
+            placeholder={userInfo.email}
             {...register('email', {
-              required: 'Please enter your e-mail.',
               maxLength: { value: 50, message: 'e-mail is too long.' }
             })}
           />
@@ -110,17 +110,18 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.email.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="password">
-            <span className="text-red-500">*</span> Password
+            Password
           </label>
+          <span className="text-xs font-extralight">New Password</span>
           <input
             className="w-full mb-4 p-2"
             id="password"
             type="password"
             {...register('password', {
-              required: 'Please enter your password.',
               minLength: { value: 6, message: 'Must include a minimum of 6 characters.' }
             })}
           />
+
           {errors.password && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
           )}
