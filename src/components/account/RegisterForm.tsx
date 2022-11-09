@@ -14,6 +14,7 @@ type Inputs = {
   password: string;
   first_name: string;
   last_name: string;
+  dontComplete: string;
 };
 
 const RegisterForm = () => {
@@ -39,7 +40,8 @@ const RegisterForm = () => {
 
   // Submit register form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setRegisterCredentials(data);
+    // If statement is declared incase captcha input is filled (probable bot).
+    if (!data.dontComplete) setRegisterCredentials(data);
   };
 
   return (
@@ -229,6 +231,12 @@ const RegisterForm = () => {
                 Must include a minimum of 6 characters.
               </span>
             </div>
+          </div>
+
+          {/* CAPTCHA */}
+          <div className="absolute inset-0 h-0 w-0 opacity-0">
+            <label htmlFor="dontComplete">Don&apos;t fill this input</label>
+            <input tabIndex={-1} type="text" id="dontComplete" {...register('dontComplete')} />
           </div>
 
           <div className="flex items-start mb-6">

@@ -11,6 +11,7 @@ import Container from '~/layouts/Container';
 type Inputs = {
   email: string;
   password: string;
+  dontComplete: string;
 };
 
 const LoginForm = () => {
@@ -36,7 +37,8 @@ const LoginForm = () => {
 
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setLoginCredentials(data);
+    // If statement is declared incase captcha input is filled (probable bot).
+    if (!data.dontComplete) setLoginCredentials(data);
   };
 
   return (
@@ -144,6 +146,11 @@ const LoginForm = () => {
                 </>
               ) : null}
             </div>
+          </div>
+          {/* CAPTCHA */}
+          <div className="absolute inset-0 h-0 w-0 opacity-0">
+            <label htmlFor="dontComplete">Don&apos;t fill this input</label>
+            <input tabIndex={-1} type="text" id="dontComplete" {...register('dontComplete')} />
           </div>
           <Link href={'/account/forgot-password'}>
             <span className="inline-block text-sm mt-4 md:mt-6">
