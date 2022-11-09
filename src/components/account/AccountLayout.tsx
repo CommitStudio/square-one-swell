@@ -1,14 +1,21 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
+import { ToastContainer } from 'react-toastify';
+
+import swell from 'swell-js';
+
 import EditProfileModal from './EditProfileModal';
+
+import { useStore } from '~/hooks/useStore';
 
 import { useUserLogged, useLogout } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
+swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
 type Props = {
   children: React.ReactNode;
@@ -17,8 +24,20 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const { data } = useUserLogged();
   const handleLogout = useLogout();
+  const { state } = useStore();
+  const { data } = useUserLogged();
+  const [userData, setUserData] = useState(data);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await swell.account.get();
+      console.log(user, 'user en useeffect');
+      setUserData(user);
+    };
+
+    getUser().catch((err) => console.log(err));
+  }, [state.updateUser]);
 
   // User not logged, redirect to login page
   if (data === null) {
@@ -34,12 +53,24 @@ const AccountLayout = ({ children }: Props) => {
   // User logged, render account page
   return (
     <Container className="mb-10">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
           <h4 className="font-semibold text-xl mb-2">
-            {data.first_name} {data.last_name}
+            {userData?.first_name} {userData?.last_name}
           </h4>
-          <p className="mb-2">{data.email}</p>
+          <p className="mb-2">{userData?.email}</p>
           <button
             className="flex items-center gap-1 hover:text-red-600 mb-4"
             onClick={() => setOpen(true)}
