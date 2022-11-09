@@ -13,6 +13,7 @@ import SortBy from './SortBy';
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 
 interface FilterProps {
   categories: Category[];
@@ -98,22 +99,27 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
                 onSubmit={(e) => {
                   void handleSubmit(onSubmit)(e);
                 }}
+                className="flex items-center justify-between border rounded-lg mb-8 md:mb-0 md:ml-4"
               >
                 <input
                   type="text"
                   placeholder="Search..."
                   autoComplete="off"
                   autoFocus={true}
-                  className={
-                    'md:ml-4 my-2 px-4 py-1 text-l border border-solid border-gray-300 rounded'
-                  }
+                  className="py-2 px-4 text-l rounded-lg sm:py-1.5 focus:outline-none"
                   {...register('search')}
                 />
+                <button
+                  type="submit"
+                  className="bg-gray-100 py-2 px-2 text-2xl text-secondary rounded-r-lg sm:py-1.5"
+                >
+                  <HiOutlineArrowNarrowRight />
+                </button>
               </form>
             </Transition>
           </div>
         </div>
-        <SortBy />
+        <SortBy className="flex items-center" />
       </div>
       <hr className="my-6" />
 

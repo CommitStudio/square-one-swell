@@ -19,7 +19,11 @@ const sortParams: SortParam[] = [
   { value: 'Newest', sort: 'date_created desc' }
 ];
 
-const SortBy = () => {
+type Props = {
+  className?: string;
+};
+
+const SortBy = ({ className }: Props) => {
   const router = useRouter();
 
   const selectedQuery = router.query.sort as string;
@@ -42,7 +46,7 @@ const SortBy = () => {
   };
 
   return (
-    <div className="flex items-center md:ml-6">
+    <div className={className}>
       <span className="mr-2">Sort by</span>
       <MdSort className="text-xl mr-2" />
       <div className="min-w-fit w-32">
