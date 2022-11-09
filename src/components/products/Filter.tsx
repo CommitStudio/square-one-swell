@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsSearch, BsFilter } from 'react-icons/bs';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { MdOutlineClose } from 'react-icons/md';
 
 import { FilterBy } from './FilterBy';
@@ -13,7 +14,6 @@ import SortBy from './SortBy';
 import { useStore } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 
 interface FilterProps {
   categories: Category[];
