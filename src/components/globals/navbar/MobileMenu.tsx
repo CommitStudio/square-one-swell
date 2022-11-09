@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 
 type Props = {
@@ -22,9 +20,9 @@ const MobileMenu = ({ isOpen, categories }: Props) => {
       } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
     >
       <ul className="divide-y text-secondary" aria-labelledby="navbarMenu">
-        {categories.map((category) => {
+        {categories.map((category, i) => {
           return (
-            <li key={uuidv4()}>
+            <li key={`mobile-menu-category-${i}`}>
               <Link href={`/${category.slug}`}>
                 <a
                   onClick={handleClick}

@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 
 type Props = {
@@ -20,9 +18,9 @@ const DesktopMenu = ({ categories }: Props) => {
       id="navbar-sticky"
     >
       <ul className="hidden bg-secondary mt-6 lg:flex lg:flex-row lg:p-4 lg:space-x-8 lg:mt-0">
-        {categories.map((category) => {
+        {categories.map((category, i) => {
           return (
-            <li key={uuidv4()}>
+            <li key={`category-${i}`}>
               <Link href={`/${category.slug}`}>
                 <a
                   onClick={handleClick}

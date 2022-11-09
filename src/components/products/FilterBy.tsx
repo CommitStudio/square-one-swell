@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 
 export interface FilterItem {
@@ -26,10 +24,10 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   return (
     <div>
       <h5 className="font-bold mb-2">{title}</h5>
-      {items.map((item) => {
+      {items.map((item, i) => {
         return (
           <Link
-            key={uuidv4()}
+            key={`filter-item-${i}`}
             href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
             scroll={false}
           >
