@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 import { toast, ToastContainer } from 'react-toastify';
@@ -13,13 +13,13 @@ type Inputs = {
   last_name: string;
   email: string;
   password: string;
-  //confirmPassword: string;
+  confirmPassword?: string;
 };
 
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo: { first_name: string; last_name: string; email: string; password?: string };
+  userInfo: { first_name: string; last_name: string; email: string };
 };
 
 const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
@@ -39,8 +39,10 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
 
   const {
     register,
+    unregister,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    watch,
+    formState: { errors }
   } = useForm<Inputs>({
     mode: 'onChange',
     defaultValues: {
@@ -52,12 +54,21 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
 
   const { user } = useUpdateAccount(updateUser);
 
+  const password = useRef({});
+  password.current = watch('password');
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(isSubmitting);
+    delete data?.confirmPassword;
     setUpdateUser(data);
     setOpen(false);
     notify('Update was successful');
   };
+
+  useEffect(() => {
+    if (password.current) {
+      unregister('confirmPassword');
+    }
+  }, [unregister]);
 
   return (
     <>
@@ -128,6 +139,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               className="w-full mb-4 p-2"
               id="password"
               type="password"
+              placeholder="New password"
               {...register('password', {
                 minLength: { value: 6, message: 'Must include a minimum of 6 characters.' }
               })}
@@ -136,24 +148,22 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             {errors.password && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
             )}
-            {/* <label className="block text-sm mb-2" htmlFor="confirmPassword">
-            <span className="text-red-500">*</span> Confirm password
-          </label>
-          <input
-            className="w-full mb-4 p-2"
-            id="confirmPassword"
-            type="password"
-            {...register(
-              'confirmPassword'
-              //  {
-              //   required: 'Please enter your password.',
-              //   minLength: { value: 6, message: 'Must include a minimum of 6 characters.' }
-              // }
+
+            <label className="block text-xs mb-2 font-extralight" htmlFor="confirmPassword">
+              Confirm password
+            </label>
+            <input
+              className="w-full mb-4 p-2"
+              id="confirmPassword"
+              type="password"
+              placeholder="Repeat password"
+              {...register('confirmPassword', {
+                validate: (value) => value === password.current || 'Passwords must be the same'
+              })}
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
             )}
-          />
-          {errors.confirmPassword && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
-          )} */}
             <button
               type="submit"
               className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"

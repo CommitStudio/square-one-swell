@@ -25,19 +25,8 @@ const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleLogout = useLogout();
-  //const { state } = useStore();
+
   const { data } = useUserLogged();
-  //const [userData, setUserData] = useState(data);
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const user = await swell.account.get();
-  //     console.log(user, 'user en useeffect');
-  //     setUserData(user);
-  //   };
-
-  //   getUser().catch((err) => console.log(err));
-  // }, [state.updateUser]);
 
   // User not logged, redirect to login page
   if (data === null) {
