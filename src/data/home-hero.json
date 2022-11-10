@@ -4,25 +4,33 @@
       "alt_text": "man-in-blue-jacket",
       "src": "/img/heros/man-in-blue-jacket.jpg",
       "title": "NEW COLLECTION",
-      "collection": "MEN CASUAL"
+      "collection": "MEN CASUAL",
+      "slug": "men",
+      "category": "Men"
     },
     {
       "alt_text": "model-poses-casually-on-ride",
       "src": "/img/heros/model-poses-casually-on-ride.jpg",
       "title": "NEW COLLECTION",
-      "collection": "WOMEN CASUAL"
+      "collection": "WOMEN CASUAL",
+      "slug": "women",
+      "category": "Women"
     },
     {
       "alt_text": "push-point-pow",
       "src": "/img/heros/push-point-pow.jpg",
       "title": "NEW COLLECTION",
-      "collection": "MEN FASHION"
+      "collection": "MEN FASHION",
+      "slug": "men",
+      "category": "Men"
     },
     {
       "alt_text": "women-party-fashion-in-sequin-room",
       "src": "/img/heros/women-party-fashion-in-sequin-room.jpg",
       "title": "NEW COLLECTION",
-      "collection": "WOMEN FASHION"
+      "collection": "WOMEN FASHION",
+      "slug": "women",
+      "category": "Women"
     }
   ]
 }

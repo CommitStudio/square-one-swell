@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
 
 // Import Swiper styles
@@ -10,9 +11,14 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import data from '~/data/home-hero.json';
+import { useStore } from '~/hooks/useStore';
 
 const HomeHero = () => {
   const { hero_images } = data;
+  const { updateStateProp } = useStore();
+  const handleClick = (itemName: string) => {
+    updateStateProp('breadcrumbSelectedCategory', itemName);
+  };
 
   return (
     <header id="header-hero" className="mb-10">
@@ -51,9 +57,14 @@ const HomeHero = () => {
                     {image.collection}
                   </p>
                 </div>
-                <button className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] transition-all duration-300 sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary">
-                  SHOP NOW
-                </button>
+                <Link href={`/products?category=${image.slug}`}>
+                  <button
+                    className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] transition-all duration-300 sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary"
+                    onClick={() => handleClick(image.category)}
+                  >
+                    SHOP NOW
+                  </button>
+                </Link>
               </div>
             </SwiperSlide>
           );
