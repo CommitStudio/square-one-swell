@@ -2,7 +2,12 @@ declare module 'swell-js' {
   export function init(store, key, opt = {});
 
   interface Account {
-    update({ first_name: string, last_name: string, email: string, password: string });
+    update({
+      first_name: string,
+      last_name: string,
+      email: string,
+      password: string
+    }): Promise<AccountInformation>;
     create({
       first_name: string,
       last_name: string,
