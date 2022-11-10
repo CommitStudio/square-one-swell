@@ -98,22 +98,22 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
                 onSubmit={(e) => {
                   void handleSubmit(onSubmit)(e);
                 }}
-                className="flex items-center justify-between border-none mb-8 md:mb-0 md:ml-4"
+                className="flex items-center justify-between border-b-2 border-secondary mb-8 md:mb-0 md:ml-4"
               >
                 <input
                   type="text"
                   placeholder="Search..."
                   autoComplete="off"
                   autoFocus={true}
-                  className="py-2 pl-1 pr-4 text-l border-b-2 border-secondary sm:py-1.5 focus:outline-none"
+                  className="py-2 pl-1 pr-4 text-l sm:py-1.5 focus:outline-none"
                   {...register('search')}
                 />
                 <button
                   type="submit"
                   title="Search"
-                  className="py-2 px-1 text-2xl text-secondary border-b-2 border-secondary sm:py-1.5"
+                  className="py-2 px-1 text-xl text-secondary sm:py-1.5"
                 >
-                  <HiOutlineArrowNarrowRight />
+                  <BsSearch />
                 </button>
               </form>
             </Transition>
