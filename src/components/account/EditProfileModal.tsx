@@ -6,9 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from '~/components/account/Modal';
-import { useStore } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
-//import swell from 'swell-js';
 
 type Inputs = {
   first_name: string;
@@ -25,22 +23,18 @@ type Props = {
 };
 
 const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
-  //const router = useRouter();
-
-  const { updateStateProp, state } = useStore();
-
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
   const notify = (message: string) =>
     toast.success(message, {
       position: 'top-right',
-      autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'light'
+      theme: 'light',
+      autoClose: 2000
     });
 
   const {
@@ -61,26 +55,13 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(isSubmitting);
     setUpdateUser(data);
-    // location.reload();
     setOpen(false);
-    updateStateProp('updateUser', !state.updateUser);
     notify('Update was successful');
   };
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <ToastContainer rtl={false} pauseOnFocusLoss />
       <Modal open={open} setOpen={setOpen}>
         <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
