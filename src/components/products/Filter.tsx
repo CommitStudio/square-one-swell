@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
@@ -29,7 +29,6 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
   const router = useRouter();
   const { state } = useStore();
   const { updateStateProp } = useStore();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -72,13 +71,13 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
           </button>
           <button
             onClick={() => {
-              setIsSearchOpen((prev) => !prev);
-              isSearchOpen && cleanSearchInput();
+              updateStateProp('isSearchOpen', !state.isSearchOpen);
+              state.isSearchOpen && cleanSearchInput();
             }}
-            className="flex items-center md:ml-4 my-4"
+            className="flex items-center md:ml-8 my-4"
           >
             Search
-            {isSearchOpen ? (
+            {state.isSearchOpen ? (
               <MdOutlineClose className="text-2xl pl-[4px] text-red-700" />
             ) : (
               <BsSearch className="ml-2" />
@@ -87,7 +86,7 @@ const Filter = ({ categories, pagination, products }: FilterProps) => {
           <div>
             <Transition
               as={Fragment}
-              show={isSearchOpen}
+              show={state.isSearchOpen}
               enter="transition-all ease-in-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"
