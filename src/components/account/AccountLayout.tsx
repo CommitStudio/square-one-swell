@@ -25,19 +25,19 @@ const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleLogout = useLogout();
-  const { state } = useStore();
+  //const { state } = useStore();
   const { data } = useUserLogged();
-  const [userData, setUserData] = useState(data);
+  //const [userData, setUserData] = useState(data);
 
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await swell.account.get();
-      console.log(user, 'user en useeffect');
-      setUserData(user);
-    };
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const user = await swell.account.get();
+  //     console.log(user, 'user en useeffect');
+  //     setUserData(user);
+  //   };
 
-    getUser().catch((err) => console.log(err));
-  }, [state.updateUser]);
+  //   getUser().catch((err) => console.log(err));
+  // }, [state.updateUser]);
 
   // User not logged, redirect to login page
   if (data === null) {
@@ -68,9 +68,9 @@ const AccountLayout = ({ children }: Props) => {
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
           <h4 className="font-semibold text-xl mb-2">
-            {userData?.first_name} {userData?.last_name}
+            {data.first_name} {data.last_name}
           </h4>
-          <p className="mb-2">{userData?.email}</p>
+          <p className="mb-2">{data.email}</p>
           <button
             className="flex items-center gap-1 hover:text-red-600 mb-4"
             onClick={() => setOpen(true)}
