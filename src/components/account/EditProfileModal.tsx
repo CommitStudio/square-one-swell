@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 import { toast, ToastContainer } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from '~/components/account/Modal';
+
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
 
 type Inputs = {
@@ -52,7 +52,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
     }
   });
 
-  const { user } = useUpdateAccount(updateUser);
+  useUpdateAccount(updateUser);
 
   const password = useRef({});
   password.current = watch('password');

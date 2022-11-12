@@ -32,7 +32,7 @@ export const useRegister = (
  * Update Account Info
  ****************************************************************************/
 export const useUpdateAccount = (
-  credentials: {
+  userDetails: {
     first_name: string;
     last_name: string;
     email: string;
@@ -42,14 +42,15 @@ export const useUpdateAccount = (
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
-    if (!credentials) {
+    if (!userDetails) {
       return setUser(undefined);
     }
+
     swell.account
-      .update(credentials)
+      .update(userDetails)
       .then((account) => setUser(account))
       .catch(() => setUser(null));
-  }, [credentials]);
+  }, [userDetails]);
 
   return { user };
 };

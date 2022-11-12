@@ -1,21 +1,15 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
-
 import { ToastContainer } from 'react-toastify';
 
-import swell from 'swell-js';
-
 import EditProfileModal from './EditProfileModal';
-
-import { useStore } from '~/hooks/useStore';
 
 import { useUserLogged, useLogout } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
-swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
 type Props = {
   children: React.ReactNode;
@@ -24,9 +18,8 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const handleLogout = useLogout();
-
   const { data } = useUserLogged();
+  const handleLogout = useLogout();
 
   // User not logged, redirect to login page
   if (data === null) {
