@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from '~/components/account/Modal';
 
+import { useStore } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
 
 type Inputs = {
@@ -19,10 +20,10 @@ type Inputs = {
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo: { first_name: string; last_name: string; email: string };
 };
 
-const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
+const EditProfileModal = ({ open, setOpen }: Props) => {
+  const { state } = useStore();
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
   const notify = (message: string) =>
@@ -45,9 +46,9 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
   } = useForm<Inputs>({
     mode: 'onChange',
     defaultValues: {
-      first_name: userInfo.first_name,
-      last_name: userInfo.last_name,
-      email: userInfo.email
+      first_name: state.user.first_name,
+      last_name: state.user.last_name,
+      email: state.user.email
     }
   });
 
@@ -86,7 +87,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               className="w-full mb-8 p-2"
               id="first_name"
               type="text"
-              placeholder={userInfo.first_name}
+              placeholder={state.user.first_name}
               {...register('first_name', {
                 maxLength: { value: 50, message: 'first name is too long.' }
               })}
@@ -101,7 +102,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               className="w-full mb-8 p-2"
               id="last_name"
               type="text"
-              placeholder={userInfo.last_name}
+              placeholder={state.user.last_name}
               {...register('last_name', {
                 maxLength: { value: 50, message: 'Last name is too long.' }
               })}
@@ -117,7 +118,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               className="w-full mb-8 p-2"
               id="email"
               type="text"
-              placeholder={userInfo.email}
+              placeholder={state.user.email}
               {...register('email', {
                 maxLength: { value: 50, message: 'e-mail is too long.' }
               })}
