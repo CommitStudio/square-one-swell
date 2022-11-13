@@ -39,17 +39,21 @@ const AccountLayout = ({ children }: Props) => {
       />
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
-          <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
-            {state.user?.first_name} {state.user?.last_name}
-          </h4>
-          <p className="h-6 mb-2">{state.user?.email}</p>
-          <button
-            className="flex items-center gap-1 hover:text-red-600 mb-4"
-            onClick={() => setOpen(true)}
+          <div
+            className={`h-24 mb-4 flex flex-col justify-center ${state.user.email || 'invisible'}`}
           >
-            <TbEdit />
-            Edit profile
-          </button>
+            <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
+              {state.user?.first_name} {state.user?.last_name}
+            </h4>
+            <p className="h-6 mb-2">{state.user?.email}</p>
+            <button
+              className="flex items-center gap-1 hover:text-red-600"
+              onClick={() => setOpen(true)}
+            >
+              <TbEdit />
+              Edit profile
+            </button>
+          </div>
           <EditProfileModal open={open} setOpen={setOpen} />
           <Link href="/account/orders">
             <a
