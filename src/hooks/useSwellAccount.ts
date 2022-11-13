@@ -47,6 +47,7 @@ export const useUpdateAccount = (
     password: string;
   } | null
 ) => {
+  const { updateStateProp } = useStore();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -56,8 +57,13 @@ export const useUpdateAccount = (
 
     swell.account
       .update(userDetails)
-      .then((account) => setUser(account))
+      .then((account) => {
+        setUser(account);
+        updateStateProp('user', account);
+      })
       .catch(() => setUser(null));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
   return { user };
