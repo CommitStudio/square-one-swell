@@ -53,7 +53,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
 
   useUpdateAccount(updateUser);
 
-  //Used to check if password and confirmpasword fields are the same
+  //Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
 
