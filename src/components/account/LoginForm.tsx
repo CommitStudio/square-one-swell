@@ -38,7 +38,6 @@ const LoginForm = () => {
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setLoginCredentials(data);
-    updateStateProp('triggerFetchCart', !state.triggerFetchCart);
   };
 
   return (

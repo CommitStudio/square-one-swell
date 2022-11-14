@@ -1,11 +1,14 @@
 import { atom, useAtom } from 'jotai';
 
+import { swell } from './useSwellCart';
+
 type Store = {
   isFilterOpen: boolean;
   breadcrumbSelectedCategory: string;
   breadcrumbMainRoute: string;
   isVariantActive: boolean;
   triggerFetchCart: boolean;
+  localCart: swell.Cart | object;
 };
 
 export const store = atom({
@@ -13,7 +16,8 @@ export const store = atom({
   breadcrumbSelectedCategory: '',
   breadcrumbMainRoute: '',
   isVariantActive: true,
-  triggerFetchCart: false
+  triggerFetchCart: false,
+  localCart: {}
 });
 
 export function useStore(): {
