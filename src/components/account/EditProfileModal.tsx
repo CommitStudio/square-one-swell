@@ -39,7 +39,6 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
 
   const {
     register,
-    unregister,
     handleSubmit,
     watch,
     formState: { errors }
@@ -54,21 +53,16 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
 
   useUpdateAccount(updateUser);
 
+  //Used to check if password and confirmpasword fields are the same
   const password = useRef({});
   password.current = watch('password');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    delete data?.confirmPassword;
+    delete data?.confirmPassword; //Delete confirmPassword not required on the store
     setUpdateUser(data);
     setOpen(false);
-    notify('Update was successful');
+    notify('Update was successful'); //TODO: Improve notify when update is NOT successful
   };
-
-  useEffect(() => {
-    if (password.current) {
-      unregister('confirmPassword');
-    }
-  }, [unregister]);
 
   return (
     <>
@@ -89,7 +83,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               First name
             </label>
             <input
-              className="w-full mb-4 p-2"
+              className="w-full mb-8 p-2"
               id="first_name"
               type="text"
               placeholder={userInfo.first_name}
@@ -104,7 +98,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               Last Name
             </label>
             <input
-              className="w-full mb-4 p-2"
+              className="w-full mb-8 p-2"
               id="last_name"
               type="text"
               placeholder={userInfo.last_name}
@@ -120,7 +114,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               E-mail
             </label>
             <input
-              className="w-full mb-4 p-2"
+              className="w-full mb-8 p-2"
               id="email"
               type="text"
               placeholder={userInfo.email}
@@ -131,12 +125,12 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             {errors.email && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.email.message}</p>
             )}
-            <label className="block text-sm mb-2" htmlFor="password">
+            <span className="block text-sm mb-2 ">New Password</span>
+            <label className="text-xs mb-1 font-extralight" htmlFor="password">
               Password
             </label>
-            <span className="text-xs font-extralight">New Password</span>
             <input
-              className="w-full mb-4 p-2"
+              className="w-full mb-8 p-2"
               id="password"
               type="password"
               placeholder="New password"
@@ -148,8 +142,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
             {errors.password && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
             )}
-
-            <label className="block text-xs mb-2 font-extralight" htmlFor="confirmPassword">
+            <label className="block text-xs mb-1 font-extralight" htmlFor="confirmPassword">
               Confirm password
             </label>
             <input
