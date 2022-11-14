@@ -56,6 +56,7 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
   //Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
+  console.log(password.current);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     delete data?.confirmPassword; //Delete confirmPassword not required on the store
@@ -63,7 +64,6 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
     setOpen(false);
     notify('Update was successful'); //TODO: Improve notify when update is NOT successful
   };
-
   return (
     <>
       <ToastContainer rtl={false} pauseOnFocusLoss />
@@ -150,8 +150,10 @@ const EditProfileModal = ({ open, setOpen, userInfo }: Props) => {
               id="confirmPassword"
               type="password"
               placeholder="Repeat password"
-              {...register('confirmPassword', {
-                validate: (value) => value === password.current || 'Passwords must be the same'
+              {...(password.current !== undefined && {
+                ...register('confirmPassword', {
+                  validate: (value) => value === password.current || 'Passwords must be the same'
+                })
               })}
             />
             {errors.confirmPassword && (
