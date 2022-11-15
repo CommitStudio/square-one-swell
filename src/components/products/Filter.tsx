@@ -18,7 +18,7 @@ interface FilterProps {
   products: Product[];
 }
 
-const Filter = ({ categories, pagination, products }: FilterProps) => {
+const Filter = ({ categories }: FilterProps) => {
   const { state } = useStore();
   const { updateStateProp } = useStore();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
