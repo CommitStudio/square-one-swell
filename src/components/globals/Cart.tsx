@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 
@@ -89,7 +87,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             {determineIfIsCart(state.localCart) &&
               state.localCart?.items?.map((product) => (
                 <div
-                  key={uuidv4()}
+                  key={product.id}
                   className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
                 >
                   <div className="relative h-24 w-24">
