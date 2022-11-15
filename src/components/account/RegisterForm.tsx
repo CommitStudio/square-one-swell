@@ -14,7 +14,7 @@ type Inputs = {
   password: string;
   first_name: string;
   last_name: string;
-  dontComplete: string;
+  dontComplete?: string;
 };
 
 const RegisterForm = () => {
@@ -41,7 +41,10 @@ const RegisterForm = () => {
   // Submit register form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // If statement is declared incase captcha input is filled (probable bot).
-    if (!data.dontComplete) setRegisterCredentials(data);
+    if (!data.dontComplete) {
+      delete data.dontComplete;
+      setRegisterCredentials(data);
+    }
   };
 
   return (

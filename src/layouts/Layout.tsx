@@ -1,11 +1,15 @@
 import Footer from '~/components/globals/Footer';
 import Navbar from '~/components/globals/navbar/Navbar';
 
+import { useUserLogged } from '~/hooks/useSwellAccount';
+
 type Props = {
   children: React.ReactNode;
 };
 
 export default function Layout({ children }: Props) {
+  useUserLogged();
+
   return (
     <>
       <Navbar />
