@@ -69,7 +69,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
         <nav className="border h-full bg-white text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
-              Cart{' '}
+              Items:{' '}
               {determineIfIsCart(state.localCart) &&
                 state?.localCart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
             </h3>
