@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
+import { useStore } from '~/hooks/useStore';
+
 import { useLogin } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
@@ -16,6 +18,7 @@ type Inputs = {
 
 const LoginForm = () => {
   const router = useRouter();
+  const { updateStateProp, state } = useStore();
 
   const [isHidden, setIsHidden] = useState(true);
   const [loginCredentials, setLoginCredentials] = useState<Inputs | null>(null);
@@ -39,6 +42,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // If statement is declared incase captcha input is filled (probable bot).
     if (!data.dontComplete) setLoginCredentials(data);
+    updateStateProp('triggerFetchCart', !state.triggerFetchCart);
   };
 
   return (

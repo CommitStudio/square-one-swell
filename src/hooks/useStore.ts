@@ -1,5 +1,7 @@
 import { atom, useAtom } from 'jotai';
 
+import { swell } from './useSwellCart';
+
 type Store = {
   isFilterOpen: boolean;
   breadcrumbSelectedCategory: string;
@@ -11,6 +13,7 @@ type Store = {
     last_name: string;
     email: string;
   };
+  localCart: swell.Cart | object;
 };
 
 export const store = atom({
@@ -23,7 +26,8 @@ export const store = atom({
     first_name: '',
     last_name: '',
     email: ''
-  }
+  },
+  localCart: {}
 });
 
 export function useStore(): {

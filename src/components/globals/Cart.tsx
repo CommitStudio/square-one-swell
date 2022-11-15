@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
@@ -11,24 +13,44 @@ type Props = {
 };
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
-  const { state, updateStateProp } = useStore();
-  const [cart, setCart] = useState<swell.Cart | null>(null);
+  const { state, updateStateProp, updateState } = useStore();
 
   const closeCart = () => {
     setIsCartOpen(false);
   };
 
+  function determineIfIsCart(toBeDetermined: swell.Cart | object): toBeDetermined is swell.Cart {
+    if (toBeDetermined) {
+      return true;
+    }
+    return false;
+  }
+
   useEffect(() => {
     const getCart = async () => {
       const cart = await swell.cart.get();
-      setCart(cart);
+      updateStateProp('localCart', cart);
     };
     getCart().catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.triggerFetchCart]);
 
-  const removeProductFromCart = async (cartItemId: string) => {
-    await swell.cart.removeItem(cartItemId);
-    updateStateProp('triggerFetchCart', !state.triggerFetchCart);
+  const removeProductFromCart = async (cartItemId: string, productVariantId: string) => {
+    updateState({
+      ...state,
+      localCart: {
+        ...state.localCart,
+        items:
+          determineIfIsCart(state.localCart) &&
+          state.localCart.items.filter(
+            (item) => item.product.id !== cartItemId && item.variant.id !== productVariantId
+          )
+      }
+    });
+
+    const cartWithoutItem = await swell.cart.removeItem(cartItemId);
+
+    updateStateProp('localCart', cartWithoutItem);
   };
 
   return (
@@ -48,7 +70,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
         <nav className="border h-full bg-white text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
-              Cart {cart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
+              Items:{' '}
+              {determineIfIsCart(state.localCart) &&
+                state?.localCart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
             </h3>
             <Image
               src="/img/close-logo.svg"
@@ -62,34 +86,35 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           <div className="overflow-y-auto px-7 mb-auto">
             <hr className="mb-5 opacity-20" />
-            {cart?.items?.map((product, i) => (
-              <div
-                key={`cart-item-${i}`}
-                className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
-              >
-                <div className="relative h-24 w-24">
-                  <Image
-                    src={product.product?.images[0]?.file.url}
-                    alt={product.product.name}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-                <div className="w-52">
-                  <p>{product.product.name}</p>
-                  <p>Variant: {product.variant?.name}</p>
-                  <p>
-                    {product.quantity} x ${product.price.toFixed(2)}
-                  </p>
-                </div>
-                <button
-                  onClick={() => void removeProductFromCart(product.id)}
-                  className="self-end hover:text-red-600"
+            {determineIfIsCart(state.localCart) &&
+              state.localCart?.items?.map((product) => (
+                <div
+                  key={uuidv4()}
+                  className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
                 >
-                  Remove
-                </button>
-              </div>
-            ))}
+                  <div className="relative h-24 w-24">
+                    <Image
+                      src={product.product?.images[0]?.file.url}
+                      alt={product.product.name}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="w-52">
+                    <p>{product.product.name}</p>
+                    <p>Variant: {product.variant?.name}</p>
+                    <p>
+                      {product.quantity} x ${product.price.toFixed(2)}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => void removeProductFromCart(product.id, product.variant.id)}
+                    className="self-end hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
           </div>
           <div className="px-7 pb-7 bg-secondary text-xs">
             <hr className="mb-5 opacity-20" />
@@ -97,24 +122,44 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p>Subtotal</p>
               <p className="text-right">
                 ${' '}
-                {cart?.items
-                  ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                  .toFixed(2)}
+                {determineIfIsCart(state.localCart) && state.localCart.items
+                  ? determineIfIsCart(state.localCart) &&
+                    state.localCart.items
+                      ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
+                      .toFixed(2)
+                  : Number(0).toFixed(2)}
               </p>
               <p>Taxes</p>
-              <p className="text-right">$ {cart?.tax_total.toFixed(2)}</p>
+              <p className="text-right">
+                ${' '}
+                {determineIfIsCart(state.localCart) && state.localCart.tax_total
+                  ? determineIfIsCart(state.localCart) && state.localCart.tax_total.toFixed(2)
+                  : Number(0).toFixed(2)}
+              </p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
-                {(
-                  Number(
-                    cart?.items?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                  ) + Number(cart?.tax_total)
-                ).toFixed(2)}
+                {determineIfIsCart(state.localCart) && state.localCart.items
+                  ? (
+                      Number(
+                        determineIfIsCart(state.localCart) &&
+                          state.localCart.items?.reduce(
+                            (acc, product) => acc + product.price * product.quantity,
+                            0
+                          )
+                      ) + Number(determineIfIsCart(state.localCart) && state.localCart.tax_total)
+                    ).toFixed(2)
+                  : Number(0).toFixed(2)}
               </p>
             </div>
             <Link
-              href={`${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart?.checkout_id || ''}`}
+              href={
+                determineIfIsCart(state.localCart) && state.localCart.items?.length
+                  ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${
+                      (determineIfIsCart(state.localCart) && state.localCart.checkout_id) || ''
+                    }`
+                  : '#'
+              }
             >
               <a className="bg-primary text-secondary p-3 w-full block text-center rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
                 CHECKOUT

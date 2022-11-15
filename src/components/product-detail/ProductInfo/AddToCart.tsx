@@ -14,7 +14,7 @@ interface ProductProp {
 }
 
 interface AddProductProps {
-  id: string;
+  product: Product;
   quantity: number;
   toastifyMessage: string;
 }
@@ -25,8 +25,20 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const { state, updateStateProp } = useStore();
 
-  const notify = (message: string) =>
+  const notifySuccess = (message: string) =>
     toast.success(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
+
+  const notifyFailure = (message: string) =>
+    toast.error(message, {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: true,
@@ -40,19 +52,33 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
 
-  const addProduct = async ({ id, quantity, toastifyMessage }: AddProductProps) => {
-    await swell.cart.addItem({
-      product_id: id,
-      quantity: quantity,
-      options: Object.keys(chosenOptions).map((optionName) => ({
-        name: optionName,
-        value: chosenOptions[optionName]
-      }))
-    });
-    updateStateProp('triggerFetchCart', !state.triggerFetchCart);
-    notify(toastifyMessage);
+  const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
+    // Message of added product
+    notifySuccess(toastifyMessage);
+
+    // Add product to cart on Swell
+    const cartWithNewItem = await swell.cart
+      .addItem({
+        product_id: product.id,
+        quantity: quantity,
+        options: Object.keys(chosenOptions).map((optionName) => ({
+          name: optionName,
+          value: chosenOptions[optionName]
+        }))
+      })
+      .catch((err) => {
+        console.log(err);
+
+        // Message of error in case product is not added to cart on Swell
+        notifyFailure(
+          "There has been a problem, we couldn´t add the product to your cart. We're sorry."
+        );
+      });
+    // Add product to localCart
+    updateStateProp('localCart', cartWithNewItem);
   };
 
   return (
@@ -101,7 +127,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
               : state.isVariantActive
               ? () =>
                   void addProduct({
-                    id: product.id,
+                    product: product,
                     quantity: productAmount,
                     toastifyMessage: `${productAmount} x ${product.name} added to cart`
                   })
