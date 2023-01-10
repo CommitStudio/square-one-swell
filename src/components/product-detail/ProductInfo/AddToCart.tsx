@@ -61,21 +61,18 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     if (!areAllOptionsSelected) {
       setPleaseSelectAllOptions('Please select the wanted options.');
     } else if (state.isVariantActive) {
-      setIsLoading(true);
-      setTimeout(() => {
-        void addProduct({
-          product: product,
-          quantity: productAmount,
-          toastifyMessage: `${productAmount} x ${product.name} added to cart`
-        });
-        setIsLoading(false);
-      }, 500);
+      void addProduct({
+        product: product,
+        quantity: productAmount,
+        toastifyMessage: `${productAmount} x ${product.name} added to cart`
+      });
     }
   };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Message of added product
     notifySuccess(toastifyMessage);
-
+    //Turn on spinner while waiting
+    setIsLoading(true);
     // Add product to cart on Swell
     const cartWithNewItem = await swell.cart
       .addItem({
@@ -88,11 +85,14 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       })
       .catch((err) => {
         console.log(err);
-
         // Message of error in case product is not added to cart on Swell
         notifyFailure(
           "There has been a problem, we couldn´t add the product to your cart. We're sorry."
         );
+      })
+      .finally(() => {
+        //Turn of spinner
+        setIsLoading(false);
       });
     // Add product to localCart
     updateStateProp('localCart', cartWithNewItem);
