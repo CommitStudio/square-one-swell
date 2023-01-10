@@ -5,7 +5,7 @@ interface SpinnerProp {
 
 export const Spinner = ({ position = 'center', size = 10 }: SpinnerProp) => {
   return (
-    <div className={`text-${position} mb-16`}>
+    <div className={`text-${position}`}>
       <div role="status">
         <svg
           className={`inline mr-2 w-${size} h-${size} text-gray-200 animate-spin dark:text-gray-600 fill-secondary`}

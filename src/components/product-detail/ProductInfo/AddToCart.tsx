@@ -5,6 +5,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Spinner } from '~/components/globals/Spinner';
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 
@@ -23,6 +24,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { state, updateStateProp } = useStore();
 
   const notifySuccess = (message: string) =>
@@ -55,6 +57,21 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
 
+  const handleAddToCart = () => {
+    if (!areAllOptionsSelected) {
+      setPleaseSelectAllOptions('Please select the wanted options.');
+    } else if (state.isVariantActive) {
+      setIsLoading(true);
+      setTimeout(() => {
+        void addProduct({
+          product: product,
+          quantity: productAmount,
+          toastifyMessage: `${productAmount} x ${product.name} added to cart`
+        });
+        setIsLoading(false);
+      }, 500);
+    }
+  };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Message of added product
     notifySuccess(toastifyMessage);
@@ -121,29 +138,23 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
           </div>
         </div>
         <button
-          onClick={
-            !areAllOptionsSelected
-              ? () => setPleaseSelectAllOptions('Please select the wanted options.')
-              : state.isVariantActive
-              ? () =>
-                  void addProduct({
-                    product: product,
-                    quantity: productAmount,
-                    toastifyMessage: `${productAmount} x ${product.name} added to cart`
-                  })
-              : void null
-          }
+          onClick={() => handleAddToCart()}
           disabled={state.isVariantActive ? false : true}
-          className={`font-bold py-3 px-5
+          className={`font-bold py-3 px-5 min-w-[150px]
          ${
            state.isVariantActive
              ? 'bg-secondary hover:bg-primary text-white hover:text-secondary duration-200'
              : 'bg-gray-600 text-gray-300'
          }`}
         >
-          {state.isVariantActive ? 'ADD TO CART' : 'UNAVAILABLE'}
+          {state.isVariantActive && !isLoading ? (
+            'ADD TO CART'
+          ) : isLoading ? (
+            <Spinner size={6} />
+          ) : (
+            'UNAVAIABLE'
+          )}
         </button>
-
         <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
           <AiOutlineHeart />
         </button>
