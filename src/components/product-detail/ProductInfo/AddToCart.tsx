@@ -152,7 +152,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
           ) : isLoading ? (
             <Spinner size={6} />
           ) : (
-            'UNAVAIABLE'
+            'UNAVAILABLE'
           )}
         </button>
         <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
