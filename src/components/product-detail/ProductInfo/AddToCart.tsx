@@ -87,7 +87,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         console.log(err);
         // Message of error in case product is not added to cart on Swell
         notifyFailure(
-          "There has been a problem, we couldn´t add the product to your cart. We're sorry."
+          "There has been a problem, we couldn't add the product to your cart. We're sorry."
         );
       })
       .finally(() => {
@@ -139,7 +139,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         </div>
         <button
           onClick={() => handleAddToCart()}
-          disabled={state.isVariantActive ? false : true}
+          disabled={!state.isVariantActive || isLoading}
           className={`font-bold py-3 px-5 min-w-[150px]
          ${
            state.isVariantActive
