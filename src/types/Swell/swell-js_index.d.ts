@@ -142,7 +142,7 @@ declare module 'swell-js' {
     guest: true;
     id: string;
     itemDiscount: number;
-    itemQuantity: number;
+    item_quantity: number;
     items: CartItem[];
     itemShipmentWeight: number;
     itemTax: number;

@@ -10,19 +10,21 @@ type Props = {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export function determineIfIsCart(
+  toBeDetermined: swell.Cart | object
+): toBeDetermined is swell.Cart {
+  if (toBeDetermined) {
+    return true;
+  }
+  return false;
+}
+
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { state, updateStateProp, updateState } = useStore();
 
   const closeCart = () => {
     setIsCartOpen(false);
   };
-
-  function determineIfIsCart(toBeDetermined: swell.Cart | object): toBeDetermined is swell.Cart {
-    if (toBeDetermined) {
-      return true;
-    }
-    return false;
-  }
 
   useEffect(() => {
     const getCart = async () => {

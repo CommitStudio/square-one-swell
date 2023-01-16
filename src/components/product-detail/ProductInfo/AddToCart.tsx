@@ -5,6 +5,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Spinner } from '~/components/globals/Spinner';
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 
@@ -23,6 +24,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { state, updateStateProp } = useStore();
 
   const notifySuccess = (message: string) =>
@@ -55,10 +57,22 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
 
+  const handleAddToCart = () => {
+    if (!areAllOptionsSelected) {
+      setPleaseSelectAllOptions('Please select the wanted options.');
+    } else if (state.isVariantActive) {
+      void addProduct({
+        product: product,
+        quantity: productAmount,
+        toastifyMessage: `${productAmount} x ${product.name} added to cart`
+      });
+    }
+  };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Message of added product
     notifySuccess(toastifyMessage);
-
+    //Turn on spinner while waiting
+    setIsLoading(true);
     // Add product to cart on Swell
     const cartWithNewItem = await swell.cart
       .addItem({
@@ -71,11 +85,14 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       })
       .catch((err) => {
         console.log(err);
-
         // Message of error in case product is not added to cart on Swell
         notifyFailure(
-          "There has been a problem, we couldn´t add the product to your cart. We're sorry."
+          "There has been a problem, we couldn't add the product to your cart. We're sorry."
         );
+      })
+      .finally(() => {
+        //Turn of spinner
+        setIsLoading(false);
       });
     // Add product to localCart
     updateStateProp('localCart', cartWithNewItem);
@@ -121,29 +138,23 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
           </div>
         </div>
         <button
-          onClick={
-            !areAllOptionsSelected
-              ? () => setPleaseSelectAllOptions('Please select the wanted options.')
-              : state.isVariantActive
-              ? () =>
-                  void addProduct({
-                    product: product,
-                    quantity: productAmount,
-                    toastifyMessage: `${productAmount} x ${product.name} added to cart`
-                  })
-              : void null
-          }
-          disabled={state.isVariantActive ? false : true}
-          className={`font-bold py-3 px-5
+          onClick={() => handleAddToCart()}
+          disabled={!state.isVariantActive || isLoading}
+          className={`font-bold py-3 px-5 min-w-[150px]
          ${
            state.isVariantActive
              ? 'bg-secondary hover:bg-primary text-white hover:text-secondary duration-200'
              : 'bg-gray-600 text-gray-300'
          }`}
         >
-          {state.isVariantActive ? 'ADD TO CART' : 'UNAVAILABLE'}
+          {state.isVariantActive && !isLoading ? (
+            'ADD TO CART'
+          ) : isLoading ? (
+            <Spinner size={6} />
+          ) : (
+            'UNAVAILABLE'
+          )}
         </button>
-
         <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
           <AiOutlineHeart />
         </button>
