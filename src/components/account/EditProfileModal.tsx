@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from '~/components/account/Modal';
 
 import { useStore } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
+import { notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {
   first_name: string;
@@ -27,18 +27,6 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
   const { first_name, last_name, email } = state.user;
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
-  const notify = (message: string) =>
-    toast.success(message, {
-      position: 'top-right',
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-      autoClose: 2000
-    });
-
   const {
     register,
     handleSubmit,
@@ -54,13 +42,12 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
   //Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
-  console.log(password.current);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     delete data?.confirmPassword; //Delete confirmPassword not required on the store
     setUpdateUser(data);
     setOpen(false);
-    notify('Update was successful'); //TODO: Improve notify when update is NOT successful
+    notifySuccess('Update was successful'); //TODO: Improve notify when update is NOT successful
   };
 
   useEffect(() => {
@@ -71,7 +58,6 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
 
   return (
     <>
-      <ToastContainer rtl={false} pauseOnFocusLoss />
       <Modal open={open} setOpen={setOpen}>
         <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
@@ -176,5 +162,4 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
     </>
   );
 };
-
 export default EditProfileModal;
