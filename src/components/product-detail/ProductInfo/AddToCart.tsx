@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/components/globals/Spinner';
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 interface ProductProp {
   product: Product;
@@ -26,30 +26,6 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { state, updateStateProp } = useStore();
-
-  const notifySuccess = (message: string) =>
-    toast.success(message, {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light'
-    });
-
-  const notifyFailure = (message: string) =>
-    toast.error(message, {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light'
-    });
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
@@ -100,18 +76,6 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <div className="flex space-x-6 py-5">
         <div className="flex">
           <input
