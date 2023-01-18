@@ -26,7 +26,6 @@ const AccountLayout = ({ children }: Props) => {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false);
-
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
