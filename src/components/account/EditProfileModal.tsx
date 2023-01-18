@@ -18,11 +18,11 @@ type Inputs = {
 };
 
 type Props = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  openEdit: boolean;
+  setOpenEdit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const EditProfileModal = ({ open, setOpen }: Props) => {
+const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
   const { state } = useStore();
   const { first_name, last_name, email } = state.user;
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
@@ -46,7 +46,7 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     delete data?.confirmPassword; //Delete confirmPassword not required on the store
     setUpdateUser(data);
-    setOpen(false);
+    setOpenEdit(false);
     notifySuccess('Update was successful'); //TODO: Improve notify when update is NOT successful
   };
 
@@ -58,11 +58,11 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
 
   return (
     <>
-      <Modal open={open} setOpen={setOpen}>
+      <Modal open={openEdit} setOpen={setOpenEdit}>
         <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
             <h3 className="font-medium text-3xl">Edit profile</h3>
-            <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
+            <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpenEdit(false)} />
           </div>
           <form
             className="mt-3"
