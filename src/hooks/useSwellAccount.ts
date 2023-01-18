@@ -126,7 +126,7 @@ export const useUserLogged = () => {
 export const useLogout = () => {
   const router = useRouter();
   const { updateStateProp } = useStore();
-  console.log('useLogout');
+
   return async () => {
     await swell.account
       .logout()
