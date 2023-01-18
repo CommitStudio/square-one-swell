@@ -4,6 +4,8 @@ import { GrClose } from 'react-icons/gr';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import type { AccountInformation } from 'swell-js';
+
 import Modal from '~/components/account/Modal';
 
 import { useStore } from '~/hooks/useStore';
@@ -24,7 +26,9 @@ type Props = {
 
 const EditProfileModal = ({ open, setOpen }: Props) => {
   const { state } = useStore();
-  const { first_name, last_name, email } = state.user;
+  const { user } = state as { user: AccountInformation };
+  const { first_name, last_name, email } = user;
+
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
   const notify = (message: string) =>

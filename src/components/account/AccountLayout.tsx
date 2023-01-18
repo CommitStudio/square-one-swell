@@ -5,6 +5,8 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 import { ToastContainer } from 'react-toastify';
 
+import type { AccountInformation } from 'swell-js';
+
 import EditProfileModal from './EditProfileModal';
 
 import { useStore } from '~/hooks/useStore';
@@ -20,6 +22,8 @@ const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
 
   const { state } = useStore();
+  const { user } = state as { user: AccountInformation };
+
   const [open, setOpen] = useState(false);
   const handleLogout = useLogout();
 
@@ -39,13 +43,11 @@ const AccountLayout = ({ children }: Props) => {
       />
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
-          <div
-            className={`h-24 mb-4 flex flex-col justify-center ${state.user.email || 'invisible'}`}
-          >
+          <div className={`h-24 mb-4 flex flex-col justify-center ${user.email || 'invisible'}`}>
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
-              {state.user?.first_name} {state.user?.last_name}
+              {user?.first_name} {user?.last_name}
             </h4>
-            <p className="h-6 mb-2">{state.user?.email}</p>
+            <p className="h-6 mb-2">{user?.email}</p>
             <button
               className="flex items-center gap-1 hover:text-red-600"
               onClick={() => setOpen(true)}
