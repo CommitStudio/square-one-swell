@@ -101,22 +101,34 @@ export const useLogin = (credentials: { email: string; password: string } | null
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {
-  const { updateStateProp } = useStore();
+  const { state, updateState } = useStore();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
-    swell.account
-      .get()
-      .then((account) => {
-        updateStateProp('user', account);
-        setUser(account);
+    getUserData()
+      .then(({ account, cart }) => {
+        updateState({ ...state, user: account || {}, localCart: cart });
+        setUser(user);
       })
-      .catch(() => setUser(null));
+      .catch(() => {
+        updateState({ ...state, user: {}, localCart: {} });
+        setUser(null);
+      });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { user };
+};
+
+/*****************************************************************************
+ * Fetch required user data from Swell
+ ****************************************************************************/
+const getUserData = async () => {
+  const accountPromise = swell.account.get();
+  const cartPromise = swell.cart.get();
+  const [account, cart] = await Promise.all([accountPromise, cartPromise]);
+  return { account, cart };
 };
 
 /*****************************************************************************

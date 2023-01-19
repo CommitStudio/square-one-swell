@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
 
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
@@ -25,15 +24,6 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const closeCart = () => {
     setIsCartOpen(false);
   };
-
-  useEffect(() => {
-    const getCart = async () => {
-      const cart = await swell.cart.get();
-      updateStateProp('localCart', cart);
-    };
-    getCart().catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.triggerFetchCart]);
 
   const removeProductFromCart = async (cartItemId: string, productVariantId: string) => {
     updateState({

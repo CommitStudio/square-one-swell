@@ -1,5 +1,7 @@
 import { atom, useAtom } from 'jotai';
 
+import type { AccountInformation } from 'swell-js';
+
 import { swell } from './useSwellCart';
 
 type Store = {
@@ -8,11 +10,7 @@ type Store = {
   breadcrumbMainRoute: string;
   isVariantActive: boolean;
   triggerFetchCart: boolean;
-  user: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  user: AccountInformation | object;
   localCart: swell.Cart | object;
 };
 
@@ -22,11 +20,7 @@ export const store = atom({
   breadcrumbMainRoute: '',
   isVariantActive: true,
   triggerFetchCart: false,
-  user: {
-    first_name: '',
-    last_name: '',
-    email: ''
-  },
+  user: {},
   localCart: {}
 });
 
