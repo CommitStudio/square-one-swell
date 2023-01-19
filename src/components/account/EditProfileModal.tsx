@@ -58,7 +58,6 @@ const EditProfileModal = ({ open, setOpen }: Props) => {
   //Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
-  console.log(password.current);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     delete data?.confirmPassword; //Delete confirmPassword not required on the store
