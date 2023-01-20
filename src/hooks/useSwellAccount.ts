@@ -7,6 +7,7 @@ import type { AccountInformation } from 'swell-js';
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
 import { useStore } from '~/hooks/useStore';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 /*****************************************************************************
  * Register new user and return account information
@@ -139,12 +140,17 @@ export const useLogout = () => {
   const { updateStateProp } = useStore();
 
   return async () => {
-    await swell.account.logout();
-    updateStateProp('user', {
-      first_name: '',
-      last_name: '',
-      email: ''
-    });
-    router.push('/').catch(() => null);
+    await swell.account
+      .logout()
+      .then(() => {
+        updateStateProp('user', {
+          first_name: '',
+          last_name: '',
+          email: ''
+        });
+        router.push('/').catch(() => null);
+      })
+      .catch(() => notifyFailure('Something went wrong'))
+      .finally(() => notifySuccess("You've been logged out"));
   };
 };

@@ -8,8 +8,9 @@ import type { AccountInformation } from 'swell-js';
 
 import EditProfileModal from './EditProfileModal';
 
+import { LogOutModal } from './LogOutModal';
+
 import { useStore } from '~/hooks/useStore';
-import { useLogout } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
 
@@ -23,9 +24,8 @@ const AccountLayout = ({ children }: Props) => {
   const { state } = useStore();
   const { user } = state as { user: AccountInformation };
 
-  const [open, setOpen] = useState(false);
-  const handleLogout = useLogout();
-
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openLogOut, setOpenLogOut] = useState(false);
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
@@ -37,13 +37,14 @@ const AccountLayout = ({ children }: Props) => {
             <p className="h-6 mb-2">{user?.email}</p>
             <button
               className="flex items-center gap-1 hover:text-red-600"
-              onClick={() => setOpen(true)}
+              onClick={() => setOpenEdit(true)}
             >
               <TbEdit />
               Edit profile
             </button>
           </div>
-          <EditProfileModal open={open} setOpen={setOpen} />
+          <EditProfileModal openEdit={openEdit} setOpenEdit={setOpenEdit} />
+          <LogOutModal openLogOut={openLogOut} setOpenLogOut={setOpenLogOut} />
           <Link href="/account/orders">
             <a
               className={`block ${
@@ -84,9 +85,7 @@ const AccountLayout = ({ children }: Props) => {
           </Link>
           <button
             className="flex items-center gap-1 hover:text-red-600 mt-10"
-            onClick={() => {
-              void handleLogout();
-            }}
+            onClick={() => setOpenLogOut(true)}
           >
             <HiOutlineLogout />
             Log out
