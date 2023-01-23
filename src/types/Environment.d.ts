@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       NEXT_PUBLIC_BASE_URL: string;
       PUBLIC_STORE_URL: string;
+      GTM_ID: string;
       SWELL_STORE_ID?: string;
       SWELL_SECRET_KEY?: string;
       SWELL_PUBLIC_KEY?: string;
@@ -14,4 +15,4 @@ declare global {
 
 // If this file has no import/export statements (i.e. is a script)
 // convert it into a module by adding an empty export statement.
-export {};
+export { };
