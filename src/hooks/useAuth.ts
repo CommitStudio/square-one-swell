@@ -22,6 +22,11 @@ export const useAuth = () => {
   const isAnonPage = allowedRoutes.includes(router.pathname);
 
   /*****************************************************************************
+   * Determine if we should show the loading indicator
+   ****************************************************************************/
+  const isLoading = (isAccountPage && user === undefined) || (isAnonPage && user !== null);
+
+  /*****************************************************************************
    * Redirect if user is logged in and tries to access login page
    ****************************************************************************/
   if (isAnonPage && user) {
@@ -37,5 +42,5 @@ export const useAuth = () => {
     void router.push('/account/login');
   }
 
-  return { user, isAccountPage, isAnonPage };
+  return { user, isLoading, isAccountPage, isAnonPage };
 };
