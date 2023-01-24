@@ -16,8 +16,7 @@ export const useAuth = () => {
     router.pathname.startsWith('/account') && !allowedRoutes.includes(router.pathname);
 
   /*****************************************************************************
-   * Is the current page an anonymous page?
-   * If so, redirect to orders if logged in
+   * Check for unprotected account pages
    ****************************************************************************/
   const isAnonPage = allowedRoutes.includes(router.pathname);
 
@@ -25,6 +24,12 @@ export const useAuth = () => {
    * Determine if we should show the loading indicator
    ****************************************************************************/
   const isLoading = (isAccountPage && user === undefined) || (isAnonPage && user !== null);
+
+  /*****************************************************************************
+   * Determine if page is ready to render
+   ****************************************************************************/
+  const isReady =
+    (isAccountPage && user) || (isAnonPage && user === null) || (!isAccountPage && !isAnonPage);
 
   /*****************************************************************************
    * Redirect if user is logged in and tries to access login page
@@ -42,5 +47,5 @@ export const useAuth = () => {
     void router.push('/account/login');
   }
 
-  return { user, isLoading, isAccountPage, isAnonPage };
+  return { isReady, isLoading };
 };
