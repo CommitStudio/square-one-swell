@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function Layout({ children }: Props) {
-  const { user, isAccountPage } = useAuth();
+  const { user, isAccountPage, isAnonPage } = useAuth();
 
   return (
     <>
@@ -27,8 +27,9 @@ export default function Layout({ children }: Props) {
       <Navbar />
       <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">
         {isAccountPage && user === undefined && <div>LOADING ...</div>}
+        {isAnonPage && user !== null && <div>LOADING ...</div>}
         {isAccountPage && user && children}
-        {!isAccountPage && children}
+        {!isAccountPage && !isAnonPage && children}
       </div>
       <Footer />
     </>
