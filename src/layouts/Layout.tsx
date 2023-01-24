@@ -26,9 +26,9 @@ export default function Layout({ children }: Props) {
       />
       <Navbar />
       <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">
-        {isAccountPage() && user === undefined && <div>LOADING ...</div>}
-        {isAccountPage() && user && children}
-        {!isAccountPage() && children}
+        {isAccountPage && user === undefined && <div>LOADING ...</div>}
+        {isAccountPage && user && children}
+        {!isAccountPage && children}
       </div>
       <Footer />
     </>
