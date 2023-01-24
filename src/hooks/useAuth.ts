@@ -9,27 +9,20 @@ export const useAuth = () => {
 
   const { user } = useUserLogged();
 
-  const isAccountPage = () => {
-    if (router.pathname.startsWith('/account') && !allowedRoutes.includes(router.pathname)) {
-      return true;
-    }
+  const isAccountPage =
+    router.pathname.startsWith('/account') && !allowedRoutes.includes(router.pathname);
 
-    return false;
-  };
+  const isAnonPage = allowedRoutes.includes(router.pathname);
 
-  if (allowedRoutes.includes(router.pathname) && user) {
+  if (isAnonPage && user) {
     console.log('REDIRECT TO ORDERS');
     void router.push('/account/orders');
   }
 
-  if (
-    user === null &&
-    router.pathname.startsWith('/account') &&
-    !allowedRoutes.includes(router.pathname)
-  ) {
+  if (user === null && isAccountPage) {
     console.log('REDIRECT TO LOGIN');
     void router.push('/account/login');
   }
 
-  return { user, isAccountPage };
+  return { user, isAccountPage, isAnonPage };
 };
