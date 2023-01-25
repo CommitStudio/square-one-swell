@@ -40,7 +40,8 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       void addProduct({
         product: product,
         quantity: productAmount,
-        toastifyMessage: `${productAmount} x ${product.name} added to cart`
+        toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.
+        `
       });
     }
   };

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Props = {
   isCartOpen: boolean;
@@ -98,7 +99,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                     </p>
                   </div>
                   <button
-                    onClick={() => void removeProductFromCart(product.id, product.variant.id)}
+                    onClick={() => {
+                      void removeProductFromCart(product.id, product.variant.id);
+                      notifySuccess(
+                        'The item has been removed from your cart. Keep shopping or proceed to checkout'
+                      );
+                    }}
                     className="self-end hover:text-red-600"
                   >
                     Remove
