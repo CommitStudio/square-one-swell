@@ -51,7 +51,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
     delete data?.confirmPassword; //Delete confirmPassword not required on the store
     setUpdateUser(data);
     setOpenEdit(false);
-    notifySuccess('Update was successful'); //TODO: Improve notify when update is NOT successful
+    notifySuccess('Your account information has been successfully updated.'); //TODO: Improve notify when update is NOT successful
   };
 
   useEffect(() => {
