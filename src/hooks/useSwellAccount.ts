@@ -28,6 +28,9 @@ export const useRegister = (
       .then((account) => {
         updateStateProp('user', account);
         setUser(account);
+        notifySuccess(
+          'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
+        );
       })
       .catch(() => setUser(null));
 
@@ -89,6 +92,9 @@ export const useLogin = (credentials: { email: string; password: string } | null
       .then((account) => {
         updateStateProp('user', account);
         setUser(account);
+        notifySuccess(
+          'Welcome! You are now logged in and can proceed to checkout or continue shopping'
+        );
       })
       .catch(() => setUser(null));
 
@@ -151,6 +157,10 @@ export const useLogout = () => {
         router.push('/').catch(() => null);
       })
       .catch(() => notifyFailure('Something went wrong'))
-      .finally(() => notifySuccess("You've been logged out"));
+      .finally(() =>
+        notifySuccess(
+          'You have been successfully logged out. Thank you for shopping with us. We hope to see you again soon!'
+        )
+      );
   };
 };

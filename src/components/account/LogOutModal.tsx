@@ -32,7 +32,7 @@ export const LogOutModal = ({ openLogOut, setOpenLogOut }: Props) => {
             </button>
             <button
               type="submit"
-              className="w-full bg-white text-secondary p-3 rounded mt-5 md:mt-10 transition-all duration-300 hover:bg-primary hover:text-secondary"
+              className="w-full bg-white text-secondary border-2 border-secondary  p-3 rounded mt-5 md:mt-10 transition-all duration-300 hover:bg-primary hover:text-secondary"
               onClick={() => {
                 void handleLogout();
               }}
