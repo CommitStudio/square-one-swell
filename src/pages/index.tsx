@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Script from 'next/script';
 
 import { GtagScript } from '~/components/globals/GtagScript';
 
@@ -12,7 +13,7 @@ import keywords from '~/data/keywords.json';
 
 import Store from '~/lib/Store';
 
-const { NEXT_PUBLIC_BASE_URL } = process.env;
+const { NEXT_PUBLIC_BASE_URL, GTM_ID } = process.env;
 
 type HomeProps = {
   products: Product[];
@@ -31,7 +32,19 @@ const Home = ({ products, categories, promotion, firstProductPromotion }: HomePr
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/`}
       />
-      <GtagScript />
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script async id="google-analytics" strategy="afterInteractive">
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', ${GTM_ID});
+      `}
+      </Script>
       <HomeHero />
       <CategoriesSlider categories={categories} />
       {/* TODO: Update call for specific filter */}
