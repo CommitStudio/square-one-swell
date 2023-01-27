@@ -1,6 +1,8 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
+import { GtagScript } from './GtagScript';
+
 interface Props {
   title: string;
   description: string;
@@ -21,6 +23,7 @@ const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={`${NEXT_PUBLIC_BASE_URL}${url}`} />
+      <GtagScript />
     </Head>
   );
 };
