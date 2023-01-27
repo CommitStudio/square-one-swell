@@ -4,14 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '~/components/globals/Footer';
 import Navbar from '~/components/globals/navbar/Navbar';
 
-import { useUserLogged } from '~/hooks/useSwellAccount';
+import { useAuth } from '~/hooks/useAuth';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function Layout({ children }: Props) {
-  useUserLogged();
+  const { isReady, isLoading } = useAuth();
 
   return (
     <>
@@ -25,7 +25,10 @@ export default function Layout({ children }: Props) {
         theme="light"
       />
       <Navbar />
-      <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">{children}</div>
+      <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">
+        {isLoading && <div>LOADING ...</div>}
+        {isReady && children}
+      </div>
       <Footer />
     </>
   );

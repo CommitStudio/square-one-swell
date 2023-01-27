@@ -109,7 +109,7 @@ export const useUserLogged = () => {
     getUserData()
       .then(({ account, cart }) => {
         updateState({ ...state, user: account || {}, localCart: cart });
-        setUser(user);
+        setUser(account);
       })
       .catch(() => {
         updateState({ ...state, user: {}, localCart: {} });
