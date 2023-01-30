@@ -15,6 +15,7 @@ const { NEXT_PUBLIC_BASE_URL } = process.env;
 const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
   return (
     <Head>
+      <GtagScript />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:url" content={`${NEXT_PUBLIC_BASE_URL}${url}`} />
@@ -23,7 +24,6 @@ const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={`${NEXT_PUBLIC_BASE_URL}${url}`} />
-      <GtagScript />
     </Head>
   );
 };
