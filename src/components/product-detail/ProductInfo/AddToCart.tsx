@@ -95,7 +95,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
               <IoIosArrowUp />
             </button>
             <button
-              onClick={() => setProductAmount(productAmount - 1)}
+              onClick={() => productAmount > 1 && setProductAmount(productAmount - 1)}
               className="bg-gray-200 hover:bg-gray-300 border hover:border-gray-300 p-1"
             >
               <IoIosArrowDown />
