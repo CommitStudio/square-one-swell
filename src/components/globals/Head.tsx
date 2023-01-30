@@ -1,8 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import { GtagScript } from './GtagScript';
-
 interface Props {
   title: string;
   description: string;
@@ -15,7 +13,6 @@ const { NEXT_PUBLIC_BASE_URL } = process.env;
 const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
   return (
     <Head>
-      <GtagScript />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:url" content={`${NEXT_PUBLIC_BASE_URL}${url}`} />

@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next';
 
+import { GtagScript } from '~/components/globals/GtagScript';
+
 import Head from '~/components/globals/Head';
 import CategoriesSlider from '~/components/home/CategoriesSlider';
 import DealOfTheWeek from '~/components/home/DealOfTheWeek';
@@ -10,7 +12,7 @@ import keywords from '~/data/keywords.json';
 
 import Store from '~/lib/Store';
 
-const { NEXT_PUBLIC_BASE_URL, GTM_ID } = process.env;
+const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 type HomeProps = {
   products: Product[];
@@ -29,6 +31,7 @@ const Home = ({ products, categories, promotion, firstProductPromotion }: HomePr
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/`}
       />
+      <GtagScript />
       <HomeHero />
       <CategoriesSlider categories={categories} />
       {/* TODO: Update call for specific filter */}
