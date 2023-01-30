@@ -34,7 +34,10 @@ const UserButtons = ({ toggleCart }: Props) => {
         {quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
       <Link href="/account/orders" title="Login">
-        <a className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary">
+        <a
+          className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
+          title="User Area"
+        >
           <FaUser />
         </a>
       </Link>
