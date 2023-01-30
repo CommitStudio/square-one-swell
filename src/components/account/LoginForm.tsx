@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -17,7 +16,6 @@ type Inputs = {
 };
 
 const LoginForm = () => {
-  const router = useRouter();
   const { updateStateProp, state } = useStore();
 
   const [isHidden, setIsHidden] = useState(true);
@@ -34,7 +32,7 @@ const LoginForm = () => {
 
   // If login is successful, redirect to the account page
   if (user) {
-    void router.push('/');
+    document.location = '/';
     return null;
   }
 
