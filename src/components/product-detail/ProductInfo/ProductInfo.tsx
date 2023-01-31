@@ -21,7 +21,7 @@ const ProductInfo = ({ product, categories }: ProductProp) => {
       <ProductTitle title={product.name} />
       <ProductRating rating={3} />
       <ProductDescription description={product.description} />
-      <ProductPriceOptions price={product.price} />
+      <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions
         product={product}
         chosenOptions={chosenOptions}

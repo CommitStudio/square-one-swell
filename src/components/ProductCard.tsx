@@ -34,7 +34,14 @@ const ProductCard = ({ product }: Props) => {
           </Link>
         </div>
         <p className="text-center text-xl pt-3">{product.name}</p>
-        <p className="text-center text-red-600 text-xl">${product.price}</p>
+        {product.salePrice ? (
+          <div>
+            <p className="text-center text-red-600 text-xl">U$ {product.salePrice?.toFixed(2)}</p>
+            <p className="line-through text-gray-300 text-center">U${product.price?.toFixed(2)}</p>
+          </div>
+        ) : (
+          <p className="text-center text-red-600 text-xl">U$ {product.price?.toFixed(2)}</p>
+        )}
       </div>
       <Link href={`/product-detail/${product.slug}`}>
         <a

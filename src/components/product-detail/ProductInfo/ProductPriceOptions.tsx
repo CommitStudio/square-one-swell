@@ -2,15 +2,20 @@ import React from 'react';
 
 type PriceOptions = {
   price?: number;
+  salePrice: number | undefined | null;
 };
 
-const ProductPriceOptions = ({ price }: PriceOptions) => {
+const ProductPriceOptions = ({ price, salePrice }: PriceOptions) => {
   return (
     <div className="space-y-1">
-      <div>
-        <span className="line-through text-gray-300 mr-2">U${price?.toFixed(2)}</span>
-        U${price && (price / 2.5).toFixed(2)}
-      </div>
+      {salePrice ? (
+        <div>
+          <span className="line-through text-gray-300 mr-2">U${price?.toFixed(2)}</span>
+          U$ {salePrice?.toFixed(2)}
+        </div>
+      ) : (
+        <div>U$ {price?.toFixed(2)}</div>
+      )}
     </div>
   );
 };

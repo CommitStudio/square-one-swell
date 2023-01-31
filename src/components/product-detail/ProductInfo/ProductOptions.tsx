@@ -18,6 +18,17 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   // To compare selected ids with the sets of active ids we transform the object of selected into an array
   const availableIdsArr = Object.entries(selectedIds).map(([key, value]) => value);
 
+  // Selects first variant option as default
+  useEffect(() => {
+    product.options?.map((option, i) => {
+      setChosenOptions((prev) => ({ ...prev, [option.label]: option.values[0].name }));
+    });
+
+    product.options?.map((option, i) => {
+      setSelectedIds((prev) => ({ ...prev, [option.label]: option.values[0].id }));
+    });
+  }, []);
+
   // Declare useEffect to 'listen' for variant selections
   useEffect(() => {
     // When the all options have a item clicked we ask if the selected ids are the same in the active variant
