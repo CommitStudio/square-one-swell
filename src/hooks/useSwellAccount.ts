@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import swell from 'swell-js';
 
@@ -142,7 +141,6 @@ const getUserData = async () => {
  * Logout current user and redirect to home page
  ****************************************************************************/
 export const useLogout = () => {
-  const router = useRouter();
   const { updateStateProp } = useStore();
 
   return async () => {
@@ -154,7 +152,8 @@ export const useLogout = () => {
           last_name: '',
           email: ''
         });
-        router.push('/').catch(() => null);
+
+        document.location = '/';
       })
       .catch(() => notifyFailure('Something went wrong'))
       .finally(() =>
