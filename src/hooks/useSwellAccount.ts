@@ -114,6 +114,7 @@ export const useUserLogged = () => {
     getUserData()
       .then(({ account, cart }) => {
         updateState({ ...state, user: account || {}, localCart: cart });
+        getUserOrders().then(console.log('dentro del user data')).catch({});
         setUser(account);
       })
       .catch(() => {
@@ -134,7 +135,17 @@ const getUserData = async () => {
   const accountPromise = swell.account.get();
   const cartPromise = swell.cart.get();
   const [account, cart] = await Promise.all([accountPromise, cartPromise]);
+
   return { account, cart };
+};
+
+/*****************************************************************************
+ * Fetch user Orders
+ ****************************************************************************/
+const getUserOrders = async () => {
+  const orders = await swell.cart.getOrder(); //aca el cart.getOrder() segun documentacion no me esta andando
+  console.log(orders, 'orders');
+  return { orders };
 };
 
 /*****************************************************************************
