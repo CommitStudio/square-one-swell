@@ -43,7 +43,8 @@ const Home = ({ products, categories, promotion, firstProductPromotion }: HomePr
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { products } = await Store.getProducts({
-    category: 'featured'
+    category: 'featured',
+    maxProducts: 20
   });
   const categories = await Store.getCategories();
   const promotion = await Store.getNextPromotionToBeExpired();

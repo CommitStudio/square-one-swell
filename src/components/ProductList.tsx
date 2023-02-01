@@ -8,6 +8,8 @@ interface Props {
 }
 
 const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
+  const randomProducts = products?.sort(() => Math.random() - 0.5).slice(0, 4);
+
   return (
     <Container className="mb-10">
       <div
@@ -19,7 +21,7 @@ const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
             : 'lg:grid-cols-4'
         }  gap-y-4 justify-items-center`}
       >
-        {products?.map((product, i) => {
+        {randomProducts?.map((product, i) => {
           return <ProductCard product={product} key={`card-${i}`} />;
         })}
       </div>
