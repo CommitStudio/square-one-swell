@@ -12,7 +12,7 @@ type Store = {
   triggerFetchCart: boolean;
   user: AccountInformation | object;
   localCart: swell.Cart | object;
-  orders: object; //to improve
+  orders: UserOrder[] | object;
 };
 
 export const store = atom({

@@ -112,9 +112,13 @@ export const useUserLogged = () => {
 
   useEffect(() => {
     getUserData()
-      .then(({ account, cart }) => {
-        updateState({ ...state, user: account || {}, localCart: cart });
-        getUserOrders().then(console.log('dentro del user data')).catch({});
+      .then(({ account, cart, listOrders }) => {
+        updateState({
+          ...state,
+          user: account || {},
+          localCart: cart,
+          orders: listOrders
+        });
         setUser(account);
       })
       .catch(() => {
@@ -134,18 +138,39 @@ export const useUserLogged = () => {
 const getUserData = async () => {
   const accountPromise = swell.account.get();
   const cartPromise = swell.cart.get();
-  const [account, cart] = await Promise.all([accountPromise, cartPromise]);
+  const orderPromise = getUserOrders();
+  const [account, cart, listOrders] = await Promise.all([
+    accountPromise,
+    cartPromise,
+    orderPromise
+  ]);
 
-  return { account, cart };
+  return { account, cart, listOrders };
 };
 
 /*****************************************************************************
  * Fetch user Orders
  ****************************************************************************/
 const getUserOrders = async () => {
-  const orders = await swell.account.getOrders();
-  console.log(orders, 'orders');
-  return { orders };
+  const dataFromlistOrders = await swell.account.listOrders();
+  const userOrders = dataFromlistOrders.results;
+
+  return userOrders.map((order: Order) => {
+    // console.log(order.items[0].product.images[0].file.url);
+    return {
+      id: order.id,
+      number: order.number,
+      status: order.status,
+      delivered: order.delivered,
+      date: order.date_created,
+      items: order.item_quantity,
+      total: order.grand_total,
+      currency: order.currency,
+      paid: order.paid,
+      image1: order.items[0].product.images[0].file.url
+      // image2: order.items[1]
+    } as UserOrder;
+  });
 };
 
 /*****************************************************************************
