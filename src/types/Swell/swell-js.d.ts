@@ -17,6 +17,7 @@ declare module 'swell-js' {
     login(email, password): Promise<AccountInformation | null>;
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
+    getOrders(): Promise<Order[]>;
   }
 
   export interface AccountInformation {
