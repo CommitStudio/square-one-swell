@@ -143,7 +143,7 @@ const getUserData = async () => {
  * Fetch user Orders
  ****************************************************************************/
 const getUserOrders = async () => {
-  const orders = await swell.cart.getOrder(); //aca el cart.getOrder() segun documentacion no me esta andando
+  const orders = await swell.account.getOrders();
   console.log(orders, 'orders');
   return { orders };
 };
