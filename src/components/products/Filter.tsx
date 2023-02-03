@@ -36,6 +36,7 @@ const Filter = ({ categories }: FilterProps) => {
 
   return (
     <Container className="pt-10">
+      {console.log(state.isSearchOpen)}
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center">
           <button

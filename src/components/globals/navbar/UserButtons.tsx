@@ -11,7 +11,7 @@ type Props = {
 };
 
 const UserButtons = ({ toggleCart }: Props) => {
-  const { state } = useStore();
+  const { state, updateStateProp } = useStore();
   const quantity = determineIfIsCart(state.localCart) && state.localCart.item_quantity;
 
   return (
