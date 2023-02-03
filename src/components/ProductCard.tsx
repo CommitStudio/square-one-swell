@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+
 import { FaRegHeart } from 'react-icons/fa';
+
+import Tooltip from './globals/Tooltip';
 
 interface Props {
   product: Product;
@@ -20,11 +23,15 @@ const ProductCard = ({ product }: Props) => {
     >
       <div className="px-4 pt-6 pb-12">
         <div className="flex justify-end">
-          <FaRegHeart
-            className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-              isHovered ? 'lg:-translate-x-2' : 'lg:opacity-0 lg:translate-x-3'
-            }`}
-          />
+          <Tooltip content="Feature coming soon!">
+            <div>
+              <FaRegHeart
+                className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
+                  isHovered ? 'lg:-translate-x-0' : 'lg:opacity-0 lg:translate-x-3'
+                }`}
+              />
+            </div>
+          </Tooltip>
         </div>
         <div className="flex justify-center cursor-pointer">
           <Link href={`/product-detail/${product.slug}`}>

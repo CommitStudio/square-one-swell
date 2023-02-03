@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
+import Link from 'next/link';
 import React from 'react';
 import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-icons/ai';
 
@@ -15,9 +16,11 @@ const LinksAddress = () => {
         {items.slice(0, 4).map(function (item, i) {
           return (
             <p key={`address-item-1.${i}`}>
-              <a className="hover:text-primary" href="/">
-                {item.name}
-              </a>
+              <Link href={item.href}>
+                <a className="hover:text-primary" href="/">
+                  {item.name}
+                </a>
+              </Link>
             </p>
           );
         })}
@@ -26,9 +29,11 @@ const LinksAddress = () => {
         {items.slice(4, 8).map(function (item, i) {
           return (
             <p key={`address-item-2.${i}`}>
-              <a className="hover:text-primary" href="/">
-                {item.name}
-              </a>
+              <Link href={item.href}>
+                <a className="hover:text-primary" href="/">
+                  {item.name}
+                </a>
+              </Link>
             </p>
           );
         })}

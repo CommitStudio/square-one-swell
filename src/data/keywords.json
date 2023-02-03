@@ -1,5 +1,7 @@
 {
   "home": "ecommerce, development, web, storefront",
   "products": "products, deals, sales, collection, categories",
-  "product_detail": "product, additional information, reviews, price, pictures"
+  "product_detail": "product, additional information, reviews, price, pictures",
+  "privacy_policy": "privacy, policy, terms, conditions, information",
+  "terms_conditions": "terms, conditions, privacy, policy, information"
 }
