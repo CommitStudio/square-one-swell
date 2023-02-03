@@ -154,9 +154,7 @@ const getUserData = async () => {
 const getUserOrders = async () => {
   const dataFromlistOrders = await swell.account.listOrders();
   const userOrders = dataFromlistOrders.results;
-
   return userOrders.map((order: Order) => {
-    // console.log(order.items[0].product.images[0].file.url);
     return {
       id: order.id,
       number: order.number,
@@ -168,7 +166,6 @@ const getUserOrders = async () => {
       currency: order.currency,
       paid: order.paid,
       image1: order.items[0].product.images[0].file.url
-      // image2: order.items[1]
     } as UserOrder;
   });
 };

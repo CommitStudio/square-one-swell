@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.3",
     "@headlessui/tailwindcss": "^0.1.1",
     "@tailwindcss/line-clamp": "^0.4.0",
+    "dayjs": "^1.11.7",
     "html-react-parser": "^3.0.4",
     "jotai": "^1.8.0",
     "next": "^12.2.0",
