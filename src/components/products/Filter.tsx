@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -19,9 +19,7 @@ interface FilterProps {
 }
 
 const Filter = ({ categories }: FilterProps) => {
-  const { state } = useStore();
-  const { updateStateProp } = useStore();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { state, updateStateProp } = useStore();
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -34,6 +32,7 @@ const Filter = ({ categories }: FilterProps) => {
 
   return (
     <Container className="pt-10">
+      {console.log(state.isSearchOpen)}
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center">
           <button
@@ -48,11 +47,11 @@ const Filter = ({ categories }: FilterProps) => {
             )}
           </button>
           <button
-            onClick={() => setIsSearchOpen((prev) => !prev)}
+            onClick={() => updateStateProp('isSearchOpen', !state.isSearchOpen)}
             className="flex items-center md:ml-4 my-4"
           >
             Search
-            {isSearchOpen ? (
+            {state.isSearchOpen ? (
               <MdOutlineClose className="text-2xl pl-[4px] text-red-700" />
             ) : (
               <BsSearch className="ml-2" />
@@ -61,7 +60,7 @@ const Filter = ({ categories }: FilterProps) => {
           <div className="">
             <Transition
               as={Fragment}
-              show={isSearchOpen}
+              show={state.isSearchOpen}
               enter="transition-all ease-in-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"

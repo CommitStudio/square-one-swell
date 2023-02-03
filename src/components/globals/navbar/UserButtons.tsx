@@ -11,18 +11,19 @@ type Props = {
 };
 
 const UserButtons = ({ toggleCart }: Props) => {
-  const { state } = useStore();
+  const { state, updateStateProp } = useStore();
   const quantity = determineIfIsCart(state.localCart) && state.localCart.item_quantity;
 
   return (
     <div className="flex lg:order-2">
-      <button
-        type="button"
-        className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
-        title="Search"
-      >
-        <FaSearch />
-      </button>
+      <Link href="/products" title="Search">
+        <a
+          onClick={() => updateStateProp('isSearchOpen', true)}
+          className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary"
+        >
+          <FaSearch />
+        </a>
+      </Link>
 
       <button
         type="button"
@@ -31,7 +32,7 @@ const UserButtons = ({ toggleCart }: Props) => {
         onClick={toggleCart}
       >
         <FaShoppingCart />
-        {quantity > 0 && <Badge itemsQuantity={quantity} />}
+        {typeof quantity == 'number' && quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
       <Link href="/account/orders" title="Login">
         <a

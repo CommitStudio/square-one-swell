@@ -12,6 +12,7 @@ type Store = {
   triggerFetchCart: boolean;
   user: AccountInformation | object;
   localCart: swell.Cart | object;
+  isSearchOpen: boolean;
 };
 
 export const store = atom({
@@ -21,7 +22,8 @@ export const store = atom({
   isVariantActive: true,
   triggerFetchCart: false,
   user: {},
-  localCart: {}
+  localCart: {},
+  isSearchOpen: false
 });
 
 export function useStore(): {
