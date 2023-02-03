@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import ProductCard from '~/components/ProductCard';
 import Container from '~/layouts/Container';
 
@@ -8,6 +10,13 @@ interface Props {
 }
 
 const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
+  const [randomProducts, setRandomProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    setRandomProducts(products ? products.sort(() => Math.random() - 0.5).slice(0, 4) : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container className="mb-10">
       <div

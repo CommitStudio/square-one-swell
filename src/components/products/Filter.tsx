@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -20,6 +20,7 @@ interface FilterProps {
 
 const Filter = ({ categories }: FilterProps) => {
   const { state, updateStateProp } = useStore();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -30,9 +31,14 @@ const Filter = ({ categories }: FilterProps) => {
     { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
   ];
 
+  useEffect(() => {
+    if (state.isSearchOpen) {
+      inputRef.current?.focus();
+    }
+  }, [state.isSearchOpen]);
+
   return (
     <Container className="pt-10">
-      {console.log(state.isSearchOpen)}
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center">
           <button
@@ -60,15 +66,16 @@ const Filter = ({ categories }: FilterProps) => {
           <div className="">
             <Transition
               as={Fragment}
-              show={state.isSearchOpen}
-              enter="transition-all ease-in-out duration-300"
+              show={state.isSearchOpen as boolean}
+              enter=" ease-in-out duration-[0]"
               enterFrom="opacity-0"
               enterTo="opacity-100"
-              leave="transition-all ease-in-out duration-300"
+              leave=" ease-in-out duration-[0]"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
               <input
+                ref={inputRef}
                 type="text"
                 placeholder="Search..."
                 className={
