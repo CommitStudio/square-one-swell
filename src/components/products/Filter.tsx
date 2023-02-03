@@ -66,7 +66,7 @@ const Filter = ({ categories }: FilterProps) => {
           <div className="">
             <Transition
               as={Fragment}
-              show={state.isSearchOpen as boolean}
+              show={state.isSearchOpen}
               enter=" ease-in-out duration-[0]"
               enterFrom="opacity-0"
               enterTo="opacity-100"
