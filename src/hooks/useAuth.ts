@@ -35,7 +35,6 @@ export const useAuth = () => {
    * Redirect if user is logged in and tries to access login page
    ****************************************************************************/
   if (isAnonPage && user) {
-    console.log('REDIRECT TO ORDERS');
     void router.push('/account/orders');
   }
 
@@ -43,7 +42,6 @@ export const useAuth = () => {
    * Redirect if user is not logged in and tries to access protected pages
    ****************************************************************************/
   if (user === null && isAccountPage) {
-    console.log('REDIRECT TO LOGIN');
     void router.push('/account/login');
   }
 
