@@ -1,5 +1,6 @@
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment, useEffect, useRef } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
@@ -21,6 +22,7 @@ interface FilterProps {
 const Filter = ({ categories }: FilterProps) => {
   const { state, updateStateProp } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -35,7 +37,13 @@ const Filter = ({ categories }: FilterProps) => {
     if (state.isSearchOpen) {
       inputRef.current?.focus();
     }
-  }, [state.isSearchOpen]);
+    return () => {
+      if (router.pathname.includes('/products')) {
+        updateStateProp('isSearchOpen', false);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.pathname]);
 
   return (
     <Container className="pt-10">
