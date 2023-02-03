@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -18,8 +17,6 @@ type Inputs = {
 };
 
 const RegisterForm = () => {
-  const router = useRouter();
-
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
   const [registerCredentials, setRegisterCredentials] = useState<Inputs | null>(null);
@@ -34,7 +31,7 @@ const RegisterForm = () => {
 
   // If register is successful, redirect to the account page
   if (user?.id) {
-    void router.push('/');
+    document.location = '/';
     return null;
   }
 
