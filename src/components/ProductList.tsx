@@ -14,11 +14,11 @@ const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
 
   useEffect(() => {
     setRandomProducts(products ? products.sort(() => Math.random() - 0.5).slice(0, 4) : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Container className="mb-10">
-      {console.log(randomProducts)}
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${
           threeColumns
