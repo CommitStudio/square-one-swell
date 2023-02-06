@@ -6,6 +6,8 @@ import { FaRegHeart } from 'react-icons/fa';
 
 import Tooltip from './globals/Tooltip';
 
+import { formatCurrency } from '~/utils/numbers';
+
 interface Props {
   product: Product;
 }
@@ -43,11 +45,15 @@ const ProductCard = ({ product }: Props) => {
         <p className="text-center text-xl pt-3">{product.name}</p>
         {product.salePrice ? (
           <div>
-            <p className="text-center text-red-600 text-xl">U$ {product.salePrice?.toFixed(2)}</p>
-            <p className="line-through text-gray-300 text-center">U${product.price?.toFixed(2)}</p>
+            <p className="text-center text-red-600 text-xl">
+              U$ {formatCurrency(product.salePrice)}
+            </p>
+            <p className="line-through text-gray-300 text-center">
+              U$ {formatCurrency(product.price)}
+            </p>
           </div>
         ) : (
-          <p className="text-center text-red-600 text-xl">U$ {product.price?.toFixed(2)}</p>
+          <p className="text-center text-red-600 text-xl">U$ {formatCurrency(product.price)}</p>
         )}
       </div>
       <Link href={`/product-detail/${product.slug}`}>
