@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { formatCurrency } from '~/utils/numbers';
+
 type PriceOptions = {
-  price?: number;
+  price: number;
   salePrice: number | undefined | null;
 };
 
@@ -10,11 +12,11 @@ const ProductPriceOptions = ({ price, salePrice }: PriceOptions) => {
     <div className="space-y-1">
       {salePrice ? (
         <div>
-          <span className="line-through text-gray-300 mr-2">U${price?.toFixed(2)}</span>
-          U$ {salePrice?.toFixed(2)}
+          <span className="line-through text-gray-300 mr-2">U${formatCurrency(price)}</span>
+          U$ {formatCurrency(salePrice)}
         </div>
       ) : (
-        <div>U$ {price?.toFixed(2)}</div>
+        <div>U$ {formatCurrency(price)}</div>
       )}
     </div>
   );
