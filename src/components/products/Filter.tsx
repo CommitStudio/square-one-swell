@@ -1,10 +1,5 @@
 import Link from 'next/link';
-<<<<<<< HEAD
 import { useEffect, useRef } from 'react';
-=======
-import { useRouter } from 'next/router';
-import { Fragment, useEffect, useRef } from 'react';
->>>>>>> e12125a (moved reset isSearchOpen reset logic to component)
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -25,7 +20,6 @@ interface FilterProps {
 const Filter = ({ categories }: FilterProps) => {
   const { state, updateStateProp } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -37,21 +31,8 @@ const Filter = ({ categories }: FilterProps) => {
   ];
 
   useEffect(() => {
-<<<<<<< HEAD
     inputRef.current?.focus();
   }, []);
-=======
-    if (state.isSearchOpen) {
-      inputRef.current?.focus();
-    }
-    return () => {
-      if (router.pathname.includes('/products')) {
-        updateStateProp('isSearchOpen', false);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.pathname]);
->>>>>>> e12125a (moved reset isSearchOpen reset logic to component)
 
   return (
     <Container className="pt-10">
