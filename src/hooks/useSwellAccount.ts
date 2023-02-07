@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import swell from 'swell-js';
+import swell, { card } from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
@@ -112,17 +112,18 @@ export const useUserLogged = () => {
 
   useEffect(() => {
     getUserData()
-      .then(({ account, cart, listOrders }) => {
+      .then(({ account, cart, listOrders, userCards }) => {
         updateState({
           ...state,
           user: account || {},
           localCart: cart,
-          orders: listOrders
+          orders: listOrders,
+          cards: userCards
         });
         setUser(account);
       })
       .catch(() => {
-        updateState({ ...state, user: {}, localCart: {} });
+        updateState({ ...state, user: {}, localCart: {}, cards: {} });
         setUser(null);
       });
 
@@ -139,13 +140,15 @@ const getUserData = async () => {
   const accountPromise = swell.account.get();
   const cartPromise = swell.cart.get();
   const orderPromise = getUserOrders();
-  const [account, cart, listOrders] = await Promise.all([
+  const listCards = swell.account.listCards();
+  const [account, cart, listOrders, userCards] = await Promise.all([
     accountPromise,
     cartPromise,
-    orderPromise
+    orderPromise,
+    listCards
   ]);
 
-  return { account, cart, listOrders };
+  return { account, cart, listOrders, userCards };
 };
 
 /*****************************************************************************
