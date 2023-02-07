@@ -1,9 +1,12 @@
+import { format } from 'path';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
-import { notifyFailure, notifySuccess } from '~/utils/toastifies';
+import { formatCurrency } from '~/utils/numbers';
+import { notifySuccess } from '~/utils/toastifies';
 
 type Props = {
   isCartOpen: boolean;
@@ -95,7 +98,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                     <p>{product.product.name}</p>
                     <p>Variant: {product.variant?.name}</p>
                     <p>
-                      {product.quantity} x ${product.price.toFixed(2)}
+                      {product.quantity} x ${formatCurrency(product.price)}
                     </p>
                   </div>
                   <button
@@ -119,32 +122,31 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p className="text-right">
                 ${' '}
                 {determineIfIsCart(state.localCart) && state.localCart.items
-                  ? determineIfIsCart(state.localCart) &&
-                    state.localCart.items
-                      ?.reduce((acc, product) => acc + product.price * product.quantity, 0)
-                      .toFixed(2)
+                  ? formatCurrency(
+                      state.localCart.items?.reduce(
+                        (acc, product) => acc + product.price * product.quantity,
+                        0
+                      )
+                    )
                   : Number(0).toFixed(2)}
               </p>
               <p>Taxes</p>
               <p className="text-right">
                 ${' '}
                 {determineIfIsCart(state.localCart) && state.localCart.tax_total
-                  ? determineIfIsCart(state.localCart) && state.localCart.tax_total.toFixed(2)
+                  ? formatCurrency(state.localCart.tax_total)
                   : Number(0).toFixed(2)}
               </p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
                 {determineIfIsCart(state.localCart) && state.localCart.items
-                  ? (
-                      Number(
-                        determineIfIsCart(state.localCart) &&
-                          state.localCart.items?.reduce(
-                            (acc, product) => acc + product.price * product.quantity,
-                            0
-                          )
-                      ) + Number(determineIfIsCart(state.localCart) && state.localCart.tax_total)
-                    ).toFixed(2)
+                  ? formatCurrency(
+                      state.localCart.items?.reduce(
+                        (acc, product) => acc + product.price * product.quantity,
+                        0
+                      ) + state.localCart.tax_total
+                    )
                   : Number(0).toFixed(2)}
               </p>
             </div>
