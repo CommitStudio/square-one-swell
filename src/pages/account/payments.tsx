@@ -3,9 +3,14 @@ import { MdPayment } from 'react-icons/md';
 
 import AccountLayout from '~/components/account/AccountLayout';
 import PaymentsModal from '~/components/account/PaymentsModal';
+import { useStore } from '~/hooks/useStore';
 
 const Payments = () => {
   const [open, setOpen] = useState(false);
+  const { state } = useStore();
+  const { cards } = state as { cards: UserCards[] };
+
+  console.log(cards, 'en payments');
 
   return (
     <AccountLayout>

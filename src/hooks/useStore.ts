@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 import type { AccountInformation } from 'swell-js';
 
-import { swell } from './useSwellCart';
+import { swell } from './useSwellConection';
 
 type Store = {
   isFilterOpen: boolean;
@@ -14,6 +14,7 @@ type Store = {
   localCart: swell.Cart | object;
   orders: UserOrder[] | object;
   addresses: SwellAddress | object;
+  cards: UserCards[] | object;
 };
 
 export const store = atom({
@@ -25,7 +26,8 @@ export const store = atom({
   user: {},
   localCart: {},
   orders: {},
-  addresses: {}
+  addresses: {},
+  cards: {}
 });
 
 export function useStore(): {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import swell from 'swell-js';
+import swell, { card } from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
@@ -112,18 +112,19 @@ export const useUserLogged = () => {
 
   useEffect(() => {
     getUserData()
-      .then(({ account, cart, listOrders, addresses }) => {
+      .then(({ account, cart, listOrders, addresses, userCards }) => {
         updateState({
           ...state,
           user: account || {},
           localCart: cart,
           orders: listOrders,
-          addresses: addresses
+          addresses: addresses,
+          cards: userCards
         });
         setUser(account);
       })
       .catch(() => {
-        updateState({ ...state, user: {}, localCart: {}, orders: {}, addresses: {} });
+        updateState({ ...state, user: {}, localCart: {}, orders: {}, addresses: {}, cards: {} });
         setUser(null);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,14 +141,15 @@ const getUserData = async () => {
   const cartPromise = swell.cart.get();
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
-  const [account, cart, listOrders, addresses] = await Promise.all([
+  const listCards = swell.account.listCards();
+  const [account, cart, listOrders, addresses, userCards] = await Promise.all([
     accountPromise,
     cartPromise,
     orderPromise,
     AddressesPromise
   ]);
 
-  return { account, cart, listOrders, addresses };
+  return { account, cart, listOrders, addresses, userCards };
 };
 
 /*****************************************************************************
