@@ -17,7 +17,7 @@ const Payments = () => {
         onClick={() => setOpen(true)}
       >
         <MdPayment />
-        ADD NEW PAYMENT METHOD
+        ADD NEW CREDIT CARD
       </button>
       <PaymentsModal open={open} setOpen={setOpen} />
     </AccountLayout>
