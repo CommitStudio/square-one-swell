@@ -11,7 +11,6 @@ const SkeletonPlaceholder = () => {
             <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-500 w-24 mb-8"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-500 w-40 max-w-[360px] mb-7"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-500 w-32 mb-7"></div>
-            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-500 w-40 mb-7"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-500 w-32 mb-14"></div>
             <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-500 max-w-[95px] mb-2.5"></div>
             <span className="sr-only">Loading...</span>

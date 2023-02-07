@@ -54,17 +54,6 @@ const AccountLayout = ({ children }: Props) => {
               Orders & Returns
             </a>
           </Link>
-          <Link href="/account/subscriptions">
-            <a
-              className={`block ${
-                router.pathname.includes('/account/subscriptions')
-                  ? 'font-semibold bg-gray-100'
-                  : ''
-              } hover:bg-gray-100 p-2 mb-1`}
-            >
-              Subscriptions
-            </a>
-          </Link>
           <Link href="/account/addresses">
             <a
               className={`block ${
