@@ -28,6 +28,7 @@ declare module 'swell-js' {
       country: string,
       phone: string
     }): Promise<SwellAddressResult>;
+    deleteAddress(id: string): Promise<SwellAddressResult>;
   }
 
   export interface AccountInformation {

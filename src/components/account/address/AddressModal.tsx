@@ -30,7 +30,7 @@ type Props = {
 };
 
 const AddressModal = ({ open, setOpen }: Props) => {
-  const { state, updateStateProp } = useStore();
+  const { updateStateProp } = useStore();
 
   const {
     register,
