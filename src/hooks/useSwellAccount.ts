@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import swell, { card } from 'swell-js';
+import swell from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
