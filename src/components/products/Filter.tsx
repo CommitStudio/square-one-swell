@@ -1,6 +1,5 @@
-import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -19,9 +18,8 @@ interface FilterProps {
 }
 
 const Filter = ({ categories }: FilterProps) => {
-  const { state } = useStore();
-  const { updateStateProp } = useStore();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { state, updateStateProp } = useStore();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -31,6 +29,10 @@ const Filter = ({ categories }: FilterProps) => {
     { name: '+$40', slug: { minPrice: 40, maxPrice: '' } },
     { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
   ];
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <Container className="pt-10">
@@ -47,36 +49,18 @@ const Filter = ({ categories }: FilterProps) => {
               <BsFilter className="ml-2 text-lg" />
             )}
           </button>
-          <button
-            onClick={() => setIsSearchOpen((prev) => !prev)}
-            className="flex items-center md:ml-4 my-4"
-          >
-            Search
-            {isSearchOpen ? (
-              <MdOutlineClose className="text-2xl pl-[4px] text-red-700" />
-            ) : (
+          <div className="flex items-center">
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search..."
+              className={
+                'md:ml-4 my-2 px-4 py-1 text-l border border-solid border-gray-300 rounded focus:outline focus:outline-2 focus:outline-secondary'
+              }
+            />
+            <button>
               <BsSearch className="ml-2" />
-            )}
-          </button>
-          <div className="">
-            <Transition
-              as={Fragment}
-              show={isSearchOpen}
-              enter="transition-all ease-in-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-all ease-in-out duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <input
-                type="text"
-                placeholder="Search..."
-                className={
-                  'md:ml-4 my-2 px-4 py-1 text-l border border-solid border-gray-300 rounded focus:outline focus:outline-2 focus:outline-secondary'
-                }
-              />
-            </Transition>
+            </button>
           </div>
         </div>
         <SortBy />
