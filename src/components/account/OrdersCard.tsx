@@ -8,8 +8,6 @@ interface OrderProps {
 }
 
 const OrderCard = ({ order }: OrderProps) => {
-  console.log(order);
-
   return (
     <div className="flex flex-col md:flex-row rounded bg-primary-lightest p-4 shadow-md border border-gray-50 mb-6">
       <div className="flex-none w-120">
