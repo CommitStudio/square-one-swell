@@ -7,23 +7,9 @@ interface OrderProps {
   order: UserOrder;
 }
 
-const orderStatusMap: OrderStatusMap = {
-  pending: { label: 'Pending' },
-  draft: { label: 'Draft' },
-  payment_pending: { label: 'Payment Pending' },
-  delivery_pending: { label: 'Pending Delivery' },
-  hold: { label: 'Hold' },
-  completed: { label: 'Completed' },
-  canceled: { label: 'Canceled' }
-};
-
-type OrderStatusMap = {
-  [key: string]: {
-    label: string;
-  };
-};
-
 const OrderCard = ({ order }: OrderProps) => {
+  console.log(order);
+
   return (
     <div className="flex flex-col md:flex-row rounded bg-primary-lightest p-4 shadow-md border border-gray-50 mb-6">
       <div className="flex-none w-120">
@@ -39,7 +25,9 @@ const OrderCard = ({ order }: OrderProps) => {
         </div>
       </div>
       <div className="md:ml-10 mt-5 md:mt-0  flex-auto w-64">
-        <p className="font-bold text-lg">{orderStatusMap[order.status].label}</p>
+        <p className="font-bold text-lg first-letter:capitalize">
+          {order.status.replace('_', ' ')}
+        </p>
 
         <div className="text-sm space-y-1 pt-4">
           <p>
