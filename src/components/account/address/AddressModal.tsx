@@ -1,8 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
+import swell from 'swell-js';
+
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
+import { useStore } from '~/hooks/useStore';
+
+swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
 const { countries } = countriesJSON;
 
@@ -25,14 +30,28 @@ type Props = {
 };
 
 const AddressModal = ({ open, setOpen }: Props) => {
+  const { state, updateStateProp } = useStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
+    const fullName = `${data.firstName} ${data.lastName}`;
+    await swell.account.createAddress({
+      name: fullName,
+      address1: data.address,
+      address2: data.apartment,
+      city: data.city,
+      zip: data.zipCode,
+      country: data.country,
+      phone: data.phone
+    });
+    const allAddress = await swell.account.listAddresses();
+    updateStateProp('addresses', allAddress);
   };
 
   return (
@@ -155,7 +174,7 @@ const AddressModal = ({ open, setOpen }: Props) => {
                       ------
                     </option>
                   ) : (
-                    <option key={i} value={`${country.name}`}>
+                    <option key={i} value={`${country.alpha2Code}`}>
                       {`${country.name}`}
                     </option>
                   )

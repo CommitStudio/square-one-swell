@@ -112,12 +112,13 @@ export const useUserLogged = () => {
 
   useEffect(() => {
     getUserData()
-      .then(({ account, cart, listOrders }) => {
+      .then(({ account, cart, listOrders, addresses }) => {
         updateState({
           ...state,
           user: account || {},
           localCart: cart,
-          orders: listOrders
+          orders: listOrders,
+          addresses: addresses
         });
         setUser(account);
       })
@@ -139,13 +140,15 @@ const getUserData = async () => {
   const accountPromise = swell.account.get();
   const cartPromise = swell.cart.get();
   const orderPromise = getUserOrders();
-  const [account, cart, listOrders] = await Promise.all([
+  const AddressesPromise = swell.account.listAddresses();
+  const [account, cart, listOrders, addresses] = await Promise.all([
     accountPromise,
     cartPromise,
-    orderPromise
+    orderPromise,
+    AddressesPromise
   ]);
 
-  return { account, cart, listOrders };
+  return { account, cart, listOrders, addresses };
 };
 
 /*****************************************************************************
