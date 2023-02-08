@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, Fragment, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
 import { BsSearch, BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
-import { FilterBy } from './FilterBy';
-
-import SortBy from './SortBy';
-
+import { FilterBy } from '~/components/products/FilterBy';
+import SortBy from '~/components/products/SortBy';
 import { useStore } from '~/hooks/useStore';
-
 import Container from '~/layouts/Container';
 
 interface FilterProps {
@@ -18,10 +14,6 @@ interface FilterProps {
   pagination: Pagination;
   products: Product[];
 }
-
-type Input = {
-  search: string;
-};
 
 const Filter = ({ categories }: FilterProps) => {
   const { state, updateStateProp } = useStore();

@@ -14,7 +14,6 @@ type Store = {
   localCart: swell.Cart | object;
   orders: UserOrder[] | object;
   addresses: SwellAddress | object;
-  isSearchOpen: boolean;
 };
 
 export const store = atom({
@@ -26,8 +25,7 @@ export const store = atom({
   user: {},
   localCart: {},
   orders: {},
-  addresses: {},
-  isSearchOpen: false
+  addresses: {}
 });
 
 export function useStore(): {
