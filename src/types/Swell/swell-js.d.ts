@@ -18,6 +18,33 @@ declare module 'swell-js' {
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
     listOrders(): Promise<ListOrders>;
+    listAddresses(): Promise<SwellAddress>;
+    createAddress({
+      name: string,
+      address1: string,
+      address2: string,
+      city: string,
+      zip: string,
+      country: string,
+      phone: string
+    }): Promise<SwellAddressResult>;
+    deleteAddress(id: string): Promise<SwellAddressResult>;
+    updateAddress(
+      id: string,
+      {
+        active: boolean,
+        address1: string,
+        address2: string,
+        city: string,
+        country: string,
+        first_name: string,
+        id: string,
+        last_name: string,
+        name: string,
+        phone: string,
+        zip: string
+      }
+    ): Promise<SwellAddressResult>;
   }
 
   export interface AccountInformation {
@@ -46,6 +73,29 @@ declare module 'swell-js' {
     date_created: string;
     balance: number;
     id: string;
+  }
+
+  interface SwellAddress {
+    count: number;
+    page: number;
+    results: SwellAddressResult[];
+  }
+
+  interface SwellAddressResult {
+    active: boolean;
+    address1: string;
+    address2: string | null;
+    city: string;
+    country: string;
+    date_created: string;
+    fingerprint: string;
+    first_name: string;
+    id: string;
+    last_name: string;
+    name: string;
+    parent_id: string;
+    phone: string | null;
+    zip: string | null;
   }
 
   export const account: Account;

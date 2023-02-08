@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import AccountLayout from '~/components/account/AccountLayout';
-import AddressModal from '~/components/account/address/AddressModal';
 import AddressesBody from '~/components/account/address/AddressesBody';
+import NewAddressModal from '~/components/account/address/NewAddressModal';
 
 const Addresses = () => {
   const [open, setOpen] = useState(false);
@@ -10,7 +10,7 @@ const Addresses = () => {
   return (
     <AccountLayout>
       <AddressesBody setOpen={setOpen} />
-      <AddressModal open={open} setOpen={setOpen} />
+      <NewAddressModal open={open} setOpen={setOpen} />
     </AccountLayout>
   );
 };
