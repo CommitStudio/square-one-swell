@@ -42,9 +42,9 @@ const SortBy = () => {
   };
 
   return (
-    <div className="flex items-center md:ml-6">
-      <span className="mr-2">Sort by</span>
-      <MdSort className="text-xl mr-2" />
+    <div className="flex items-center gap-5">
+      <span className="w-[55px]">Sort by</span>
+      <MdSort className="text-xl" />
       <div className="min-w-fit w-32">
         <Listbox value={selected} onChange={handleFilter}>
           <div className="relative">
