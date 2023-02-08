@@ -12,16 +12,14 @@ swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KE
 const { countries } = countriesJSON;
 
 type Inputs = {
-  firstName: string;
-  lastName: string;
-  address: string;
-  additionalAddressInfo: string;
-  apartment: string;
+  first_name: string;
+  last_name: string;
+  address1: string;
+  address2: string;
   city: string;
   country: string;
-  zipCode: string;
+  zip: string;
   phone: string;
-  isDefaultAddress: boolean;
 };
 
 type Props = {
@@ -29,29 +27,31 @@ type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AddressModal = ({ open, setOpen }: Props) => {
+const NewAddressModal = ({ open, setOpen }: Props) => {
   const { updateStateProp } = useStore();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
-    const fullName = `${data.firstName} ${data.lastName}`;
+    const fullName = `${data.first_name} ${data.last_name}`;
     await swell.account.createAddress({
       name: fullName,
-      address1: data.address,
-      address2: data.apartment,
+      address1: data.address1,
+      address2: data.address2,
       city: data.city,
-      zip: data.zipCode,
+      zip: data.zip,
       country: data.country,
       phone: data.phone
     });
     const allAddress = await swell.account.listAddresses();
     updateStateProp('addresses', allAddress);
+    setOpen(false);
+    reset();
   };
 
   return (
@@ -75,72 +75,59 @@ const AddressModal = ({ open, setOpen }: Props) => {
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="firstName"
+            id="first_name"
             type="text"
-            {...register('firstName', {
+            {...register('first_name', {
               required: 'Please enter your first name.',
               maxLength: { value: 50, message: 'First name is too long.' }
             })}
           />
-          {errors.firstName && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.firstName.message}</p>
+          {errors.first_name && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.first_name.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="lastName">
             <span className="text-red-500">*</span> Last Name
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="lastName"
+            id="last_name"
             type="text"
-            {...register('lastName', {
+            {...register('last_name', {
               required: 'Please enter your last name.',
               maxLength: { value: 50, message: 'Last name is too long.' }
             })}
           />
-          {errors.lastName && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.lastName.message}</p>
+          {errors.last_name && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.last_name.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="address">
             <span className="text-red-500">*</span> Address
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="address"
+            id="address1"
             type="text"
-            {...register('address', {
+            {...register('address1', {
               required: 'Please enter your address.',
               maxLength: { value: 50, message: 'Address is too long.' }
             })}
           />{' '}
-          {errors.address && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address.message}</p>
-          )}
-          <label className="block text-sm mb-2" htmlFor="additionalAddressInfo">
-            Additional address information
-          </label>
-          <textarea
-            className="w-full mb-4"
-            id="additionalAddressInfo"
-            {...register('additionalAddressInfo', {})}
-          />
-          {errors.address && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">
-              {errors.additionalAddressInfo?.message}
-            </p>
+          {errors.address1 && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address1.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="apartment">
             Apartment / Floor / Suite
           </label>
           <input
             className="w-full mb-4 p-2"
-            id="apartment"
+            id="address2"
             type="text"
-            {...register('apartment', {
+            {...register('address2', {
               maxLength: { value: 50, message: 'Apartment / floor / suite is too long.' }
             })}
           />
-          {errors.apartment && (
-            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.apartment.message}</p>
+          {errors.address2 && (
+            <p className="text-red-600 text-xs -mt-4 mb-4">{errors.address2.message}</p>
           )}
           <label className="block text-sm mb-2" htmlFor="city">
             <span className="text-red-500">*</span> City
@@ -190,15 +177,15 @@ const AddressModal = ({ open, setOpen }: Props) => {
               </label>
               <input
                 className="mb-4 p-2"
-                id="zipCode"
+                id="zip"
                 type="text"
-                {...register('zipCode', {
+                {...register('zip', {
                   required: 'Please enter your zip code',
                   maxLength: { value: 50, message: 'Zip code is too long.' }
                 })}
               />
-              {errors.zipCode && (
-                <p className="text-red-600 text-xs -mt-4 mb-4">{errors.zipCode.message}</p>
+              {errors.zip && (
+                <p className="text-red-600 text-xs -mt-4 mb-4">{errors.zip.message}</p>
               )}
             </div>
           </div>
@@ -216,12 +203,6 @@ const AddressModal = ({ open, setOpen }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <div className="flex items-center gap-4">
-            <label className="block text-sm" htmlFor="isDefaultAddress">
-              Make this my default shipping address
-            </label>
-            <input id="isDefaultAddress" type="checkbox" {...register('isDefaultAddress')} />
-          </div>
           <button
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
@@ -234,4 +215,4 @@ const AddressModal = ({ open, setOpen }: Props) => {
   );
 };
 
-export default AddressModal;
+export default NewAddressModal;

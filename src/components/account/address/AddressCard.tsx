@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import swell from 'swell-js';
+
+import EditAddressModal from './EditAddressModal';
 
 import { useStore } from '~/hooks/useStore';
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
@@ -9,6 +12,7 @@ interface Props {
 
 const AddressCard = ({ address }: Props) => {
   const { updateStateProp } = useStore();
+  const [open, setOpen] = useState(false);
 
   const handleDeleteAddress = async (id: string) => {
     await swell.account.deleteAddress(id);
@@ -30,14 +34,20 @@ const AddressCard = ({ address }: Props) => {
       </div>
       <div className="flex flex-col justify-between">
         <button
-          className="px-2"
+          className="bg-secondary text-primary p-1 rounded transition-all duration-300 hover:bg-primary hover:text-secondary"
           onClick={() => {
             void handleDeleteAddress(address.id);
           }}
         >
           Delete
         </button>
-        <button className="px-2">Edit</button>
+        <button
+          className="bg-secondary text-primary p-1 rounded transition-all duration-300 hover:bg-primary hover:text-secondary"
+          onClick={() => setOpen(true)}
+        >
+          Edit
+        </button>
+        <EditAddressModal open={open} setOpen={setOpen} address={address} />
       </div>
     </div>
   );

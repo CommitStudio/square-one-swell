@@ -29,6 +29,22 @@ declare module 'swell-js' {
       phone: string
     }): Promise<SwellAddressResult>;
     deleteAddress(id: string): Promise<SwellAddressResult>;
+    updateAddress(
+      id: string,
+      {
+        active: boolean,
+        address1: string,
+        address2: string,
+        city: string,
+        country: string,
+        first_name: string,
+        id: string,
+        last_name: string,
+        name: string,
+        phone: string,
+        zip: string
+      }
+    ): Promise<SwellAddressResult>;
   }
 
   export interface AccountInformation {

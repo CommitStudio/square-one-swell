@@ -123,10 +123,9 @@ export const useUserLogged = () => {
         setUser(account);
       })
       .catch(() => {
-        updateState({ ...state, user: {}, localCart: {} });
+        updateState({ ...state, user: {}, localCart: {}, orders: {}, addresses: {} });
         setUser(null);
       });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
