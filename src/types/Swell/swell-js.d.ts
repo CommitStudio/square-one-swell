@@ -15,6 +15,7 @@ declare module 'swell-js' {
       password: string
     }): Promise<AccountInformation>;
     createCard(CardToken): Promise<Card>;
+    createCard(CardToken): Promise<Card>;
     login(email, password): Promise<AccountInformation | null>;
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
