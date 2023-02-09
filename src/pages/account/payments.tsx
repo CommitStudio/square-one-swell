@@ -11,13 +11,11 @@ const Payments = () => {
   const { cards } = state as { cards: SwellUserCards };
 
   const cardList = cards.results;
-  console.log(cardList, 'en payments');
-  // Falta recargar las tarjetas
 
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Payment methods</h4>
-      {!cards ? (
+      {cardList?.length === 0 ? (
         <>
           <p className="text-gray-400">
             There are no payment methods associated with this account.
@@ -25,7 +23,6 @@ const Payments = () => {
         </>
       ) : (
         <>
-          {cardList?.length}
           {cardList?.map((card) => {
             return <p key={card.id}>Hello card {card.brand}</p>;
           })}
