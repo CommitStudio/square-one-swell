@@ -1,7 +1,9 @@
+import dayjs from 'dayjs';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
@@ -20,33 +22,39 @@ type Props = {
 };
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
+  const { state, updateState } = useStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     const month = data.expirationDate.slice(5, 7);
     const year = data.expirationDate.slice(0, 4);
 
-    const cardToken = await swell.card.createToken({
-      number: data.cardNumber,
-      exp_month: month,
-      exp_year: year,
-      cvc: data.cvc
-    });
-
-    swell.account
-      .createCard(cardToken)
-      .then((cardData) => {
-        console.log(cardData);
+    swell.card
+      .createToken({
+        number: data.cardNumber,
+        exp_month: month,
+        exp_year: year,
+        cvc: data.cvc
+      })
+      .then((cardToken) => {
+        swell.account
+          .createCard(cardToken)
+          .then((cardData: SwellUserCards) => {
+            // updateState({ ...state, cards: cardData }); not working
+            notifySuccess('Credit card added');
+            setOpen(false);
+          })
+          .catch((e) => {
+            notifyFailure('Invalid credit card'), console.error(e);
+          });
       })
       .catch((e) => {
-        notifyFailure('Something was wrong'), console.error(e);
-      })
-      .finally(() => {
-        setOpen(false), notifySuccess('Card added succesfully');
+        notifyFailure('Invalid credit card'), console.error(e);
       });
   };
 
@@ -115,7 +123,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             type="number"
             {...register('cardNumber', {
               required: 'Please enter your card number.',
-              maxLength: { value: 16, message: 'number is too long. should be 16 max.' }
+              maxLength: { value: 16, message: 'number is too long. should be 16 min.' },
+              minLength: { value: 16, message: 'number is too short. should be 16 min.' },
+              validate: (val) => {
+                return !swell.card.validateNumber(val) ? 'Invalid credit card number' : true;
+              }
             })}
           />
           {errors.cardNumber && (
@@ -132,6 +144,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
                 className="w-full mb-4 p-2 -webkit-datetime-edit:text-red-500"
                 id="expirationDate"
                 type="month"
+                min={dayjs().format('YYYY-MM').toString()}
                 {...register('expirationDate', {
                   required: 'Please enter your card expiration date.'
                 })}
