@@ -30,32 +30,26 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit = async (data: Inputs) => {
     const month = data.expirationDate.slice(5, 7);
     const year = data.expirationDate.slice(0, 4);
 
-    swell.card
-      .createToken({
+    try {
+      const cardToken = await swell.card.createToken({
         number: data.cardNumber,
         exp_month: month,
         exp_year: year,
         cvc: data.cvc
-      })
-      .then((cardToken) => {
-        swell.account
-          .createCard(cardToken)
-          .then((cardData: SwellUserCards) => {
-            // updateState({ ...state, cards: cardData }); not working
-            notifySuccess('Credit card added');
-            setOpen(false);
-          })
-          .catch((e) => {
-            notifyFailure('Invalid credit card'), console.error(e);
-          });
-      })
-      .catch((e) => {
-        notifyFailure('Invalid credit card'), console.error(e);
       });
+      await swell.account.createCard(cardToken);
+      const cards = await swell.account.listCards();
+      updateState({ ...state, cards });
+      notifySuccess('Credit card added');
+      setOpen(false);
+    } catch (e) {
+      notifyFailure('Invalid credit card');
+      console.error(e);
+    }
   };
 
   return (
