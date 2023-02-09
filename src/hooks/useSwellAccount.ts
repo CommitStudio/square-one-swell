@@ -146,7 +146,8 @@ const getUserData = async () => {
     accountPromise,
     cartPromise,
     orderPromise,
-    AddressesPromise
+    AddressesPromise,
+    listCards
   ]);
 
   return { account, cart, listOrders, addresses, userCards };
