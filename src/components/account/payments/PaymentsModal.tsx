@@ -183,7 +183,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
-            {!isLoading ? 'ADD NEW' : <Spinner size={6} />}
+            {!isLoading ? 'ADD NEW' : <Spinner size={5} />}
           </button>
         </form>
       </div>
