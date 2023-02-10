@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
       />
       <Container className="py-16">
         {/* TODO: TEXT TO BE REVISED */}
-        <Link href="/account/create-account">
+        <Link href="/">
           <a className="text-secondary text-lg hover:underline font-bold">Back</a>
         </Link>
         <div className="font-bold text-align text-center pb-6 text-lg">

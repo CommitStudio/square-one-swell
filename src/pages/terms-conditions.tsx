@@ -16,7 +16,7 @@ const TermsConditions = () => {
         url={`${NEXT_PUBLIC_BASE_URL}/terms-conditions`}
       />
       <Container className="py-16">
-        <Link href="/account/create-account">
+        <Link href="/">
           <a className="text-secondary text-lg hover:underline font-bold">Back</a>
         </Link>
         {/* TODO: TEXT TO BE REVISED */}
