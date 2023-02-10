@@ -19,7 +19,7 @@ const AddressesBody = ({ setOpen }: Props) => {
           return <AddressCard key={address.id} address={address} />;
         })}
       </div>
-      {!addresses && (
+      {addresses.results.length === 0 && (
         <p className="text-gray-400">There are no addresses associated with this account.</p>
       )}
       <button

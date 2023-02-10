@@ -51,7 +51,7 @@ const AccountLayout = ({ children }: Props) => {
                 router.pathname.includes('/account/orders') ? 'font-semibold bg-gray-100' : ''
               } hover:bg-gray-100 p-2 mb-1`}
             >
-              Orders & Returns
+              Orders
             </a>
           </Link>
           <Link href="/account/addresses">

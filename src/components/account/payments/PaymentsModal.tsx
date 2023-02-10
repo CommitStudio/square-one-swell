@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
@@ -44,10 +44,10 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       await swell.account.createCard(cardToken);
       const cards = await swell.account.listCards();
       updateState({ ...state, cards });
-      notifySuccess('Credit card added');
+      notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {
-      notifyFailure('Invalid credit card');
+      notifyFailure('Invalid payment method');
       console.error(e);
     }
   };
@@ -56,7 +56,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
     <Modal open={open} setOpen={setOpen}>
       <div className="bg-gray-200 p-6 rounded md:w-[500px]">
         <div className="flex items-center justify-between mb-2 gap-x-4 w-full">
-          <h3 className="font-medium text-3xl">Add New Credit Card</h3>
+          <h3 className="font-medium text-3xl">Add New Payment Method</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
@@ -120,7 +120,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
               maxLength: { value: 16, message: 'number is too long. should be 16 min.' },
               minLength: { value: 16, message: 'number is too short. should be 16 min.' },
               validate: (val) => {
-                return !swell.card.validateNumber(val) ? 'Invalid credit card number' : true;
+                return !swell.card.validateNumber(val) ? 'Invalid number' : true;
               }
             })}
           />

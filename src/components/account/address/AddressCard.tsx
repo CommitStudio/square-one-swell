@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import swell from 'swell-js';
 
 import EditAddressModal from './EditAddressModal';
 
 import { useStore } from '~/hooks/useStore';
-swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
+import { swell } from '~/hooks/useSwellConection';
 
 interface Props {
   address: SwellAddressResult;
