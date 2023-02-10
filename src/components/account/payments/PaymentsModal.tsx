@@ -180,6 +180,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             <input className="" id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />
           </div>
           <button
+            disabled={isLoading}
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
