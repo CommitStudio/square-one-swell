@@ -1,4 +1,5 @@
 import Head from '~/components/globals/Head';
+import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -14,6 +15,7 @@ const Contact = () => {
         keywords={keywords.contact_us}
         url={`${NEXT_PUBLIC_BASE_URL}/contact`}
       />
+      <PlaceholderBanner />
       <Container className="py-24">
         <h1 className="font-bold text-align pb-10 text-4xl">Contact us</h1>
         <div className="grid lg:grid-cols-2 gap-10">

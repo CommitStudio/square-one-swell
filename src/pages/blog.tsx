@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import Head from '~/components/globals/Head';
+import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -51,6 +52,7 @@ const Blog = () => {
         keywords={keywords.blog}
         url={`${NEXT_PUBLIC_BASE_URL}/blog`}
       />
+      <PlaceholderBanner />
       <Container className="py-24">
         <h1 className="font-bold text-align pb-10 text-4xl">Blog</h1>
         <ul>
