@@ -3,5 +3,9 @@
   "products": "products, deals, sales, collection, categories",
   "product_detail": "product, additional information, reviews, price, pictures",
   "privacy_policy": "privacy, policy, terms, conditions, information",
-  "terms_conditions": "terms, conditions, privacy, policy, information"
+  "terms_conditions": "terms, conditions, privacy, policy, information",
+  "about_us": "about, us, company, information, contact",
+  "contact_us": "contact, us, information, company, about",
+  "faq": "faq, frequently asked questions, questions, answers, information",
+  "blog": "blog, news, articles, information, posts"
 }

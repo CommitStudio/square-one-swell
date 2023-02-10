@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import Head from '~/components/globals/Head';
+import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 
@@ -15,8 +16,9 @@ const TermsConditions = () => {
         keywords={keywords.terms_conditions}
         url={`${NEXT_PUBLIC_BASE_URL}/terms-conditions`}
       />
+      <PlaceholderBanner />
       <Container className="py-16">
-        <Link href="/account/create-account">
+        <Link href="/">
           <a className="text-secondary text-lg hover:underline font-bold">Back</a>
         </Link>
         {/* TODO: TEXT TO BE REVISED */}

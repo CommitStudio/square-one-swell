@@ -1,0 +1,35 @@
+{
+  "faqs": {
+    "title": "FAQ",
+    "questions": [
+      {
+        "question": "Question 1",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 2",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 3",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 4",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 5",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 6",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      },
+      {
+        "question": "Question 7",
+        "answer": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum possimus autem"
+      }
+    ]
+  }
+}

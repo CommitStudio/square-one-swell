@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import Head from '~/components/globals/Head';
+import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -16,9 +17,10 @@ const PrivacyPolicy = () => {
         keywords={keywords.privacy_policy}
         url={`${NEXT_PUBLIC_BASE_URL}/privacy-policy`}
       />
+      <PlaceholderBanner />
       <Container className="py-16">
         {/* TODO: TEXT TO BE REVISED */}
-        <Link href="/account/create-account">
+        <Link href="/">
           <a className="text-secondary text-lg hover:underline font-bold">Back</a>
         </Link>
         <div className="font-bold text-align text-center pb-6 text-lg">
