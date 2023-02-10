@@ -1,12 +1,11 @@
 {
   "items": [
     { "id": 0, "name": "About us", "href": "/about-us" },
-    { "id": 1, "name": "Online store", "href": "/"  },
+    { "id": 1, "name": "Products", "href": "/products"  },
     { "id": 2, "name": "Blog", "href": "/blog"  },
     { "id": 3, "name": "Contact Us", "href": "/contact"  },
     { "id": 8, "name": "FAQs", "href": "/faq"  },
     { "id": 9, "name": "Terms of service", "href": "/terms-conditions"  },
-    { "id": 10, "name": "Privacy policy", "href": "/privacy-policy"  },
-    { "id": 11, "name": "Returns", "href": "/returns"  }
+    { "id": 10, "name": "Privacy policy", "href": "/privacy-policy"  }
   ]
 }
