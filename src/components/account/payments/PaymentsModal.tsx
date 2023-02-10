@@ -1,8 +1,11 @@
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import { Spinner } from '~/components/globals/Spinner';
+
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
@@ -23,6 +26,7 @@ type Props = {
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
   const { state, updateState } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -33,6 +37,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
   const onSubmit = async (data: Inputs) => {
     const month = data.expirationDate.slice(5, 7);
     const year = data.expirationDate.slice(0, 4);
+    setIsLoading(true); //Turn on spinner while waiting
 
     try {
       const cardToken = await swell.card.createToken({
@@ -43,12 +48,16 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       });
       await swell.account.createCard(cardToken);
       const cards = await swell.account.listCards();
+      console.log(isLoading);
       updateState({ ...state, cards });
       notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {
       notifyFailure('Invalid payment method');
       console.error(e);
+    } finally {
+      //Turn off spinner
+      setIsLoading(false);
     }
   };
 
@@ -117,7 +126,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             type="number"
             {...register('cardNumber', {
               required: 'Please enter your card number.',
-              maxLength: { value: 16, message: 'number is too long. should be 16 min.' },
+              maxLength: { value: 16, message: 'number is too long. should be 16 max.' },
               minLength: { value: 16, message: 'number is too short. should be 16 min.' },
               validate: (val) => {
                 return !swell.card.validateNumber(val) ? 'Invalid number' : true;
@@ -175,7 +184,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
-            ADD NEW
+            {!isLoading ? 'ADD NEW' : <Spinner size={6} />}
           </button>
         </form>
       </div>

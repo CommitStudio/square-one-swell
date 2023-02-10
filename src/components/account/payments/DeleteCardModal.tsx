@@ -26,7 +26,7 @@ const DeleteCardModal = ({ openConfModal, setOpenConfModal, cardId }: Props) => 
       <Modal open={openConfModal} setOpen={setOpenConfModal}>
         <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
-            <h3 className="font-medium text-3xl">Confirm payment method</h3>
+            <h3 className="font-medium text-3xl">Confirm action</h3>
             <GrClose
               className="cursor-pointer min-w-[16px]"
               onClick={() => setOpenConfModal(false)}
