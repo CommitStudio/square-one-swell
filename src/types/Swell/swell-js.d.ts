@@ -14,6 +14,8 @@ declare module 'swell-js' {
       email: string,
       password: string
     }): Promise<AccountInformation>;
+    createCard(CardToken): Promise<Card>;
+    createCard(CardToken): Promise<Card>;
     login(email, password): Promise<AccountInformation | null>;
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
@@ -45,6 +47,7 @@ declare module 'swell-js' {
         zip: string
       }
     ): Promise<SwellAddressResult>;
+    listCards(): Promise<UserCards>;
   }
 
   export interface AccountInformation {
