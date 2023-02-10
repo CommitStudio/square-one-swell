@@ -48,7 +48,6 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       });
       await swell.account.createCard(cardToken);
       const cards = await swell.account.listCards();
-      console.log(isLoading);
       updateState({ ...state, cards });
       notifySuccess('New payment method added');
       setOpen(false);
