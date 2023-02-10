@@ -19,7 +19,7 @@ const Filter = ({ categories }: FilterProps) => {
   const { state, updateStateProp } = useStore();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [test, setTest] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -34,12 +34,12 @@ const Filter = ({ categories }: FilterProps) => {
 
   useEffect(() => {
     inputRef.current?.focus();
-    query.search && setTest(query.search as string);
+    query.search && setSearchValue(query.search as string);
   }, []);
 
   const handleSubmit = () => {
-    console.log(test);
-    test !== '' ? (query.search = test) : delete query.search;
+    console.log(searchValue);
+    searchValue !== '' ? (query.search = searchValue) : delete query.search;
     void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
   };
 
@@ -47,7 +47,7 @@ const Filter = ({ categories }: FilterProps) => {
     const query = { ...router.query };
     delete query.search;
     void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
-    setTest('');
+    setSearchValue('');
   };
 
   return (
@@ -73,11 +73,11 @@ const Filter = ({ categories }: FilterProps) => {
                 type="text"
                 placeholder="Search..."
                 id="search"
-                onChange={(value) => setTest(value.target.value)}
+                onChange={(value) => setSearchValue(value.target.value)}
                 className={
                   'px-4 py-1 text-l border border-solid border-gray-300 rounded focus:outline focus:outline-2 focus:outline-secondary w-full md:w-[300px]'
                 }
-                value={test}
+                value={searchValue}
                 ref={inputRef}
               />
               <button>
@@ -85,7 +85,7 @@ const Filter = ({ categories }: FilterProps) => {
               </button>
             </form>
           </div>
-          {test !== '' && (
+          {searchValue !== '' && (
             <Link href={{ pathname: '/products' }} scroll={false}>
               <button
                 onClick={() => {
