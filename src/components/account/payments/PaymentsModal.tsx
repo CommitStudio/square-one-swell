@@ -31,6 +31,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<Inputs>();
 
@@ -57,6 +58,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
     } finally {
       //Turn off spinner
       setIsLoading(false);
+      reset();
     }
   };
 

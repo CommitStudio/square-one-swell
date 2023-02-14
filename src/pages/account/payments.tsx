@@ -27,7 +27,7 @@ const Payments = () => {
         </div>
       )}
       <button
-        className="inline-flex items-center gap-1 bg-secondary text-primary p-3 rounded mt-10 transition-all duration-300 hover:bg-primary hover:text-secondary"
+        className="inline-flex items-center gap-1 bg-secondary text-primary p-3 rounded my-10 transition-all duration-300 hover:bg-primary hover:text-secondary"
         onClick={() => setOpen(true)}
       >
         <MdPayment />
