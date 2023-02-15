@@ -1,8 +1,11 @@
 import dayjs from 'dayjs';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import { Spinner } from '~/components/globals/Spinner';
+
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
@@ -23,16 +26,19 @@ type Props = {
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
   const { state, updateState } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<Inputs>();
 
   const onSubmit = async (data: Inputs) => {
     const month = data.expirationDate.slice(5, 7);
     const year = data.expirationDate.slice(0, 4);
+    setIsLoading(true); //Turn on spinner while waiting
 
     try {
       const cardToken = await swell.card.createToken({
@@ -44,11 +50,15 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       await swell.account.createCard(cardToken);
       const cards = await swell.account.listCards();
       updateState({ ...state, cards });
-      notifySuccess('Credit card added');
+      notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {
-      notifyFailure('Invalid credit card');
+      notifyFailure('Invalid payment method');
       console.error(e);
+    } finally {
+      //Turn off spinner
+      setIsLoading(false);
+      reset();
     }
   };
 
@@ -56,7 +66,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
     <Modal open={open} setOpen={setOpen}>
       <div className="bg-gray-200 p-6 rounded md:w-[500px]">
         <div className="flex items-center justify-between mb-2 gap-x-4 w-full">
-          <h3 className="font-medium text-3xl">Add New Credit Card</h3>
+          <h3 className="font-medium text-3xl">Add New Payment Method</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
@@ -117,10 +127,10 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             type="number"
             {...register('cardNumber', {
               required: 'Please enter your card number.',
-              maxLength: { value: 16, message: 'number is too long. should be 16 min.' },
+              maxLength: { value: 16, message: 'number is too long. should be 16 max.' },
               minLength: { value: 16, message: 'number is too short. should be 16 min.' },
               validate: (val) => {
-                return !swell.card.validateNumber(val) ? 'Invalid credit card number' : true;
+                return !swell.card.validateNumber(val) ? 'Invalid number' : true;
               }
             })}
           />
@@ -172,10 +182,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             <input className="" id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />
           </div>
           <button
+            disabled={isLoading}
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
-            ADD NEW
+            {!isLoading ? 'ADD NEW' : <Spinner size={5} />}
           </button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 interface SpinnerProp {
   position?: 'center' | 'left' | 'right';
-  size?: 4 | 6 | 8 | 10;
+  size?: 4 | 5 | 6 | 8 | 10;
 }
 
 export const Spinner = ({ position = 'center', size = 10 }: SpinnerProp) => {

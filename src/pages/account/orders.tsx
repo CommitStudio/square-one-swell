@@ -12,8 +12,8 @@ const Orders = () => {
 
   return (
     <AccountLayout>
-      <h4 className="text-3xl font-medium mb-5">Orders & Returns</h4>
-      {!orders ? (
+      <h4 className="text-3xl font-medium mb-5">Orders</h4>
+      {orders.length === 0 ? (
         <>
           <p className="text-gray-400">You haven&lsquo;t ordered anything yet.</p>
           <Link href="/products">
