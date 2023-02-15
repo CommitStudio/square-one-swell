@@ -17,18 +17,20 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
   // To compare selected ids with the sets of active ids we transform the object of selected into an array
   const availableIdsArr = Object.entries(selectedIds).map(([key, value]) => value);
-
   // Selects first avaiable variant option by default
   useEffect(() => {
     //find the first variant that is === active
     const firstActiveVariant = product.variants?.reverse().find((variant) => variant.active);
+    const firstActiveLabel = firstActiveVariant?.name.split(', ');
 
     product.options?.map((option, i) => {
-      setChosenOptions((prev) => ({ ...prev, [option.label]: option.values[0].name }));
-    });
-    product.options?.map((option, i) => {
+      setChosenOptions((prev) => ({
+        ...prev,
+        [option.label]: firstActiveLabel ? firstActiveLabel[i] : ''
+      }));
       setSelectedIds((prev) => ({ ...prev, [option.label]: firstActiveVariant?.value_ids[i] }));
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
