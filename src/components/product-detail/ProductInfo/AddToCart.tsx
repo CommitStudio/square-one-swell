@@ -5,6 +5,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/components/globals/Spinner';
+import Tooltip from '~/components/globals/Tooltip';
 import { useStore } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
@@ -120,9 +121,11 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
             'UNAVAILABLE'
           )}
         </button>
-        <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
-          <AiOutlineHeart />
-        </button>
+        <Tooltip content="Feature coming soon!">
+          <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
+            <AiOutlineHeart />
+          </button>
+        </Tooltip>
       </div>
       {pleaseSelectAllOptions && <p className="text-red-500">{pleaseSelectAllOptions}</p>}
     </>

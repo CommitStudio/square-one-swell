@@ -1,4 +1,4 @@
-import React from 'react';
+import Tooltip from '~/components/globals/Tooltip';
 
 const CTA = () => {
   return (
@@ -10,9 +10,11 @@ const CTA = () => {
           className="w-full border focus:outline-0 md:w-[350px] border-gray-400 rounded-tl-md rounded-bl-md p-2"
           placeholder="Your email"
         />
-        <button className="bg-secondary w-full md:w-[200px] text-white hover:text-secondary p-2 hover:bg-primary rounded-tr-md rounded-br-md">
-          Subscribe
-        </button>
+        <Tooltip content="Feature coming soon!">
+          <button className="bg-secondary w-full md:w-[200px] text-white hover:text-secondary p-2 hover:bg-primary rounded-tr-md rounded-br-md">
+            Subscribe
+          </button>
+        </Tooltip>
       </div>
     </div>
   );
