@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MdPayment } from 'react-icons/md';
+import { AccountInformation } from 'swell-js';
 
 import AccountLayout from '~/components/account/AccountLayout';
 import PaymentCard from '~/components/account/payments/PaymentsCard';
@@ -12,6 +13,9 @@ const Payments = () => {
   const { state } = useStore();
   const { cards } = state as { cards: SwellUserCards };
 
+  const { user } = state as { user: AccountInformation };
+
+  const defaultCard = user?.billing?.account_card_id;
   const cardList = cards.results;
 
   return (
@@ -21,8 +25,8 @@ const Payments = () => {
         <p className="text-gray-400">There are no payment methods associated with this account.</p>
       ) : (
         <div className="grid gap-3 md:auto-rows-fr md:grid-cols-2 md:gap-8">
-          {cardList?.map((card, i) => {
-            return <PaymentCard card={card} key={card.id} defaultCard={i === 0} />;
+          {cardList?.map((card) => {
+            return <PaymentCard card={card} key={card.id} defaultCard={card.id === defaultCard} />;
           })}
         </div>
       )}

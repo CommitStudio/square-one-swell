@@ -6,7 +6,8 @@ declare module 'swell-js' {
       first_name: string,
       last_name: string,
       email: string,
-      password: string
+      password: string,
+      billing: { account_card_id: string }
     }): Promise<AccountInformation>;
     create({
       first_name: string,
@@ -71,6 +72,7 @@ declare module 'swell-js' {
     orders: Order[];
     name: string;
     last_name: string;
+    billing?: { account_card_id: string };
     first_name: string;
     email_optin: boolean;
     email: string;
