@@ -2,8 +2,12 @@
   "brand_name": "SQUARE ONE",
   "brand_logo": "",
   "categories": [
-    { "name": "PRODUCTS", "slug": "products" },
-    { "name": "ABOUT US", "slug": "about-us" },
-    { "name": "CONTACT", "slug": "contact" }
+    { "name": "PRODUCTS", "slug": "products", "hideOnDesktop": false  },
+    { "name": "ABOUT US", "slug": "about-us" ,"hideOnDesktop": false },
+    { "name": "CONTACT", "slug": "contact", "hideOnDesktop": false },
+    { "name": "SEARCH", "slug": "products", "hideOnDesktop": true },
+    { "name": "CART", "slug": "", "hideOnDesktop": true  },
+    { "name": "LOGIN", "slug": "account/login", "hideOnDesktop": true  }
   ]
+
 }
