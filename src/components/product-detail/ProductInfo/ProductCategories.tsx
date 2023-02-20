@@ -18,7 +18,10 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
       <span>Categories:</span>
       {productCategories?.map((category, i) => {
         return (
-          <Link key={`product-category-${i}`} href="/">
+          <Link
+            key={`product-category-${i}`}
+            href={`/products?category=${category?.slug?.category as string}`}
+          >
             <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
               {category?.name}
             </a>
