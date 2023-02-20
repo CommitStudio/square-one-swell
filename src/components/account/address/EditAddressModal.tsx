@@ -1,7 +1,6 @@
 import { useReducer } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-
 import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
@@ -231,17 +230,11 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
                   }
                 })}
               >
-                {countries.map((country, i) =>
-                  country.name === '------' ? (
-                    <option value="------" disabled key="------">
-                      ------
-                    </option>
-                  ) : (
-                    <option key={i} value={`${country.alpha2Code}`}>
-                      {`${country.name}`}
-                    </option>
-                  )
-                )}
+                {countries.map((country, i) => (
+                  <option key={i} value={`${country.alpha2Code}`}>
+                    {`${country.name}`}
+                  </option>
+                ))}
               </select>
               {errors.country && (
                 <p className="text-red-600 text-xs -mt-4 mb-4">{errors.country.message}</p>
@@ -297,7 +290,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             type="submit"
             className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
           >
-            EDIT ADDRESS
+            SAVE CHANGES
           </button>
         </form>
       </div>
