@@ -5,7 +5,7 @@ import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
-import { useStore } from '~/hooks/useStore';
+import { useStore, useOrdersState, useCartState } from '~/hooks/useStore';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 /*****************************************************************************
@@ -108,23 +108,30 @@ export const useLogin = (credentials: { email: string; password: string } | null
  ****************************************************************************/
 export const useUserLogged = () => {
   const { state, updateState } = useStore();
+  const { setOrders } = useOrdersState();
+  const { setCart } = useCartState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
     getUserData()
       .then(({ account, cart, listOrders, addresses, userCards }) => {
+        setOrders(listOrders);
+        setCart(cart);
+
         updateState({
           ...state,
           user: account || {},
-          localCart: cart,
-          orders: listOrders,
           addresses: addresses,
           cards: userCards
         });
+
         setUser(account);
       })
       .catch(() => {
-        updateState({ ...state, user: {}, localCart: {}, orders: {}, addresses: {}, cards: {} });
+        setOrders([]);
+        setCart({});
+
+        updateState({ ...state, user: {}, addresses: {}, cards: {} });
         setUser(null);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
