@@ -1,14 +1,14 @@
 import { FaRegAddressCard } from 'react-icons/fa';
 
 import AddressCard from '~/components/account/address/AddressCard';
-import { useAddressesState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddressesBody = ({ setOpen }: Props) => {
-  const { addresses } = useAddressesState();
+  const { addresses } = useGlobalState();
 
   return (
     <>

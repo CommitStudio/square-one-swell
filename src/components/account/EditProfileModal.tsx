@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from '~/components/account/Modal';
 
-import { useAccountState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
 import { notifySuccess } from '~/utils/toastifies';
 
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
-  const { account } = useAccountState();
+  const { account } = useGlobalState();
   const { first_name, last_name, email } = account || {};
 
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);

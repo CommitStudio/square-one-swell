@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useCartState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 import { formatCurrency } from '~/utils/numbers';
 import { notifySuccess } from '~/utils/toastifies';
@@ -18,7 +18,7 @@ export function determineIfIsCart(
 }
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
-  const { cart, setCart } = useCartState();
+  const { cart, setCart } = useGlobalState();
 
   const closeCart = () => {
     setIsCartOpen(false);

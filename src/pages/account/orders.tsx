@@ -4,10 +4,10 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 import OrderCard from '~/components/account/OrdersCard';
-import { useOrdersState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 const Orders = () => {
-  const { orders } = useOrdersState();
+  const { orders } = useGlobalState();
 
   return (
     <AccountLayout>

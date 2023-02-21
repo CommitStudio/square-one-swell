@@ -4,14 +4,14 @@ import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Badge } from '../Badge';
 import { determineIfIsCart } from '../Cart';
 
-import { useCartState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 type Props = {
   toggleCart: () => void;
 };
 
 const UserButtons = ({ toggleCart }: Props) => {
-  const { cart } = useCartState();
+  const { cart } = useGlobalState();
   const quantity = determineIfIsCart(cart) && cart?.item_quantity;
 
   return (

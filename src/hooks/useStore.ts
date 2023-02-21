@@ -39,29 +39,26 @@ const store = atom({
 /*****************************************************************************
  * State hooks
  ****************************************************************************/
-export function useOrdersState() {
+
+export function useGlobalState() {
   const [orders, setOrders] = useAtom(stateOrdes);
-  return { orders, setOrders };
-}
-
-export function useCartState() {
   const [cart, setCart] = useAtom(stateCart);
-  return { cart, setCart };
-}
-
-export function useAddressesState() {
   const [addresses, setAddresses] = useAtom(stateAddresses);
-  return { addresses, setAddresses };
-}
-
-export function useCardsState() {
   const [cards, setCards] = useAtom(stateCards);
-  return { cards, setCards };
-}
-
-export function useAccountState() {
   const [account, setAccount] = useAtom(stateAccount);
-  return { account, setAccount };
+
+  return {
+    orders,
+    cart,
+    addresses,
+    cards,
+    account,
+    setOrders,
+    setCart,
+    setAddresses,
+    setCards,
+    setAccount
+  };
 }
 
 /** Global state used for UI */

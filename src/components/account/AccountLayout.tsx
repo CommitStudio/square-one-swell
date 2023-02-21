@@ -7,7 +7,7 @@ import { TbEdit } from 'react-icons/tb';
 import EditProfileModal from './EditProfileModal';
 import LogOutModal from './LogOutModal';
 
-import { useAccountState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
 
@@ -18,7 +18,7 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
 
-  const { account } = useAccountState();
+  const { account } = useGlobalState();
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false);

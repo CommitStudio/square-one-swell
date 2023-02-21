@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/components/globals/Spinner';
 import Tooltip from '~/components/globals/Tooltip';
-import { useStore, useCartState } from '~/hooks/useStore';
+import { useStore, useGlobalState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
@@ -27,7 +27,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useStore();
-  const { setCart } = useCartState();
+  const { setCart } = useGlobalState();
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);

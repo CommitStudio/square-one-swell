@@ -5,13 +5,7 @@ import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
-import {
-  useOrdersState,
-  useCartState,
-  useAddressesState,
-  useCardsState,
-  useAccountState
-} from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
@@ -21,7 +15,7 @@ import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 export const useRegister = (
   credentials: { first_name: string; last_name: string; email: string; password: string } | null
 ) => {
-  const { setAccount } = useAccountState();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -57,7 +51,7 @@ export const useUpdateAccount = (
     password: string;
   } | null
 ) => {
-  const { setAccount } = useAccountState();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -83,7 +77,7 @@ export const useUpdateAccount = (
  * Login user and return account information
  ****************************************************************************/
 export const useLogin = (credentials: { email: string; password: string } | null) => {
-  const { setAccount } = useAccountState();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -114,11 +108,7 @@ export const useLogin = (credentials: { email: string; password: string } | null
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {
-  const { setOrders } = useOrdersState();
-  const { setCart } = useCartState();
-  const { setAddresses } = useAddressesState();
-  const { setCards } = useCardsState();
-  const { setAccount } = useAccountState();
+  const { setOrders, setCart, setAddresses, setCards, setAccount } = useGlobalState();
 
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
@@ -193,7 +183,7 @@ const getUserOrders = async () => {
  * Logout current user and redirect to home page
  ****************************************************************************/
 export const useLogout = () => {
-  const { setAccount } = useAccountState();
+  const { setAccount } = useGlobalState();
 
   return async () => {
     await swell.account

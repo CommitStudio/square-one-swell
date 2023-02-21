@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import EditAddressModal from './EditAddressModal';
 
-import { useAddressesState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AddressCard = ({ address }: Props) => {
-  const { setAddresses } = useAddressesState();
+  const { setAddresses } = useGlobalState();
   const [open, setOpen] = useState(false);
 
   const handleDeleteAddress = async (id: string) => {

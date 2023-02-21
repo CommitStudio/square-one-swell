@@ -4,7 +4,7 @@ import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
-import { useAddressesState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
@@ -27,7 +27,7 @@ type Props = {
 };
 
 const NewAddressModal = ({ open, setOpen }: Props) => {
-  const { setAddresses } = useAddressesState();
+  const { setAddresses } = useGlobalState();
 
   const {
     register,

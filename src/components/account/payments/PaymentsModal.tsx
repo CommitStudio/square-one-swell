@@ -6,7 +6,7 @@ import { GrClose } from 'react-icons/gr';
 import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 
-import { useCardsState } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
-  const { setCards } = useCardsState();
+  const { setCards } = useGlobalState();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
