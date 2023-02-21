@@ -20,13 +20,11 @@ const DesktopMenu = ({ categories }: Props) => {
       <ul className="hidden bg-secondary mt-6 lg:flex lg:flex-row lg:p-4 lg:space-x-8 lg:mt-0">
         {categories.map((category, i) => {
           return (
-            <li key={`category-${i}`}>
+            <li key={`category-${i}`} className={`${category.hideOnDesktop ? 'md:hidden' : ''}`}>
               <Link href={`/${category.slug}`}>
                 <a
                   onClick={handleClick}
-                  className={`${
-                    category.hideOnDesktop ? 'md:hidden' : ''
-                  } 'block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary`}
+                  className="block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary"
                 >
                   {category.name}
                 </a>
