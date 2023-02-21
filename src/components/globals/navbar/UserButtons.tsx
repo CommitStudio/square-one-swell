@@ -12,7 +12,7 @@ type Props = {
 
 const UserButtons = ({ toggleCart }: Props) => {
   const { cart } = useCartState();
-  const quantity = determineIfIsCart(cart) && cart.item_quantity;
+  const quantity = determineIfIsCart(cart) && cart?.item_quantity;
 
   return (
     <div className="flex lg:order-2">

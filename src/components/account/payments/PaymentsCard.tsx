@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
+import type { SwellCard } from 'swell-js';
+
 import DeleteCardModal from './DeleteCardModal';
 
 type PaymentCardProps = {
-  card: SwellCards;
+  card: SwellCard;
   defaultCard: boolean;
 };
 

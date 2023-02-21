@@ -105,10 +105,10 @@ declare module 'swell-js' {
   interface SwellCardsResult {
     count: number;
     page: number;
-    results: SwellCards[];
+    results: SwellCard[];
   }
 
-  interface SwellCards {
+  interface SwellCard {
     active: boolean;
     address_check: string;
     brand: string;

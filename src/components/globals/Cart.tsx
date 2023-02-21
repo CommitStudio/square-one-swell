@@ -12,12 +12,9 @@ type Props = {
 };
 
 export function determineIfIsCart(
-  toBeDetermined: swell.Cart | object
-): toBeDetermined is swell.Cart {
-  if (toBeDetermined) {
-    return true;
-  }
-  return false;
+  toBeDetermined: swell.Cart | null
+): toBeDetermined is swell.Cart | null {
+  return toBeDetermined ? true : false;
 }
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
@@ -28,11 +25,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   };
 
   const removeProductFromCart = async (cartItemId: string, productVariantId: string) => {
-    const newCart = { ...cart };
+    const newCart = { ...cart } as swell.Cart;
 
     const items =
       determineIfIsCart(cart) &&
-      cart.items.filter(
+      cart?.items.filter(
         (item) => item.product.id !== cartItemId && item.variant.id !== productVariantId
       );
 
@@ -120,7 +117,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p>Subtotal</p>
               <p className="text-right">
                 ${' '}
-                {determineIfIsCart(cart) && cart.items
+                {determineIfIsCart(cart) && cart?.items
                   ? formatCurrency(
                       cart.items?.reduce(
                         (acc, product) => acc + product.price * product.quantity,
@@ -132,14 +129,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p>Taxes</p>
               <p className="text-right">
                 ${' '}
-                {determineIfIsCart(cart) && cart.tax_total
+                {determineIfIsCart(cart) && cart?.tax_total
                   ? formatCurrency(cart.tax_total)
                   : Number(0).toFixed(2)}
               </p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
-                {determineIfIsCart(cart) && cart.items
+                {determineIfIsCart(cart) && cart?.items
                   ? formatCurrency(
                       cart.items?.reduce(
                         (acc, product) => acc + product.price * product.quantity,
@@ -151,7 +148,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             </div>
             <Link
               href={
-                determineIfIsCart(cart) && cart.items?.length
+                determineIfIsCart(cart) && cart?.items?.length
                   ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${
                       (determineIfIsCart(cart) && cart.checkout_id) || ''
                     }`
