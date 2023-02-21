@@ -7,7 +7,7 @@ import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 
 import { useGlobalState } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellConection';
+import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {

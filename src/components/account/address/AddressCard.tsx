@@ -3,7 +3,7 @@ import { useState } from 'react';
 import EditAddressModal from './EditAddressModal';
 
 import { useGlobalState } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellConection';
+import swell from '~/lib/SwellJS';
 
 interface Props {
   address: SwellAddress;

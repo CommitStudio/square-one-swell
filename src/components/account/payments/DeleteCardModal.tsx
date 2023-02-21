@@ -4,7 +4,7 @@ import Modal from '../Modal';
 
 import { useGlobalState } from '~/hooks/useStore';
 
-import { swell } from '~/hooks/useSwellConection';
+import swell from '~/lib/SwellJS';
 
 type Props = {
   openConfModal: boolean;

@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Spinner } from '~/components/globals/Spinner';
 import Tooltip from '~/components/globals/Tooltip';
 import { useStore, useGlobalState } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellCart';
+import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 interface ProductProp {

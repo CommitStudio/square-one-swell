@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useGlobalState } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellCart';
+import swell from '~/lib/SwellJS';
 import { formatCurrency } from '~/utils/numbers';
 import { notifySuccess } from '~/utils/toastifies';
 

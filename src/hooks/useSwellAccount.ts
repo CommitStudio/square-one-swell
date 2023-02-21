@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import swell from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
-swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
-
 import { useGlobalState } from '~/hooks/useStore';
+import swell from '~/lib/SwellJS';
 
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
