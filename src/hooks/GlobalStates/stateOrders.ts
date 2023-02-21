@@ -1,16 +1,20 @@
 import { atom, useAtom } from 'jotai';
 
+import type { AccountInformation } from 'swell-js';
+
 import { swell } from '../useSwellConection';
 
 type StateOrders = UserOrder[];
-type StateCart = swell.Cart;
+type StateCart = swell.Cart | null;
 type StateAddresses = SwellAddress[];
 type StateCards = SwellUserCards[];
+type StateAccount = AccountInformation | null;
 
 const stateOrdes = atom([] as StateOrders);
 const stateCart = atom({} as StateCart);
 const stateAddresses = atom([] as StateAddresses);
 const stateCards = atom([] as StateCards);
+const stateAccount = atom({} as StateAccount);
 
 export function useOrdersState() {
   const [orders, setOrders] = useAtom(stateOrdes);
@@ -30,4 +34,9 @@ export function useAddressesState() {
 export function useCardsState() {
   const [cards, setCards] = useAtom(stateCards);
   return { cards, setCards };
+}
+
+export function useAccountState() {
+  const [account, setAccount] = useAtom(stateAccount);
+  return { account, setAccount };
 }

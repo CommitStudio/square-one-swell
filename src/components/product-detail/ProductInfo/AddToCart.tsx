@@ -26,7 +26,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { state, updateStateProp } = useStore();
+  const { state } = useStore();
   const { setCart } = useCartState();
 
   useEffect(() => {

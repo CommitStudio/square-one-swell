@@ -9,7 +9,7 @@ type Props = {
   setOpenLogOut: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const LogOutModal = ({ openLogOut, setOpenLogOut }: Props) => {
+const LogOutModal = ({ openLogOut, setOpenLogOut }: Props) => {
   const handleLogout = useLogout();
 
   return (
@@ -45,3 +45,5 @@ export const LogOutModal = ({ openLogOut, setOpenLogOut }: Props) => {
     </>
   );
 };
+
+export default LogOutModal;

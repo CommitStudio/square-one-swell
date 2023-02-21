@@ -21,6 +21,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   const handleClick = (itemName: string) => {
     updateStateProp('breadcrumbSelectedCategory', itemName);
   };
+
   return (
     <div>
       <h5 className="font-bold mb-2">{title}</h5>

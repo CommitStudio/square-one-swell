@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useStore, useCartState } from '~/hooks/useStore';
+import { useCartState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellCart';
 import { formatCurrency } from '~/utils/numbers';
 import { notifySuccess } from '~/utils/toastifies';
