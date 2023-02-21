@@ -1,10 +1,4 @@
-interface SwellUserCards {
-  count: number;
-  page: number;
-  results: SwellCards[];
-}
-
-type SwellCards = {
+type SwellUserCards = {
   active: boolean;
   address_check: string;
   brand: string;

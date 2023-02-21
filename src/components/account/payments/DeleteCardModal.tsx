@@ -2,7 +2,7 @@ import { GrClose } from 'react-icons/gr';
 
 import Modal from '../Modal';
 
-import { useStore } from '~/hooks/useStore';
+import { useCardsState } from '~/hooks/useStore';
 
 import { swell } from '~/hooks/useSwellConection';
 
@@ -13,12 +13,12 @@ type Props = {
 };
 
 const DeleteCardModal = ({ openConfModal, setOpenConfModal, cardId }: Props) => {
-  const { updateStateProp } = useStore();
+  const { setCards } = useCardsState();
 
   const handleDeleteCard = async (id: string) => {
     await swell.account.deleteCard(id);
-    const allCards = await swell.account.listCards();
-    updateStateProp('cards', allCards);
+    const { results } = await swell.account.listCards();
+    setCards(results);
   };
 
   return (

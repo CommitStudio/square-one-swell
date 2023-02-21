@@ -4,24 +4,21 @@ import { MdPayment } from 'react-icons/md';
 import AccountLayout from '~/components/account/AccountLayout';
 import PaymentCard from '~/components/account/payments/PaymentsCard';
 import PaymentsModal from '~/components/account/payments/PaymentsModal';
-import { useStore } from '~/hooks/useStore';
+import { useCardsState } from '~/hooks/useStore';
 
 const Payments = () => {
   const [open, setOpen] = useState(false);
 
-  const { state } = useStore();
-  const { cards } = state as { cards: SwellUserCards };
-
-  const cardList = cards.results;
+  const { cards } = useCardsState();
 
   return (
     <AccountLayout>
       <h4 className="text-3xl font-medium mb-5">Payment methods</h4>
-      {cardList.length === 0 ? (
+      {cards.length === 0 ? (
         <p className="text-gray-400">There are no payment methods associated with this account.</p>
       ) : (
         <div className="grid gap-3 md:auto-rows-fr md:grid-cols-2 md:gap-8">
-          {cardList?.map((card, i) => {
+          {cards?.map((card, i) => {
             return <PaymentCard card={card} key={card.id} defaultCard={i === 0} />;
           })}
         </div>

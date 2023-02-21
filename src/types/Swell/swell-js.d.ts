@@ -47,8 +47,8 @@ declare module 'swell-js' {
         zip: string
       }
     ): Promise<SwellAddressResult>;
-    listCards(): Promise<UserCards>;
-    deleteCard(id: string): Promise<UserCards>;
+    listCards(): Promise<SwellCardsResult>;
+    deleteCard(id: string): Promise<SwellCardsResult>;
   }
 
   export interface AccountInformation {
@@ -100,6 +100,28 @@ declare module 'swell-js' {
     parent_id: string;
     phone: string | null;
     zip: string | null;
+  }
+
+  interface SwellCardsResult {
+    count: number;
+    page: number;
+    results: SwellCards[];
+  }
+
+  interface SwellCards {
+    active: boolean;
+    address_check: string;
+    brand: string;
+    cvc_check: string;
+    date_created: string;
+    exp_month: number;
+    exp_year: number;
+    fingerprint: string;
+    id: string;
+    last4: string;
+    parent_id: string;
+    token: string;
+    zip_check: string;
   }
 
   export const account: Account;

@@ -2,7 +2,12 @@ import { atom, useAtom } from 'jotai';
 
 import type { AccountInformation } from 'swell-js';
 
-import { useOrdersState, useCartState, useAddressesState } from './GlobalStates/stateOrders';
+import {
+  useOrdersState,
+  useCartState,
+  useAddressesState,
+  useCardsState
+} from './GlobalStates/stateOrders';
 
 type Store = {
   isFilterOpen: boolean;
@@ -11,7 +16,6 @@ type Store = {
   isVariantActive: boolean;
   triggerFetchCart: boolean;
   user: AccountInformation | object;
-  cards: UserCards[] | object;
 };
 
 export const store = atom({
@@ -20,8 +24,7 @@ export const store = atom({
   breadcrumbMainRoute: '',
   isVariantActive: true,
   triggerFetchCart: false,
-  user: {},
-  cards: {}
+  user: {}
 });
 
 export function useStore(): {
@@ -45,4 +48,4 @@ export function useStore(): {
   return { state, updateStateProp, updateState };
 }
 
-export { useOrdersState, useCartState, useAddressesState };
+export { useOrdersState, useCartState, useAddressesState, useCardsState };

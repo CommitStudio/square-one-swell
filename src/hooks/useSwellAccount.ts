@@ -5,7 +5,14 @@ import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
-import { useStore, useOrdersState, useCartState, useAddressesState } from '~/hooks/useStore';
+import {
+  useStore,
+  useOrdersState,
+  useCartState,
+  useAddressesState,
+  useCardsState
+} from '~/hooks/useStore';
+
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 /*****************************************************************************
@@ -111,6 +118,7 @@ export const useUserLogged = () => {
   const { setOrders } = useOrdersState();
   const { setCart } = useCartState();
   const { setAddresses } = useAddressesState();
+  const { setCards } = useCardsState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -119,11 +127,11 @@ export const useUserLogged = () => {
         setOrders(listOrders);
         setCart(cart);
         setAddresses(addresses);
+        setCards(userCards);
 
         updateState({
           ...state,
-          user: account || {},
-          cards: userCards
+          user: account || {}
         });
 
         setUser(account);
@@ -132,8 +140,9 @@ export const useUserLogged = () => {
         setOrders([]);
         setCart({});
         setAddresses([]);
+        setCards([]);
 
-        updateState({ ...state, user: {}, cards: {} });
+        updateState({ ...state, user: {} });
         setUser(null);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -160,7 +169,7 @@ const getUserData = async () => {
     listCards
   ]);
 
-  return { account, cart, listOrders, addresses: addresses.results, userCards };
+  return { account, cart, listOrders, addresses: addresses.results, userCards: userCards.results };
 };
 
 /*****************************************************************************
