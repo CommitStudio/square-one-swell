@@ -5,11 +5,11 @@ import type { AccountInformation, Cart } from 'swell-js';
 /*****************************************************************************
  * Define and declare global state hook
  ****************************************************************************/
-const stateOrdes = atom([] as UserOrder[]);
-const stateCart = atom(null as Cart | null);
-const stateAddresses = atom([] as SwellAddress[]);
-const stateCards = atom([] as SwellUserCards[]);
-const stateAccount = atom(null as AccountInformation | null);
+const stateOrdes = atom<UserOrder[]>([]);
+const stateCart = atom<Cart | null>(null);
+const stateAddresses = atom<SwellAddress[]>([]);
+const stateCards = atom<SwellUserCards[]>([]);
+const stateAccount = atom<AccountInformation | null>(null);
 
 export function useGlobalState() {
   const [orders, setOrders] = useAtom(stateOrdes);
