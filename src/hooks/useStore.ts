@@ -3,42 +3,13 @@ import { atom, useAtom } from 'jotai';
 import type { AccountInformation, Cart } from 'swell-js';
 
 /*****************************************************************************
- * Define states types
+ * Define and declare global state hook
  ****************************************************************************/
-type StateOrders = UserOrder[];
-type StateCart = Cart | null;
-type StateAddresses = SwellAddress[];
-type StateCards = SwellUserCards[];
-type StateAccount = AccountInformation | null;
-
-type Store = {
-  isFilterOpen: boolean;
-  breadcrumbSelectedCategory: string;
-  breadcrumbMainRoute: string;
-  isVariantActive: boolean;
-  triggerFetchCart: boolean;
-};
-
-/*****************************************************************************
- * Initialize states
- ****************************************************************************/
-const stateOrdes = atom([] as StateOrders);
-const stateCart = atom({} as StateCart);
-const stateAddresses = atom([] as StateAddresses);
-const stateCards = atom([] as StateCards);
-const stateAccount = atom({} as StateAccount);
-
-const store = atom({
-  isFilterOpen: false,
-  breadcrumbSelectedCategory: '',
-  breadcrumbMainRoute: '',
-  isVariantActive: true,
-  triggerFetchCart: false
-});
-
-/*****************************************************************************
- * State hooks
- ****************************************************************************/
+const stateOrdes = atom([] as UserOrder[]);
+const stateCart = atom(null as Cart | null);
+const stateAddresses = atom([] as SwellAddress[]);
+const stateCards = atom([] as SwellUserCards[]);
+const stateAccount = atom(null as AccountInformation | null);
 
 export function useGlobalState() {
   const [orders, setOrders] = useAtom(stateOrdes);
@@ -61,7 +32,25 @@ export function useGlobalState() {
   };
 }
 
-/** Global state used for UI */
+/*****************************************************************************
+ * Global state used for UI
+ ****************************************************************************/
+type Store = {
+  isFilterOpen: boolean;
+  breadcrumbSelectedCategory: string;
+  breadcrumbMainRoute: string;
+  isVariantActive: boolean;
+  triggerFetchCart: boolean;
+};
+
+const store = atom({
+  isFilterOpen: false,
+  breadcrumbSelectedCategory: '',
+  breadcrumbMainRoute: '',
+  isVariantActive: true,
+  triggerFetchCart: false
+});
+
 export function useStore(): {
   state: Store;
   updateStateProp: (property: string, value: unknown) => void;
