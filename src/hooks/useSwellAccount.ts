@@ -5,7 +5,7 @@ import type { AccountInformation } from 'swell-js';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
-import { useStore, useOrdersState, useCartState } from '~/hooks/useStore';
+import { useStore, useOrdersState, useCartState, useAddressesState } from '~/hooks/useStore';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 /*****************************************************************************
@@ -110,6 +110,7 @@ export const useUserLogged = () => {
   const { state, updateState } = useStore();
   const { setOrders } = useOrdersState();
   const { setCart } = useCartState();
+  const { setAddresses } = useAddressesState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -117,11 +118,11 @@ export const useUserLogged = () => {
       .then(({ account, cart, listOrders, addresses, userCards }) => {
         setOrders(listOrders);
         setCart(cart);
+        setAddresses(addresses);
 
         updateState({
           ...state,
           user: account || {},
-          addresses: addresses,
           cards: userCards
         });
 
@@ -130,8 +131,9 @@ export const useUserLogged = () => {
       .catch(() => {
         setOrders([]);
         setCart({});
+        setAddresses([]);
 
-        updateState({ ...state, user: {}, addresses: {}, cards: {} });
+        updateState({ ...state, user: {}, cards: {} });
         setUser(null);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -149,6 +151,7 @@ const getUserData = async () => {
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
   const listCards = swell.account.listCards();
+
   const [account, cart, listOrders, addresses, userCards] = await Promise.all([
     accountPromise,
     cartPromise,
@@ -157,7 +160,7 @@ const getUserData = async () => {
     listCards
   ]);
 
-  return { account, cart, listOrders, addresses, userCards };
+  return { account, cart, listOrders, addresses: addresses.results, userCards };
 };
 
 /*****************************************************************************

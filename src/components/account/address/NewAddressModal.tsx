@@ -1,11 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-
 import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
-import { useStore } from '~/hooks/useStore';
+import { useAddressesState } from '~/hooks/useStore';
 
 swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
 
@@ -28,7 +27,7 @@ type Props = {
 };
 
 const NewAddressModal = ({ open, setOpen }: Props) => {
-  const { updateStateProp } = useStore();
+  const { setAddresses } = useAddressesState();
 
   const {
     register,
@@ -48,8 +47,9 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
       country: data.country,
       phone: data.phone
     });
+
     const allAddress = await swell.account.listAddresses();
-    updateStateProp('addresses', allAddress);
+    setAddresses(allAddress.results);
     setOpen(false);
     reset();
   };

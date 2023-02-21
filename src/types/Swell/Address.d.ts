@@ -1,10 +1,4 @@
 interface SwellAddress {
-  count: number;
-  page: number;
-  results: SwellAddressResult[];
-}
-
-interface SwellAddressResult {
   active: boolean;
   address1: string;
   address2: string | null;

@@ -2,21 +2,21 @@ import { useState } from 'react';
 
 import EditAddressModal from './EditAddressModal';
 
-import { useStore } from '~/hooks/useStore';
+import { useAddressesState } from '~/hooks/useStore';
 import { swell } from '~/hooks/useSwellConection';
 
 interface Props {
-  address: SwellAddressResult;
+  address: SwellAddress;
 }
 
 const AddressCard = ({ address }: Props) => {
-  const { updateStateProp } = useStore();
+  const { setAddresses } = useAddressesState();
   const [open, setOpen] = useState(false);
 
   const handleDeleteAddress = async (id: string) => {
     await swell.account.deleteAddress(id);
-    const allAddress = await swell.account.listAddresses();
-    updateStateProp('addresses', allAddress);
+    const { results } = await swell.account.listAddresses();
+    setAddresses(results);
   };
 
   return (

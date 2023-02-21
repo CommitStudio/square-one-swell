@@ -2,9 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 import type { AccountInformation } from 'swell-js';
 
-import { useOrdersState, useCartState } from './GlobalStates/stateOrders';
-
-import { swell } from './useSwellConection';
+import { useOrdersState, useCartState, useAddressesState } from './GlobalStates/stateOrders';
 
 type Store = {
   isFilterOpen: boolean;
@@ -13,7 +11,6 @@ type Store = {
   isVariantActive: boolean;
   triggerFetchCart: boolean;
   user: AccountInformation | object;
-  addresses: SwellAddress | object;
   cards: UserCards[] | object;
 };
 
@@ -24,7 +21,6 @@ export const store = atom({
   isVariantActive: true,
   triggerFetchCart: false,
   user: {},
-  addresses: {},
   cards: {}
 });
 
@@ -49,4 +45,4 @@ export function useStore(): {
   return { state, updateStateProp, updateState };
 }
 
-export { useOrdersState, useCartState };
+export { useOrdersState, useCartState, useAddressesState };

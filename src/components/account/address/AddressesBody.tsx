@@ -1,25 +1,24 @@
 import { FaRegAddressCard } from 'react-icons/fa';
 
 import AddressCard from '~/components/account/address/AddressCard';
-import { useStore } from '~/hooks/useStore';
+import { useAddressesState } from '~/hooks/useStore';
 
 interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddressesBody = ({ setOpen }: Props) => {
-  const { state } = useStore();
-  const { addresses } = state as { addresses: SwellAddress };
+  const { addresses } = useAddressesState();
 
   return (
     <>
       <h4 className="text-3xl font-medium mb-5">Addresses</h4>
       <div className="grid gap-3 md:auto-rows-fr md:grid-cols-2 md:gap-8">
-        {addresses?.results?.map((address) => {
+        {addresses?.map((address) => {
           return <AddressCard key={address.id} address={address} />;
         })}
       </div>
-      {addresses.results.length === 0 && (
+      {addresses.length === 0 && (
         <p className="text-gray-400">There are no addresses associated with this account.</p>
       )}
       <button
