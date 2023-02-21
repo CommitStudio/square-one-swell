@@ -40,15 +40,13 @@ type Store = {
   breadcrumbSelectedCategory: string;
   breadcrumbMainRoute: string;
   isVariantActive: boolean;
-  triggerFetchCart: boolean;
 };
 
 const store = atom({
   isFilterOpen: false,
   breadcrumbSelectedCategory: '',
   breadcrumbMainRoute: '',
-  isVariantActive: true,
-  triggerFetchCart: false
+  isVariantActive: true
 });
 
 export function useStore(): {
