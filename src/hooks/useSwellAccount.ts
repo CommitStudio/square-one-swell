@@ -152,7 +152,7 @@ export const useUserLogged = () => {
  * Fetch required user data from Swell
  ****************************************************************************/
 const getUserData = async () => {
-  const accountPromise = swell.account.get() as Promise<AccountInformation>;
+  const accountPromise = swell.account.get();
   const cartPromise = swell.cart.get();
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
@@ -175,20 +175,18 @@ const getUserData = async () => {
 const getUserOrders = async () => {
   const dataFromlistOrders = await swell.account.listOrders();
   const userOrders = dataFromlistOrders.results;
-  return userOrders.map((order: Order) => {
-    return {
-      id: order.id,
-      number: order.number,
-      status: order.status,
-      delivered: order.delivered,
-      date: order.date_created,
-      items: order.item_quantity,
-      total: order.grand_total,
-      currency: order.currency,
-      paid: order.paid,
-      image1: order.items[0].product.images[0].file.url
-    } as UserOrder;
-  });
+  return userOrders.map((order: Order) => ({
+    id: order.id,
+    number: order.number,
+    status: order.status,
+    delivered: order.delivered,
+    date: order.date_created,
+    items: order.item_quantity,
+    total: order.grand_total,
+    currency: order.currency,
+    paid: order.paid,
+    image1: order.items[0].product.images[0].file.url
+  }));
 };
 
 /*****************************************************************************
