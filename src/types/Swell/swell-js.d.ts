@@ -49,6 +49,7 @@ declare module 'swell-js' {
     ): Promise<SwellAddressResult>;
     listCards(): Promise<UserCards>;
     deleteCard(id: string): Promise<UserCards>;
+    recover(email): Promise<unknown>;
   }
 
   export interface AccountInformation {
