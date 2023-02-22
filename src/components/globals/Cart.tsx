@@ -1,5 +1,3 @@
-import { format } from 'path';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -61,7 +59,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border h-full bg-white text-secondary ml-auto w-[500px] hidden lg:flex lg:flex-col justify-between">
+        <nav className="border h-full bg-white md:w-[500px] w-screen text-secondary ml-auto sm:flex:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
               Items:{' '}
@@ -78,44 +76,52 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               onClick={closeCart}
             />
           </div>
+          {/* products sections */}
           <div className="overflow-y-auto px-7 mb-auto">
-            <hr className="mb-5 opacity-20" />
-            {determineIfIsCart(state.localCart) &&
-              state.localCart?.items?.map((product) => (
-                <div
-                  key={product.id}
-                  className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
-                >
-                  <div className="relative h-24 w-24">
-                    <Image
-                      src={product.product?.images[0]?.file.url}
-                      alt={product.product.name}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className="w-52">
-                    <p>{product.product.name}</p>
-                    <p>Variant: {product.variant?.name}</p>
-                    <p>
-                      {product.quantity} x ${formatCurrency(product.price)}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => {
-                      void removeProductFromCart(product.id, product.variant.id);
-                      notifySuccess(
-                        'The item has been removed from your cart. Keep shopping or proceed to checkout'
-                      );
-                    }}
-                    className="self-end hover:text-red-600"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+            {determineIfIsCart(state.localCart) && state?.localCart?.items?.length === 0 ? (
+              <p className="">There are no items in your cart yet</p>
+            ) : (
+              <>
+                <hr className="mb-5 opacity-20" />
+                {determineIfIsCart(state.localCart) &&
+                  state.localCart?.items?.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-2 border-black border-opacity-20"
+                    >
+                      <div className="relative h-24 w-24 ">
+                        <Image
+                          src={product.product?.images[0]?.file.url}
+                          alt={product.product.name}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                      <div className="w-52">
+                        <p>{product.product.name}</p>
+                        <p>Variant: {product.variant?.name}</p>
+                        <p>
+                          {product.quantity} x ${formatCurrency(product.price)}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          void removeProductFromCart(product.id, product.variant.id);
+                          notifySuccess(
+                            'The item has been removed from your cart. Keep shopping or proceed to checkout'
+                          );
+                        }}
+                        className="self-end hover:text-red-600"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+              </>
+            )}
           </div>
-          <div className="px-7 pb-7 bg-secondary text-xs">
+          {/* checkout section */}
+          <div className="fixed bottom-0 w-full px-7 pb-7 bg-secondary text-xs">
             <hr className="mb-5 opacity-20" />
             <div className="grid grid-cols-2 text-base mb-3 text-white">
               <p>Subtotal</p>

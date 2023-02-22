@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useStore } from '~/hooks/useStore';
 
 type Props = {
-  categories: { name: string; slug: string; query?: string }[];
+  categories: { name: string; slug: string; query?: string; hideOnDesktop: boolean }[];
 };
 
 const DesktopMenu = ({ categories }: Props) => {
@@ -20,7 +20,7 @@ const DesktopMenu = ({ categories }: Props) => {
       <ul className="hidden bg-secondary mt-6 lg:flex lg:flex-row lg:p-4 lg:space-x-8 lg:mt-0">
         {categories.map((category, i) => {
           return (
-            <li key={`category-${i}`}>
+            <li key={`category-${i}`} className={`${category.hideOnDesktop ? 'md:hidden' : ''}`}>
               <Link href={`/${category.slug}`}>
                 <a
                   onClick={handleClick}
