@@ -2,7 +2,12 @@ import { useRouter } from 'next/router';
 
 import { useUserLogged } from './useSwellAccount';
 
-const allowedRoutes = ['/account/login', '/account/create-account'];
+const allowedRoutes = [
+  '/account/login',
+  '/account/create-account',
+  '/account/forgot-password', //to ask for change password
+  '/account/reset-password' //after the email password change was sent
+];
 
 export const useAuth = () => {
   const router = useRouter();

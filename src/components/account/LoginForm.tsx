@@ -61,10 +61,11 @@ const LoginForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label htmlFor="email" className="font-bold text-xs text-gray-500 mb-2 block">
                 E-MAIL <span className="text-red-500">*</span>
               </label>
               <input
+                id="email"
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
@@ -82,34 +83,21 @@ const LoginForm = () => {
                 })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
-              {errors.email ? (
-                <>
-                  {errors.email.type === 'required' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                  {errors.email.type === 'maxLength' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                  {errors.email.type === 'pattern' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </>
-              ) : null}
+              {errors.email && (
+                <p role="alert" className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
           </div>
           <div>
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label htmlFor="password" className="font-bold text-xs text-gray-500 mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
               <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
                 <input
+                  id="password"
                   type={`${isHidden ? 'password' : 'text'}`}
                   placeholder="••••••"
                   autoComplete="off"
@@ -132,20 +120,11 @@ const LoginForm = () => {
                 </button>
               </div>
 
-              {errors.password ? (
-                <>
-                  {errors.password.type === 'required' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
-                  {errors.password.type === 'minLength' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
-                </>
-              ) : null}
+              {errors.password && (
+                <p role="alert" className="text-red-500 text-xs mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
           </div>
           {/* CAPTCHA */}

@@ -90,11 +90,17 @@ export const useLogin = (credentials: { email: string; password: string } | null
       .then((account) => {
         setAccount(account);
         setUser(account);
-        notifySuccess(
-          'Welcome! You are now logged in and can proceed to checkout or continue shopping'
-        );
+        if (account) {
+          notifySuccess(
+            'Welcome! You are now logged in and can proceed to checkout or continue shopping'
+          );
+        } else {
+          notifyFailure('Something went wrong. Please check your credentials');
+        }
       })
-      .catch(() => setUser(null));
+      .catch(() => {
+        setUser(null);
+      });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
