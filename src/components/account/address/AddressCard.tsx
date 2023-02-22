@@ -1,26 +1,18 @@
 import { useState } from 'react';
 
+import DeleteAddressModal from './DeleteAddressModal';
 import EditAddressModal from './EditAddressModal';
-
-import { useStore } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellConection';
 
 interface Props {
   address: SwellAddressResult;
 }
 
 const AddressCard = ({ address }: Props) => {
-  const { updateStateProp } = useStore();
   const [open, setOpen] = useState(false);
-
-  const handleDeleteAddress = async (id: string) => {
-    await swell.account.deleteAddress(id);
-    const allAddress = await swell.account.listAddresses();
-    updateStateProp('addresses', allAddress);
-  };
+  const [openConfModal, setOpenConfModal] = useState(false);
 
   return (
-    <div className="flex rounded bg-primary-lightest p-4 shadow-md border border-gray-50 justify-between mb-2">
+    <div className="flex rounded bg-primary-lightest p-5 shadow-md border border-gray-50 justify-between mb-2">
       <div className="space-y-2">
         <p>
           {address.first_name} {address.last_name}
@@ -33,15 +25,20 @@ const AddressCard = ({ address }: Props) => {
       </div>
       <div className="flex flex-col justify-between">
         <button
-          className="bg-secondary text-primary p-1 rounded transition-all duration-300 hover:bg-primary hover:text-secondary"
+          className="bg-secondary text-primary p-2 rounded transition-all duration-100 hover:bg-primary hover:text-secondary"
           onClick={() => {
-            void handleDeleteAddress(address.id);
+            void setOpenConfModal(true);
           }}
         >
           Delete
         </button>
+        <DeleteAddressModal
+          addressId={address.id}
+          openConfModal={openConfModal}
+          setOpenConfModal={setOpenConfModal}
+        />
         <button
-          className="bg-secondary text-primary p-1 rounded transition-all duration-300 hover:bg-primary hover:text-secondary"
+          className="bg-secondary text-primary p-2 rounded transition-all duration-100 hover:bg-primary hover:text-secondary"
           onClick={() => setOpen(true)}
         >
           Edit
