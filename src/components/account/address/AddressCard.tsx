@@ -4,7 +4,7 @@ import DeleteAddressModal from './DeleteAddressModal';
 import EditAddressModal from './EditAddressModal';
 
 interface Props {
-  address: SwellAddressResult;
+  address: SwellAddress;
 }
 
 const AddressCard = ({ address }: Props) => {

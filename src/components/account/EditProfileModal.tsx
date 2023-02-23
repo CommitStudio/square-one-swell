@@ -3,11 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 import 'react-toastify/dist/ReactToastify.css';
 
-import type { AccountInformation } from 'swell-js';
-
 import Modal from '~/components/account/Modal';
 
-import { useStore } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
 import { notifySuccess } from '~/utils/toastifies';
 
@@ -25,9 +23,8 @@ type Props = {
 };
 
 const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
-  const { state } = useStore();
-  const { user } = state as { user: AccountInformation };
-  const { first_name, last_name, email } = user;
+  const { account } = useGlobalState();
+  const { first_name, last_name, email } = account || {};
 
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
@@ -55,9 +52,9 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
   };
 
   useEffect(() => {
-    setValue('first_name', first_name);
-    setValue('last_name', last_name);
-    setValue('email', email);
+    setValue('first_name', first_name || '');
+    setValue('last_name', last_name || '');
+    setValue('email', email || '');
   }, [email, first_name, last_name, setValue]);
 
   return (

@@ -4,15 +4,15 @@ import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Badge } from '../Badge';
 import { determineIfIsCart } from '../Cart';
 
-import { useStore } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 type Props = {
   toggleCart: () => void;
 };
 
 const UserButtons = ({ toggleCart }: Props) => {
-  const { state } = useStore();
-  const quantity = determineIfIsCart(state.localCart) && state.localCart.item_quantity;
+  const { cart } = useGlobalState();
+  const quantity = determineIfIsCart(cart) && cart?.item_quantity;
 
   return (
     <div className="flex lg:order-2">

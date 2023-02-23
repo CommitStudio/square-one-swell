@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/components/globals/Spinner';
 import Tooltip from '~/components/globals/Tooltip';
-import { useStore } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellCart';
+import { useStore, useGlobalState } from '~/hooks/useStore';
+import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 interface ProductProp {
@@ -26,7 +26,8 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { state, updateStateProp } = useStore();
+  const { state } = useStore();
+  const { setCart } = useGlobalState();
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
@@ -49,10 +50,12 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Message of added product
     notifySuccess(toastifyMessage);
+
     //Turn on spinner while waiting
     setIsLoading(true);
+
     // Add product to cart on Swell
-    const cartWithNewItem = await swell.cart
+    await swell.cart
       .addItem({
         product_id: product.id,
         quantity: quantity,
@@ -60,6 +63,10 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
           name: optionName,
           value: chosenOptions[optionName]
         }))
+      })
+      .then((cart) => {
+        // Add product to cart
+        setCart(cart);
       })
       .catch((err) => {
         console.log(err);
@@ -72,8 +79,6 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         //Turn of spinner
         setIsLoading(false);
       });
-    // Add product to localCart
-    updateStateProp('localCart', cartWithNewItem);
   };
 
   return (

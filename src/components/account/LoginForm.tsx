@@ -40,7 +40,6 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // If statement is declared incase captcha input is filled (probable bot).
     if (!data.dontComplete) setLoginCredentials(data);
-    updateStateProp('triggerFetchCart', !state.triggerFetchCart);
   };
 
   return (

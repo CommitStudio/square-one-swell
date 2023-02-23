@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import swell from 'swell-js';
 
 import type { AccountInformation } from 'swell-js';
 
-swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
+import { useGlobalState } from '~/hooks/useStore';
+import swell from '~/lib/SwellJS';
 
-import { useStore } from '~/hooks/useStore';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 /*****************************************************************************
@@ -14,7 +13,7 @@ import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 export const useRegister = (
   credentials: { first_name: string; last_name: string; email: string; password: string } | null
 ) => {
-  const { updateStateProp } = useStore();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const useRegister = (
     swell.account
       .create(credentials)
       .then((account) => {
-        updateStateProp('user', account);
+        setAccount(account);
         setUser(account);
         notifySuccess(
           'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
@@ -50,7 +49,7 @@ export const useUpdateAccount = (
     password: string;
   } | null
 ) => {
-  const { updateStateProp } = useStore();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -62,7 +61,7 @@ export const useUpdateAccount = (
       .update(userDetails)
       .then((account) => {
         setUser(account);
-        updateStateProp('user', account);
+        setAccount(account);
       })
       .catch(() => setUser(null));
 
@@ -76,7 +75,7 @@ export const useUpdateAccount = (
  * Login user and return account information
  ****************************************************************************/
 export const useLogin = (credentials: { email: string; password: string } | null) => {
-  const { updateStateProp } = useStore();
+  const { setAccount } = useGlobalState();
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
@@ -89,7 +88,7 @@ export const useLogin = (credentials: { email: string; password: string } | null
     swell.account
       .login(email, password)
       .then((account) => {
-        updateStateProp('user', account);
+        setAccount(account);
         setUser(account);
         notifySuccess(
           'Welcome! You are now logged in and can proceed to checkout or continue shopping'
@@ -107,24 +106,28 @@ export const useLogin = (credentials: { email: string; password: string } | null
  * Check if the user is logged in
  ****************************************************************************/
 export const useUserLogged = () => {
-  const { state, updateState } = useStore();
+  const { setOrders, setCart, setAddresses, setCards, setAccount } = useGlobalState();
+
   const [user, setUser] = useState<AccountInformation | null | undefined>(undefined);
 
   useEffect(() => {
     getUserData()
       .then(({ account, cart, listOrders, addresses, userCards }) => {
-        updateState({
-          ...state,
-          user: account || {},
-          localCart: cart,
-          orders: listOrders,
-          addresses: addresses,
-          cards: userCards
-        });
+        setOrders(listOrders);
+        setCart(cart);
+        setAddresses(addresses);
+        setCards(userCards);
+        setAccount(account);
+
         setUser(account);
       })
       .catch(() => {
-        updateState({ ...state, user: {}, localCart: {}, orders: {}, addresses: {}, cards: {} });
+        setOrders([]);
+        setCart(null);
+        setAddresses([]);
+        setCards([]);
+        setAccount(null);
+
         setUser(null);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,6 +145,7 @@ const getUserData = async () => {
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
   const listCards = swell.account.listCards();
+
   const [account, cart, listOrders, addresses, userCards] = await Promise.all([
     accountPromise,
     cartPromise,
@@ -150,7 +154,7 @@ const getUserData = async () => {
     listCards
   ]);
 
-  return { account, cart, listOrders, addresses, userCards };
+  return { account, cart, listOrders, addresses: addresses.results, userCards: userCards.results };
 };
 
 /*****************************************************************************
@@ -159,38 +163,31 @@ const getUserData = async () => {
 const getUserOrders = async () => {
   const dataFromlistOrders = await swell.account.listOrders();
   const userOrders = dataFromlistOrders.results;
-  return userOrders.map((order: Order) => {
-    return {
-      id: order.id,
-      number: order.number,
-      status: order.status,
-      delivered: order.delivered,
-      date: order.date_created,
-      items: order.item_quantity,
-      total: order.grand_total,
-      currency: order.currency,
-      paid: order.paid,
-      image1: order.items[0].product.images[0].file.url
-    } as UserOrder;
-  });
+  return userOrders.map((order: Order) => ({
+    id: order.id,
+    number: order.number,
+    status: order.status,
+    delivered: order.delivered,
+    date: order.date_created,
+    items: order.item_quantity,
+    total: order.grand_total,
+    currency: order.currency,
+    paid: order.paid,
+    image1: order.items[0].product.images[0].file.url
+  }));
 };
 
 /*****************************************************************************
  * Logout current user and redirect to home page
  ****************************************************************************/
 export const useLogout = () => {
-  const { updateStateProp } = useStore();
+  const { setAccount } = useGlobalState();
 
   return async () => {
     await swell.account
       .logout()
       .then(() => {
-        updateStateProp('user', {
-          first_name: '',
-          last_name: '',
-          email: ''
-        });
-
+        setAccount(null);
         document.location = '/';
       })
       .catch(() => notifyFailure('Something went wrong'))

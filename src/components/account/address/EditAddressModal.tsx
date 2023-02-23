@@ -1,13 +1,11 @@
 import { useReducer } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
-import { useStore } from '~/hooks/useStore';
-
-swell.init(process.env.PUBLIC_SWELL_STORE_ID, process.env.PUBLIC_SWELL_PUBLIC_KEY);
+import { useGlobalState } from '~/hooks/useStore';
+import swell from '~/lib/SwellJS';
 
 const { countries } = countriesJSON;
 
@@ -25,11 +23,12 @@ type Inputs = {
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  address: SwellAddressResult;
+  address: SwellAddress;
 };
 
 const EditAddressModal = ({ open, setOpen, address }: Props) => {
-  const { updateStateProp } = useStore();
+  const { setAddresses } = useGlobalState();
+
   const {
     register,
     handleSubmit,
@@ -53,10 +52,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
     zip: address.zip || null
   };
 
-  const reducer = (
-    data: SwellAddressResult,
-    action: { type: string; value: SwellAddressResult }
-  ) => {
+  const reducer = (data: SwellAddress, action: { type: string; value: SwellAddress }) => {
     switch (action.type) {
       case 'updateAddress':
         swell.account.updateAddress(address.id, action.value).catch((err) => {
@@ -65,7 +61,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
         swell.account
           .listAddresses()
           .then((allAddresses) => {
-            updateStateProp('addresses', allAddresses);
+            setAddresses(allAddresses.results);
             setOpen(false);
           })
           .catch((err) => {
@@ -82,7 +78,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
 
   const [data, dispatch] = useReducer(reducer, initialAddress);
 
-  const onSubmit: SubmitHandler<Inputs> = (formData) => {
+  const onSubmit: SubmitHandler<Inputs> = () => {
     const fullName = `${data.first_name} ${data.last_name}`;
     dispatch({ type: 'updateAddress', value: { ...data, name: fullName } });
   };

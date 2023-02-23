@@ -6,8 +6,8 @@ import { GrClose } from 'react-icons/gr';
 import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 
-import { useStore } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellConection';
+import { useGlobalState } from '~/hooks/useStore';
+import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
-  const { state, updateState } = useStore();
+  const { setCards } = useGlobalState();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -48,8 +48,8 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
         cvc: data.cvc
       });
       await swell.account.createCard(cardToken);
-      const cards = await swell.account.listCards();
-      updateState({ ...state, cards });
+      const { results } = await swell.account.listCards();
+      setCards(results);
       notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {

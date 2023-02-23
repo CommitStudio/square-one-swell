@@ -4,13 +4,10 @@ import { useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
-import type { AccountInformation } from 'swell-js';
-
 import EditProfileModal from './EditProfileModal';
+import LogOutModal from './LogOutModal';
 
-import { LogOutModal } from './LogOutModal';
-
-import { useStore } from '~/hooks/useStore';
+import { useGlobalState } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
 
@@ -21,8 +18,7 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
   const router = useRouter();
 
-  const { state } = useStore();
-  const { user } = state as { user: AccountInformation };
+  const { account } = useGlobalState();
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false);
@@ -30,11 +26,13 @@ const AccountLayout = ({ children }: Props) => {
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
-          <div className={`h-24 mb-4 flex flex-col justify-center ${user.email || 'invisible'}`}>
+          <div
+            className={`h-24 mb-4 flex flex-col justify-center ${account?.email || 'invisible'}`}
+          >
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
-              {user?.first_name} {user?.last_name}
+              {account?.first_name} {account?.last_name}
             </h4>
-            <p className="h-6 mb-2">{user?.email}</p>
+            <p className="h-6 mb-2">{account?.email}</p>
             <button
               className="flex items-center gap-1 hover:text-red-600"
               onClick={() => setOpenEdit(true)}

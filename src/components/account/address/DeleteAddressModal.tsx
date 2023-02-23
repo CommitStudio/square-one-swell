@@ -3,7 +3,7 @@ import { GrClose } from 'react-icons/gr';
 import Modal from '~/components/account/Modal';
 
 import { useStore } from '~/hooks/useStore';
-import { swell } from '~/hooks/useSwellConection';
+import swell from '~/lib/SwellJS';
 
 type Props = {
   openConfModal: boolean;
