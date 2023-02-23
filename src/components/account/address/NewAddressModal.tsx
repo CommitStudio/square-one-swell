@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
+import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
@@ -146,24 +147,25 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
                 Country
               </label>
               <select
-                className="w-full py-2"
+                className="w-full p-[0.6rem] mb-4"
                 id="country"
                 {...register('country', {
                   required: 'Please enter your country',
+                  validate: (value) => {
+                    return value === '--' ? 'Please select a country' : true;
+                  },
                   maxLength: { value: 50, message: 'Country is too long.' }
                 })}
               >
-                {countries.map((country, i) =>
-                  country.name === '------' ? (
-                    <option value="------" disabled key="------">
-                      ------
-                    </option>
-                  ) : (
-                    <option key={i} value={`${country.alpha2Code}`}>
-                      {`${country.name}`}
-                    </option>
-                  )
-                )}
+                {countries.map((country, i) => (
+                  <option
+                    key={i}
+                    value={`${country.alpha2Code}`}
+                    hidden={country.name === 'Select a country'}
+                  >
+                    {`${country.name}`}
+                  </option>
+                ))}
               </select>
               {errors.country && (
                 <p className="text-red-600 text-xs -mt-4 mb-4">{errors.country.message}</p>

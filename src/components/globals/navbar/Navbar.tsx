@@ -20,6 +20,7 @@ const Navbar = () => {
 
   const toggleHamburgerNav = () => {
     setIsHamburgerNavOpen((prev) => !prev);
+    isCartOpen && setIsCartOpen(false);
   };
 
   useEffect(() => {
@@ -40,7 +41,13 @@ const Navbar = () => {
         <DesktopMenu categories={data.categories} />
         <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
       </div>
-      <MobileMenu isOpen={isHamburgerNavOpen} categories={data.categories} />
+      <MobileMenu
+        isOpen={isHamburgerNavOpen}
+        setIsMenuOpen={setIsHamburgerNavOpen}
+        categories={data.categories}
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+      />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
   );
