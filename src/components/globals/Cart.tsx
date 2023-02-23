@@ -78,7 +78,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           {/* products sections */}
           <div className="overflow-y-auto px-7 mb-auto">
-            {determineIfIsCart(state.localCart) && state?.localCart?.items?.length === 0 ? (
+            {determineIfIsCart(state.localCart) &&
+            (state?.localCart?.items?.length === 0 ||
+              state?.localCart?.items?.length === undefined) ? (
               <p className="">There are no items in your cart yet</p>
             ) : (
               <>
@@ -121,7 +123,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             )}
           </div>
           {/* checkout section */}
-          <div className="fixed bottom-0 w-full px-7 pb-7 bg-secondary text-xs">
+          <div className="fixed md:absolute bottom-0 w-full px-7 pb-7 bg-secondary text-xs">
             <hr className="mb-5 opacity-20" />
             <div className="grid grid-cols-2 text-base mb-3 text-white">
               <p>Subtotal</p>
