@@ -80,9 +80,10 @@ const ForgotPasswordForm = () => {
           </div>
           <div className="mb-4">
             {confirmation && (
-              <p className="text-gray-500 text-sm pb-6 mb-4">
-                Please check your email for next steps.
-              </p>
+              <div className="text-gray-500 text-sm pb-8 text-center">
+                <p>Please check your email for next steps.</p>
+                <p>If the email is not in our system, you will not receive an email.</p>
+              </div>
             )}
             <button
               type="submit"
