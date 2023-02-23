@@ -11,8 +11,6 @@ type Props = {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-//
-
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { cart, setCart } = useGlobalState();
 
