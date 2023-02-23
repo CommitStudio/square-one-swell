@@ -1,6 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
-import swell from 'swell-js';
 
 import Modal from '~/components/account/Modal';
 import countriesJSON from '~/data/countries.json';
