@@ -11,12 +11,6 @@ type Props = {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function determineIfIsCart(
-  toBeDetermined: swell.Cart | null
-): toBeDetermined is swell.Cart | null {
-  return toBeDetermined ? true : false;
-}
-
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { cart, setCart } = useGlobalState();
 
@@ -27,11 +21,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const removeProductFromCart = async (cartItemId: string, productVariantId: string) => {
     const newCart = { ...cart } as swell.Cart;
 
-    const items =
-      determineIfIsCart(cart) &&
-      cart?.items.filter(
-        (item) => item.product.id !== cartItemId && item.variant.id !== productVariantId
-      );
+    const items = cart?.items.filter(
+      (item) => item.product.id !== cartItemId && item.variant.id !== productVariantId
+    );
 
     if (items) {
       newCart.items = items;
@@ -60,9 +52,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
         <nav className="border h-full bg-white md:w-[500px] w-screen text-secondary ml-auto sm:flex:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
-              Items:{' '}
-              {determineIfIsCart(cart) &&
-                cart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
+              Items: {cart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
             </h3>
             <Image
               src="/img/close-logo.svg"
@@ -76,46 +66,44 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           {/* products sections */}
           <div className="overflow-y-auto px-7 mb-auto">
-            {determineIfIsCart(cart) &&
-            (cart?.items?.length === 0 || cart?.items?.length === undefined) ? (
+            {cart?.items.length === 0 || cart === null ? (
               <p className="">There are no items in your cart yet</p>
             ) : (
               <>
                 <hr className="mb-5 opacity-20" />
-                {determineIfIsCart(cart) &&
-                  cart?.items?.map((product) => (
-                    <div
-                      key={product.id}
-                      className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-2 border-black border-opacity-20"
-                    >
-                      <div className="relative h-24 w-24 ">
-                        <Image
-                          src={product.product?.images[0]?.file.url}
-                          alt={product.product.name}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                      <div className="w-52">
-                        <p>{product.product.name}</p>
-                        <p>Variant: {product.variant?.name}</p>
-                        <p>
-                          {product.quantity} x ${formatCurrency(product.price)}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          void removeProductFromCart(product.id, product.variant.id);
-                          notifySuccess(
-                            'The item has been removed from your cart. Keep shopping or proceed to checkout'
-                          );
-                        }}
-                        className="self-end hover:text-red-600"
-                      >
-                        Remove
-                      </button>
+                {cart?.items?.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-2 border-black border-opacity-20"
+                  >
+                    <div className="relative h-24 w-24 ">
+                      <Image
+                        src={product.product?.images[0]?.file.url}
+                        alt={product.product.name}
+                        layout="fill"
+                        objectFit="cover"
+                      />
                     </div>
-                  ))}
+                    <div className="w-52">
+                      <p>{product.product.name}</p>
+                      <p>Variant: {product.variant?.name}</p>
+                      <p>
+                        {product.quantity} x ${formatCurrency(product.price)}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        void removeProductFromCart(product.id, product.variant.id);
+                        notifySuccess(
+                          'The item has been removed from your cart. Keep shopping or proceed to checkout'
+                        );
+                      }}
+                      className="self-end hover:text-red-600"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
               </>
             )}
           </div>
@@ -126,7 +114,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p>Subtotal</p>
               <p className="text-right">
                 ${' '}
-                {determineIfIsCart(cart) && cart?.items
+                {cart?.items
                   ? formatCurrency(
                       cart.items?.reduce(
                         (acc, product) => acc + product.price * product.quantity,
@@ -137,15 +125,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               </p>
               <p>Taxes</p>
               <p className="text-right">
-                ${' '}
-                {determineIfIsCart(cart) && cart?.tax_total
-                  ? formatCurrency(cart.tax_total)
-                  : Number(0).toFixed(2)}
+                $ {cart?.tax_total ? formatCurrency(cart.tax_total) : Number(0).toFixed(2)}
               </p>
               <p className="text-2xl mt-3">Total</p>
               <p className="text-2xl mt-3 text-right">
                 ${' '}
-                {determineIfIsCart(cart) && cart?.items
+                {cart?.items
                   ? formatCurrency(
                       cart.items?.reduce(
                         (acc, product) => acc + product.price * product.quantity,
@@ -157,10 +142,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             </div>
             <Link
               href={
-                determineIfIsCart(cart) && cart?.items?.length
-                  ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${
-                      (determineIfIsCart(cart) && cart.checkout_id) || ''
-                    }`
+                cart?.items?.length
+                  ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart.checkout_id || ''}`
                   : '#'
               }
             >

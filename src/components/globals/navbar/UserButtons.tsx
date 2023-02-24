@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 import { Badge } from '../Badge';
-import { determineIfIsCart } from '../Cart';
 
 import { useGlobalState } from '~/hooks/useStore';
 
@@ -12,7 +11,7 @@ type Props = {
 
 const UserButtons = ({ toggleCart }: Props) => {
   const { cart } = useGlobalState();
-  const quantity = determineIfIsCart(cart) && cart?.item_quantity;
+  const quantity = cart?.item_quantity;
 
   return (
     <div className="flex lg:order-2">
