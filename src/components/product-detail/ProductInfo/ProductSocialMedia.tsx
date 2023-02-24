@@ -1,11 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import {
-  AiFillFacebook,
-  AiFillLinkedin,
-  AiOutlineTwitter,
-  AiOutlineWhatsApp
-} from 'react-icons/ai';
+import { AiFillFacebook, AiOutlineTwitter, AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsPinterest } from 'react-icons/bs';
 
 const ProductSocialMedia = () => {
@@ -39,7 +34,7 @@ const ProductSocialMedia = () => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href={`https://api.whatsapp.com/send?text=Check%20out%20this%20amazing%20product:%20${route}`}
+        href={`https://api.whatsapp.com/send?text=Check%20out%20this%20amazing%20product!%20${route}`}
       >
         <AiOutlineWhatsApp className="text-secondary hover:text-primary cursor-pointer" />
       </a>
