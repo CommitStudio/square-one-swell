@@ -1,9 +1,14 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsArrowLeft } from 'react-icons/bs';
 
 import Container from '~/layouts/Container';
+import swell from '~/lib/SwellJS';
+import { notifyFailure } from '~/utils/toastifies';
+
+const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 type Inputs = {
   email: string;
@@ -11,13 +16,26 @@ type Inputs = {
 };
 
 const ForgotPasswordForm = () => {
+  const [confirmation, setConfirmation] = useState(false); //Used to show confirmation message after form is submitted
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      await swell.account.recover({
+        email: data.email,
+        reset_url: `${NEXT_PUBLIC_BASE_URL}/account/reset-password?key={reset_key}`
+      });
+      setConfirmation(true); //Turn on confirmation that a message has been sent
+    } catch (error) {
+      notifyFailure('There was an error sending your email. Please try again.');
+      console.error(error);
+    }
+  };
 
   return (
     <Container className="h-full flex flex-grow flex-col justify-center items-center">
@@ -52,28 +70,20 @@ const ForgotPasswordForm = () => {
                 })}
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
-              {errors.email ? (
-                <>
-                  {errors.email.type === 'required' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                  {errors.email.type === 'maxLength' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                  {errors.email.type === 'pattern' && (
-                    <p role="alert" className="text-red-500 text-xs mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </>
-              ) : null}
+              {errors.email && (
+                <p role="alert" className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
           </div>
           <div className="mb-4">
+            {confirmation && (
+              <div className="text-gray-500 text-sm pb-8 text-center">
+                <p>Please check your email for next steps.</p>
+                <p>If the email is not in our system, you will not receive an email.</p>
+              </div>
+            )}
             <button
               type="submit"
               aria-label=""
