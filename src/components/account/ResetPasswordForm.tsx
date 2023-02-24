@@ -5,9 +5,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { Spinner } from '../globals/Spinner';
 
-import { swell } from '~/hooks/useSwellConection';
-
 import Container from '~/layouts/Container';
+import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {

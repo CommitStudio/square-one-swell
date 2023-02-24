@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsArrowLeft } from 'react-icons/bs';
 
-import { swell } from '~/hooks/useSwellConection';
-
 import Container from '~/layouts/Container';
+import swell from '~/lib/SwellJS';
 import { notifyFailure } from '~/utils/toastifies';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
