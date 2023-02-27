@@ -43,8 +43,8 @@ const LinksAddress = () => {
           {data.brand_name}
         </div>
         <div className="flex flex-col space-y-3">
-          <span className="text-lg font-bold">Montevideo, Uruguay</span>
-          <span>Blvr. Artigas 1182 +598 2706 5597</span>
+          <span className="text-lg font-bold">City, Country</span>
+          <span>Address 1234 +111 1234 5678</span>
           <div className="flex space-x-4 text-3xl cursor-pointer">
             <span className="hover:text-primary">
               <AiOutlineInstagram />
