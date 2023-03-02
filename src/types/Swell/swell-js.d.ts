@@ -74,7 +74,7 @@ declare module 'swell-js' {
     last_name: string;
     first_name: string;
     email_optin: boolean;
-    email: { email: string; code: string; message: string };
+    email: { email: string; code?: string; message?: string };
     date_created: string;
     balance: number;
     id: string;
