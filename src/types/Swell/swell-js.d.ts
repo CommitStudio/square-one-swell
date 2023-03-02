@@ -3,10 +3,17 @@ declare module 'swell-js' {
 
   interface Account {
     update({
-      first_name: string,
-      last_name: string,
-      email: string,
-      password: string
+      first_name,
+      last_name,
+      email,
+      password,
+      billing
+    }: {
+      first_name?: string;
+      last_name?: string;
+      email?: string;
+      password?: string;
+      billing?: { account_card_id: string };
     }): Promise<AccountInformation>;
     create({
       first_name: string,
@@ -73,6 +80,7 @@ declare module 'swell-js' {
     name: string;
     last_name: string;
     first_name: string;
+    billing: { account_card_id: string };
     email_optin: boolean;
     email: string;
     date_created: string;

@@ -9,7 +9,8 @@ import { useGlobalState } from '~/hooks/useStore';
 const Payments = () => {
   const [open, setOpen] = useState(false);
 
-  const { cards } = useGlobalState();
+  const { cards, account } = useGlobalState();
+  const defaultCard = account?.billing?.account_card_id;
 
   return (
     <AccountLayout>
@@ -18,8 +19,8 @@ const Payments = () => {
         <p className="text-gray-400">There are no payment methods associated with this account.</p>
       ) : (
         <div className="grid gap-3 md:auto-rows-fr md:grid-cols-2 md:gap-8">
-          {cards?.map((card, i) => {
-            return <PaymentCard card={card} key={card.id} defaultCard={i === 0} />;
+          {cards?.map((card) => {
+            return <PaymentCard card={card} key={card.id} defaultCard={card.id === defaultCard} />;
           })}
         </div>
       )}
