@@ -9,10 +9,14 @@ import MobileMenu from '~/components/globals/navbar/MobileMenu';
 import UserButtons from '~/components/globals/navbar/UserButtons';
 
 import data from '~/data/partials.json';
+import { useGlobalState } from '~/hooks/useStore';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
+
+  const { account } = useGlobalState();
+  const isLogged = account ? true : false;
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -47,6 +51,7 @@ const Navbar = () => {
         categories={data.categories}
         isCartOpen={isCartOpen}
         setIsCartOpen={setIsCartOpen}
+        isLogged={isLogged}
       />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
