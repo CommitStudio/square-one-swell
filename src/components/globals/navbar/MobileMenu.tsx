@@ -8,9 +8,17 @@ type Props = {
   categories: { name: string; slug: string; query?: string }[];
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isLogged?: boolean;
 };
 
-const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOpen }: Props) => {
+const MobileMenu = ({
+  isOpen,
+  categories,
+  setIsMenuOpen,
+  isCartOpen,
+  setIsCartOpen,
+  isLogged
+}: Props) => {
   const { state, updateState } = useStore();
 
   const handleClick = (category: string) => {
@@ -35,7 +43,7 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
                   className="
                    block py-3 px-4 text-secondary active:bg-secondary active:text-primary focus:text-primary focus:bg-secondary sm:px-6 lg:text-white  lg:active:bg-secondary lg:active:text-primary"
                 >
-                  {category.name}
+                  {isLogged && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
                 </a>
               </Link>
             </li>
