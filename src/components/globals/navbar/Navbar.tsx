@@ -9,14 +9,14 @@ import MobileMenu from '~/components/globals/navbar/MobileMenu';
 import UserButtons from '~/components/globals/navbar/UserButtons';
 
 import data from '~/data/partials.json';
-import { useGlobalState } from '~/hooks/useStore';
 
-const Navbar = () => {
+type Props = {
+  isLogged: boolean;
+};
+
+const Navbar = ({ isLogged }: Props) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
-
-  const { account } = useGlobalState();
-  const isLogged = account ? true : false;
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
