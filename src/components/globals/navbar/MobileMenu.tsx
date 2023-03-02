@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useStore } from '~/hooks/useStore';
+import { useGlobalState, useStore } from '~/hooks/useStore';
 
 type Props = {
   isOpen: boolean;
@@ -8,18 +8,13 @@ type Props = {
   categories: { name: string; slug: string; query?: string }[];
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isLogged?: boolean;
 };
 
-const MobileMenu = ({
-  isOpen,
-  categories,
-  setIsMenuOpen,
-  isCartOpen,
-  setIsCartOpen,
-  isLogged
-}: Props) => {
+const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOpen }: Props) => {
   const { state, updateState } = useStore();
+  const { account } = useGlobalState();
+
+  const isLogged = account && account.id ? true : false;
 
   const handleClick = (category: string) => {
     updateState({ ...state, isFilterOpen: false, breadcrumbSelectedCategory: '' });

@@ -10,11 +10,7 @@ import UserButtons from '~/components/globals/navbar/UserButtons';
 
 import data from '~/data/partials.json';
 
-type Props = {
-  isLogged: boolean;
-};
-
-const Navbar = ({ isLogged }: Props) => {
+const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
 
@@ -51,7 +47,6 @@ const Navbar = ({ isLogged }: Props) => {
         categories={data.categories}
         isCartOpen={isCartOpen}
         setIsCartOpen={setIsCartOpen}
-        isLogged={isLogged}
       />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </nav>
