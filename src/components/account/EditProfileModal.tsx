@@ -54,8 +54,8 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
   useEffect(() => {
     setValue('first_name', first_name || '');
     setValue('last_name', last_name || '');
-    setValue('email', email || '');
-  }, [email, first_name, last_name, setValue]);
+    setValue('email', email?.email || '');
+  }, [email?.email, first_name, last_name, setValue]);
 
   return (
     <>
@@ -109,7 +109,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               className="w-full mb-8 p-2"
               id="email"
               type="text"
-              placeholder={email}
+              placeholder={email?.email}
               {...register('email', {
                 maxLength: { value: 50, message: 'e-mail is too long.' }
               })}

@@ -82,7 +82,7 @@ declare module 'swell-js' {
     first_name: string;
     billing: { account_card_id: string };
     email_optin: boolean;
-    email: { email: string; code: string; message: string };
+    email: { email: string; code?: string; message?: string };
     date_created: string;
     balance: number;
     id: string;
