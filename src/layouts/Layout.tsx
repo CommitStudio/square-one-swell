@@ -6,6 +6,7 @@ import Footer from '~/components/globals/Footer';
 import Navbar from '~/components/globals/navbar/Navbar';
 
 import { useAuth } from '~/hooks/useAuth';
+import { useGlobalState } from '~/hooks/useStore';
 
 type Props = {
   children: React.ReactNode;
@@ -13,6 +14,9 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   const { isReady, isLoading } = useAuth();
+  const { account } = useGlobalState();
+
+  const isLogged = account && account.id ? true : false;
 
   return (
     <>
@@ -25,7 +29,7 @@ export default function Layout({ children }: Props) {
         pauseOnHover
         theme="light"
       />
-      <Navbar />
+      <Navbar isLogged={isLogged} />
       <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">
         {isLoading && <SkeletonPlaceholder />}
         {isReady && children}
