@@ -25,9 +25,8 @@ type Props = {
 };
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
-  const { setCards } = useGlobalState();
+  const { setCards, setAccount } = useGlobalState();
   const [isLoading, setIsLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -50,6 +49,12 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       await swell.account.createCard(cardToken);
       const { results } = await swell.account.listCards();
       setCards(results);
+      if (data.isDefaultCard) {
+        const defaultCard = await swell.account.update({
+          billing: { account_card_id: results[0].id }
+        });
+        setAccount(defaultCard);
+      }
       notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {
@@ -179,7 +184,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             <label className="block text-sm" htmlFor="isDefaultCard">
               Use as default card
             </label>
-            <input className="" id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />
+            <input id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />
           </div>
           <button
             disabled={isLoading}
