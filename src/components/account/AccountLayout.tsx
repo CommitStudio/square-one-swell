@@ -26,13 +26,11 @@ const AccountLayout = ({ children }: Props) => {
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
         <div className="lg:col-span-3 lg:border-r mr-10">
-          <div
-            className={`h-24 mb-4 flex flex-col justify-center ${account?.email || 'invisible'}`}
-          >
+          <div className="h-24 mb-4 flex flex-col justify-center">
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
               {account?.first_name} {account?.last_name}
             </h4>
-            <p className="h-6 mb-2">{account?.email}</p>
+            {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
             <button
               className="flex items-center gap-1 hover:text-red-600"
               onClick={() => setOpenEdit(true)}
