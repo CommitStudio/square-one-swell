@@ -6,7 +6,7 @@ export const PaymentDetail = ({ order }: OrderProps) => {
   return (
     <>
       <h5 className="text-xl py-8 text-center">Payment details</h5>
-      <div className="px-24 flex flex-row justify-between">
+      <div className="px-6 md:px-24 flex flex-col md:flex-row justify-between gap-4">
         <div className="space-y-2">
           <p>
             <span>Type: </span>

@@ -8,7 +8,7 @@ export const DeliveryDetails = ({ order }: OrderProps) => {
   return (
     <>
       <h5 className="text-xl py-6 text-center">Delivery details</h5>
-      <div className="px-24 ">
+      <div className="px-6 md:px-24 ">
         <div className="pb-4">
           Method:{' '}
           <span>
