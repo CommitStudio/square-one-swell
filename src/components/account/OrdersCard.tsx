@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { formatDate } from '~/utils/dates';
 import { formatCurrency } from '~/utils/numbers';
@@ -50,9 +51,11 @@ const OrderCard = ({ order }: OrderProps) => {
       </div>
 
       <div className="flex flex-col justify-end text-sm">
-        <button className="mt-4 px-3 py-1 rounded hover:bg-gray-200 transition-all duration-300">
-          VIEW MORE
-        </button>
+        <Link href={`/account/orders/${order.id}`}>
+          <a className="mt-4 px-3 py-1 rounded hover:bg-gray-200 transition-all duration-300">
+            VIEW MORE
+          </a>
+        </Link>
       </div>
     </div>
   );

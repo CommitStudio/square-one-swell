@@ -151,7 +151,6 @@ const getUserData = async () => {
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
   const listCards = swell.account.listCards();
-
   const [account, cart, listOrders, addresses, userCards] = await Promise.all([
     accountPromise,
     cartPromise,
@@ -181,6 +180,21 @@ const getUserOrders = async () => {
     paid: order.paid,
     image1: order.items[0].product.images[0].file.url
   }));
+};
+
+/*****************************************************************************
+ * Fetch Order by id
+ ****************************************************************************/
+export const useGetOrderById = (id: string) => {
+  const [data, setData] = useState<Order | void>(undefined);
+
+  useEffect(() => {
+    swell.account
+      .getOrder(id)
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, [id]);
+  return data;
 };
 
 /*****************************************************************************
