@@ -26,9 +26,15 @@ export const useRegister = (
       .then((account) => {
         setAccount(account);
         setUser(account);
-        notifySuccess(
-          'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
-        );
+
+        if (account.email?.code) {
+          //if the account turns out a code message, it means that creating the new user was a problem, so bring the message
+          notifyFailure(account.email.message || 'There was an error trying to create the user.');
+          console.error(account.email.message || 'There was an error trying to create the user.');
+        } else
+          notifySuccess(
+            'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
+          );
       })
       .catch(() => setUser(null));
 
