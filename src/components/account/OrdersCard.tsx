@@ -52,7 +52,7 @@ const OrderCard = ({ order }: OrderProps) => {
 
       <div className="flex flex-col justify-end text-sm">
         <Link href={`/account/orders/${order.id}`}>
-          <a className="mt-4 px-3 py-1 rounded hover:bg-gray-200 transition-all duration-300">
+          <a className="mt-4 text-center px-3 py-1 rounded hover:bg-gray-100 bg-gray-200 transition-all duration-300">
             VIEW MORE
           </a>
         </Link>

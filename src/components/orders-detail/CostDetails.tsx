@@ -11,7 +11,7 @@ export const CostDetails = ({ order }: OrderProps) => {
         <p className="pb-3">Sub-Total</p>
         <p className="">Shipping</p>
         <p className="">Taxes</p>
-        <p className="pt-3 font-bold">Grand Total</p>
+        <p className="pt-3 font-bold">Total</p>
       </div>
       <div className="text-end">
         <p className="pb-3">

@@ -4,13 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useStore } from '~/hooks/useStore';
-
-// Transform each word to PascalCase format - Ex: "product" --> "Product"
-export const toPascalCase = (word: string) => {
-  return word.replace(/\w+/g, function (w) {
-    return w[0].toUpperCase() + w.slice(1).toLowerCase();
-  });
-};
+import { toPascalCase } from '~/utils/format';
 
 const Breadcrumb = () => {
   const { state, updateStateProp, updateState } = useStore();

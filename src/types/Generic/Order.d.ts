@@ -40,6 +40,7 @@ interface Items {
   price: number;
   variant: ItemProductVariant;
   discount_each: number;
+  quantity: number;
 }
 interface Order {
   id: string;

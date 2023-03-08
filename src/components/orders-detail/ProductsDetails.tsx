@@ -12,7 +12,7 @@ export const ProductsDetails = ({ order }: OrderProps) => {
       <h5 className="text-xl py-6 text-center">Products details</h5>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6  mb-4 border rounded border-light">
         {order.items.map((item, i) => (
-          <div key={i} className="flex flex-row">
+          <div key={i} className="flex flex-row text-sm">
             <div className="w-36 h-36 relative">
               <Image
                 src={item.product.images[0].file.url}
@@ -32,6 +32,7 @@ export const ProductsDetails = ({ order }: OrderProps) => {
                 <p>
                   Price: {order.currency} {formatCurrency(item.price)}{' '}
                 </p>
+                <p>Item quantity: {item.quantity}</p>
               </div>
               <div>
                 Size/Color/Material:
