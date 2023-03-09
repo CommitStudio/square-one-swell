@@ -1,5 +1,6 @@
 import router from 'next/router';
-import SkeletonPlaceholder from '../account/SkeletonPlaceholder';
+
+import SkeletonPlaceholder from '../SkeletonPlaceholder';
 
 import { CostDetails } from './CostDetails';
 import { DeliveryDetails } from './DeliveryDetails';
