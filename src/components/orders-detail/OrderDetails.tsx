@@ -1,5 +1,4 @@
 import router from 'next/router';
-
 import SkeletonPlaceholder from '../account/SkeletonPlaceholder';
 
 import { CostDetails } from './CostDetails';
