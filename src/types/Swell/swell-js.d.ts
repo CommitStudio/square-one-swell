@@ -27,6 +27,7 @@ declare module 'swell-js' {
     get(): Promise<AccountInformation | null>;
     logout(): Promise<unknown>;
     listOrders(): Promise<ListOrders>;
+    getOrder(id: string): Promise<Order>; //get a specific order by id
     listAddresses(): Promise<SwellAddress>;
     createAddress({
       name: string,
