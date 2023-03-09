@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import AccountLayout from '~/components/account/AccountLayout';
-import { OrderDetails } from '~/components/orders-detail/OrderDetails';
+import { OrderDetails } from '~/components/account/orders-detail/OrderDetails';
 
 const OrderDetail = () => {
   const router = useRouter();
