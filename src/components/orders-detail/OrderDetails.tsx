@@ -1,4 +1,5 @@
 import router from 'next/router';
+import SkeletonPlaceholder from '../account/SkeletonPlaceholder';
 
 import { CostDetails } from './CostDetails';
 import { DeliveryDetails } from './DeliveryDetails';
@@ -20,7 +21,9 @@ export const OrderDetails = ({ orderId }: Props) => {
 
   return (
     <>
-      {order && (
+      {order === undefined ? (
+        <SkeletonPlaceholder twoCols={false} />
+      ) : (
         <>
           <div
             className="text-sm text-secondary cursor-pointer pb-8"
