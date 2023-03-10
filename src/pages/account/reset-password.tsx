@@ -13,7 +13,6 @@ const ResetPassword = () => {
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/account/reset-password`}
       />
-
       <ResetPasswordForm />
     </>
   );
