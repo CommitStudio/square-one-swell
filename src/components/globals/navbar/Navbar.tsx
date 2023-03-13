@@ -30,7 +30,7 @@ const Navbar = () => {
   }, [isCartOpen]);
 
   return (
-    <nav>
+    <nav className="font-header">
       <div className="fixed top-0 left-0 w-full h-24 p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16 flex justify-between bg-secondary z-20">
         <Link href="/">
           <a className="flex self-center">

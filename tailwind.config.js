@@ -7,16 +7,22 @@ module.exports = {
     colors: {
       primary: '#CCED60',
       secondary: '#142644',
-      green: '#38C385',
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
+      green: '#1DD197',
+      black: '#242323',
+      white: '#FFFFFF',
       gray: colors.neutral,
+      'gray-medium': '#A9A9A9',
+      current: 'currentColor',
+      transparent: 'transparent',
+      // to be replaced
       indigo: colors.indigo,
       red: colors.rose,
       yellow: colors.amber,
       blue: colors.blue
+    },
+    fontFamily: {
+      libre: ['Libre Baskerville', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif']
     },
     extend: {
       screens: {
