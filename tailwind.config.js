@@ -21,8 +21,8 @@ module.exports = {
       blue: colors.blue
     },
     fontFamily: {
-      header: ['Libre Baskerville', 'sans-serif'],
-      body: ['Quicksand', 'sans-serif']
+      libre: ['Libre Baskerville', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif']
     },
     extend: {
       screens: {
