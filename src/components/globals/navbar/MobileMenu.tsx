@@ -24,6 +24,7 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
 
   return (
     <div
+      role="button"
       className={`${
         !isOpen ? '-translate-y-full' : ''
       } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
