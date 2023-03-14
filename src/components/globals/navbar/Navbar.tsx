@@ -9,7 +9,7 @@ import UserButtons from '~/components/globals/navbar/UserButtons';
 
 import data from '~/data/partials.json';
 
-const NewNavbar = () => {
+const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
 
@@ -52,4 +52,4 @@ const NewNavbar = () => {
   );
 };
 
-export default NewNavbar;
+export default Navbar;
