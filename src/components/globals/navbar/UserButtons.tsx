@@ -16,9 +16,6 @@ const UserButtons = ({ toggleCart }: Props) => {
   return (
     <div className="flex lg:order-2 space-x-2">
       <Link href="/products" title="Search">
-        {/* <a className="text-primary border-2 border-primary h-fit self-center rounded-full px-2.5 py-2.5 text-center mr-3 hidden transition-all duration-300 lg:block hover:bg-primary hover:text-secondary active:bg-primary active:text-secondary">
-          <FaSearch />
-        </a> */}
         <a className="text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white">
           <FaSearch />
         </a>
