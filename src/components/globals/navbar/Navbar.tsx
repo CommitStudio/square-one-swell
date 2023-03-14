@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Cart from '~/components/globals/Cart';
 import DesktopMenu from '~/components/globals/navbar/DesktopMenu';
 import Hamburger from '~/components/globals/navbar/Hamburger';
-import Logo from '~/components/globals/navbar/Logo';
 import MobileMenu from '~/components/globals/navbar/MobileMenu';
 import UserButtons from '~/components/globals/navbar/UserButtons';
 
@@ -30,11 +29,11 @@ const Navbar = () => {
   }, [isCartOpen]);
 
   return (
-    <nav className="font-libre">
-      <div className="fixed top-0 left-0 w-full h-24 p-4 sm:px-6 lg:py-2.5 lg:px-6 xl:px-16 flex justify-between bg-secondary z-20">
+    <nav className="font-quicksand">
+      <div className="fixed top-0 left-0 w-full h-24 p-8 sm:px-12 lg:py-0 lg:px-16 xl:px-32 flex justify-between bg-white z-20">
         <Link href="/">
-          <a className="flex self-center">
-            <Logo width={165} height={60} brandLogo={data.brand_logo} brandName={data.brand_name} />
+          <a className="flex self-center uppercase font-libre text-2xl text-black font-bold">
+            Logo
           </a>
         </Link>
         <UserButtons toggleCart={toggleCart} />

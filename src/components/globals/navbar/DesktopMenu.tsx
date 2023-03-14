@@ -13,27 +13,25 @@ const DesktopMenu = ({ categories }: Props) => {
   };
 
   return (
-    <div
-      className="justify-between items-center w-full lg:w-auto lg:order-1 lg:flex"
+    <ul
+      className="hidden mt-6 h-full justify-between items-center w-full lg:w-auto lg:order-1 lg:flex lg:space-x-10 lg:mt-0"
       id="navbar-sticky"
     >
-      <ul className="hidden bg-secondary mt-6 lg:flex lg:flex-row lg:p-4 lg:space-x-8 lg:mt-0">
-        {categories.map((category, i) => {
-          return (
-            <li key={`category-${i}`} className={`${category.hideOnDesktop ? 'md:hidden' : ''}`}>
-              <Link href={`/${category.slug}`}>
-                <a
-                  onClick={handleClick}
-                  className="block py-2 px-3 text-secondary hover:text-primary active:bg-primary active:text-secondary focus:text-primary lg:text-white  lg:active:bg-secondary lg:active:text-primary"
-                >
-                  {category.name}
-                </a>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      {categories.map((category, i) => {
+        return (
+          <li
+            key={`category-${i}`}
+            className={`${
+              category.hideOnDesktop ? 'md:hidden' : ''
+            } h-full flex items-center hover:border-b-4 hover:border-black hover:font-bold`}
+          >
+            <Link href={`/${category.slug}`}>
+              <a onClick={handleClick}>{category.name}</a>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
