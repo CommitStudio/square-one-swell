@@ -16,7 +16,7 @@ const Orders = () => {
   return (
     <>
       <Head
-        title="SquareOne - Home"
+        title="SquareOne - Orders"
         description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/`}

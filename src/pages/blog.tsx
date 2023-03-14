@@ -76,7 +76,7 @@ const Blog = () => {
                 Published: {dayjs(article.created_at).locale('en').format('DD MMMM YYYY')}
               </p>
               <a>
-                <h2 className="hover:underline font-header text-headline-3 2xl:text-[2rem] mb-4 cursor-pointer">
+                <h2 className="hover:underline font-libre text-headline-3 2xl:text-[2rem] mb-4 cursor-pointer">
                   {article.title}
                 </h2>
               </a>

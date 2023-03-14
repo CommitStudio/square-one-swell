@@ -20,7 +20,7 @@ const Payments = () => {
   return (
     <>
       <Head
-        title="SquareOne - Home"
+        title="SquareOne - Payments"
         description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
         keywords={keywords.home}
         url={`${NEXT_PUBLIC_BASE_URL}/`}
