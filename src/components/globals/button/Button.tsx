@@ -20,8 +20,8 @@ enum ButtonVariants {
 }
 
 const buttonVariants = {
-  [ButtonVariants.outlined]: 'bg-white hover:text-white p-2 px-4',
-  [ButtonVariants.fill]: 'text-white hover:bg-white p-2 px-4'
+  [ButtonVariants.outlined]: 'bg-white hover:text-white py-2 px-8',
+  [ButtonVariants.fill]: 'text-white hover:bg-white py-2 px-8'
 };
 
 const baseStyles =
