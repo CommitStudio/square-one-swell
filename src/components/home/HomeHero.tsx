@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
 
 // Import Swiper styles
@@ -9,6 +8,8 @@ import 'swiper/css/pagination';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import Button from '../globals/button/Button';
 
 import data from '~/data/home-hero.json';
 import { useStore } from '~/hooks/useStore';
@@ -21,7 +22,7 @@ const HomeHero = () => {
   };
 
   return (
-    <header id="header-hero" className="mb-10">
+    <header id="header-hero" className="mb-10 text-white">
       <Swiper
         modules={[Pagination, EffectFade, Autoplay]}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
@@ -36,35 +37,31 @@ const HomeHero = () => {
               key={`hero-slide-${i}`}
               className="flex flex-col justify-center items-center relative"
             >
-              <div className="h-[75vh] w-full relative sm:h-[90vh]">
+              <div className="h-[75vh] w-full relative">
                 <Image
                   src={image.src}
                   alt={image.alt_text}
                   layout="fill"
                   objectFit="cover"
                   priority={true}
+                  className="h-[75vh] w-full relative"
                 />
               </div>
               <div
                 id="home-slide-text"
                 className={
-                  'h-5/6 flex flex-col justify-between items-center absolute bottom-10 left-50 text-center text-slide-shadow sm:h-auto sm:block sm:bottom-20 lg:bottom-40'
+                  'flex flex-col font-libre text-white justify-between items-center absolute bottom-20 sm:bottom-24 left-50 h-auto'
                 }
               >
-                <div>
-                  <span className="text-2xl text-primary sm:text-3xl">{image.title}</span>
-                  <p className="text-4xl font-bold text-primary sm:mt-4 sm:text-6xl">
-                    {image.collection}
-                  </p>
-                </div>
-                <Link href={`/products?category=${image.slug}`}>
-                  <button
-                    className="w-fit mb-2 font-bold text-sm text-white bg-secondary py-4 px-10 shadow-[0px_0px_20px_rgba(0,0,0,0.8)] transition-all duration-300 sm:mt-10 sm:mb-0 hover:bg-primary hover:text-secondary"
-                    onClick={() => handleClick(image.category)}
-                  >
-                    SHOP NOW
-                  </button>
-                </Link>
+                <span className="text-l sm:text-xl">{image.title}</span>
+                <p className="text-3xl font-bold mt-2 sm:mt-3 sm:text-4xl">{image.collection}</p>
+                <Button
+                  label="SHOP NOW"
+                  color="black"
+                  classes="mt-4"
+                  linkUrl={`/products?category=${image.slug}`}
+                  action={() => handleClick(image.category)}
+                />
               </div>
             </SwiperSlide>
           );

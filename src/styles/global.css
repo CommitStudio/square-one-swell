@@ -60,14 +60,14 @@ body {
 
 /* HomeHero bullets indicators -----------------------------------------------*/
 #header-hero > div > .swiper-pagination > .swiper-pagination-bullet {
-  @apply bg-primary;
+  @apply bg-white;
   opacity: 0.3;
   height: 0.5rem;
   width: 0.5rem;
   transition: 0.8s;
 }
 #header-hero > div > .swiper-pagination > .swiper-pagination-bullet-active {
-  @apply bg-primary;
+  @apply bg-white;
   opacity: 1;
   transition: 0.8s;
 }
@@ -84,7 +84,7 @@ body {
   }
 
   #header-hero > div > .swiper-pagination > .swiper-pagination-bullet {
-    @apply bg-primary;
+    @apply bg-white;
     height: 0.9rem;
     width: 0.9rem;
   }
