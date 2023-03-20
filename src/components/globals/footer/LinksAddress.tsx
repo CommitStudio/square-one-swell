@@ -9,7 +9,8 @@ import footer from '~/data/footer.json';
 const { items } = footer;
 
 const LinksAddress = () => {
-  const companyName = company.name as string;
+  const companyName = company.name;
+
   return (
     <div className="p-10 flex flex-col md:flex-row space-y-10 md:space-y-0 justify-around">
       <div className="space-y-4">
