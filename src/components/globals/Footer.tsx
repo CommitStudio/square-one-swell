@@ -7,7 +7,7 @@ import LinksAddress from '~/components/globals/footer/LinksAddress';
 export default function Footer() {
   const router = useRouter();
   return (
-    <footer className="block bg-secondary bottom-0 w-full text-white">
+    <footer className="block bg-black font-quicksand bottom-0 w-full text-white">
       {!router.pathname.includes('/account') && <CTA />}
       <LinksAddress />
       <Copyright />

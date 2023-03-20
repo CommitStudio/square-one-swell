@@ -1,19 +1,22 @@
+import Button from '../button/Button';
+
 import Tooltip from '~/components/globals/Tooltip';
 
 const CTA = () => {
   return (
-    <div className="bg-[#fafafa] w-full text-secondary flex flex-col space-y-3 md:space-y-0 md:flex-row justify-around p-5 items-center">
-      <div className="text-xl">Sign up for Send Newsletter</div>
+    <div className="w-full bg-white text-black flex flex-col space-y-3 md:space-y-0 md:flex-row justify-around p-5 py-24 items-center">
+      <div className="text-xl leading-8">
+        <p className="font-bold">Sign up for our Newsletter</p>
+        <span>Get top deals, latest trends, and more.</span>
+      </div>
       <div className="flex">
         <input
           type="text"
-          className="w-full border focus:outline-0 md:w-[350px] border-gray-400 rounded-tl-md rounded-bl-md p-2"
+          className="w-full border focus:outline-0 md:w-[350px] border-black border-r-0 rounded-l-lg p-2 pl-4"
           placeholder="Your email"
         />
         <Tooltip content="Feature coming soon!">
-          <button className="bg-secondary w-full md:w-[200px] text-white hover:text-secondary p-2 hover:bg-primary rounded-tr-md rounded-br-md">
-            Subscribe
-          </button>
+          <Button label="SUBSCRIBE" color="black" classes="rounded-r-lg" />
         </Tooltip>
       </div>
     </div>
