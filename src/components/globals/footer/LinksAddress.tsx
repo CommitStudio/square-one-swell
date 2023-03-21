@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Link from 'next/link';
 import React from 'react';
-import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-icons/ai';
+import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 
 import company from '~/data/company.json';
 import footer from '~/data/footer.json';
@@ -52,13 +52,13 @@ const LinksAddress = () => {
           </span>
           <div className="flex space-x-4 text-3xl cursor-pointer ">
             <span className="hover:text-gray-medium">
-              <AiOutlineInstagram />
+              <FaInstagram />
             </span>
             <span className="hover:text-gray-medium">
-              <AiOutlineFacebook />
+              <FaFacebook />
             </span>
             <span className="hover:text-gray-medium">
-              <AiOutlineLinkedin />
+              <FaLinkedin />
             </span>
           </div>
         </div>
