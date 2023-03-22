@@ -51,13 +51,13 @@ const LinksAddress = () => {
             {company.address}, {company.phone}
           </span>
           <div className="flex space-x-4 text-3xl cursor-pointer ">
-            <span className="hover:text-gray-medium">
+            <span className="hover:text-green">
               <FaInstagram />
             </span>
-            <span className="hover:text-gray-medium">
+            <span className="hover:text-green">
               <FaFacebook />
             </span>
-            <span className="hover:text-gray-medium">
+            <span className="hover:text-green">
               <FaLinkedin />
             </span>
           </div>
