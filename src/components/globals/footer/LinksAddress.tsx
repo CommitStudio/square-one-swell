@@ -1,23 +1,24 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Link from 'next/link';
 import React from 'react';
-import { AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from 'react-icons/ai';
+import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 
+import company from '~/data/company.json';
 import footer from '~/data/footer.json';
-
-import data from '~/data/partials.json';
 
 const { items } = footer;
 
 const LinksAddress = () => {
+  const companyName = company.name;
+
   return (
     <div className="p-10 flex flex-col md:flex-row space-y-10 md:space-y-0 justify-around">
-      <div className="space-y-3">
+      <div className="space-y-4">
         {items.slice(0, 4).map(function (item, i) {
           return (
             <p key={`address-item-1.${i}`}>
               <Link href={item.href}>
-                <a className="hover:text-primary" href="/">
+                <a className="hover:underline" href="/">
                   {item.name}
                 </a>
               </Link>
@@ -25,12 +26,12 @@ const LinksAddress = () => {
           );
         })}
       </div>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {items.slice(4, 8).map(function (item, i) {
           return (
             <p key={`address-item-2.${i}`}>
               <Link href={item.href}>
-                <a className="hover:text-primary" href="/">
+                <a className="hover:underline" href="/">
                   {item.name}
                 </a>
               </Link>
@@ -38,22 +39,26 @@ const LinksAddress = () => {
           );
         })}
       </div>
-      <div className="space-y-3">
-        <div className="text-xl font-semibold whitespace-nowrap text-primary">
-          {data.brand_name}
+      <div className="space-y-4">
+        <div className="text-3xl font-semibold whitespace-nowrap font-libre">
+          {companyName.toUpperCase()}
         </div>
-        <div className="flex flex-col space-y-3">
-          <span className="text-lg font-bold">City, Country</span>
-          <span>Address 1234 +111 1234 5678</span>
-          <div className="flex space-x-4 text-3xl cursor-pointer">
-            <span className="hover:text-primary">
-              <AiOutlineInstagram />
+        <div className="flex flex-col space-y-4">
+          <span className="text-lg">
+            {company.city}, {company.country}
+          </span>
+          <span>
+            {company.address}, {company.phone}
+          </span>
+          <div className="flex space-x-4 text-3xl cursor-pointer ">
+            <span className="hover:text-green">
+              <FaInstagram />
             </span>
-            <span className="hover:text-primary">
-              <AiOutlineFacebook />
+            <span className="hover:text-green">
+              <FaFacebook />
             </span>
-            <span className="hover:text-primary">
-              <AiOutlineLinkedin />
+            <span className="hover:text-green">
+              <FaLinkedin />
             </span>
           </div>
         </div>

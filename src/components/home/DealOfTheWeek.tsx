@@ -18,7 +18,7 @@ const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
   const description = promotion.description;
 
   return (
-    <section className="w-full bg-gray-200 relative mb-10">
+    <section className="w-full bg-gray-200 relative">
       <Container>
         <div className="grid md:grid-cols-2 gap-y-10 place-items-center">
           <div className="relative h-96 my-6 w-full justify-center">
