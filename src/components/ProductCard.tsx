@@ -25,7 +25,7 @@ const ProductCard = ({ product }: Props) => {
         isHovered ? 'lg:shadow-[0px_-5px_40px_-15px_rgba(0,0,0,0.3)]' : ''
       }`}
     >
-      <div className="px-4 pt-6 pb-12">
+      <div className="px-4 pt-6 pb-6">
         <div className="flex justify-end">
           <Tooltip content="Feature coming soon!">
             <div>
