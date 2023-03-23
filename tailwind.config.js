@@ -10,7 +10,7 @@ module.exports = {
       green: '#1DD197',
       black: '#242323',
       white: '#FFFFFF',
-      gray: colors.neutral,
+      gray: colors.neutral[300],
       'gray-medium': '#A9A9A9',
       current: 'currentColor',
       transparent: 'transparent',

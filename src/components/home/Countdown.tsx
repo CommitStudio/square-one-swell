@@ -11,30 +11,30 @@ const Countdown = ({ promotion }: CountdownProps) => {
   const [days, hours, minutes, seconds] = useCountdown(Number(dateTimeDealWillFinish));
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 justify-between mb-10 md:mb-0">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-between mb-10 md:mb-0 text-black font-quicksand">
       <div>
-        <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
+        <div className="bg-gray text-black border border-black rounded-2xl font-libre mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
           {Number(days) >= 0 ? days : '00'}
         </div>
-        <p className="text-center text-gray-600">Days</p>
+        <p className="text-center">Days</p>
       </div>
       <div>
-        <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+        <div className="bg-gray text-black border border-black rounded-2xl font-libre mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
           {Number(hours) >= 0 ? hours : '00'}
         </div>
-        <p className="text-center text-gray-600">Hours</p>
+        <p className="text-center">Hours</p>
       </div>
       <div>
-        <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+        <div className="bg-gray text-black border border-black rounded-2xl font-libre mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
           {Number(minutes) >= 0 ? minutes : '00'}
         </div>
-        <p className="text-center text-gray-600">Minutes</p>
+        <p className="text-center">Minutes</p>
       </div>
       <div>
-        <div className="bg-secondary text-primary mb-3 mx-auto h-20 w-20 flex justify-center items-center text-center text-3xl">
+        <div className="bg-gray text-black border border-black rounded-2xl font-libre mb-3 mx-auto h-20 w-20 flex justify-center items-center text-3xl">
           {Number(seconds) >= 0 ? seconds : '00'}
         </div>
-        <p className="text-center text-gray-600">Seconds</p>
+        <p className="text-center">Seconds</p>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav className="font-quicksand">
-      <div className="fixed top-0 left-0 w-full h-24 p-8 sm:px-12 lg:py-0 lg:px-16 xl:px-32 flex justify-between bg-white z-20 border border-b-gray-medium">
+      <div className="fixed top-0 left-0 w-full h-24 p-8 sm:px-12 lg:py-0 lg:px-16 xl:px-32 flex justify-between bg-white z-20 border-b border-gray-medium">
         <Link href="/">
           <a className="flex self-center uppercase font-libre text-2xl text-black font-bold">
             Logo
