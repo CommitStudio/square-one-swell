@@ -46,21 +46,23 @@ const ProductCard = ({ product }: Props) => {
         </div>
         <p className="font-quicksand pt-3 pb-5 uppercase">{product.name}</p>
         {product.salePrice ? (
-          <div>
+          <div className="mt-auto">
             <span className="flex">
               <p className="font-quicksand font-bold">
-                U$ <span className="ml-3">{formatCurrency(product.salePrice)}</span>
+                U$ <span className="ml-2">{formatCurrency(product.salePrice)}</span>
               </p>
-              <div className="bg-black text-white font-quicksand font-bold p-1 text-xs ml-3">
+              <div className="bg-black text-white font-quicksand font-bold py-1 px-2 text-xs ml-3">
                 SALE
               </div>
             </span>
             <p className="font-quicksand font-bold line-through text-gray-300">
-              U$ <span className="ml-3">{formatCurrency(product.price)}</span>
+              U$ <span className="ml-2">{formatCurrency(product.price)}</span>
             </p>
           </div>
         ) : (
-          <p className="font-quicksand font-bold">U$ {formatCurrency(product.price)}</p>
+          <p className="font-quicksand font-bold mt-auto">
+            U$ <span className="ml-2">{formatCurrency(product.price)}</span>
+          </p>
         )}
       </div>
       <Button
