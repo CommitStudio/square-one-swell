@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Trash from 'public/img/trash-02.svg';
+
+import Button from '~/components/globals/button/Button';
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 import { formatCurrency } from '~/utils/numbers';
 import { notifySuccess } from '~/utils/toastifies';
-
 type Props = {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,10 +51,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border h-full bg-white md:w-[500px] w-screen text-secondary ml-auto sm:flex:flex-col justify-between">
+        <nav className="border-l h-full bg-white md:w-[500px] w-screen text-black ml-auto sm:flex:flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
-              Items: {cart?.items?.reduce((acc, product) => acc + product.quantity, 0)}
+              Items: ({cart?.items?.reduce((acc, product) => acc + product.quantity, 0)})
             </h3>
             <Image
               src="/img/close-logo.svg"
@@ -67,14 +69,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           {/* products sections */}
           <div className="overflow-y-auto px-7 mb-auto">
             {cart?.items.length === 0 || cart === null ? (
-              <p className="">There are no items in your cart yet</p>
+              <p>There are no items in your cart yet!</p>
             ) : (
               <>
                 <hr className="mb-5 opacity-20" />
                 {cart?.items?.map((product) => (
                   <div
                     key={product.id}
-                    className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-2 border-black border-opacity-20"
+                    className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-1 border-black border-opacity-20"
                   >
                     <div className="relative h-24 w-24 ">
                       <Image
@@ -85,11 +87,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                       />
                     </div>
                     <div className="w-52">
-                      <p>{product.product.name}</p>
+                      <p className="font-bold uppercase">{product.product.name}</p>
                       <p>Variant: {product.variant?.name}</p>
                       <p>
                         {product.quantity} x ${formatCurrency(product.price)}
                       </p>
+                      <p></p>
                     </div>
                     <button
                       onClick={() => {
@@ -98,9 +101,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                           'The item has been removed from your cart. Keep shopping or proceed to checkout'
                         );
                       }}
-                      className="self-end hover:text-red-600"
+                      className="self-end hover:border-b"
                     >
-                      Remove
+                      <Image src={Trash as string} alt="Trash icon" />
                     </button>
                   </div>
                 ))}
@@ -108,9 +111,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             )}
           </div>
           {/* checkout section */}
-          <div className="fixed md:absolute bottom-0 w-full px-7 pb-7 bg-secondary text-xs">
+          <div className="fixed md:absolute bottom-0 w-full px-7 pb-7 bg-gray text-xs">
             <hr className="mb-5 opacity-20" />
-            <div className="grid grid-cols-2 text-base mb-3 text-white">
+            <div className="grid grid-cols-2 text-base mb-3">
               <p>Subtotal</p>
               <p className="text-right">
                 ${' '}
@@ -127,8 +130,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               <p className="text-right">
                 $ {cart?.tax_total ? formatCurrency(cart.tax_total) : Number(0).toFixed(2)}
               </p>
-              <p className="text-2xl mt-3">Total</p>
-              <p className="text-2xl mt-3 text-right">
+              <p className="text-xl mt-3 font-bold">Total</p>
+              <p className="text-xl mt-3 text-right font-bold">
                 ${' '}
                 {cart?.items
                   ? formatCurrency(
@@ -140,17 +143,18 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                   : Number(0).toFixed(2)}
               </p>
             </div>
-            <Link
-              href={
+
+            <Button
+              linkUrl={
                 cart?.items?.length
                   ? `${String(process.env.PUBLIC_STORE_URL)}/checkout/${cart.checkout_id || ''}`
                   : '#'
               }
-            >
-              <a className="bg-primary text-secondary p-3 w-full block text-center rounded-md mb-2 text-base font-bold tracking-wide hover:bg-white">
-                CHECKOUT
-              </a>
-            </Link>
+              label="CHECKOUT"
+              fullWidth
+              color="black"
+              classes="!p-3 text-base rounded-md"
+            />
           </div>
         </nav>
       </div>
