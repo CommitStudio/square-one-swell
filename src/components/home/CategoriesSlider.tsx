@@ -31,7 +31,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
     <div id="slider" className="px-5 mb-5">
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
+        spaceBetween={0}
         loop
         watchSlidesProgress
         navigation

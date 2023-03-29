@@ -2,31 +2,31 @@
   "hero_images": [
     {
       "alt_text": "three-men-walking",
-      "src": "/img/heros/three-men.jpeg",
+      "src": "/img/heros/three-men.jpg",
       "title": "NEW COLLECTION",
       "collection": "MEN CASUAL",
       "slug": "men",
       "category": "Men"
     },
     {
-      "alt_text": "model-poses-casually-on-ride",
-      "src": "/img/heros/model-poses-casually-on-ride.jpg",
+      "alt_text": "women-informal",
+      "src": "/img/heros/women-informal.jpg",
       "title": "NEW COLLECTION",
       "collection": "WOMEN CASUAL",
       "slug": "women",
       "category": "Women"
     },
     {
-      "alt_text": "push-point-pow",
-      "src": "/img/heros/push-point-pow.jpg",
+      "alt_text": "men-informal",
+      "src": "/img/heros/men-informal.jpg",
       "title": "NEW COLLECTION",
       "collection": "MEN FASHION",
       "slug": "men",
       "category": "Men"
     },
     {
-      "alt_text": "women-party-fashion-in-sequin-room",
-      "src": "/img/heros/women-party-fashion-in-sequin-room.jpg",
+      "alt_text": "women",
+      "src": "/img/heros/women.jpg",
       "title": "NEW COLLECTION",
       "collection": "WOMEN FASHION",
       "slug": "women",
