@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper';
 
@@ -7,6 +6,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import Button from '../globals/button/Button';
 
 import { useStore } from '~/hooks/useStore';
 
@@ -49,23 +50,25 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         {categories.map((category, i) => {
           return (
             <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
-              <div className={'h-[250px] w-full relative'}>
+              <div className={'h-[40vw] md:h-[18vw] md:max-h-[18vw] w-auto relative aspect-square'}>
                 <Image
                   src={category.images[0].src}
                   alt={category.name}
                   layout="fill"
                   objectFit="cover"
+                  className="rounded-full "
                 />
               </div>
-              <div className="absolute bottom-10">
-                <Link href={{ pathname: 'products', query: category.slug }}>
-                  <a
-                    onClick={() => handleClick(category.name)}
-                    className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium"
-                  >
-                    {category.name.toUpperCase()}
-                  </a>
-                </Link>
+
+              <div className="absolute -bottom-14">
+                <Button
+                  label={category.name.toUpperCase()}
+                  variant="outlined"
+                  color="black"
+                  linkUrl={{ pathname: 'products', query: category.slug }}
+                  action={() => handleClick(category.name)}
+                  classes="border-0 hover:!bg-white hover:!text-black hover:underline"
+                ></Button>
               </div>
             </SwiperSlide>
           );

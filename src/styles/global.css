@@ -125,13 +125,19 @@ body {
 #slider .swiper-button-prev,
 #slider .swiper-button-next::after,
 #slider .swiper-button-prev::after {
-  color: white;
+  color: black;
   font-size: 25px;
   font-weight: bolder;
+  
 }
 
+#slider .swiper {
+  margin: 0 20px;
+  padding-bottom: 60px;;
+}
 /* ProductImageGallery------------------------------------------------------- */
 /* Slider Images */
+
 #product-gallery > div.image-gallery {
   width: 100%;
   height: fit-content;
