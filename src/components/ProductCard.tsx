@@ -31,7 +31,7 @@ const ProductCard = ({ product }: Props) => {
             <div>
               <FaRegHeart
                 className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                  isHovered ? 'lg:-translate-x-0' : 'lg:opacity-0 lg:translate-x-3'
+                  isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'
                 }`}
               />
             </div>
@@ -44,7 +44,7 @@ const ProductCard = ({ product }: Props) => {
             </a>
           </Link>
         </div>
-        <p className="font-quicksand pt-3 pb-5 uppercase">{product.name}</p>
+        <p className="font-quicksand mt-3 mb-5 uppercase line-clamp-2 h-12">{product.name}</p>
         {product.salePrice ? (
           <div className="mt-auto">
             <span className="flex">
@@ -70,7 +70,7 @@ const ProductCard = ({ product }: Props) => {
         fullWidth
         color="black"
         linkUrl={`/product-detail/${product.slug}`}
-        classes={`transition-all duration-300 ${isHovered ? '' : 'lg:opacity-0'}`}
+        classes={`transition-all duration-300 ${isHovered ? '' : 'md:opacity-0'}`}
       />
     </div>
   );
