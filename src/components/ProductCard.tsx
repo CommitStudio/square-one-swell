@@ -25,7 +25,7 @@ const ProductCard = ({ product }: Props) => {
         isHovered ? 'lg:shadow-[0px_-5px_40px_-15px_rgba(0,0,0,0.3)]' : ''
       }`}
     >
-      <div className="px-4 pt-6 pb-6">
+      <div className="px-4 pt-6 pb-5">
         <div className="flex justify-end">
           <Tooltip content="Feature coming soon!">
             <div>
@@ -44,7 +44,7 @@ const ProductCard = ({ product }: Props) => {
             </a>
           </Link>
         </div>
-        <p className="font-quicksand mt-3 mb-5 uppercase line-clamp-2 h-12">{product.name}</p>
+        <p className="font-quicksand mt-3 mb-3 uppercase line-clamp-2 h-12">{product.name}</p>
         {product.salePrice ? (
           <div className="mt-auto">
             <span className="flex">
