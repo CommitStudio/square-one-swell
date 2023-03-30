@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import Trash from 'public/img/trash-02.svg';
 
@@ -51,7 +50,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border-l h-full bg-white md:w-[500px] w-screen text-black ml-auto sm:flex:flex-col justify-between">
+        <nav className="border-l h-full bg-white md:w-[500px] w-screen text-black ml-auto flex flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
               Items: ({cart?.items?.reduce((acc, product) => acc + product.quantity, 0)})
@@ -76,9 +75,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                 {cart?.items?.map((product) => (
                   <div
                     key={product.id}
-                    className="flex justify-between pb-3 mb-3 border-b last-of-type:border-none gap-1 border-black border-opacity-20"
+                    className="flex space-x-4 pb-3 mb-3 border-b last-of-type:border-none border-black border-opacity-20"
                   >
-                    <div className="relative h-24 w-24 ">
+                    <div className="relative h-24 w-24">
                       <Image
                         src={product.product?.images[0]?.file.url}
                         alt={product.product.name}
@@ -86,32 +85,33 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                         objectFit="cover"
                       />
                     </div>
-                    <div className="w-52">
+                    <div className="flex flex-col space-y-4 w-full">
                       <p className="font-bold uppercase">{product.product.name}</p>
-                      <p>Variant: {product.variant?.name}</p>
-                      <p>
-                        {product.quantity} x ${formatCurrency(product.price)}
-                      </p>
-                      <p></p>
+                      <div className="flex justify-between">
+                        <div>
+                          <p>Variant: {product.variant?.name}</p>
+                          <p>
+                            {product.quantity} x ${formatCurrency(product.price)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            void removeProductFromCart(product.id, product.variant.id);
+                            notifySuccess('The item has been removed from your cart.');
+                          }}
+                          className="self-end hover:border-b"
+                        >
+                          <Image src={Trash as string} alt="Trash icon" />
+                        </button>
+                      </div>
                     </div>
-                    <button
-                      onClick={() => {
-                        void removeProductFromCart(product.id, product.variant.id);
-                        notifySuccess(
-                          'The item has been removed from your cart. Keep shopping or proceed to checkout'
-                        );
-                      }}
-                      className="self-end hover:border-b"
-                    >
-                      <Image src={Trash as string} alt="Trash icon" />
-                    </button>
                   </div>
                 ))}
               </>
             )}
           </div>
           {/* checkout section */}
-          <div className="fixed md:absolute bottom-0 w-full px-7 pb-7 bg-gray text-xs">
+          <div className="w-full px-7 pb-7 bg-gray text-xs">
             <hr className="mb-5 opacity-20" />
             <div className="grid grid-cols-2 text-base mb-3">
               <p>Subtotal</p>
@@ -153,7 +153,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               label="CHECKOUT"
               fullWidth
               color="black"
-              classes="!p-3 text-base rounded-md"
+              classes="!p-3 text-base mt-1"
             />
           </div>
         </nav>
