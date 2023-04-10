@@ -126,14 +126,22 @@ body {
 #slider .swiper-button-next::after,
 #slider .swiper-button-prev::after {
   color: black;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bolder;
-  
+  top: 40%;   
+}
+
+#slider .swiper-button-prev {
+  position: absolute;
+  left: 0px;
+}
+#slider .swiper-button-next {
+  right: 0px;
 }
 
 #slider .swiper {
-  margin: 0 20px;
-  padding-bottom: 60px;;
+   margin: 0 20px;
+   padding-bottom: 60px;
 }
 /* ProductImageGallery------------------------------------------------------- */
 /* Slider Images */
@@ -216,6 +224,16 @@ body {
   #product-gallery .image-gallery-slide img {
     height: 360px;
   }
+  #slider .swiper {
+    margin: 0;
+  }
+  #slider .swiper-button-next,
+  #slider .swiper-button-prev,
+  #slider .swiper-button-next::after,
+  #slider .swiper-button-prev::after {
+    font-size: 20px;
+  }
+
 }
 
 @media (min-width: 640px) {
@@ -227,6 +245,12 @@ body {
 @media (min-width: 768px) {
   #product-gallery .image-gallery-content.left.fullscreen .image-gallery-slide-wrapper.left {
     width: 70vw;
+  }
+  #slider .swiper-button-next,
+  #slider .swiper-button-prev,
+  #slider .swiper-button-next::after,
+  #slider .swiper-button-prev::after {
+    font-size: 30px;
   }
 }
 
