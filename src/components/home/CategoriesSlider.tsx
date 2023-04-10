@@ -28,7 +28,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
   };
 
   return isMounted ? (
-    <div id="slider" className="px-5 mb-5">
+    <div id="slider" className="relative px-3 mb-5">
       <Swiper
         modules={[Navigation]}
         spaceBetween={0}
@@ -36,8 +36,16 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         watchSlidesProgress
         navigation
         breakpoints={{
-          768: {
+          1280: {
+            slidesPerView: categories.length <= 3 ? categories.length : 5,
+            enabled: categories.length <= 3 ? false : true
+          },
+          1024: {
             slidesPerView: categories.length <= 3 ? categories.length : 4,
+            enabled: categories.length <= 3 ? false : true
+          },
+          768: {
+            slidesPerView: categories.length <= 3 ? categories.length : 3,
             enabled: categories.length <= 3 ? false : true
           },
           375: {
@@ -50,7 +58,9 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         {categories.map((category, i) => {
           return (
             <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
-              <div className={'h-[40vw] md:h-[18vw] md:max-h-[18vw] w-auto relative aspect-square'}>
+              <div
+                className={'h-[160px] md:h-[215px] md:max-h-[215px] w-auto relative aspect-square'}
+              >
                 <Image
                   src={category.images[0].src}
                   alt={category.name}
@@ -67,7 +77,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
                   color="black"
                   linkUrl={{ pathname: 'products', query: category.slug }}
                   action={() => handleClick(category.name)}
-                  classes="border-0 hover:!bg-white hover:!text-black hover:underline"
+                  classes="border-0 !py-0 hover:!bg-white hover:!text-black hover:underline"
                 ></Button>
               </div>
             </SwiperSlide>
