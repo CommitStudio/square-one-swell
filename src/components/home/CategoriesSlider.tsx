@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper';
 
@@ -61,13 +62,18 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
               <div
                 className={'h-[160px] md:h-[215px] md:max-h-[215px] w-auto relative aspect-square'}
               >
-                <Image
-                  src={category.images[0].src}
-                  alt={category.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full "
-                />
+                <Link
+                  href={{ pathname: 'products', query: category.slug }}
+                  className="cursor-pointer"
+                >
+                  <Image
+                    src={category.images[0].src}
+                    alt={category.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full cursor-pointer"
+                  />
+                </Link>
               </div>
 
               <div className="absolute -bottom-14">
