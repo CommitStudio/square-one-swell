@@ -18,7 +18,7 @@
     },
     {
       "alt_text": "men-informal",
-      "src": "/img/heros/men-informal.jpg",
+      "src": "/img/heros/men-clothing.jpeg",
       "title": "NEW COLLECTION",
       "collection": "MEN FASHION",
       "slug": "men",
@@ -26,7 +26,7 @@
     },
     {
       "alt_text": "women",
-      "src": "/img/heros/women.jpg",
+      "src": "/img/heros/women-clothes.jpeg",
       "title": "NEW COLLECTION",
       "collection": "WOMEN FASHION",
       "slug": "women",
