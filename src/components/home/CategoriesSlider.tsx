@@ -8,6 +8,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import Button from '../globals/button/Button';
+
 import { useStore } from '~/hooks/useStore';
 
 interface CategoriesProps {
@@ -27,16 +29,24 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
   };
 
   return isMounted ? (
-    <div id="slider" className="px-5 mb-5">
+    <div id="slider" className="relative px-3 mb-5">
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
+        spaceBetween={0}
         loop
         watchSlidesProgress
         navigation
         breakpoints={{
-          768: {
+          1280: {
+            slidesPerView: categories.length <= 3 ? categories.length : 5,
+            enabled: categories.length <= 3 ? false : true
+          },
+          1024: {
             slidesPerView: categories.length <= 3 ? categories.length : 4,
+            enabled: categories.length <= 3 ? false : true
+          },
+          768: {
+            slidesPerView: categories.length <= 3 ? categories.length : 3,
             enabled: categories.length <= 3 ? false : true
           },
           375: {
@@ -49,23 +59,32 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         {categories.map((category, i) => {
           return (
             <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
-              <div className={'h-[250px] w-full relative'}>
-                <Image
-                  src={category.images[0].src}
-                  alt={category.name}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="absolute bottom-10">
-                <Link href={{ pathname: 'products', query: category.slug }}>
-                  <a
-                    onClick={() => handleClick(category.name)}
-                    className="bg-secondary text-white text-sm hover:bg-primary hover:text-secondary transition-all duration-200 px-9 py-3 font-medium"
-                  >
-                    {category.name.toUpperCase()}
-                  </a>
+              <div
+                className={'h-[160px] md:h-[215px] md:max-h-[215px] w-auto relative aspect-square'}
+              >
+                <Link
+                  href={{ pathname: 'products', query: category.slug }}
+                  className="cursor-pointer"
+                >
+                  <Image
+                    src={category.images[0].src}
+                    alt={category.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full cursor-pointer"
+                  />
                 </Link>
+              </div>
+
+              <div className="absolute -bottom-14">
+                <Button
+                  label={category.name.toUpperCase()}
+                  variant="outlined"
+                  color="black"
+                  linkUrl={{ pathname: 'products', query: category.slug }}
+                  action={() => handleClick(category.name)}
+                  classes="border-0 !py-0 hover:!bg-white hover:!text-black hover:underline"
+                ></Button>
               </div>
             </SwiperSlide>
           );

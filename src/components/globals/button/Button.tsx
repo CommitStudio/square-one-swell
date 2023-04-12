@@ -9,7 +9,7 @@ type Props = {
   type?: 'submit';
   disabled?: boolean;
   tabindex?: number;
-  linkUrl?: string;
+  linkUrl?: string | { pathname: string; query: { category: string } };
   _blank?: boolean;
   fullWidth?: boolean;
 };
@@ -62,7 +62,9 @@ const Button = ({
     return (
       <Link href={linkUrl}>
         <a
-          aria-label={`Redirect to ${linkUrl}`}
+          aria-label={`Redirect to ${
+            typeof linkUrl === 'string' ? linkUrl : linkUrl.query.category
+          }`}
           className={`${baseStyles} ${buttonColors[color]} ${buttonVariants[variant]} ${
             fullWidth ? 'w-full' : ''
           } ${disabled ? disabledStyles : ''} ${classes ? classes : ''}`}
