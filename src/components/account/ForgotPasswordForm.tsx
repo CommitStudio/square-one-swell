@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsArrowLeft } from 'react-icons/bs';
 
+import Button from '~/components/globals/button/Button';
 import Container from '~/layouts/Container';
 import swell from '~/lib/SwellJS';
 import { notifyFailure } from '~/utils/toastifies';
@@ -38,9 +39,9 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <Container className="h-full flex flex-grow flex-col justify-center items-center">
+    <Container className="h-full flex flex-grow flex-col justify-center items-center font-quicksand">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
-        <h1 className="font-bold text-3xl pb-6 mb-4">Forgot your password?</h1>
+        <h1 className="font-libre font-semibold text-3xl pb-6 mb-4">Forgot your password?</h1>
         <p className="text-sm pb-6 mb-4">
           Enter your email address and we’ll send you an email on how to reset your password.
         </p>
@@ -51,7 +52,7 @@ const ForgotPasswordForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">E-MAIL</label>
+              <label className="font-bold text-gray-500 mb-2 block">E-MAIL</label>
               <input
                 type="email"
                 placeholder="example@mail.com"
@@ -84,17 +85,11 @@ const ForgotPasswordForm = () => {
                 <p>If the email is not in our system, you will not receive an email.</p>
               </div>
             )}
-            <button
-              type="submit"
-              aria-label=""
-              className="w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
-            >
-              SEND EMAIL
-            </button>
+            <Button label="SEND EMAIL" fullWidth type="submit" aria-label="" />
             <div className="flex items-center justify-center">
               <Link href={'/account/login'}>
-                <a className="flex items-center justify-center text-sm mt-4 text-blue-700 cursor-pointer hover:underline">
-                  <BsArrowLeft className="text-lg mr-1" />
+                <a className="flex items-center justify-center text-sm mt-4 hover:underline group">
+                  <BsArrowLeft className="text-lg mr-1 group-hover:-translate-x-1" />
                   Log in
                 </a>
               </Link>

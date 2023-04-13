@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import { useStore } from '~/hooks/useStore';
-
+import Button from '~/components/globals/button/Button';
 import { useLogin } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
@@ -16,8 +15,6 @@ type Inputs = {
 };
 
 const LoginForm = () => {
-  const { updateStateProp, state } = useStore();
-
   const [isHidden, setIsHidden] = useState(true);
   const [loginCredentials, setLoginCredentials] = useState<Inputs | null>(null);
 
@@ -43,14 +40,14 @@ const LoginForm = () => {
   };
 
   return (
-    <Container className="h-full flex flex-grow flex-col justify-center items-center">
+    <Container className="h-full flex flex-grow flex-col justify-center items-center font-quicksand">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
-          <h1 className="font-bold text-3xl mb-2">Log in</h1>
+          <h1 className="font-libre first-line:font-semibold text-3xl mb-2">Log in</h1>
           {user === null && (
             <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
           )}
-          <span className="text-sm">
+          <span>
             <span className="text-red-500">*</span> Indicates a required field
           </span>
         </div>
@@ -61,7 +58,7 @@ const LoginForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label htmlFor="email" className="font-bold text-xs text-gray-500 mb-2 block">
+              <label htmlFor="email" className="font-bold text-gray-500 mb-2 block">
                 E-MAIL <span className="text-red-500">*</span>
               </label>
               <input
@@ -92,7 +89,7 @@ const LoginForm = () => {
           </div>
           <div>
             <div className="mb-2">
-              <label htmlFor="password" className="font-bold text-xs text-gray-500 mb-2 block">
+              <label htmlFor="password" className="font-bold text-gray-500 mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
               <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
@@ -135,22 +132,16 @@ const LoginForm = () => {
           <Link href={'/account/forgot-password'}>
             <span className="inline-block text-sm mt-4 md:mt-6">
               Forgot your password?&nbsp;
-              <a className="text-blue-700 cursor-pointer hover:underline">Reset it</a>.
+              <a className="font-bold cursor-pointer border-b hover:pb-0.5">Reset it</a>.
             </span>
           </Link>
           <div className="mt-7 mb-4">
-            <button
-              type="submit"
-              aria-label=""
-              className="w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
-            >
-              LOG IN
-            </button>
+            <Button fullWidth type="submit" label="LOG IN" />
 
             <Link href={'/account/create-account'}>
               <span className="block text-center text-sm mt-4">
                 Don&apos;t have an account?&nbsp;
-                <a className="text-blue-700 cursor-pointer hover:underline">Create it</a>.
+                <a className="font-bold cursor-pointer border-b hover:pb-0.5">Create it</a>.
               </span>
             </Link>
           </div>

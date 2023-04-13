@@ -5,6 +5,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { Spinner } from '../globals/Spinner';
 
+import Button from '~/components/globals/button/Button';
+
 import Container from '~/layouts/Container';
 import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
@@ -52,17 +54,17 @@ const ResetPasswordForm = () => {
   password.current = watch('password');
 
   return (
-    <Container className="h-full flex flex-grow flex-col justify-center items-center">
+    <Container className="font-quicksand h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
-        <h1 className="font-bold text-3xl mb-4">Reset your password</h1>
-        <p className="block text-sm mb-14 ">Plesase enter your new password</p>
+        <h1 className="font-semibold font-libre text-3xl mb-4">Reset your password</h1>
+        <p className="block mb-10 ">Plesase enter your new password</p>
         <form
           onSubmit={(e) => {
             void handleSubmit(onSubmit)(e);
           }}
         >
           <div className="mb-8">
-            <label className="font-bold text-xs text-gray-500 mb-2 block" htmlFor="password">
+            <label className="font-bold text-gray-500 mb-2 block" htmlFor="password">
               NEW PASSWORD
             </label>
             <div className="mb-2 flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
@@ -94,8 +96,8 @@ const ResetPasswordForm = () => {
             )}
           </div>
           <div className="mb-14">
-            <label className="font-bold text-xs text-gray-500 mb-2 block" htmlFor="confirmPassword">
-              CONFIRM NEW PASSWORD{' '}
+            <label className="font-bold text-gray-500 mb-2 block" htmlFor="confirmPassword">
+              CONFIRM NEW PASSWORD
             </label>
             <div className="mb-2 flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
               <input
@@ -121,13 +123,7 @@ const ResetPasswordForm = () => {
               <p className="text-red-600 text-xs mt-2 mb-4">{errors.confirmPassword.message}</p>
             )}
           </div>
-          <button
-            type="submit"
-            aria-label=""
-            className="w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 hover:text-secondary hover:bg-primary"
-          >
-            {!isLoading ? 'SAVE' : <Spinner size={4} />}
-          </button>
+          <Button type="submit" label={!isLoading ? 'SAVE' : <Spinner size={4} />} fullWidth />
         </form>
       </div>
     </Container>
