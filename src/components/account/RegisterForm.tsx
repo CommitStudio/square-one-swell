@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
+import Button from '~/components/globals/button/Button';
 import { useRegister } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
@@ -44,10 +45,10 @@ const RegisterForm = () => {
     }
   };
   return (
-    <Container className="h-full flex flex-grow flex-col justify-center items-center">
+    <Container className="font-quicksand h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
-          <h1 className="font-bold text-3xl mb-2">Create account</h1>
+          <h1 className="font-semibold font-libre text-3xl mb-2">Create account</h1>
           {user && (
             <p className="text-red-500 text-sm">
               There was an error trying to create the user. Email already exists.
@@ -64,7 +65,7 @@ const RegisterForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-500 mb-2 block">
                 FIRST NAME <span className="text-red-500">*</span>
               </label>
               <input
@@ -100,7 +101,7 @@ const RegisterForm = () => {
           </div>
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-500 mb-2 block">
                 LAST NAME <span className="text-red-500">*</span>
               </label>
               <input
@@ -136,7 +137,7 @@ const RegisterForm = () => {
           </div>
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-500 mb-2 block">
                 E-MAIL <span className="text-red-500">*</span>
               </label>
               <input
@@ -181,7 +182,7 @@ const RegisterForm = () => {
 
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-xs text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-500 mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
               <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
@@ -249,7 +250,7 @@ const RegisterForm = () => {
                 href={'/terms-conditions'}
                 target="_blank"
                 rel="noreferrer"
-                className="text-blue-700 cursor-pointer hover:underline"
+                className="font-bold cursor-pointer border-b hover:pb-0.5"
               >
                 Terms of Service
               </a>
@@ -258,7 +259,7 @@ const RegisterForm = () => {
                 href={'/privacy-policy'}
                 target="_blank"
                 rel="noreferrer"
-                className="text-blue-700 cursor-pointer hover:underline"
+                className="font-bold cursor-pointer border-b hover:pb-0.5"
               >
                 Privacy Policy
               </a>
@@ -267,23 +268,12 @@ const RegisterForm = () => {
           </div>
 
           <div className="mt-8 mb-4">
-            <button
-              type="submit"
-              aria-label=""
-              className={`w-full bg-secondary text-white text-sm font-bold rounded py-4 px-6 transition-all duration-300 ${
-                isChecked
-                  ? 'cursor-not-allowed opacity-60'
-                  : 'hover:text-secondary hover:bg-primary'
-              }`}
-              disabled={isChecked}
-            >
-              CREATE ACCOUNT
-            </button>
+            <Button label="CREATE ACCOUNT" fullWidth disabled={isChecked ? true : false} />
 
             <Link href={'/account/login'}>
               <span className="block text-center text-sm mt-4">
                 Already have an account?&nbsp;
-                <a className="text-blue-700 cursor-pointer hover:underline">Log in</a>.
+                <a className="font-bold cursor-pointer border-b hover:pb-0.5">Log in</a>.
               </span>
             </Link>
           </div>

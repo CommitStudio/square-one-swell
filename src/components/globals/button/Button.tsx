@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 type Props = {
-  label: string;
+  label: string | JSX.Element;
   action?: () => void | Promise<boolean> | Promise<void>;
   variant?: 'outlined' | 'fill';
   color?: 'black' | 'green';
@@ -80,7 +80,7 @@ const Button = ({
 
   return (
     <button
-      aria-label={label}
+      aria-label={typeof label === 'string' ? label : 'Button loading state'}
       onClick={action}
       type={type ? type : 'button'}
       className={`${baseStyles} ${buttonColors[color]} ${buttonVariants[variant]} ${
