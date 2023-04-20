@@ -268,7 +268,12 @@ const RegisterForm = () => {
           </div>
 
           <div className="mt-8 mb-4">
-            <Button label="CREATE ACCOUNT" fullWidth disabled={isChecked ? true : false} />
+            <Button
+              label="CREATE ACCOUNT"
+              fullWidth
+              disabled={isChecked ? true : false}
+              type="submit"
+            />
 
             <Link href={'/account/login'}>
               <span className="block text-center text-sm mt-4">

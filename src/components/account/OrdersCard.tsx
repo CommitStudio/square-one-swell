@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Button from '../globals/button/Button';
+
 import { formatDate } from '~/utils/dates';
 import { formatCurrency } from '~/utils/numbers';
 
@@ -10,7 +12,7 @@ interface OrderProps {
 
 const OrderCard = ({ order }: OrderProps) => {
   return (
-    <div className="flex flex-col md:flex-row rounded bg-primary-lightest p-4 shadow-md border border-gray-50 mb-6">
+    <div className="flex flex-col md:flex-row rounded bg-primary-lightest p-4 shadow-md border border-gray mb-6">
       <div className="flex-none w-120">
         <div className="flex">
           <span className="flex-col w-36 h-36 relative">
@@ -23,27 +25,24 @@ const OrderCard = ({ order }: OrderProps) => {
           </span>
         </div>
       </div>
-      <div className="md:ml-10 mt-5 md:mt-0  flex-auto w-64">
-        <p className="font-bold text-lg first-letter:capitalize">
-          {order.status.replace('_', ' ')}
-        </p>
-
+      <div className="md:ml-10 mt-5 md:mt-0 flex-auto w-64">
+        <p className="font-extrabold first-letter:capitalize">{order.status.replace('_', ' ')}</p>
         <div className="text-sm space-y-1 pt-4">
-          <p>
-            <span>Date</span>
-            <span className="pl-3 font-semibold">{formatDate(order.date)}</span>
+          <p className="space-x-2">
+            <span>Date:</span>
+            <span>{formatDate(order.date)}</span>
           </p>
-          <p>
-            <span>Number</span>
-            <span className="pl-3 font-semibold"># {order.number}</span>
+          <p className="space-x-2">
+            <span>Number:</span>
+            <span>#{order.number}</span>
           </p>
-          <p>
-            <span>Total items</span>
-            <span className="pl-3 font-semibold"># {order.items}</span>
+          <p className="space-x-2">
+            <span>Total items:</span>
+            <span>#{order.items}</span>
           </p>
-          <p>
-            <span>Total</span>
-            <span className="pl-3 font-semibold">
+          <p className="space-x-2 font-black pt-4">
+            <span>Total:</span>
+            <span>
               {order.currency} {formatCurrency(order.total)}
             </span>
           </p>
@@ -52,7 +51,7 @@ const OrderCard = ({ order }: OrderProps) => {
 
       <div className="flex flex-col justify-end text-sm">
         <Link href={`/account/orders/${order.id}`}>
-          <a className="mt-4 text-center px-3 py-1 rounded hover:bg-gray-100 bg-gray-200 transition-all duration-300">
+          <a className="mt-4 text-xs text-center text-white px-3 py-1 rounded border border-white hover:bg-white hover:border hover:border-green bg-green hover:text-green transition-all duration-200">
             VIEW MORE
           </a>
         </Link>

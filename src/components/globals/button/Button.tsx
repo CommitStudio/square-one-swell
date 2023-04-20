@@ -40,8 +40,9 @@ const Button = ({
   tabindex,
   linkUrl,
   _blank,
-  fullWidth
-}: Props) => {
+  fullWidth,
+  ...props
+}: Props & React.ComponentProps<'button'> & React.ComponentProps<'a'>) => {
   enum ButtonColors {
     black = 'black',
     green = 'green'
@@ -71,6 +72,7 @@ const Button = ({
           tabIndex={tabindex ? tabindex : 0}
           target={`${_blank ? '_blank' : ''}`}
           rel="noreferrer noopener"
+          {...props}
         >
           {label}
         </a>
@@ -88,6 +90,7 @@ const Button = ({
       } ${disabled ? disabledStyles : ''} ${classes ? classes : ''}`}
       disabled={disabled}
       tabIndex={tabindex ? tabindex : 0}
+      {...props}
     >
       {label}
     </button>

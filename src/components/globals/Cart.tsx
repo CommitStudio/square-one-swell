@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Trash from 'public/img/trash-02.svg';
+import Trash from 'public/img/icons/trash-02.svg';
 
 import Button from '~/components/globals/button/Button';
 import { useGlobalState } from '~/hooks/useStore';
