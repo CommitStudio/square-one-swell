@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 
 import Head from '~/components/globals/Head';
-import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -52,13 +51,13 @@ const Blog = () => {
         keywords={keywords.blog}
         url={`${NEXT_PUBLIC_BASE_URL}/blog`}
       />
-      <PlaceholderBanner />
-      <Container className="py-24">
-        <h1 className="font-bold text-align pb-10 text-4xl">Blog</h1>
+
+      <Container className="py-20">
+        <h1 className="text-align pb-20 text-4xl font-libre uppercase">Blog</h1>
         <ul>
           {articles.map((article, i) => (
-            <li key={i} className="border rounded-md mb-8 py-4 px-10">
-              <p className="mb-3 flex items-center">
+            <li key={i} className="border border-gray-medium mb-8 py-4 px-10">
+              <p className="mb-3 flex items-center font-quicksand">
                 <svg
                   className="w-4 h-4 mr-2"
                   fill="none"
@@ -80,12 +79,12 @@ const Blog = () => {
                   {article.title}
                 </h2>
               </a>
-              <p className="mb-4 flex items-center">{article.description}</p>
+              <p className="mb-4 flex items-center font-quicksand">{article.description}</p>
               <a
                 rel="noopener noreferrer"
                 className="w-fit flex items-center font-semibold min-w-fit mt-[1.75rem]"
               >
-                <span className="mr-2 cursor-pointer hover:underline">View more</span>
+                <span className="mr-2 cursor-pointer underline font-quicksand">View more</span>
               </a>
             </li>
           ))}

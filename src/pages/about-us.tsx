@@ -20,7 +20,7 @@ const AboutUs = () => {
       <Container className="py-20">
         {/* TODO: TEXT TO BE REVISED */}
 
-        <h1 className="text-align pb-20 text-4xl font-libre">About us</h1>
+        <h1 className="text-align pb-20 text-4xl font-libre uppercase">About us</h1>
         <div className="grid lg:grid-cols-2 gap-16">
           <p className="font-quicksand">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates
