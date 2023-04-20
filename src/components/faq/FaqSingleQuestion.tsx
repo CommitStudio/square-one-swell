@@ -12,7 +12,7 @@ function FaqSingleQuestion({ question, answer }: Props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <hr className="bg-gray-200 h-px border-none mt-[1.625rem] mb-8" />
+            <hr className="bg-gray h-px border-none mt-[1.625rem] mb-8" />
             <Disclosure.Button>
               <div className="flex justify-between items-start">
                 <h3 className="text-left text-black">{question}</h3>
@@ -38,6 +38,7 @@ function FaqSingleQuestion({ question, answer }: Props) {
                 <p className="font-light text-black mt-7 mr-6">{answer}</p>
               </Disclosure.Panel>
             </Transition>
+            <hr className="bg-gray hidden last-of-type:block h-px border-none mt-[1.625rem]" />
           </>
         )}
       </Disclosure>
