@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import Head from '~/components/globals/Head';
-import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 
@@ -16,14 +15,10 @@ const TermsConditions = () => {
         keywords={keywords.terms_conditions}
         url={`${NEXT_PUBLIC_BASE_URL}/terms-conditions`}
       />
-      <PlaceholderBanner />
-      <Container className="py-16">
-        <Link href="/">
-          <a className="text-secondary text-lg hover:underline font-bold">Back</a>
-        </Link>
-        {/* TODO: TEXT TO BE REVISED */}
-        <div className="font-bold text-align text-center pb-6 text-lg">TERMS OF SERVICE </div>
-        <div>
+
+      <Container className="py-20">
+        <h1 className="text-align pb-20 text-4xl font-libre uppercase">Terms of service</h1>
+        <p className="font-quicksand pb-4">
           This website is operated by Square One. Throughout the site, the terms “we”, “us” and
           “our” refer to Square One. Square One offers this website, including all information,
           tools and Services available from this site to you, the user, conditioned upon your
@@ -46,9 +41,9 @@ const TermsConditions = () => {
           following the posting of any changes constitutes acceptance of those changes. Our store is
           hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us
           to sell our products and Services to you.
-        </div>
-        <div className="font-bold">SECTION 1 - ONLINE STORE TERMS</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 1 - ONLINE STORE TERMS</h3>
+        <p className="font-quicksand pb-4">
           By agreeing to these Terms of Service, you represent that you are at least the age of
           majority in your state or province of residence, or that you are the age of majority in
           your state or province of residence and you have given us your consent to allow any of
@@ -57,9 +52,9 @@ const TermsConditions = () => {
           jurisdiction (including but not limited to copyright laws). You must not transmit any
           worms or viruses or any code of a destructive nature. A breach or violation of any of the
           Terms will result in an immediate termination of your Services.
-        </div>
-        <div className="font-bold">SECTION 2 - GENERAL CONDITIONS</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 2 - GENERAL CONDITIONS</h3>
+        <p className="font-quicksand pb-4">
           We reserve the right to refuse service to anyone for any reason at any time. You
           understand that your content (not including credit card information), may be transferred
           unencrypted and involve (a) transmissions over various networks; and (b) changes to
@@ -69,11 +64,11 @@ const TermsConditions = () => {
           or access to the Service or any contact on the website through which the service is
           provided, without express written permission by us. The headings used in this agreement
           are included for convenience only and will not limit or otherwise affect these Terms.
-        </div>
-        <div className="font-bold">
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
           SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION
-        </div>
-        <div>
+        </h3>
+        <p className="font-quicksand pb-4">
           We are not responsible if information made available on this site is not accurate,
           complete or current. The material on this site is provided for general information only
           and should not be relied upon or used as the sole basis for making decisions without
@@ -83,16 +78,18 @@ const TermsConditions = () => {
           provided for your reference only. We reserve the right to modify the contents of this site
           at any time, but we have no obligation to update any information on our site. You agree
           that it is your responsibility to monitor changes to our site.
-        </div>
-        <div className="font-bold">SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
+          SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES
+        </h3>
+        <p className="font-quicksand pb-4">
           Prices for our products are subject to change without notice. We reserve the right at any
           time to modify or discontinue the Service (or any part or content thereof) without notice
           at any time. We shall not be liable to you or to any third-party for any modification,
           price change, suspension or discontinuance of the Service.
-        </div>
-        <div className="font-bold">SECTION 5 - PRODUCTS OR SERVICES</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 5 - PRODUCTS OR SERVICES</h3>
+        <p className="font-quicksand pb-4">
           (if applicable) Certain products or Services may be available exclusively online through
           the website. These products or Services may have limited quantities and are subject to
           return or exchange only according to our Return Policy. To view our Return Policy, please
@@ -108,9 +105,11 @@ const TermsConditions = () => {
           prohibited. We do not warrant that the quality of any products, Services, information, or
           other material purchased or obtained by you will meet your expectations, or that any
           errors in the Service will be corrected.
-        </div>
-        <div className="font-bold">SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
+          SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION
+        </h3>
+        <p className="font-quicksand pb-4">
           We reserve the right to refuse any order you place with us. We may, in our sole
           discretion, limit or cancel quantities purchased per person, per household or per order.
           These restrictions may include orders placed by or under the same customer account, the
@@ -123,9 +122,9 @@ const TermsConditions = () => {
           store. You agree to promptly update your account and other information, including your
           email address and credit card numbers and expiration dates, so that we can complete your
           transactions and contact you as needed. For more detail, please review our Returns Policy.
-        </div>
-        <div className="font-bold">SECTION 7 - OPTIONAL TOOLS</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 7 - OPTIONAL TOOLS</h3>
+        <p className="font-quicksand pb-4">
           We may provide you with access to third-party tools over which we neither monitor nor have
           any control nor input. You acknowledge and agree that we provide access to such tools ”as
           is” and “as available” without any warranties, representations or conditions of any kind
@@ -136,9 +135,9 @@ const TermsConditions = () => {
           relevant third-party provider(s). We may also, in the future, offer new Services and/or
           features through the website (including, the release of new tools and resources). Such new
           features and/or Services shall also be subject to these Terms of Service.
-        </div>
-        <div className="font-bold">SECTION 8 - THIRD-PARTY LINKS </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 8 - THIRD-PARTY LINKS </h3>
+        <p className="font-quicksand pb-4">
           Certain content, products and Services available via our Service may include materials
           from third-parties. Third-party links on this site may direct you to third-party websites
           that are not affiliated with us. We are not responsible for examining or evaluating the
@@ -150,9 +149,11 @@ const TermsConditions = () => {
           third-party’s policies and practices and make sure you understand them before you engage
           in any transaction. Complaints, claims, concerns, or questions regarding third-party
           products should be directed to the third-party.
-        </div>
-        <div className="font-bold">SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
+          SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS{' '}
+        </h3>
+        <p className="font-quicksand pb-4">
           If, at our request, you send certain specific submissions (for example contest entries) or
           without a request from us you send creative ideas, suggestions, proposals, plans, or other
           materials, whether online, by email, by postal mail, or otherwise (collectively,
@@ -172,9 +173,9 @@ const TermsConditions = () => {
           mislead us or third-parties as to the origin of any comments. You are solely responsible
           for any comments you make and their accuracy. We take no responsibility and assume no
           liability for any comments posted by you or any third-party.
-        </div>
-        <div className="font-bold"> SECTION 10 - PERSONAL INFORMATION </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1"> SECTION 10 - PERSONAL INFORMATION </h3>
+        <p className="font-quicksand pb-4">
           Your submission of personal information through the store is governed by our Privacy
           Policy. To view our Privacy Policy, please see{' '}
           <Link href="/privacy-policy">
@@ -182,9 +183,11 @@ const TermsConditions = () => {
               www.squareone.com/privacy-policy
             </a>
           </Link>
-        </div>
-        <div className="font-bold">SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
+          SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS
+        </h3>
+        <p className="font-quicksand pb-4">
           Occasionally there may be information on our site or in the Service that contains
           typographical errors, inaccuracies or omissions that may relate to product descriptions,
           pricing, promotions, offers, product shipping charges, transit times and availability. We
@@ -196,9 +199,9 @@ const TermsConditions = () => {
           except as required by law. No specified update or refresh date applied in the Service or
           on any related website, should be taken to indicate that all information in the Service or
           on any related website has been modified or updated.
-        </div>
-        <div className="font-bold">SECTION 12 - PROHIBITED USES</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 12 - PROHIBITED USES</h3>
+        <p className="font-quicksand pb-4">
           In addition to other prohibitions as set forth in the Terms of Service, you are prohibited
           from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to
           perform or participate in any unlawful acts; (c) to violate any international, federal,
@@ -215,11 +218,11 @@ const TermsConditions = () => {
           Service or any related website, other websites, or the Internet. We reserve the right to
           terminate your use of the Service or any related website for violating any of the
           prohibited uses.
-        </div>
-        <div className="font-bold">
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">
           SECTION 13 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY
-        </div>
-        <div>
+        </h3>
+        <p className="font-quicksand pb-4">
           We do not guarantee, represent or warrant that your use of our service will be
           uninterrupted, timely, secure or error-free. We do not warrant that the results that may
           be obtained from the use of the service will be accurate or reliable. You agree that from
@@ -245,26 +248,26 @@ const TermsConditions = () => {
           allow the exclusion or the limitation of liability for consequential or incidental
           damages, in such states or jurisdictions, our liability shall be limited to the maximum
           extent permitted by law.
-        </div>
-        <div className="font-bold">SECTION 14 - INDEMNIFICATION </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 14 - INDEMNIFICATION </h3>
+        <p className="font-quicksand pb-4">
           You agree to indemnify, defend and hold harmless Square One and our parent, subsidiaries,
           affiliates, partners, officers, directors, agents, contractors, licensors, service
           providers, subcontractors, suppliers, interns and employees, harmless from any claim or
           demand, including reasonable attorneys’ fees, made by any third-party due to or arising
           out of your breach of these Terms of Service or the documents they incorporate by
           reference, or your violation of any law or the rights of a third-party.
-        </div>
-        <div className="font-bold">SECTION 15 - SEVERABILITY </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 15 - SEVERABILITY </h3>
+        <p className="font-quicksand pb-4">
           In the event that any provision of these Terms of Service is determined to be unlawful,
           void or unenforceable, such provision shall nonetheless be enforceable to the fullest
           extent permitted by applicable law, and the unenforceable portion shall be deemed to be
           severed from these Terms of Service, such determination shall not affect the validity and
           enforceability of any other remaining provisions.
-        </div>
-        <div className="font-bold">SECTION 16 - TERMINATION </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 16 - TERMINATION </h3>
+        <p className="font-quicksand pb-4">
           The obligations and liabilities of the parties incurred prior to the termination date
           shall survive the termination of this agreement for all purposes. These Terms of Service
           are effective unless and until terminated by either you or us. You may terminate these
@@ -274,9 +277,9 @@ const TermsConditions = () => {
           terminate this agreement at any time without notice and you will remain liable for all
           amounts due up to and including the date of termination; and/or accordingly may deny you
           access to our Services (or any part thereof).
-        </div>
-        <div className="font-bold">SECTION 17 - ENTIRE AGREEMENT</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 17 - ENTIRE AGREEMENT</h3>
+        <p className="font-quicksand pb-4">
           The failure of us to exercise or enforce any right or provision of these Terms of Service
           shall not constitute a waiver of such right or provision. These Terms of Service and any
           policies or operating rules posted by us on this site or in respect to The Service
@@ -285,23 +288,23 @@ const TermsConditions = () => {
           proposals, whether oral or written, between you and us (including, but not limited to, any
           prior versions of the Terms of Service). Any ambiguities in the interpretation of these
           Terms of Service shall not be construed against the drafting party.
-        </div>
-        <div className="font-bold">SECTION 18 - GOVERNING LAW</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 18 - GOVERNING LAW</h3>
+        <p className="font-quicksand pb-4">
           These Terms of Service and any separate agreements whereby we provide you Services shall
           be governed by and construed in accordance with the laws of Uruguay.
-        </div>
-        <div className="font-bold">SECTION 19 - CHANGES TO TERMS OF SERVICE</div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 19 - CHANGES TO TERMS OF SERVICE</h3>
+        <p className="font-quicksand pb-4">
           You can review the most current version of the Terms of Service at any time at this page.
           We reserve the right, at our sole discretion, to update, change or replace any part of
           these Terms of Service by posting updates and changes to our website. It is your
           responsibility to check our website periodically for changes. Your continued use of or
           access to our website or the Service following the posting of any changes to these Terms
           of Service constitutes acceptance of those changes.
-        </div>
-        <div className="font-bold">SECTION 20 - CONTACT INFORMATION </div>
-        <div>
+        </p>
+        <h3 className="font-bold font-quicksand pb-1">SECTION 20 - CONTACT INFORMATION </h3>
+        <p className="font-quicksand">
           Questions about the Terms of Service should be sent to us at{' '}
           <Link href="mailto:info@squareone.com">
             <a className="italic">info@squareone.com</a>
@@ -309,7 +312,7 @@ const TermsConditions = () => {
           . Our contact information is posted below: [INSERT TRADING NAME] [INSERT EMAIL ADDRESS]
           [INSERT BUSINESS ADDRESS] [INSERT BUSINESS PHONE NUMBER] [INSERT BUSINESS REGISTRATION
           NUMBER] [INSERT VAT NUMBER]
-        </div>
+        </p>
       </Container>
     </>
   );
