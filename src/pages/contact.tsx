@@ -1,5 +1,5 @@
 import Head from '~/components/globals/Head';
-import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
+import Button from '~/components/globals/button/Button';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -15,55 +15,54 @@ const Contact = () => {
         keywords={keywords.contact_us}
         url={`${NEXT_PUBLIC_BASE_URL}/contact`}
       />
-      <PlaceholderBanner />
-      <Container className="py-24">
-        <h1 className="font-bold text-align pb-10 text-4xl">Contact us</h1>
+      <Container className="py-20">
+        <h1 className="text-align pb-20 text-4xl font-libre uppercase">Contact us</h1>
         <div className="grid lg:grid-cols-2 gap-10">
-          <form>
-            <label className="block text-sm mb-2" htmlFor="name">
+          <form className="font-quicksand">
+            <label className="block mb-2" htmlFor="name">
               Name
             </label>
             <input
-              className="w-full mb-8 p-2 border"
+              className="w-full mb-3 py-2 px-4 border"
               id="name"
               type="text"
               placeholder="Write your name"
             />
-            <label className="block text-sm mb-2" htmlFor="phone">
+            <label className="block mb-2" htmlFor="phone">
               Phone
             </label>
             <input
-              className="w-full mb-8 p-2 border"
+              className="w-full mb-3 py-2 px-4 border"
               id="phone"
               type="tel"
               placeholder="Write your phone"
             />
-            <label className="block text-sm mb-2" htmlFor="email">
+            <label className="block mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="w-full mb-8 p-2 border"
+              className="w-full mb-3 py-2 px-4 border"
               id="email"
               type="email"
               placeholder="Write your email"
             />
-            <label className="block text-sm mb-2" htmlFor="content">
+            <label className="block mb-2" htmlFor="content">
               Message
             </label>
             <textarea
-              className="w-full mb-8 p-2 border"
+              className="w-full mb-8 py-2 px-4 border"
               name="content"
               id="content"
               cols={30}
               rows={5}
               placeholder="Enter your message"
             ></textarea>
-            <button
+            <Button
               type="submit"
-              className="w-full bg-secondary text-primary p-3 rounded transition-all duration-300 hover:bg-primary hover:text-secondary"
-            >
-              Send message
-            </button>
+              label="Send message"
+              fullWidth
+              classes="uppercase font-quicksand"
+            />
           </form>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3271.87912145818!2d-56.1691871843327!3d-34.909482880381354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f814c4cec4b67%3A0x10c61042c2b15fc0!2sCo-Work%20Latam-Parque%20Rod%C3%B3!5e0!3m2!1sen!2suy!4v1675892606100!5m2!1sen!2suy"
