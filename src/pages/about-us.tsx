@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import Head from '~/components/globals/Head';
-import PlaceholderBanner from '~/components/globals/PlaceholderBanner';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
@@ -17,13 +16,13 @@ const AboutUs = () => {
         keywords={keywords.about_us}
         url={`${NEXT_PUBLIC_BASE_URL}/about-us`}
       />
-      <PlaceholderBanner />
-      <Container className="py-24">
+
+      <Container className="py-20">
         {/* TODO: TEXT TO BE REVISED */}
 
-        <h1 className="font-bold text-align pb-10 text-4xl">About us</h1>
+        <h1 className="text-align pb-20 text-4xl font-libre">About us</h1>
         <div className="grid lg:grid-cols-2 gap-16">
-          <p>
+          <p className="font-quicksand">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates
             odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum
             possimus autem, atque ut asperiores assumenda dignissimos recusandae dicta molestiae
@@ -39,7 +38,7 @@ const AboutUs = () => {
           </p>
           <div className="relative h-96 lg:h-auto">
             <Image
-              src="/img/heros/push-point-pow.jpg"
+              src="/img/heros/about-us.jpg"
               alt="About us picture"
               layout="fill"
               objectFit="cover"
