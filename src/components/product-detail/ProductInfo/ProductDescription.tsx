@@ -5,7 +5,16 @@ type Description = {
 };
 
 const ProductDescription = ({ description }: Description) => {
-  return <>{description && <div className="font-light">{parse(description)}</div>}</>;
+  return (
+    <>
+      {description && (
+        <div className="font-quicksand">
+          <p>Description:</p>
+          <p>{parse(description)}</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default ProductDescription;

@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import React from 'react';
 
-import Hero from '~/components/Hero';
 import Head from '~/components/globals/Head';
 import ProductSection from '~/components/product-detail/ProductSection';
 import RelatedProducts from '~/components/product-detail/RelatedProducts';
@@ -31,8 +31,22 @@ const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductPro
         keywords={keywords.product_detail}
         url={`${NEXT_PUBLIC_BASE_URL}${router.asPath}`}
       />
-      <Hero title={product.name} />
-      <Container>
+      <Container className="pt-8">
+        <Link href="/products">
+          <a className="font-quicksand flex items-center gap-2 mb-8 hover:underline">
+            <svg
+              width="10"
+              height="18"
+              viewBox="0 0 10 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M9 1L1 9L9 17" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Product list
+          </a>
+        </Link>
+        <hr className="bg-gray h-px border-none" />
         <ProductSection product={product} categories={categories} />
         {/* ProductReview is commented because the functionality is not working (it just show hardcoded data) */}
         {/* <ProductReview test_product={test_product} /> */}

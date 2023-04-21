@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import AddToCart from '~/components/product-detail/ProductInfo/AddToCart';
-import ProductCategories from '~/components/product-detail/ProductInfo/ProductCategories';
 import ProductDescription from '~/components/product-detail/ProductInfo/ProductDescription';
 import ProductOptions from '~/components/product-detail/ProductInfo/ProductOptions';
 import ProductPriceOptions from '~/components/product-detail/ProductInfo/ProductPriceOptions';
@@ -14,13 +13,14 @@ interface ProductProp {
   categories: Category[];
 }
 
-const ProductInfo = ({ product, categories }: ProductProp) => {
+const ProductInfo = ({ product }: ProductProp) => {
   const [chosenOptions, setChosenOptions] = useState({});
+  console.log(product);
   return (
-    <div className="w-full ml-0 md:ml-6 space-y-4 mt-5 md:mt-0">
-      <ProductTitle title={product.name} />
+    <div className="w-full space-y-2 mt-5 md:mt-0">
+      <ProductTitle title={product.name} id={product.id} />
       <ProductRating rating={3} />
-      <ProductDescription description={product.description} />
+
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions
         product={product}
@@ -28,7 +28,7 @@ const ProductInfo = ({ product, categories }: ProductProp) => {
         setChosenOptions={setChosenOptions}
       />
       <AddToCart product={product} chosenOptions={chosenOptions} />
-      <ProductCategories product={product} categories={categories} />
+      <ProductDescription description={product.description} />
       <ProductSocialMedia />
     </div>
   );
