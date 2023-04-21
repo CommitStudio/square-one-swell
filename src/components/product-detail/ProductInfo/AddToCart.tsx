@@ -83,39 +83,40 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
 
   return (
     <>
-      <div className="flex space-x-6 py-5">
+      <div className="flex space-x-4 py-5">
         <div className="flex">
           <input
             type="number"
             name="product-quantity"
             value={productAmount}
             id="product-quantity"
-            className="focus-visible:outline-none w-10 p-1 text-center border border-r-0 appearance-none"
+            className="focus-visible:outline-none text-sm font-quicksand w-10 text-center border border-gray border-r-0 appearance-none"
             onChange={(e) => setProductAmount(Number(e.target.value))}
           />
           <div className="flex flex-col">
             <button
-              className="bg-gray-200 hover:bg-gray-300 border border-b-0 hover:border-gray-300  p-1"
+              className="bg-gray hover:bg-gray-medium border border-gray border-b-0 hover:border-gray-300 p-1"
               onClick={() => setProductAmount(productAmount + 1)}
             >
               <IoIosArrowUp />
             </button>
             <button
               onClick={() => productAmount > 1 && setProductAmount(productAmount - 1)}
-              className="bg-gray-200 hover:bg-gray-300 border hover:border-gray-300 p-1"
+              className="bg-gray hover:bg-gray-medium border border-t-0 border-gray hover:border-gray-300 p-1"
             >
               <IoIosArrowDown />
             </button>
           </div>
         </div>
+
         <button
           onClick={() => handleAddToCart()}
           disabled={!state.isVariantActive || isLoading}
-          className={`font-bold py-3 px-5 min-w-[150px]
+          className={`font-bold py-3 px-5 min-w-[240px]
          ${
            state.isVariantActive
-             ? 'bg-secondary hover:bg-primary text-white hover:text-secondary duration-200'
-             : 'bg-gray-600 text-gray-300'
+             ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200'
+             : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
         >
           {state.isVariantActive && !isLoading ? (
@@ -127,12 +128,14 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
           )}
         </button>
         <Tooltip content="Feature coming soon!">
-          <button className="border p-3 text-gray-400 border-gray-200 hover:text-secondary hover:border-secondary duration-200">
-            <AiOutlineHeart />
+          <button className="py-3 hover:text-secondary hover:border-secondary duration-200">
+            <AiOutlineHeart className="h-6 w-6" />
           </button>
         </Tooltip>
       </div>
-      {pleaseSelectAllOptions && <p className="text-red-500">{pleaseSelectAllOptions}</p>}
+      {pleaseSelectAllOptions && (
+        <p className="text-red-500 font-quicksand">{pleaseSelectAllOptions}</p>
+      )}
     </>
   );
 };
