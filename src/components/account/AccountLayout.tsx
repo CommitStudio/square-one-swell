@@ -24,7 +24,7 @@ const AccountLayout = ({ children }: Props) => {
   const [openLogOut, setOpenLogOut] = useState(false);
   return (
     <Container className="mb-10">
-      <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10">
+      <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10 font-quicksand">
         <div className="lg:col-span-3 lg:border-r mr-10">
           <div className="h-24 mb-4 flex flex-col justify-center">
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
@@ -41,33 +41,35 @@ const AccountLayout = ({ children }: Props) => {
           </div>
           <EditProfileModal openEdit={openEdit} setOpenEdit={setOpenEdit} />
           <LogOutModal openLogOut={openLogOut} setOpenLogOut={setOpenLogOut} />
-          <Link href="/account/orders">
-            <a
-              className={`block ${
-                router.pathname.includes('/account/orders') ? 'font-semibold bg-gray-100' : ''
-              } hover:bg-gray-100 p-2 mb-1`}
-            >
-              Orders
-            </a>
-          </Link>
-          <Link href="/account/addresses">
-            <a
-              className={`block ${
-                router.pathname.includes('/account/addresses') ? 'font-semibold bg-gray-100' : ''
-              } hover:bg-gray-100 p-2 mb-1`}
-            >
-              Addresses
-            </a>
-          </Link>
-          <Link href="/account/payments">
-            <a
-              className={`block ${
-                router.pathname.includes('/account/payments') ? 'font-semibold bg-gray-100' : ''
-              } hover:bg-gray-100 p-2`}
-            >
-              Payment methods
-            </a>
-          </Link>
+          <div className="space-y-4 my-10">
+            <Link href="/account/orders">
+              <a
+                className={`block ${
+                  router.pathname.includes('/account/orders') ? 'font-bold underline' : ''
+                }`}
+              >
+                Orders
+              </a>
+            </Link>
+            <Link href="/account/addresses">
+              <a
+                className={`block ${
+                  router.pathname.includes('/account/addresses') ? 'font-bold underline' : ''
+                }`}
+              >
+                Addresses
+              </a>
+            </Link>
+            <Link href="/account/payments">
+              <a
+                className={`block ${
+                  router.pathname.includes('/account/payments') ? 'font-bold underline' : ''
+                }`}
+              >
+                Payment methods
+              </a>
+            </Link>
+          </div>
           <button
             className="flex items-center gap-1 hover:text-red-600 mt-10"
             onClick={() => setOpenLogOut(true)}

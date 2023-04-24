@@ -3,6 +3,9 @@ import { useState } from 'react';
 import DeleteAddressModal from './DeleteAddressModal';
 import EditAddressModal from './EditAddressModal';
 
+import EditIcon from 'public/img/icons/EditIcon';
+import TrashIcon from 'public/img/icons/TrashIcon';
+
 interface Props {
   address: SwellAddress;
 }
@@ -14,7 +17,7 @@ const AddressCard = ({ address }: Props) => {
   return (
     <div className="flex rounded bg-primary-lightest p-5 shadow-md border border-gray-50 justify-between mb-2">
       <div className="space-y-2">
-        <p>
+        <p className="font-bold">
           {address.first_name} {address.last_name}
         </p>
         <p>{address.address1}</p>
@@ -24,13 +27,8 @@ const AddressCard = ({ address }: Props) => {
         <p>{address.country}</p>
       </div>
       <div className="flex flex-col justify-between">
-        <button
-          className="bg-secondary text-primary p-2 rounded transition-all duration-100 hover:bg-primary hover:text-secondary"
-          onClick={() => {
-            void setOpenConfModal(true);
-          }}
-        >
-          Delete
+        <button className="flex justify-center items-center pt-1" onClick={() => setOpen(true)}>
+          <EditIcon />
         </button>
         <DeleteAddressModal
           addressId={address.id}
@@ -38,10 +36,12 @@ const AddressCard = ({ address }: Props) => {
           setOpenConfModal={setOpenConfModal}
         />
         <button
-          className="bg-secondary text-primary p-2 rounded transition-all duration-100 hover:bg-primary hover:text-secondary"
-          onClick={() => setOpen(true)}
+          className="hover:stroke-red-500"
+          onClick={() => {
+            void setOpenConfModal(true);
+          }}
         >
-          Edit
+          <TrashIcon />
         </button>
         <EditAddressModal open={open} setOpen={setOpen} address={address} />
       </div>

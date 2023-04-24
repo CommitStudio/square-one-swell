@@ -27,7 +27,7 @@ export const OrderDetails = ({ orderId }: Props) => {
       ) : (
         <>
           <div
-            className="text-sm text-secondary cursor-pointer pb-8"
+            className="text-sm text-secondary cursor-pointer pb-8 font-quicksand"
             onClick={() => {
               void router.push('/account/orders');
             }}
@@ -49,7 +49,7 @@ export const OrderDetails = ({ orderId }: Props) => {
             <span className="pl-2">Back to all orders</span>
           </div>
           {/* Summary Details */}
-          <h3 className="text-xl font-bold pb-4">Order number # {order.number}</h3>
+          <h3 className="text-xl font-bold pb-4">Order number #{order.number}</h3>
           <div className="leading-7 py-4">
             <p>
               Status:{' '}

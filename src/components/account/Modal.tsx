@@ -37,7 +37,7 @@ const Modal = ({ open, setOpen, children }: Props) => {
             leaveFrom="opacity-100 lg:scale-100"
             leaveTo="opacity-0 lg:scale-90"
           >
-            <div className="relative transform transition-all w-fit mx-auto flex justify-center">
+            <div className="relative transform transition-all w-fit mx-auto bg-white flex justify-center">
               {children}
             </div>
           </Transition.Child>

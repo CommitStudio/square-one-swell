@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import Button from '~/components/globals/button/Button';
 import countriesJSON from '~/data/countries.json';
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
@@ -56,7 +57,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
     <Modal open={open} setOpen={setOpen}>
       <div className="bg-gray-200 p-6 rounded w-full">
         <div className="flex items-center justify-between mb-4 w-full">
-          <h3 className="font-medium text-3xl">Add new address</h3>{' '}
+          <h3 className="font-medium font-libre text-3xl">Add new address</h3>{' '}
           <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
@@ -72,7 +73,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             <span className="text-red-500">*</span> First Name
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="first_name"
             type="text"
             {...register('first_name', {
@@ -87,7 +88,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             <span className="text-red-500">*</span> Last Name
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="last_name"
             type="text"
             {...register('last_name', {
@@ -102,7 +103,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             <span className="text-red-500">*</span> Address
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="address1"
             type="text"
             {...register('address1', {
@@ -117,7 +118,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             Apartment / Floor / Suite
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="address2"
             type="text"
             {...register('address2', {
@@ -131,7 +132,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             <span className="text-red-500">*</span> City
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="city"
             type="text"
             {...register('city', {
@@ -146,7 +147,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
                 Country
               </label>
               <select
-                className="w-full p-[0.6rem] mb-4"
+                className="w-full p-[0.6rem] mb-4 border"
                 id="country"
                 {...register('country', {
                   required: 'Please enter your country',
@@ -175,7 +176,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
                 <span className="text-red-500">*</span> Zip code
               </label>
               <input
-                className="mb-4 p-2"
+                className="mb-4 p-2 border"
                 id="zip"
                 type="text"
                 {...register('zip', {
@@ -192,7 +193,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
             Phone
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="phone"
             type="number"
             {...register('phone', {
@@ -202,12 +203,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <button
-            type="submit"
-            className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
-          >
-            CREATE ADDRESS
-          </button>
+          <Button type="submit" fullWidth label="CREATE ADRESS" />
         </form>
       </div>
     </Modal>

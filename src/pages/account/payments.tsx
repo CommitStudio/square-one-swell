@@ -5,6 +5,7 @@ import AccountLayout from '~/components/account/AccountLayout';
 import PaymentCard from '~/components/account/payments/PaymentsCard';
 import PaymentsModal from '~/components/account/payments/PaymentsModal';
 import Head from '~/components/globals/Head';
+import Button from '~/components/globals/button/Button';
 import keywords from '~/data/keywords.json';
 
 import { useGlobalState } from '~/hooks/useStore';
@@ -26,7 +27,7 @@ const Payments = () => {
         url={`${NEXT_PUBLIC_BASE_URL}/`}
       />
       <AccountLayout>
-        <h4 className="text-3xl font-medium mb-5">Payment methods</h4>
+        <h4 className="text-3xl font-libre font-medium mb-5">Payment methods</h4>
         {cards.length === 0 ? (
           <p className="text-gray-400">
             There are no payment methods associated with this account.
@@ -40,13 +41,16 @@ const Payments = () => {
             })}
           </div>
         )}
-        <button
-          className="inline-flex items-center gap-1 bg-secondary text-primary p-3 rounded my-10 transition-all duration-300 hover:bg-primary hover:text-secondary"
+        <Button
+          classes="my-10 rounded"
           onClick={() => setOpen(true)}
-        >
-          <MdPayment />
-          ADD NEW PAYMENT METHOD
-        </button>
+          label={
+            <div className="flex justify-center items-center space-x-2">
+              <MdPayment />
+              <span>ADD NEW PAYMENT METHOD</span>
+            </div>
+          }
+        />
         <PaymentsModal open={open} setOpen={setOpen} />
       </AccountLayout>
     </>
