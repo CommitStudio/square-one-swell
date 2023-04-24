@@ -56,18 +56,19 @@ const Filter = ({ categories }: FilterProps) => {
         <div className="flex flex-col md:flex-row align-left md:items-center gap-5">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
-            className="flex items-center gap-2"
+            className="flex font-quick font-normal items-center gap-2 uppercase focus:outline-secondary"
           >
-            Filters{' '}
             {state.isFilterOpen ? <MdOutlineClose className="text-red-700" /> : <BsFilter />}
+            FILTERS{' '}
           </button>
+          {/* search section */}
           <div className="flex items-center gap-5">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
               }}
-              className="flex items-center justify-between  mb-8 md:mb-0"
+              className="flex items-center justify-between mb-8 md:mb-0"
             >
               <input
                 type="text"
@@ -75,13 +76,13 @@ const Filter = ({ categories }: FilterProps) => {
                 id="search"
                 onChange={(value) => setSearchValue(value.target.value)}
                 className={
-                  'px-4 py-1 text-l border border-solid border-gray-300 rounded focus:outline focus:outline-2 focus:outline-secondary w-full md:w-[300px]'
+                  'px-4 py-1 text-l border border-solid border-gray rounded focus:outline-1  focus:outline-secondary w-full md:w-[300px]'
                 }
                 value={searchValue}
                 ref={inputRef}
               />
-              <button>
-                <BsSearch className="ml-2" />
+              <button className="focus:outline focus-visible:outline-secondary focus:py-2 focus:rounded">
+                <BsSearch className="mx-4" />
               </button>
             </form>
           </div>
@@ -100,7 +101,7 @@ const Filter = ({ categories }: FilterProps) => {
         </div>
         <SortBy />
       </div>
-      <hr className="my-6" />
+      <hr className="my-6 border-gray" />
 
       <div
         className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
