@@ -5,11 +5,10 @@ type TitleProps = {
   id?: string;
 };
 
-const ProductTitle = ({ title, id }: TitleProps) => {
+const ProductTitle = ({ title }: TitleProps) => {
   return (
     <>
       <h5 className="text-xl font-quicksand uppercase">{title}</h5>
-      <p className="font-quicksand text-gray-medium !mt-0">code {id}</p>
     </>
   );
 };
