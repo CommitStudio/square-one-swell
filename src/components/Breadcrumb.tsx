@@ -37,17 +37,15 @@ const Breadcrumb = () => {
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <Link href="/">
-            <a className="inline-flex items-center text-sm font-medium text-secondary hover:text-primary">
-              Home
-            </a>
+            <a className="inline-flex items-center text-sm font-normal hover:underline">Home</a>
           </Link>
         </li>
         {breadcrumbRoute.map((route, i) => {
           return (
             <li key={`route-${i}`}>
-              <div className="flex items-center">
+              <div className="flex font-normal items-center">
                 <svg
-                  className="w-6 h-6 text-secondary"
+                  className="w-6 h-6 "
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,13 +60,13 @@ const Breadcrumb = () => {
                   <Link href={`/${route.toLowerCase()}`}>
                     <a
                       onClick={handleClick}
-                      className="ml-1 text-sm font-medium text-secondary hover:text-primary md:ml-2"
+                      className="ml-1 text-sm font-normal hover:underline md:ml-2"
                     >
                       {route}
                     </a>
                   </Link>
                 ) : (
-                  <span className="ml-1 text-sm font-medium text-secondary md:ml-2 ">{route}</span>
+                  <span className="ml-1 text-sm font-normal md:ml-2">{route}</span>
                 )}
               </div>
             </li>
