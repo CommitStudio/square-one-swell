@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { FaShoppingCart } from 'react-icons/fa';
 
 interface Props {
   title: string;
