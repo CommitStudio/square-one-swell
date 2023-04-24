@@ -42,7 +42,7 @@ const SortBy = () => {
   };
 
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-5 font-quicksand">
       <MdSort className="text-xl" />
       <div className="min-w-fit uppercase">Sort by</div>
       <div className="min-w-fit w-40">

@@ -51,12 +51,12 @@ const Filter = ({ categories }: FilterProps) => {
   };
 
   return (
-    <Container className="pt-10">
+    <Container className="pt-10 font-quicksand">
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center gap-5">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
-            className="flex font-quick font-normal items-center gap-2 uppercase focus:outline-secondary"
+            className="flex font-normal items-center gap-2 uppercase focus:outline-secondary"
           >
             {state.isFilterOpen ? <MdOutlineClose className="text-red-700" /> : <BsFilter />}
             FILTERS{' '}
@@ -102,25 +102,28 @@ const Filter = ({ categories }: FilterProps) => {
         <SortBy />
       </div>
       <hr className="my-6 border-gray" />
-
-      <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
+      <div>
+        <div
+          className={` font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
-      >
-        <Link href={{ pathname: '/products' }} scroll={false}>
-          <button
-            onClick={() => {
-              cleanSearchInput();
-            }}
-            className="font-bold hover:text-red-500"
-          >
-            Clear filters
-          </button>
-        </Link>
-        {/* FilterBy CATEGORIES info is coming from the store */}
-        <FilterBy title="Categories" items={categories} pathname={'products'} />
-        {/*FilterBy PRICE*/}
-        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
+            {/* FilterBy CATEGORIES info is coming from the store */}
+            <FilterBy title="Categories" items={categories} pathname={'products'} />
+            {/*FilterBy PRICE*/}
+            <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+          </div>
+          <Link href={{ pathname: '/products' }} scroll={false}>
+            <button
+              onClick={() => {
+                cleanSearchInput();
+              }}
+              className="hover:font-bold underline"
+            >
+              Clear filters
+            </button>
+          </Link>
+        </div>
       </div>
     </Container>
   );
