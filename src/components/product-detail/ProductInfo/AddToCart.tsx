@@ -83,7 +83,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
 
   return (
     <>
-      <div className="flex space-x-4 py-5">
+      <div className="flex space-x-4 py-5 pb-8">
         <div className="flex">
           <input
             type="number"

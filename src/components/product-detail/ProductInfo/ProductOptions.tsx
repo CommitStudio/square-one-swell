@@ -55,7 +55,7 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   }, [selectedIds]);
 
   return (
-    <>
+    <div className="pt-7 pb-3">
       {product.options?.map((option, i) => {
         return (
           <div key={i} className="space-y-2">
@@ -85,7 +85,7 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
