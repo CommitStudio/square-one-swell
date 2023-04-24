@@ -24,7 +24,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
 
   return (
     <div>
-      <h5 className="font-bold mb-2">{title}</h5>
+      <h5 className="font-bold mb-8 uppercase">{title}</h5>
       {items.map((item, i) => {
         return (
           <Link
@@ -35,7 +35,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
             <div>
               <a
                 onClick={() => handleClick(item.name)}
-                className={`cursor-pointer w-fit hover:text-secondary ${
+                className={`cursor-pointer w-fit hover:font-bold ${
                   Object.values(item.slug)
                     .map(String)
                     .every((v) => Object.values(router.query).map(String).includes(v))
