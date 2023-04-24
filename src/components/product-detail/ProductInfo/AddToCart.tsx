@@ -83,7 +83,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
 
   return (
     <>
-      <div className="flex space-x-4 py-5 pb-8">
+      <div className="flex flex-wrap gap-4 py-5">
         <div className="flex">
           <input
             type="number"
@@ -108,30 +108,31 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
             </button>
           </div>
         </div>
-
-        <button
-          onClick={() => handleAddToCart()}
-          disabled={!state.isVariantActive || isLoading}
-          className={`font-bold py-3 px-5 min-w-[240px]
+        <span className="flex items-center gap-2">
+          <button
+            onClick={() => handleAddToCart()}
+            disabled={!state.isVariantActive || isLoading}
+            className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
            state.isVariantActive
              ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200'
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
-        >
-          {state.isVariantActive && !isLoading ? (
-            'ADD TO CART'
-          ) : isLoading ? (
-            <Spinner size={6} />
-          ) : (
-            'UNAVAILABLE'
-          )}
-        </button>
-        <Tooltip content="Feature coming soon!">
-          <button className="py-3 hover:text-secondary hover:border-secondary duration-200">
-            <AiOutlineHeart className="h-6 w-6" />
+          >
+            {state.isVariantActive && !isLoading ? (
+              'ADD TO CART'
+            ) : isLoading ? (
+              <Spinner size={6} />
+            ) : (
+              'UNAVAILABLE'
+            )}
           </button>
-        </Tooltip>
+          <Tooltip content="Feature coming soon!">
+            <button className="py-3 hover:text-secondary hover:border-secondary duration-200">
+              <AiOutlineHeart className="h-6 w-6" />
+            </button>
+          </Tooltip>
+        </span>
       </div>
       {pleaseSelectAllOptions && (
         <p className="text-red-500 font-quicksand">{pleaseSelectAllOptions}</p>

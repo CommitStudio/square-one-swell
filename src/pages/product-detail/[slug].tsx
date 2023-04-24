@@ -33,7 +33,7 @@ const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductPro
       />
       <Container className="pt-8">
         <Link href="/products">
-          <a className="font-quicksand flex items-center gap-2 mb-8 hover:underline">
+          <a className="font-quicksand inline-flex items-center gap-2 mb-8 hover:underline">
             <svg
               width="10"
               height="18"

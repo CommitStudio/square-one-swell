@@ -55,14 +55,14 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   }, [selectedIds]);
 
   return (
-    <div className="pt-7 pb-3">
+    <div>
       {product.options?.map((option, i) => {
         return (
           <div key={i} className="space-y-2">
             {option.active && (
               <>
                 <p className="pr-3 font-quicksand">{option.label}:</p>
-                <ul className="flex gap-x-3 font-quicksand">
+                <ul className="flex gap-x-2 font-quicksand">
                   {option.values.map((value, index) => {
                     return (
                       <li

@@ -9,7 +9,7 @@ const ProductSocialMedia = () => {
   const formattedRoute = route.replaceAll(':', '%3A').replaceAll('/', '%2F');
 
   return (
-    <div className="flex space-x-3 text-3xl pt-6">
+    <div className="flex space-x-3 text-3xl">
       <a
         target="_blank"
         rel="noopener noreferrer"
