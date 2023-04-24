@@ -5,6 +5,7 @@ import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
+import Button from '~/components/globals/button/Button';
 
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
@@ -69,9 +70,9 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-6 rounded md:w-[500px]">
-        <div className="flex items-center justify-between mb-2 gap-x-4 w-full">
-          <h3 className="font-medium text-3xl">Add New Payment Method</h3>
+      <div className="bg-gray-200 py-10 px-6 rounded md:w-[500px]">
+        <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
+          <h3 className="font-medium text-2xl font-libre">Add New Payment Method</h3>
           <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
@@ -85,13 +86,13 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           }}
         >
           {/* first name and last name */}
-          <div className="flex gap-5 justify-between">
+          <div className="flex gap-5 justify-between mb-6">
             <div>
               <label className="text-sm" htmlFor="firstName">
                 <span className="text-red-500">*</span> First name
               </label>
               <input
-                className="w-full mb-4 p-2"
+                className="w-full p-2 border"
                 id="firstName"
                 type="text"
                 {...register('firstName', {
@@ -108,7 +109,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
                 <span className="text-red-500">*</span> Last name
               </label>
               <input
-                className="w-full mb-4 p-2"
+                className="w-full p-2 border"
                 id="lastName"
                 type="text"
                 {...register('lastName', {
@@ -127,7 +128,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
             <span className="text-red-500">*</span> Card number
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-6 p-2 border"
             id="cardNumber"
             type="number"
             {...register('cardNumber', {
@@ -144,13 +145,13 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           )}
 
           {/* expriation and cvc */}
-          <div className="flex gap-5 justify-between">
+          <div className="flex gap-5 justify-between mb-3">
             <div>
               <label className="block mb-2 text-sm" htmlFor="expirationDate">
                 <span className="text-red-500">*</span> Expiration Date
               </label>
               <input
-                className="w-full mb-4 p-2 -webkit-datetime-edit:text-red-500"
+                className="w-full p-2 border -webkit-datetime-edit:text-red-500"
                 id="expirationDate"
                 type="month"
                 min={dayjs().format('YYYY-MM').toString()}
@@ -167,7 +168,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
                 <span className="text-red-500">*</span> CVC
               </label>
               <input
-                className="w-full mb-4 p-2"
+                className="w-full p-2 border"
                 id="cvc"
                 type="number"
                 {...register('cvc', {
@@ -180,19 +181,19 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
               )}
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mb-3">
             <label className="block text-sm" htmlFor="isDefaultCard">
               Use as default card
             </label>
             <input id="isDefaultCard" type="checkbox" {...register('isDefaultCard')} />
           </div>
-          <button
-            disabled={isLoading}
+          <Button
+            classes="mt-4"
+            label={!isLoading ? 'ADD NEW' : <Spinner size={5} />}
+            fullWidth
             type="submit"
-            className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
-          >
-            {!isLoading ? 'ADD NEW' : <Spinner size={5} />}
-          </button>
+            disabled={isLoading}
+          />
         </form>
       </div>
     </Modal>

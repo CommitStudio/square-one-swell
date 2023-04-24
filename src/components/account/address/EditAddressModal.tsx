@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
+import Button from '~/components/globals/button/Button';
 import countriesJSON from '~/data/countries.json';
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
@@ -85,9 +86,9 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="bg-gray-200 p-6 rounded w-full">
+      <div className="bg-gray-200 p-10 rounded w-full">
         <div className="flex items-center justify-between mb-4 w-full">
-          <h3 className="font-medium text-3xl">Edit address</h3>
+          <h3 className="font-medium text-3xl font-libre">Edit address</h3>
           <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
@@ -103,7 +104,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             <span className="text-red-500">*</span> First Name
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="first_name"
             type="text"
             value={data.first_name}
@@ -125,7 +126,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             <span className="text-red-500">*</span> Last Name
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="last_name"
             type="text"
             value={data.last_name}
@@ -147,7 +148,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             <span className="text-red-500">*</span> Address
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="address1"
             type="text"
             value={data.address1}
@@ -169,7 +170,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             Apartment / Floor / Suite
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="address2"
             type="text"
             value={data.address2 || ''}
@@ -190,7 +191,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             <span className="text-red-500">*</span> City
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-4 p-2 border"
             id="city"
             type="text"
             value={data.city}
@@ -212,7 +213,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
                 Country
               </label>
               <select
-                className="w-full py-2"
+                className="w-full py-2 border"
                 id="country"
                 value={data.country}
                 {...register('country', {
@@ -241,7 +242,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
                 <span className="text-red-500">*</span> Zip code
               </label>
               <input
-                className="mb-4 p-2"
+                className="mb-4 p-2 border"
                 id="zip"
                 type="text"
                 value={data.zip || ''}
@@ -265,7 +266,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             Phone
           </label>
           <input
-            className="w-full mb-4 p-2"
+            className="w-full mb-2 p-2 border"
             id="phone"
             type="number"
             value={data.phone || ''}
@@ -282,12 +283,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <button
-            type="submit"
-            className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
-          >
-            SAVE CHANGES
-          </button>
+          <Button label="SAVE CHANGES" classes="mt-5" fullWidth type="submit" />
         </form>
       </div>
     </Modal>

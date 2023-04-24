@@ -3,6 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Button from '../globals/button/Button';
+
 import Modal from '~/components/account/Modal';
 
 import { useGlobalState } from '~/hooks/useStore';
@@ -60,9 +62,9 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
   return (
     <>
       <Modal open={openEdit} setOpen={setOpenEdit}>
-        <div className="bg-gray-200 p-6 rounded w-80 md:w-[500px]">
+        <div className="bg-gray-200 p-10 rounded w-80 md:w-[500px] font-quicksand">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
-            <h3 className="font-medium text-3xl">Edit profile</h3>
+            <h3 className="font-medium text-3xl font-libre">Edit profile</h3>
             <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpenEdit(false)} />
           </div>
           <form
@@ -75,7 +77,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               First name
             </label>
             <input
-              className="w-full mb-8 p-2"
+              className="w-full mb-8 p-2 border"
               id="first_name"
               type="text"
               placeholder={first_name}
@@ -90,7 +92,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               Last Name
             </label>
             <input
-              className="w-full mb-8 p-2"
+              className="w-full mb-8 p-2 border"
               id="last_name"
               type="text"
               placeholder={last_name}
@@ -106,7 +108,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               E-mail
             </label>
             <input
-              className="w-full mb-8 p-2"
+              className="w-full mb-8 p-2 border"
               id="email"
               type="text"
               placeholder={email?.email}
@@ -118,11 +120,8 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.email.message}</p>
             )}
             <span className="block text-sm mb-2 ">New Password</span>
-            <label className="text-xs mb-1 font-extralight" htmlFor="password">
-              Password
-            </label>
             <input
-              className="w-full mb-8 p-2"
+              className="w-full mb-8 p-2 border"
               id="password"
               type="password"
               placeholder="New password"
@@ -134,11 +133,11 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
             {errors.password && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.password.message}</p>
             )}
-            <label className="block text-xs mb-1 font-extralight" htmlFor="confirmPassword">
+            <label className="block text-sm mb-2" htmlFor="confirmPassword">
               Confirm password
             </label>
             <input
-              className="w-full mb-4 p-2"
+              className="w-full mb-8 p-2 border"
               id="confirmPassword"
               type="password"
               placeholder="Repeat password"
@@ -151,12 +150,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
             {errors.confirmPassword && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
             )}
-            <button
-              type="submit"
-              className="w-full bg-secondary text-primary p-3 rounded mt-7 transition-all duration-300 hover:bg-primary hover:text-secondary"
-            >
-              SAVE CHANGES
-            </button>
+            <Button fullWidth type="submit" label="SAVE CHANGES" />
           </form>
         </div>
       </Modal>

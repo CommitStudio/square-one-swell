@@ -5,7 +5,6 @@ import EditAddressModal from './EditAddressModal';
 
 import EditIcon from 'public/img/icons/EditIcon';
 import TrashIcon from 'public/img/icons/TrashIcon';
-import Button from '~/components/globals/button/Button';
 
 interface Props {
   address: SwellAddress;
