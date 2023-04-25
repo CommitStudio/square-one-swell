@@ -55,19 +55,19 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   }, [selectedIds]);
 
   return (
-    <>
+    <div>
       {product.options?.map((option, i) => {
         return (
-          <div key={i} className="flex items-center">
+          <div key={i} className="space-y-2">
             {option.active && (
               <>
-                <h5 className="pr-3">{option.label}:</h5>
-                <ul className="flex gap-x-5">
+                <p className="pr-3 font-quicksand">{option.label}:</p>
+                <ul className="flex gap-x-2 font-quicksand">
                   {option.values.map((value, index) => {
                     return (
                       <li
-                        className={`border border-secondary px-2 cursor-pointer hover:bg-secondary hover:text-primary ${
-                          availableIdsArr.includes(value.id) ? 'bg-secondary text-primary' : ''
+                        className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
+                          availableIdsArr.includes(value.id) ? 'bg-black text-white' : ''
                         }`}
                         key={index}
                         onClick={() => {
@@ -85,7 +85,7 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
