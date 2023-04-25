@@ -58,7 +58,11 @@ const Filter = ({ categories }: FilterProps) => {
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
             className="flex font-normal items-center gap-2 uppercase focus:outline-secondary"
           >
-            {state.isFilterOpen ? <MdOutlineClose className="text-red-700" /> : <BsFilter />}
+            {state.isFilterOpen ? (
+              <MdOutlineClose className="text-red-700 text-xl" />
+            ) : (
+              <BsFilter className="text-xl" />
+            )}
             FILTERS{' '}
           </button>
           {/* search section */}
@@ -76,7 +80,7 @@ const Filter = ({ categories }: FilterProps) => {
                 id="search"
                 onChange={(value) => setSearchValue(value.target.value)}
                 className={
-                  'px-4 py-1 text-l border border-solid border-gray rounded focus:outline-1  focus:outline-secondary w-full md:w-[300px]'
+                  'px-4 py-1 text-l border border-solid border-gray-medium rounded focus:outline-1  focus:outline-secondary w-full md:w-[300px]'
                 }
                 value={searchValue}
                 ref={inputRef}
@@ -101,7 +105,7 @@ const Filter = ({ categories }: FilterProps) => {
         </div>
         <SortBy />
       </div>
-      <hr className="my-6 border-gray" />
+      <hr className="my-6 border-gray-medium" />
       <div>
         <div
           className={` font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
