@@ -52,7 +52,7 @@ const SortBy = () => {
               onClick={() => {
                 setIsOpen(true);
               }}
-              className="border-gray text-gray-medium relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus-visible:outline-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+              className="border-gray-medium text-gray-medium relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus-visible:outline-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             >
               <span className="block truncate">{selected.value}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -75,8 +75,8 @@ const SortBy = () => {
                     >
                       {({ selected }) => (
                         <span
-                          className={`block truncate py-2 px-4 text-gray-medium hover:text-secondary ${
-                            selected ? `font-bold` : 'font-normal'
+                          className={`block truncate py-2 px-4 text-gray-medium hover:text-secondary  ${
+                            selected ? 'font-bold ring-opacity-5' : 'font-normal'
                           }`}
                         >
                           {param.value}
