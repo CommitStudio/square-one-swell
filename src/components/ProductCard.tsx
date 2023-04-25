@@ -21,7 +21,7 @@ const ProductCard = ({ product }: Props) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`flex flex-col justify-between max-w-xs border-l lg:border-l-0 border-r transition-all duration-300 w-full ${
+      className={`flex flex-col justify-between max-w-xs border-l lg:border-l-0 border-r border-gray transition-all duration-300 w-full ${
         isHovered ? 'lg:shadow-[0px_-5px_40px_-15px_rgba(0,0,0,0.3)]' : ''
       }`}
     >
@@ -55,7 +55,7 @@ const ProductCard = ({ product }: Props) => {
                 SALE
               </div>
             </span>
-            <p className="font-quicksand font-bold line-through text-gray-300">
+            <p className="font-quicksand text-gray-medium font-bold line-through text-gray-300">
               U$ <span className="ml-2">{formatCurrency(product.price)}</span>
             </p>
           </div>
