@@ -10,7 +10,7 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
     <Container className="flex justify-center font-quicksand">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
         <div className="flex flex-1 items-center justify-between">
-          <div className="">
+          <div>
             <nav
               className="relative z-0 inline-flex -space-x-px text-gray-medium rounded-md shadow-sm"
               aria-label="Pagination"
