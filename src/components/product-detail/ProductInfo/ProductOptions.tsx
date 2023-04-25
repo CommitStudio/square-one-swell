@@ -55,28 +55,44 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   }, [selectedIds]);
 
   return (
-    <div>
+    <div className="space-y-3">
       {product.options?.map((option, i) => {
         return (
-          <div key={i} className="space-y-2">
+          <div key={i} className="space-y-1">
             {option.active && (
               <>
                 <p className="pr-3 font-quicksand">{option.label}:</p>
-                <ul className="flex gap-x-2 font-quicksand">
+                <ul className="flex gap-x-3 font-quicksand">
                   {option.values.map((value, index) => {
                     return (
-                      <li
-                        className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
-                          availableIdsArr.includes(value.id) ? 'bg-black text-white' : ''
-                        }`}
-                        key={index}
-                        onClick={() => {
-                          setChosenOptions({ ...chosenOptions, [option.label]: value.name });
-                          setSelectedIds({ ...selectedIds, [option.label]: value.id });
-                        }}
-                      >
-                        {value.name}
-                      </li>
+                      <>
+                        {option.label === 'Color' ? (
+                          <li
+                            className={`border w-5 h-5 cursor-pointer opacity-50 ${
+                              availableIdsArr.includes(value.id) ? 'border-green opacity-95' : ''
+                            }`}
+                            style={{ backgroundColor: `${value.name}` }}
+                            key={index}
+                            onClick={() => {
+                              setChosenOptions({ ...chosenOptions, [option.label]: value.name });
+                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
+                            }}
+                          ></li>
+                        ) : (
+                          <li
+                            className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
+                              availableIdsArr.includes(value.id) ? 'bg-black text-white' : ''
+                            }`}
+                            key={index}
+                            onClick={() => {
+                              setChosenOptions({ ...chosenOptions, [option.label]: value.name });
+                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
+                            }}
+                          >
+                            {value.name}
+                          </li>
+                        )}
+                      </>
                     );
                   })}
                 </ul>
