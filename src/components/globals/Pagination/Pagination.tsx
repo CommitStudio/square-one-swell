@@ -25,7 +25,7 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
                 )
               )}
 
-              <ArrowRight current={current} />
+              <ArrowRight current={current} pages={pages} />
             </nav>
           </div>
         </div>

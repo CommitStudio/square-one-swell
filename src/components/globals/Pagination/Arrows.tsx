@@ -7,6 +7,14 @@ import { useRouter } from 'next/router';
 export const ArrowLeft = ({ current }: { current: number }) => {
   const { pathname, query } = useRouter();
 
+  if (current === 1) {
+    return (
+      <div className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
+        <ArrowLeftIcon />
+      </div>
+    );
+  }
+
   return (
     <Link
       href={{
@@ -24,8 +32,16 @@ export const ArrowLeft = ({ current }: { current: number }) => {
 /*****************************************************************************
  * Draw left arrow button
  ****************************************************************************/
-export const ArrowRight = ({ current }: { current: number }) => {
+export const ArrowRight = ({ current, pages }: { current: number; pages: number[] }) => {
   const { pathname, query } = useRouter();
+
+  if (current === pages.length) {
+    return (
+      <div className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
+        <ArrowRightIcon />
+      </div>
+    );
+  }
 
   return (
     <Link
