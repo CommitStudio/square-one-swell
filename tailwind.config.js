@@ -12,6 +12,7 @@ module.exports = {
       white: '#FFFFFF',
       gray: colors.neutral[300],
       'gray-medium': '#A9A9A9',
+      'gray-dark': '#4A4A4A',
       current: 'currentColor',
       transparent: 'transparent',
       // to be replaced
