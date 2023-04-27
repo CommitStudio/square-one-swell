@@ -37,7 +37,7 @@ export const ArrowRight = ({ current, pages }: { current: number; pages: number[
 
   if (current === pages.length) {
     return (
-      <div className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
+      <div className="relative inline-flex items-center rounded-r-md border border-gray-medium bg-gray text-gray-medium px-2 py-2 text-sm font-bold hover:bg-gray-50">
         <ArrowRightIcon />
       </div>
     );
@@ -50,7 +50,7 @@ export const ArrowRight = ({ current, pages }: { current: number; pages: number[
         query: { ...query, page: current + 1 }
       }}
     >
-      <a className="relative inline-flex items-center rounded-r-md border border-gray-medium bg-gray text-gray-medium px-2 py-2 text-sm font-bold hover:bg-gray-50">
+      <a className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
         <ArrowRightIcon />
       </a>
     </Link>
