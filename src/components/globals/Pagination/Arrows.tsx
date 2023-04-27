@@ -9,7 +9,7 @@ export const ArrowLeft = ({ current }: { current: number }) => {
 
   if (current === 1) {
     return (
-      <div className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
+      <div className="relative inline-flex items-center rounded-l-md border border-gray-medium bg-gray text-gray-medium px-2 py-2 text-sm font-bold hover:bg-gray-50">
         <ArrowLeftIcon />
       </div>
     );
@@ -22,7 +22,7 @@ export const ArrowLeft = ({ current }: { current: number }) => {
         query: { ...query, page: current - 1 }
       }}
     >
-      <a className="relative inline-flex items-center rounded-l-md border border-gray-medium bg-gray text-gray-medium px-2 py-2 text-sm font-bold hover:bg-gray-50">
+      <a className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500">
         <ArrowLeftIcon />
       </a>
     </Link>
