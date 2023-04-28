@@ -45,7 +45,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
         <>
           <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
-          <Showing className="mb-2 md:my-10 text-center" pagination={pagination} />
+          <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
         </>
       ) : (
         <NoResults />

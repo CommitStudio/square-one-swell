@@ -42,21 +42,21 @@ const SortBy = () => {
   };
 
   return (
-    <div className="flex items-center gap-5">
-      <span className="w-[55px]">Sort by</span>
+    <div className="flex items-center gap-5 font-quicksand">
       <MdSort className="text-xl" />
-      <div className="min-w-fit w-32">
+      <div className="min-w-fit uppercase">Sort by</div>
+      <div className="min-w-fit w-40">
         <Listbox value={selected} onChange={handleFilter}>
           <div className="relative">
             <Listbox.Button
               onClick={() => {
                 setIsOpen(true);
               }}
-              className="relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+              className="border-gray-medium text-gray-medium relative w-full cursor-pointer rounded-lg bg-white border py-2 pl-3 pr-10 text-left focus-visible:outline-secondary focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             >
               <span className="block truncate">{selected.value}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                <BsChevronExpand className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <BsChevronExpand className="h-8 w-5 text-gray-400" aria-hidden="true" />
               </span>
             </Listbox.Button>
             {isOpen && (
@@ -66,7 +66,7 @@ const SortBy = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="absolute mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-10 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <Listbox.Options className="absolute border border-gray mt-1 max-h-fit w-full overflow-auto rounded-md bg-white py-1 z-10 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                   {sortParams.slice(1).map((param, index) => (
                     <Listbox.Option
                       key={index}
@@ -75,8 +75,8 @@ const SortBy = () => {
                     >
                       {({ selected }) => (
                         <span
-                          className={`block truncate py-2 px-4 hover:text-secondary ${
-                            selected ? `font-bold text-secondary` : 'font-normal'
+                          className={`block truncate py-2 px-4 text-gray-medium hover:text-secondary  ${
+                            selected ? 'font-bold ring-opacity-5' : 'font-normal'
                           }`}
                         >
                           {param.value}

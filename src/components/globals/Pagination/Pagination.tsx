@@ -7,12 +7,12 @@ const Pagination = ({ pagination }: { pagination: Pagination }) => {
   const { pages, current } = pagination;
 
   return (
-    <Container className="flex justify-center">
+    <Container className="flex justify-center font-quicksand">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
         <div className="flex flex-1 items-center justify-between">
           <div>
             <nav
-              className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
+              className="relative z-0 inline-flex -space-x-px text-gray-medium rounded-md shadow-sm"
               aria-label="Pagination"
             >
               <ArrowLeft current={current} />

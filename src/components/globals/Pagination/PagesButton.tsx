@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
  ****************************************************************************/
 export const ActiveButton = ({ page }: { page: number }) => {
   return (
-    <div className="'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600'">
+    <div className="relative z-10 inline-flex items-center border border-secondary bg-green text-secondary opacity-75 px-4 py-2 text-sm font-bold ">
       {page}
     </div>
   );
@@ -20,7 +20,7 @@ export const PageLink = ({ page }: { page: number }) => {
 
   return (
     <Link href={{ pathname, query: { ...query, page: page } }}>
-      <a className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">
+      <a className="relative inline-flex items-center border border-gray-medium bg-white px-4 py-2 text-sm font-medium text-gray-medium hover:border-gray-dark hover:text-gray-dark hover:z-20">
         {page}
       </a>
     </Link>

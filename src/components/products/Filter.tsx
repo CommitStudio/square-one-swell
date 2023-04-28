@@ -51,23 +51,28 @@ const Filter = ({ categories }: FilterProps) => {
   };
 
   return (
-    <Container className="pt-10">
+    <Container className="pt-10 font-quicksand">
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row align-left md:items-center gap-5">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
-            className="flex items-center gap-2"
+            className="flex font-normal items-center gap-2 uppercase focus:outline-secondary"
           >
-            Filters{' '}
-            {state.isFilterOpen ? <MdOutlineClose className="text-red-700" /> : <BsFilter />}
+            {state.isFilterOpen ? (
+              <MdOutlineClose className="text-red-700 text-xl" />
+            ) : (
+              <BsFilter className="text-xl" />
+            )}
+            FILTERS{' '}
           </button>
+          {/* search section */}
           <div className="flex items-center gap-5">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
               }}
-              className="flex items-center justify-between  mb-8 md:mb-0"
+              className="flex items-center justify-between mb-8 md:mb-0"
             >
               <input
                 type="text"
@@ -75,13 +80,13 @@ const Filter = ({ categories }: FilterProps) => {
                 id="search"
                 onChange={(value) => setSearchValue(value.target.value)}
                 className={
-                  'px-4 py-1 text-l border border-solid border-gray-300 rounded focus:outline focus:outline-2 focus:outline-secondary w-full md:w-[300px]'
+                  'px-4 py-1 text-l border border-solid border-gray-medium rounded focus:outline-1  focus:outline-secondary w-full md:w-[300px]'
                 }
                 value={searchValue}
                 ref={inputRef}
               />
-              <button>
-                <BsSearch className="ml-2" />
+              <button className="focus:outline focus-visible:outline-secondary focus:py-2 focus:rounded">
+                <BsSearch className="mx-4" />
               </button>
             </form>
           </div>
@@ -100,26 +105,29 @@ const Filter = ({ categories }: FilterProps) => {
         </div>
         <SortBy />
       </div>
-      <hr className="my-6" />
-
-      <div
-        className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 overflow-hidden transition-all ease-in-out duration-300 mb-10
+      <hr className="my-6 border-gray-medium" />
+      <div>
+        <div
+          className={` font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
         ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
-      >
-        <Link href={{ pathname: '/products' }} scroll={false}>
-          <button
-            onClick={() => {
-              cleanSearchInput();
-            }}
-            className="font-bold hover:text-red-500"
-          >
-            Clear filters
-          </button>
-        </Link>
-        {/* FilterBy CATEGORIES info is coming from the store */}
-        <FilterBy title="Categories" items={categories} pathname={'products'} />
-        {/*FilterBy PRICE*/}
-        <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
+            {/* FilterBy CATEGORIES info is coming from the store */}
+            <FilterBy title="Categories" items={categories} pathname={'products'} />
+            {/*FilterBy PRICE*/}
+            <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+          </div>
+          <Link href={{ pathname: '/products' }} scroll={false}>
+            <button
+              onClick={() => {
+                cleanSearchInput();
+              }}
+              className="hover:font-bold underline"
+            >
+              Clear filters
+            </button>
+          </Link>
+        </div>
       </div>
     </Container>
   );
