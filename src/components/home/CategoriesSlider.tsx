@@ -30,6 +30,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
 
   return isMounted ? (
     <div id="slider" className="relative px-3 mb-5">
+      <h5 className="text-center text-2xl pt-4 pb-8 uppercase font-libre">Categories</h5>
       <Swiper
         modules={[Navigation]}
         spaceBetween={0}
@@ -49,7 +50,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
             slidesPerView: categories.length <= 3 ? categories.length : 3,
             enabled: categories.length <= 3 ? false : true
           },
-          375: {
+          500: {
             slidesPerView: 2,
             enabled: categories.length <= 2 ? false : true
           }
@@ -57,6 +58,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
         className="mySwipe"
       >
         {categories.map((category, i) => {
+          if (category.name === 'Featured products') return;
           return (
             <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
               <div

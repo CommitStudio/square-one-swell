@@ -22,7 +22,7 @@ type HomeProps = {
 };
 
 const Home = ({ products, categories, promotion, firstProductPromotion }: HomeProps) => {
-  const imagePromotion = firstProductPromotion.images && firstProductPromotion.images[0].src;
+  const imagePromotion = firstProductPromotion.images && firstProductPromotion?.images[0]?.src;
   return (
     <>
       <Head

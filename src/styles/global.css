@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply mt-24;
+  @apply mt-20;
 }
 
 /* Navbar burger button------------------------------------------------------ */
