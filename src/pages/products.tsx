@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import Breadcrumb from '~/components/Breadcrumb';
 import Hero from '~/components/Hero';
@@ -12,6 +14,7 @@ import Showing from '~/components/products/Showing';
 import keywords from '~/data/keywords.json';
 
 import { useStore } from '~/hooks/useStore';
+import Container from '~/layouts/Container';
 
 import Store from '~/lib/Store';
 
@@ -27,6 +30,8 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
+  const [searchValue, setSearchValue] = useState('');
+  const { query } = useRouter();
 
   return (
     <>
@@ -40,10 +45,19 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
         title={selectedCategory.length > 0 ? selectedCategory : mainRoute}
         breadcrumb={<Breadcrumb />}
       />
-      <Filter categories={categories} pagination={pagination} products={products} />
+      <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          <ProductList threeColumns products={products} />
+          {query && query.search && (
+            <Container>
+              <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
+                Showing {products.length}
+                {products?.length > 1 ? ' products' : ' product'} for &quot;
+                {query.search}&quot;
+              </p>
+            </Container>
+          )}
+          <ProductList threeColumns products={products} searchValue={searchValue} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
         </>

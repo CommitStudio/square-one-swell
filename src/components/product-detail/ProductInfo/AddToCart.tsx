@@ -114,12 +114,12 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
             disabled={!state.isVariantActive || isLoading}
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
-           state.isVariantActive
+           state.isVariantActive || product.options?.length === 0
              ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200'
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
           >
-            {state.isVariantActive && !isLoading ? (
+            {(state.isVariantActive || product.options?.length === 0) && !isLoading ? (
               'ADD TO CART'
             ) : isLoading ? (
               <Spinner size={6} />
