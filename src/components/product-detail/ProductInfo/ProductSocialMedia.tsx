@@ -15,21 +15,21 @@ const ProductSocialMedia = () => {
         rel="noopener noreferrer"
         href={`https://www.facebook.com/sharer/sharer.php?u=${formattedRoute}`}
       >
-        <AiFillFacebook className="text-black hover:text-opacity-75 cursor-pointer" />
+        <AiFillFacebook className="text-black hover:text-green cursor-pointer" />
       </a>
       <a
         target="_blank"
         rel="noopener noreferrer"
         href={`http://pinterest.com/pin/create/button/?url=${formattedRoute}&media=&description=Check%20out%20this%20amazing%20product!`}
       >
-        <BsPinterest className="text-black hover:text-opacity-75 cursor-pointer" />
+        <BsPinterest className="text-black hover:text-green cursor-pointer" />
       </a>
       <a
         target="_blank"
         rel="noopener noreferrer"
         href={`https://twitter.com/intent/tweet?url=${formattedRoute}&text=Check%20out%20this%20amazing%20product!`}
       >
-        <AiOutlineTwitter className="text-black hover:text-opacity-75 cursor-pointer" />
+        <AiOutlineTwitter className="text-black hover:text-green cursor-pointer" />
       </a>
     </div>
   );

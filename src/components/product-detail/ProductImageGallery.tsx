@@ -2,11 +2,15 @@ import ImageGallery from 'react-image-gallery';
 
 import 'react-image-gallery/styles/css/image-gallery.css';
 
+import { useViewportWidth } from '~/hooks/useWindowHooks';
+
 interface ProductProp {
   product: Product;
 }
 
 const ProductImageGallery = ({ product }: ProductProp) => {
+  const viewportWidth = useViewportWidth();
+  const isMobile = viewportWidth <= 768;
   const images: {
     original: string;
     thumbnail: string;
@@ -27,8 +31,9 @@ const ProductImageGallery = ({ product }: ProductProp) => {
     <>
       <div id="product-gallery" className="h-full w-full">
         <ImageGallery
+          showThumbnails={isMobile ? false : true}
           items={images}
-          thumbnailPosition="left"
+          thumbnailPosition={isMobile ? 'bottom' : 'left'}
           showPlayButton={false}
           showNav={false}
           isRTL={false}
