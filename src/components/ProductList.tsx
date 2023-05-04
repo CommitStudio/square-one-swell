@@ -5,9 +5,10 @@ interface Props {
   relatedProducts?: boolean;
   threeColumns?: boolean;
   products?: Product[];
+  searchValue?: string;
 }
 
-const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
+const ProductList = ({ relatedProducts, threeColumns, products, searchValue }: Props) => {
   return (
     <Container className="mb-10">
       <div
