@@ -5,17 +5,18 @@ interface Props {
   relatedProducts?: boolean;
   threeColumns?: boolean;
   products?: Product[];
+  searchValue?: string;
 }
 
-const ProductList = ({ relatedProducts, threeColumns, products }: Props) => {
+const ProductList = ({ relatedProducts, threeColumns, products, searchValue }: Props) => {
   return (
     <Container className="mb-10">
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${
           threeColumns
-            ? 'lg:grid-cols-3 max-w-4xl mx-auto'
+            ? 'lg:grid-cols-3'
             : relatedProducts
-            ? `lg:flex justify-center max-w-4xl mx-auto`
+            ? 'lg:flex justify-center'
             : 'lg:grid-cols-4'
         }  gap-y-4 justify-items-center`}
       >

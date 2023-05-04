@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
  ****************************************************************************/
 export const ActiveButton = ({ page }: { page: number }) => {
   return (
-    <div className="relative z-10 inline-flex items-center border border-secondary bg-green text-secondary opacity-75 px-4 py-2 text-sm font-bold ">
+    <div className="relative z-10 inline-flex items-center border border-black bg-green text-black opacity-75 px-4 py-2 text-sm font-bold ">
       {page}
     </div>
   );
