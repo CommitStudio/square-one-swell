@@ -42,6 +42,7 @@ const AboutUs = () => {
               alt="About us picture"
               layout="fill"
               objectFit="cover"
+              priority
             />
           </div>
         </div>
