@@ -97,8 +97,10 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
       <hr className="mt-6 border-gray-medium" />
       <div>
         <div
-          className={` font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
-        ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
+          className={`font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
+        ${
+          state.isFilterOpen ? 'max-h-[1000px] mb-10 border-b border-gray-medium pb-2' : 'max-h-0'
+        }`}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
             {/* FilterBy CATEGORIES info is coming from the store */}
