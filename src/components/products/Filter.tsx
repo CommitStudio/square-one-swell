@@ -50,7 +50,7 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
     setSearchValue('');
     updateState({
       ...state,
-      isFilterOpen: !state.isFilterOpen,
+      isFilterOpen: (state.isFilterOpen = false),
       breadcrumbSelectedCategory: '',
       breadcrumbMainRoute: 'Products'
     });
