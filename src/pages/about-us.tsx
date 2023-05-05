@@ -41,7 +41,9 @@ const AboutUs = () => {
               src="/img/heros/about-us.jpg"
               alt="About us picture"
               layout="fill"
+              className="w-full"
               objectFit="cover"
+              priority
             />
           </div>
         </div>

@@ -8,6 +8,7 @@ import MobileMenu from '~/components/globals/navbar/MobileMenu';
 import UserButtons from '~/components/globals/navbar/UserButtons';
 
 import data from '~/data/partials.json';
+import Container from '~/layouts/Container';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -30,15 +31,17 @@ const Navbar = () => {
 
   return (
     <nav className="font-quicksand">
-      <div className="fixed top-0 left-0 w-full h-24 p-8 sm:px-12 lg:py-0 lg:px-16 xl:px-32 flex justify-between bg-white z-20 border-b border-gray-medium">
-        <Link href="/">
-          <a className="flex self-center uppercase font-libre text-2xl text-black font-bold">
-            Logo
-          </a>
-        </Link>
-        <UserButtons toggleCart={toggleCart} />
-        <DesktopMenu categories={data.categories} />
-        <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
+      <div className="fixed top-0 left-0 w-full lg:py-0 bg-white z-20 border-b border-gray">
+        <Container className="w-full flex justify-between items-center h-24">
+          <Link href="/">
+            <a className="flex self-center uppercase font-libre text-3xl text-black font-bold">
+              Logo
+            </a>
+          </Link>
+          <UserButtons toggleCart={toggleCart} />
+          <DesktopMenu categories={data.categories} />
+          <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
+        </Container>
       </div>
       <MobileMenu
         isOpen={isHamburgerNavOpen}

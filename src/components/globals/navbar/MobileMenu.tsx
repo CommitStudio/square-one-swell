@@ -27,9 +27,9 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
       role="button"
       className={`${
         !isOpen ? '-translate-y-full' : ''
-      } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden border-t border-black`}
+      } fixed top-0 left-0 transition duration-700 z-10 w-full mt-24 bg-white drop-shadow-xl lg:hidden`}
     >
-      <ul className="divide-y text-black" aria-labelledby="navbarMenu">
+      <ul aria-labelledby="navbarMenu">
         {categories.map((category, i) => {
           return (
             <li key={`mobile-menu-category-${i}`}>
@@ -37,7 +37,7 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
                 <a
                   onClick={() => handleClick(category.name)}
                   className="
-                   block py-3 px-4 active:bg-black active:text-white focus:text-white focus:bg-black sm:px-6 lg:text-white"
+                   block py-3 px-4 active:bg-black active:text-white focus:text-white focus:bg-black sm:px-6 lg:text-white border-b border-b-gray"
                 >
                   {isLogged && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
                 </a>

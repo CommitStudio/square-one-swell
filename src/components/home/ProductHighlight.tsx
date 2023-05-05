@@ -13,16 +13,16 @@ const ProductHighlight = ({ products, title }: ProductHighlightProps) => {
   const [randomProducts, setRandomProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    setRandomProducts(products ? products.sort(() => Math.random() - 0.5).slice(0, 4) : []);
+    setRandomProducts(products ? products.sort(() => Math.random() - 0.5).slice(0, 3) : []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className="flex flex-col text-center py-4 mb-4 font-libre">
-        <p className="text-2xl py-4 uppercase">{title}</p>
+        <h5 className="text-2xl py-4 uppercase">{title}</h5>
       </div>
-      <ProductList products={randomProducts} />
+      <ProductList threeColumns products={randomProducts} />
       <div className="w-full flex justify-center my-10">
         <Button
           label="SEE MORE"

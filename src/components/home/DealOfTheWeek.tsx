@@ -22,7 +22,7 @@ const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
       <div className="grid md:grid-cols-2 gap-y-10 place-items-center">
         <div className="relative h-96 my-6 md:my-0 w-full justify-center">
           <Image
-            src={imagePromotion ? imagePromotion : promotions[0].image.src}
+            src={imagePromotion ? imagePromotion : promotions[0]?.image.src}
             alt={promotion.name}
             layout="fill"
             objectFit="cover"
@@ -31,10 +31,10 @@ const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
         <Container>
           <div className="text-black">
             <h4 className="font-libre uppercase text-4xl mb-3 text-center">
-              {name ? name : promotions[0].name}
+              {name ? name : promotions[0]?.name}
             </h4>
             <p className="font-quicksand mb-5 text-center">
-              {description ? description : promotions[0].description}
+              {description ? description : promotions[0]?.description}
             </p>
             {promotion.name && <Countdown promotion={promotion} />}
           </div>

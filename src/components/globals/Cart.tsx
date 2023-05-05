@@ -50,7 +50,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           isCartOpen ? '' : 'translate-x-full'
         }`}
       >
-        <nav className="border-l h-full bg-white md:w-[500px] w-screen text-black ml-auto flex flex-col justify-between">
+        <nav className="h-full bg-white md:w-[500px] w-screen border-t border-t-gray text-black ml-auto flex flex-col justify-between">
           <div className="flex justify-between px-7 pt-7">
             <h3 className="mb-6 text-xl font-bold">
               Items: ({cart?.items?.reduce((acc, product) => acc + product.quantity, 0)})
@@ -112,7 +112,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           {/* checkout section */}
           <div className="w-full px-7 pb-7 bg-gray text-xs">
-            <hr className="mb-5 opacity-20" />
+            <hr className="mb-5 opacity-0" />
             <div className="grid grid-cols-2 text-base mb-3">
               <p>Subtotal</p>
               <p className="text-right">
