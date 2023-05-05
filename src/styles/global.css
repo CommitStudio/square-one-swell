@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply mt-20;
+  @apply mt-24;
 }
 
 /* Navbar burger button------------------------------------------------------ */
@@ -128,7 +128,7 @@ body {
   color: black;
   font-size: 30px;
   font-weight: bolder;
-  top: 40%;   
+  top: 40%;
 }
 
 #slider .swiper-button-prev {
@@ -140,8 +140,8 @@ body {
 }
 
 #slider .swiper {
-   margin: 0 20px;
-   padding-bottom: 60px;
+  margin: 0 20px;
+  padding-bottom: 60px;
 }
 /* ProductImageGallery------------------------------------------------------- */
 /* Slider Images */
@@ -233,7 +233,6 @@ body {
   #slider .swiper-button-prev::after {
     font-size: 20px;
   }
-
 }
 
 @media (min-width: 640px) {

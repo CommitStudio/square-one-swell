@@ -6,7 +6,7 @@ import Container from '~/layouts/Container';
 const CTA = () => {
   return (
     <div className="w-full bg-white text-black space-y-3 md:space-y-0 md:flex-row justify-around items-center">
-      <Container className="w-full flex flex-col gap-6 md:flex-row justify-between items-center py-14 md:py-24">
+      <Container className="w-full flex flex-col gap-6 md:flex-row justify-between items-center py-12">
         <div className="leading-6">
           <p className="font-bold">Sign up for our Newsletter</p>
           <span>Get top deals, latest trends, and more.</span>
