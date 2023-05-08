@@ -1,5 +1,3 @@
-Here is the transformed readme using active voice:
-
 ## Introduction
 
 Commit Storefront is an ecommerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful ecommerce business.
