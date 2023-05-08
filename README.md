@@ -14,12 +14,14 @@ To connect your store to the StoreFront project:
 
 2. Create your .env file, mimicking the .env.example, and paste the aforementioned keys.
 
-## Running the Store
+## Running StoreFront
 
 To run the store:
 
-1. Install all the necessary modules and packages by typing `npm install` in the command line.
+1. Clone the repository.
 
-2. Run the store by typing `npm run dev`.
+2. Install all the necessary modules and packages by typing npm install in the command line.
+
+3. Run the store by typing npm run dev.
 
 
