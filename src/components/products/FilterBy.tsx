@@ -24,7 +24,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
       isFilterOpen: !state.isFilterOpen,
       breadcrumbSelectedCategory: itemName
     });
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -68,7 +68,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                   onClick={() => {
                     handleClick(item.name);
                   }}
-                  className={`cursor-pointer w-fit hover:font-bold ${
+                  className={`cursor-pointer w-fit hover:font-bold transition-opacity duration-300 ${
                     Object.values(item.slug)
                       .map(String)
                       .every((v) => Object.values(router.query).map(String).includes(v))
