@@ -54,7 +54,7 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
       breadcrumbSelectedCategory: '',
       breadcrumbMainRoute: 'Products'
     });
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -114,7 +114,7 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
               onClick={() => {
                 cleanSearchInput();
               }}
-              className="hover:font-bold underline"
+              className="hover:font-bold underline transition-opacity duration-300"
             >
               Clear filters
             </button>
