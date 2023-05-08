@@ -95,13 +95,15 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
         <SortBy />
       </div>
       <hr className="mt-6 border-gray-medium" />
-      <div>
-        <div
-          className={`font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
+      <div
+        className={`grid font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
         ${
-          state.isFilterOpen ? 'max-h-[1000px] mb-10 border-b border-gray-medium pb-2' : 'max-h-0'
+          state.isFilterOpen
+            ? 'grid-rows-[1fr] mb-10 border-b border-gray-medium pb-2'
+            : 'grid-rows-[0fr]'
         }`}
-        >
+      >
+        <div className="overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
             {/* FilterBy CATEGORIES info is coming from the store */}
             <FilterBy title="Gender" items={categories} pathname={'products'} />
