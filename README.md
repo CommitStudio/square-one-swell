@@ -4,7 +4,7 @@ Commit Storefront is an ecommerce platform powered by Swell, designed to provide
 
 ## Before Development
 
-To use Commit Storefront, you need to have a Swell account with a respective store. Visit the Swell official website for more information.
+To use Commit Storefront, you need to have a Swell account with a respective store. Visit the [Swell official website](https://www.swell.is/) for more information.
 
 ## Connecting your Store to the StoreFront Project
 
