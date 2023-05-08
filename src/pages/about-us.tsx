@@ -18,23 +18,17 @@ const AboutUs = () => {
       />
 
       <Container className="py-20">
-        {/* TODO: TEXT TO BE REVISED */}
-
         <h1 className="text-align pb-20 text-4xl font-libre uppercase">About us</h1>
         <div className="grid lg:grid-cols-2 gap-16">
           <p className="font-quicksand">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem mollitia voluptates
-            odio. Voluptate eligendi iure ex quia ipsum id porro dolorem, pariatur ipsam! Earum
-            possimus autem, atque ut asperiores assumenda dignissimos recusandae dicta molestiae
-            porro numquam dolore nemo optio ratione quae, hic, perferendis harum velit excepturi.
-            Accusamus voluptate voluptates illum temporibus obcaecati repellat sed laborum cum
-            reprehenderit magnam? Necessitatibus qui praesentium porro vitae incidunt molestiae
-            magnam perferendis officiis, cum sequi quaerat vel? Rerum temporibus veniam nemo aut
-            deserunt sequi omnis molestiae sint unde accusantium ducimus nam, aliquid corporis
-            similique ullam. Optio corporis cupiditate expedita tenetur obcaecati? Possimus
-            distinctio aliquam harum accusamus asperiores reiciendis tenetur, culpa illo ipsam nam
-            illum ea tempora beatae cumque magni eaque exercitationem modi quae dolorum quisquam
-            omnis eligendi! Nesciunt consectetur.
+            Welcome to our eCommerce site! We are dedicated to providing a top-notch online shopping
+            experience for our customers. Our team of experienced professionals is passionate about
+            eCommerce and committed to sourcing high-quality products at competitive prices. We
+            prioritize customer satisfaction and offer fast shipping, secure payment options, and
+            hassle-free returns. We are constantly innovating and improving our platform to ensure a
+            seamless and enjoyable shopping experience. Thank you for choosing our eCommerce site
+            for your shopping needs. We look forward to serving you and providing an exceptional
+            online shopping experience.
           </p>
           <div className="relative h-96 lg:h-auto">
             <Image
