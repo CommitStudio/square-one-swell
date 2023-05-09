@@ -42,15 +42,15 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
 
   useUpdateAccount(updateUser);
 
-  //Used to check if password and confirmPassword fields are the same
+  // Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    delete data?.confirmPassword; //Delete confirmPassword not required on the store
+    delete data?.confirmPassword; // Delete confirmPassword not required on the store
     setUpdateUser(data);
     setOpenEdit(false);
-    notifySuccess('Your account information has been successfully updated.'); //TODO: Improve notify when update is NOT successful
+    notifySuccess('Your account information has been successfully updated.');
   };
 
   useEffect(() => {

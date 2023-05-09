@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
-import { BsSearch, BsFilter } from 'react-icons/bs';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
+
+import Search from './Search';
 
 import { FilterBy } from '~/components/products/FilterBy';
 import SortBy from '~/components/products/SortBy';
@@ -11,15 +13,14 @@ import Container from '~/layouts/Container';
 
 interface FilterProps {
   categories: Category[];
-  pagination: Pagination;
-  products: Product[];
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
 }
 
-const Filter = ({ categories }: FilterProps) => {
-  const { state, updateStateProp } = useStore();
+const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
+  const { state, updateStateProp, updateState } = useStore();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = useState('');
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -38,7 +39,6 @@ const Filter = ({ categories }: FilterProps) => {
   }, []);
 
   const handleSubmit = () => {
-    console.log(searchValue);
     searchValue !== '' ? (query.search = searchValue) : delete query.search;
     void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
   };
@@ -48,55 +48,44 @@ const Filter = ({ categories }: FilterProps) => {
     delete query.search;
     void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
     setSearchValue('');
+    updateState({
+      ...state,
+      isFilterOpen: (state.isFilterOpen = false),
+      breadcrumbSelectedCategory: '',
+      breadcrumbMainRoute: 'Products'
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <Container className="pt-10 font-quicksand">
-      <div className="flex flex-col md:flex-row md:justify-between">
-        <div className="flex flex-col md:flex-row align-left md:items-center gap-5">
+    <Container className="pt-6 font-quicksand">
+      <div className="flex flex-col md:flex-row md:justify-between gap-3">
+        <div className="flex flex-col md:flex-row align-left md:items-center gap-3">
           <button
             onClick={() => updateStateProp('isFilterOpen', !state.isFilterOpen)}
             className="flex font-normal items-center gap-2 uppercase focus:outline-secondary"
           >
             {state.isFilterOpen ? (
-              <MdOutlineClose className="text-red-700 text-xl" />
+              <MdOutlineClose className="text-black text-xl" />
             ) : (
               <BsFilter className="text-xl" />
             )}
-            FILTERS{' '}
+            FILTERS
           </button>
           {/* search section */}
-          <div className="flex items-center gap-5">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-              className="flex items-center justify-between mb-8 md:mb-0"
-            >
-              <input
-                type="text"
-                placeholder="Search..."
-                id="search"
-                onChange={(value) => setSearchValue(value.target.value)}
-                className={
-                  'px-4 py-1 text-l border border-solid border-gray-medium rounded focus:outline-1  focus:outline-secondary w-full md:w-[300px]'
-                }
-                value={searchValue}
-                ref={inputRef}
-              />
-              <button className="focus:outline focus-visible:outline-secondary focus:py-2 focus:rounded">
-                <BsSearch className="mx-4" />
-              </button>
-            </form>
-          </div>
+          <Search
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            inputRef={inputRef}
+            handleSubmit={handleSubmit}
+          />
           {searchValue !== '' && (
             <Link href={{ pathname: '/products' }} scroll={false}>
               <button
                 onClick={() => {
                   cleanSearchInput();
                 }}
-                className="text-red-500 hover:underline"
+                className="text-black hover:underline mb-3 md:mb-0"
               >
                 Clear search
               </button>
@@ -105,14 +94,19 @@ const Filter = ({ categories }: FilterProps) => {
         </div>
         <SortBy />
       </div>
-      <hr className="my-6 border-gray-medium" />
-      <div>
-        <div
-          className={` font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
-        ${state.isFilterOpen ? 'max-h-[1000px] mb-10' : 'max-h-0'}`}
-        >
+      <hr className="mt-6 border-gray-medium" />
+      <div
+        className={`grid font-quick overflow-hidden transition-all ease-in-out duration-300 mb-10
+        ${
+          state.isFilterOpen
+            ? 'grid-rows-[1fr] mb-10 border-b border-gray-medium pb-2'
+            : 'grid-rows-[0fr]'
+        }`}
+      >
+        <div className="overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
             {/* FilterBy CATEGORIES info is coming from the store */}
+            <FilterBy title="Gender" items={categories} pathname={'products'} />
             <FilterBy title="Categories" items={categories} pathname={'products'} />
             {/*FilterBy PRICE*/}
             <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
@@ -122,7 +116,7 @@ const Filter = ({ categories }: FilterProps) => {
               onClick={() => {
                 cleanSearchInput();
               }}
-              className="hover:font-bold underline"
+              className="hover:font-bold underline transition-opacity duration-300"
             >
               Clear filters
             </button>

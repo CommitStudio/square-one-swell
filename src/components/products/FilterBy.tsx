@@ -16,37 +16,71 @@ export interface FilterByProps {
 
 export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
   const router = useRouter();
-  const { updateStateProp } = useStore();
+  const { updateState, state } = useStore();
 
   const handleClick = (itemName: string) => {
-    updateStateProp('breadcrumbSelectedCategory', itemName);
+    updateState({
+      ...state,
+      isFilterOpen: !state.isFilterOpen,
+      breadcrumbSelectedCategory: itemName
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div>
-      <h5 className="font-bold mb-8 uppercase">{title}</h5>
+    <div className="my-3">
+      <h5 className="font-bold mb-4 md:mb-8 uppercase">{title}</h5>
       {items.map((item, i) => {
-        return (
-          <Link
-            key={`filter-item-${i}`}
-            href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
-            scroll={false}
-          >
-            <div>
-              <a
-                onClick={() => handleClick(item.name)}
-                className={`cursor-pointer w-fit hover:font-bold ${
-                  Object.values(item.slug)
-                    .map(String)
-                    .every((v) => Object.values(router.query).map(String).includes(v))
-                    ? 'text-secondary font-semibold text'
-                    : 'text-gray-500'
-                }`}
+        return title === 'Gender' ? (
+          <p>
+            {(item.name === 'Women' || item.name === 'Men') && (
+              <Link
+                key={`filter-item-${i}`}
+                href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
+                scroll={false}
               >
-                {item.name}
-              </a>
-            </div>
-          </Link>
+                <div>
+                  <a
+                    onClick={() => handleClick(item.name)}
+                    className={`cursor-pointer w-fit hover:font-bold ${
+                      Object.values(item.slug)
+                        .map(String)
+                        .every((v) => Object.values(router.query).map(String).includes(v))
+                        ? 'text-black font-semibold text'
+                        : 'text-gray-500'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                </div>
+              </Link>
+            )}
+          </p>
+        ) : (
+          item.name !== 'Men' && item.name !== 'Women' && (
+            <Link
+              key={`filter-item-${i}`}
+              href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
+              scroll={false}
+            >
+              <div>
+                <a
+                  onClick={() => {
+                    handleClick(item.name);
+                  }}
+                  className={`cursor-pointer w-fit hover:font-bold transition-opacity duration-300 ${
+                    Object.values(item.slug)
+                      .map(String)
+                      .every((v) => Object.values(router.query).map(String).includes(v))
+                      ? 'text-black font-semibold text'
+                      : 'text-gray-500'
+                  }`}
+                >
+                  {item.name}
+                </a>
+              </div>
+            </Link>
+          )
         );
       })}
     </div>

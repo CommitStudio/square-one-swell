@@ -3,7 +3,7 @@
     {
       "name": "Stay tuned!",
       "description": "Don't miss our next promotion",
-      "image": { "src": "/img/products/black-tank-top.jpg", "alt": "Stay tuned" }
+      "image": { "src": "/img/promotions-default.png", "alt": "Stay tuned" }
     }
   ]
 }
