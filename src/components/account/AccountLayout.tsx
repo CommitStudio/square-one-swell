@@ -22,11 +22,12 @@ const AccountLayout = ({ children }: Props) => {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false);
+
   return (
     <Container className="mb-10">
-      <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10 font-quicksand">
-        <div className="lg:col-span-3 lg:border-r mr-10">
-          <div className="h-24 mb-4 flex flex-col justify-center">
+      <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10 font-quicksand space-x-10">
+        <div className="lg:col-span-3 lg:border-r">
+          <div className="h-24 flex flex-col justify-center">
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
               {account?.first_name} {account?.last_name}
             </h4>
