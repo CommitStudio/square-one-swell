@@ -17,10 +17,10 @@ const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
       <meta name="description" content={description} />
       <meta property="og:url" content={`${NEXT_PUBLIC_BASE_URL}${url}`} />
       <meta property="og:title" content={title} />
-      <meta property="og:image" content={`${NEXT_PUBLIC_BASE_URL}/img/favicon.svg`} />
+      <meta property="og:image" content={`${NEXT_PUBLIC_BASE_URL}/img/icons/CartIcon.svg`} />
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keywords} />
-      <link rel="icon" type="image/svg" href="/img/favicon.svg"></link>
+      <link rel="icon" type="image/svg" href="/img/icons/CartIcon.svg"></link>
       <link rel="canonical" href={`${NEXT_PUBLIC_BASE_URL}${url}`} />
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>
       <link rel="preconnect" href="https://fonts.gstatic.com"></link>

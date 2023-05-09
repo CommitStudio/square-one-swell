@@ -7,5 +7,6 @@
   "about_us": "about, us, company, information, contact",
   "contact_us": "contact, us, information, company, about",
   "faq": "faq, frequently asked questions, questions, answers, information",
-  "blog": "blog, news, articles, information, posts"
+  "addresses": "addresses, direction, location, information",
+  "order_id": "orders, order, detail, information, delivery, status"
 }
