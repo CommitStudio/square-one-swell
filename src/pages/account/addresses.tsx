@@ -17,7 +17,7 @@ const Addresses = () => {
       <Head
         title="SquareOne - Addresses"
         description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
-        keywords={keywords.home}
+        keywords={keywords.addresses}
         url={`${NEXT_PUBLIC_BASE_URL}/`}
       />
       <AccountLayout>
