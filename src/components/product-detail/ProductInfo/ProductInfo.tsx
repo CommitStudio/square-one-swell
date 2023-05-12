@@ -15,6 +15,7 @@ interface ProductProp {
 
 const ProductInfo = ({ product }: ProductProp) => {
   const [chosenOptions, setChosenOptions] = useState({});
+
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
