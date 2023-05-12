@@ -22,7 +22,6 @@ interface ProductProp {
 
 const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductProp) => {
   const router = useRouter();
-
   return (
     <>
       <Head
@@ -48,8 +47,8 @@ const ProductDetail = ({ product, sameCategoryProducts, categories }: ProductPro
         </Link>
         <hr className="bg-gray h-px border-none" />
         <ProductSection product={product} categories={categories} />
-        {/* ProductReview is commented because the functionality is not working (it just show hardcoded data) */}
-        {/* <ProductReview test_product={test_product} /> */}
+        {/* ProductReview is commented because the functionality is not working (it just shows hardcoded data) */}
+        {/* <ProductReview test_product={product} /> */}
         <RelatedProducts
           title={'Related Products'}
           product={product}
@@ -67,7 +66,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (!product) {
     return { notFound: true };
   }
-
   const categories = await Store.getCategories();
 
   const { products: sameCategoryProducts } = await Store.getProducts({
