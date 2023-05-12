@@ -1,5 +1,3 @@
-import React from 'react';
-
 import WriteAReview from './WriteAReview';
 
 import Rating from '~/components/product-detail/ProductReview/Rating';
