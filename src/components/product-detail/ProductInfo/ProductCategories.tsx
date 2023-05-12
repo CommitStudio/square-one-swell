@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 
 interface ProductProp {
   product: Product;
@@ -22,7 +21,7 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
             key={`product-category-${i}`}
             href={`/products?category=${category?.slug?.category as string}`}
           >
-            <a className="border border-secondary px-2 mx-2.5 cursor-pointer hover:bg-secondary hover:text-primary">
+            <a className="border border-gray-dark px-2 mx-2.5 cursor-pointer hover:bg-black hover:text-green">
               {category?.name}
             </a>
           </Link>
