@@ -48,10 +48,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     }
   };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
-    // Message of added product
-    notifySuccess(toastifyMessage);
-
-    //Turn on spinner while waiting
+    // Turn on spinner while waiting
     setIsLoading(true);
 
     // Add product to cart on Swell
@@ -67,16 +64,18 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       .then((cart) => {
         // Add product to cart
         setCart(cart);
+        // Message of added product successfully to cart
+        notifySuccess(toastifyMessage);
       })
       .catch((err) => {
         console.log(err);
-        // Message of error in case product is not added to cart on Swell
+        // Message of error in case product is not added to cart
         notifyFailure(
           "There has been a problem, we couldn't add the product to your cart. We're sorry."
         );
       })
       .finally(() => {
-        //Turn of spinner
+        // Turn off spinner
         setIsLoading(false);
       });
   };
