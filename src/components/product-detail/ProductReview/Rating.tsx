@@ -1,17 +1,15 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import React from 'react';
 import Rater from 'react-rater';
 
 const Rating = () => {
   return (
-    <div className="flex pb-5 border-b border-blue-200">
+    <div className="flex pb-5 border-b border-gray font-quicksand">
       <div className="rounded-full overflow-hidden flex justify-center w-32 h-20 md:h-auto bg-gray-200 items-center relative">
         <Image src="/img/products/black-tank-top.jpg" alt="test" layout="fill" objectFit="cover" />
       </div>
       <div className="w-full flex flex-col justify-center ml-10">
         <div className="flex justify-between">
-          <div className="text-lg font-semibold">Nombre</div>
+          <div className="text-lg font-semibold">Name</div>
           <div>
             <Rater total={5} rating={0} />
           </div>
