@@ -6,8 +6,7 @@ interface ProductProp {
 }
 
 const RelatedProducts = ({ title, product, products }: ProductProp) => {
-  const relatedProducts = products.filter((prod) => prod.id !== product.id);
-
+  const relatedProducts = products.filter((prod) => prod.id !== product.id); // Remove the current product from the list of related products
   return relatedProducts.length > 0 ? (
     <>
       <div className="flex flex-col text-center mt-12 mb-16">
