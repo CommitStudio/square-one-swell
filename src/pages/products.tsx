@@ -32,7 +32,6 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const mainRoute = state.breadcrumbMainRoute;
   const [searchValue, setSearchValue] = useState('');
   const { query } = useRouter();
-
   return (
     <>
       <Head
@@ -48,15 +47,15 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          {query && query.search && (
-            <Container>
-              <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
-                Showing {products.length}
-                {products?.length > 1 ? ' products' : ' product'} for &quot;
-                {query.search}&quot;
-              </p>
-            </Container>
-          )}
+          {query &&
+            Object.keys(query).length > 0 && ( // will show the following text, when any query is coming from the url and filtered products are shown
+              <Container>
+                <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
+                  Showing {products.length} filtered
+                  {products?.length > 1 ? ' products' : ' product'}
+                </p>
+              </Container>
+            )}
           <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
