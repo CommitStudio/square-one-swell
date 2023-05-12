@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 import { AiFillFacebook, AiOutlineTwitter } from 'react-icons/ai';
 import { BsPinterest } from 'react-icons/bs';
 
