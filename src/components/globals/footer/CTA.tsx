@@ -62,7 +62,7 @@ const CTA = () => {
             </p>
           )}
           <p className={`${isThanksMessage ? 'text-green text-xs absolute -bottom-5' : 'hidden'}`}>
-            Thanks for subscribing!!
+            Thanks for subscribing!
           </p>
         </span>
       </Container>
