@@ -65,14 +65,14 @@ const RegisterForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-sm text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-dark mb-2 block">
                 FIRST NAME <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 placeholder="Your first name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-gray"
                 {...register('first_name', {
                   required: 'First name is required',
                   minLength: {
@@ -101,14 +101,14 @@ const RegisterForm = () => {
           </div>
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-sm text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-dark mb-2 block">
                 LAST NAME <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 placeholder="Your last name"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-gray"
                 {...register('last_name', {
                   required: 'Last name is required',
                   minLength: {
@@ -137,14 +137,14 @@ const RegisterForm = () => {
           </div>
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-sm text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-dark mb-2 block">
                 E-MAIL <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-gray"
                 {...register('email', {
                   required: 'Email address is required',
                   maxLength: {
@@ -182,10 +182,10 @@ const RegisterForm = () => {
 
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-sm text-gray-500 mb-2 block">
+              <label className="font-bold text-sm text-gray-dark mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
-              <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
+              <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-gray">
                 <input
                   type={`${isHidden ? 'password' : 'text'}`}
                   placeholder="••••••"
@@ -222,7 +222,7 @@ const RegisterForm = () => {
                   )}
                 </>
               ) : null}
-              <span className="inline-block text-xs text-gray-500">
+              <span className="inline-block text-xs text-gray-dark">
                 Must include a minimum of 6 characters.
               </span>
             </div>

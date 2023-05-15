@@ -38,7 +38,6 @@ const Filter = ({ categories }: FilterProps) => {
   }, []);
 
   const handleSubmit = () => {
-    console.log(searchValue);
     searchValue !== '' ? (query.search = searchValue) : delete query.search;
     void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
   };

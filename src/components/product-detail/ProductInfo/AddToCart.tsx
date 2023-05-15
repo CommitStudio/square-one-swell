@@ -35,18 +35,6 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
 
-  const handleAddToCart = () => {
-    if (!areAllOptionsSelected) {
-      setPleaseSelectAllOptions('Please select the wanted options.');
-    } else if (state.isVariantActive) {
-      void addProduct({
-        product: product,
-        quantity: productAmount,
-        toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.
-        `
-      });
-    }
-  };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Message of added product
     notifySuccess(toastifyMessage);
@@ -81,6 +69,14 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       });
   };
 
+  const handleAddToCart = () => {
+    void addProduct({
+      product: product,
+      quantity: productAmount,
+      toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
+    });
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 py-5">
@@ -111,15 +107,15 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         <span className="flex items-center gap-2">
           <button
             onClick={() => handleAddToCart()}
-            disabled={!state.isVariantActive || isLoading}
+            disabled={(product.options?.length === 0 && !state.isVariantActive) || isLoading}
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
-           state.isVariantActive
-             ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200'
+           state.isVariantActive || product.options?.length === 0
+             ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200 cursor-pointer'
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
           >
-            {state.isVariantActive && !isLoading ? (
+            {(state.isVariantActive || product.options?.length === 0) && !isLoading ? (
               'ADD TO CART'
             ) : isLoading ? (
               <Spinner size={6} />

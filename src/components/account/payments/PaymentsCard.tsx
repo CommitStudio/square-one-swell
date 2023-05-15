@@ -15,7 +15,7 @@ const PaymentCard = ({ card, defaultCard }: PaymentCardProps) => {
   const [openConfModal, setOpenConfModal] = useState(false);
 
   return (
-    <div className="flex rounded bg-primary-lightest p-4 shadow-md border border-gray justify-between mb-2 text-sm">
+    <div className="flex rounded p-4 shadow-md border border-gray justify-between mb-2 text-sm">
       <div className="space-y-4 text-sm">
         <p>
           <span>Type </span>

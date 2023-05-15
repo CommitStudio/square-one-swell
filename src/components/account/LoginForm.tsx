@@ -58,7 +58,7 @@ const LoginForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label htmlFor="email" className="font-bold text-gray-500 mb-2 block">
+              <label htmlFor="email" className="font-bold text-gray-dark mb-2 block">
                 E-MAIL <span className="text-red-500">*</span>
               </label>
               <input
@@ -66,7 +66,7 @@ const LoginForm = () => {
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-gray-medium"
                 {...register('email', {
                   required: 'Email address is required',
                   maxLength: {
@@ -89,7 +89,7 @@ const LoginForm = () => {
           </div>
           <div>
             <div className="mb-2">
-              <label htmlFor="password" className="font-bold text-gray-500 mb-2 block">
+              <label htmlFor="password" className="font-bold text-gray-dark mb-2 block">
                 PASSWORD <span className="text-red-500">*</span>
               </label>
               <div className="flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
