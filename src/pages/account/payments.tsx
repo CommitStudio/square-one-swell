@@ -29,7 +29,7 @@ const Payments = () => {
       <AccountLayout>
         <h4 className="text-3xl font-libre font-medium mb-5">Payment methods</h4>
         {cards.length === 0 ? (
-          <p className="text-gray-400">
+          <p className="text-gray-dark">
             There are no payment methods associated with this account.
           </p>
         ) : (

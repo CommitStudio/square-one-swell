@@ -45,11 +45,11 @@ const ResetPasswordForm = () => {
       console.error(e);
       notifyFailure('There was an error changing your password. Please try again.');
     } finally {
-      //Turn off spinner
+      // Turn off spinner
       setIsLoading(false);
     }
   };
-  //Used to check if password and confirmPassword fields are the same
+  // Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
 
@@ -64,7 +64,7 @@ const ResetPasswordForm = () => {
           }}
         >
           <div className="mb-8">
-            <label className="font-bold text-gray-500 mb-2 block" htmlFor="password">
+            <label className="font-bold text-gray-dark mb-2 block" htmlFor="password">
               NEW PASSWORD
             </label>
             <div className="mb-2 flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
@@ -86,7 +86,7 @@ const ResetPasswordForm = () => {
               <button
                 type="button"
                 onClick={() => setIsHidden(!isHidden)}
-                className="inline-flex h-fit my-auto mx-3 text-2xl text-gray-700 rounded-r"
+                className="inline-flex h-fit my-auto mx-3 text-2xl text-gray-dark rounded-r"
               >
                 {isHidden ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
@@ -96,7 +96,7 @@ const ResetPasswordForm = () => {
             )}
           </div>
           <div className="mb-14">
-            <label className="font-bold text-gray-500 mb-2 block" htmlFor="confirmPassword">
+            <label className="font-bold text-gray-dark mb-2 block" htmlFor="confirmPassword">
               CONFIRM NEW PASSWORD
             </label>
             <div className="mb-2 flex border rounded focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
@@ -114,7 +114,7 @@ const ResetPasswordForm = () => {
               <button
                 type="button"
                 onClick={() => setIsConfirmHidden(!isConfirmHidden)}
-                className="inline-flex h-fit my-auto mx-3 text-2xl text-gray-700 rounded-r"
+                className="inline-flex h-fit my-auto mx-3 text-2xl text-gray-dark rounded-r"
               >
                 {isConfirmHidden ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
