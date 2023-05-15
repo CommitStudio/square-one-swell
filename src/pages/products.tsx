@@ -36,7 +36,6 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const mainRoute = state.breadcrumbMainRoute;
   const [searchValue, setSearchValue] = useState('');
   const { query } = useRouter();
-  console.log(query.category);
   return (
     <>
       <Head
