@@ -12,7 +12,8 @@ module.exports = {
       'gray-medium': '#A9A9A9',
       'gray-dark': '#4A4A4A',
       current: 'currentColor',
-      transparent: 'transparent'
+      transparent: 'transparent',
+      red: colors.rose
     },
 
     extend: {
