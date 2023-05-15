@@ -78,7 +78,11 @@ const Contact = () => {
               type="tel"
               placeholder="Write your phone"
               {...register('phone', {
-                required: 'Phone is required'
+                required: 'Phone is required',
+                pattern: {
+                  value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                  message: 'Must contain only numbers'
+                }
               })}
             />
             {errors.phone && <p className="text-red-600 text-xs -mt-2">{errors.phone.message}</p>}
