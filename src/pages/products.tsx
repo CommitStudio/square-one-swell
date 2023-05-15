@@ -26,12 +26,17 @@ type ProductsProps = {
   pagination: Pagination;
 };
 
+function keepLastWord(text: string) {
+  return text.split('-').pop();
+}
+
 const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
   const [searchValue, setSearchValue] = useState('');
   const { query } = useRouter();
+  console.log(query.category);
   return (
     <>
       <Head
@@ -47,15 +52,25 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          {query &&
-            Object.keys(query).length > 0 && ( // will show the following text, when any query is coming from the url and filtered products are shown
-              <Container>
-                <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
+          {query && Object.keys(query).length > 0 && (
+            <Container>
+              <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
+                <span>
                   Showing {products.length} filtered
-                  {products?.length > 1 ? ' products' : ' product'}
-                </p>
-              </Container>
-            )}
+                  {products?.length > 1 ? ' products' : ' product'} by{' '}
+                </span>
+                <span className="font-medium inline-block first-letter:capitalize">
+                  {query.category && keepLastWord(query.category.toString())}
+                </span>
+                {query.maxPrice && query.category && ` and `}
+                <span className="font-medium">
+                  {query.maxPrice &&
+                    query.minPrice &&
+                    `$${query.minPrice.toString()} - $${query.maxPrice.toString()}`}
+                </span>
+              </p>
+            </Container>
+          )}
           <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
