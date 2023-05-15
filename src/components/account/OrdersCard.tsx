@@ -12,7 +12,7 @@ interface OrderProps {
 
 const OrderCard = ({ order }: OrderProps) => {
   return (
-    <div className="flex flex-col md:flex-row rounded bg-primary-lightest p-4 shadow-md border border-gray mb-6">
+    <div className="flex flex-col md:flex-row rounded p-4 shadow-md border border-gray mb-6">
       <div className="flex-none w-120">
         <div className="flex">
           <span className="flex-col w-36 h-36 relative">
@@ -49,11 +49,9 @@ const OrderCard = ({ order }: OrderProps) => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-end text-sm">
+      <div className="flex flex-col justify-end">
         <Link href={`/account/orders/${order.id}`}>
-          <a className="mt-4 text-xs text-center text-white px-3 py-1 rounded border border-white hover:bg-white hover:border hover:border-green bg-green hover:text-green transition-all duration-200">
-            VIEW MORE
-          </a>
+          <Button classes="text-xs rounded" label="VIEW MORE" />
         </Link>
       </div>
     </div>

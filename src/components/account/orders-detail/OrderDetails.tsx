@@ -10,9 +10,7 @@ import { ProductsDetails } from './ProductsDetails';
 import BackIcon from 'public/img/icons/BackIcon';
 
 import { useGetOrderById } from '~/hooks/useSwellAccount';
-import { backToTop } from '~/utils/backToTop';
 import { formatDate } from '~/utils/dates';
-import { toPascalCase } from '~/utils/format';
 import { formatCurrency } from '~/utils/numbers';
 
 interface Props {
@@ -29,7 +27,7 @@ export const OrderDetails = ({ orderId }: Props) => {
       ) : (
         <>
           <div
-            className="flex items-center text-sm text-secondary cursor-pointer pb-8 font-quicksand"
+            className="flex items-center text-sm cursor-pointer pb-8 font-quicksand"
             onClick={() => {
               void router.push('/account/orders');
             }}
@@ -42,8 +40,8 @@ export const OrderDetails = ({ orderId }: Props) => {
           <div className="leading-7 py-4">
             <p>
               Status:{' '}
-              <span className="font-bold">
-                {toPascalCase(order.status.replace('_', ' ').toString())}
+              <span className="font-bold capitalize">
+                {order.status.replace('_', ' ').toString()}
               </span>
             </p>
             <p>
@@ -72,7 +70,15 @@ export const OrderDetails = ({ orderId }: Props) => {
 
           <hr className="mt-24 mb-3" />
           {/* Back to top */}
-          <div className="text-center text-sm cursor-pointer" onClick={() => backToTop()}>
+          <div
+            className="text-center text-sm cursor-pointer"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              })
+            }
+          >
             Back to top
           </div>
         </>

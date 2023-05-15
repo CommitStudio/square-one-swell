@@ -25,7 +25,7 @@ export const ProductsDetails = ({ order }: OrderProps) => {
               <div>
                 <p>{item.product.name}</p>
                 {item.discount_each > 0 && (
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray">
                     Discount: {order.currency} {formatCurrency(item.discount_each)}{' '}
                   </p>
                 )}

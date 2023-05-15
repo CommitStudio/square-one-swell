@@ -17,7 +17,7 @@ type Inputs = {
 };
 
 const ForgotPasswordForm = () => {
-  const [confirmation, setConfirmation] = useState(false); //Used to show confirmation message after form is submitted
+  const [confirmation, setConfirmation] = useState(false); // Used to show confirmation message after form is submitted
 
   const {
     register,
@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
         email: data.email,
         reset_url: `${NEXT_PUBLIC_BASE_URL}/account/reset-password?key={reset_key}`
       });
-      setConfirmation(true); //Turn on confirmation that a message has been sent
+      setConfirmation(true); // Turn on confirmation that a message has been sent
     } catch (error) {
       notifyFailure('There was an error sending your email. Please try again.');
       console.error(error);
@@ -52,12 +52,12 @@ const ForgotPasswordForm = () => {
         >
           <div className="pb-6">
             <div className="mb-2">
-              <label className="font-bold text-gray-500 mb-2 block">E-MAIL</label>
+              <label className="font-bold text-gray-dark mb-2 block">E-MAIL</label>
               <input
                 type="email"
                 placeholder="example@mail.com"
                 autoComplete="off"
-                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-secondary"
+                className="w-full border rounded py-3 px-6 focus:outline focus:outline-2 focus:outline-gray-medium"
                 {...register('email', {
                   required: 'Email address is required',
                   maxLength: {
@@ -80,7 +80,7 @@ const ForgotPasswordForm = () => {
           </div>
           <div className="mb-4">
             {confirmation && (
-              <div className="text-gray-500 text-sm pb-8 text-center">
+              <div className="text-gray-dark text-sm pb-8 text-center">
                 <p>Please check your email for next steps.</p>
                 <p>If the email is not in our system, you will not receive an email.</p>
               </div>
