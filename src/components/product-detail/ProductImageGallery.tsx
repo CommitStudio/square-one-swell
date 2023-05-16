@@ -36,6 +36,7 @@ const ProductImageGallery = ({ product }: ProductProp) => {
           thumbnailPosition={isMobile ? 'bottom' : 'left'}
           showPlayButton={false}
           showNav={false}
+          showBullets={isMobile ? true : false}
           isRTL={false}
           useTranslate3D={false}
           useBrowserFullscreen={true}

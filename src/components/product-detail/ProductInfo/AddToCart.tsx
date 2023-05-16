@@ -23,14 +23,13 @@ interface AddProductProps {
 
 const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
-  const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useStore();
   const { setCart } = useGlobalState();
 
   useEffect(() => {
-    product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
+    product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
@@ -107,7 +106,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         <span className="flex items-center gap-2">
           <button
             onClick={() => handleAddToCart()}
-            disabled={(product.options?.length === 0 && !state.isVariantActive) || isLoading}
+            disabled={product.options?.length === 0 ? false : !state.isVariantActive || isLoading}
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
            state.isVariantActive || product.options?.length === 0
