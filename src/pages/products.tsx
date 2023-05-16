@@ -58,7 +58,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
                   Showing {products.length} filtered
                   {products?.length > 1 ? ' products' : ' product'} by{' '}
                 </span>
-                <span className="font-medium inline-block first-letter:capitalize">
+                <span className="font-medium inline-block first-letter:uppercase">
                   {query.category && keepLastWord(query.category.toString())}
                 </span>
                 {query.maxPrice && query.category && ` and `}
