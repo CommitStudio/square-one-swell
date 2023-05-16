@@ -4,25 +4,25 @@
 
 @layer base {
   @font-face {
-    font-family: LibreBaskerville;
+    font-family: LocalLibreBaskerville;
     src: url('/fonts/LibreBaskerville-Regular.ttf');
     font-weight: 400;
   }
 
   @font-face {
-    font-family: LibreBaskerville;
+    font-family: LocalLibreBaskerville;
     src: url('/fonts/LibreBaskerville-Bold.ttf');
     font-weight: 700;
   }
 
   @font-face {
-    font-family: Quicksand;
+    font-family: LocalQuicksand;
     src: url('/fonts/Quicksand-Regular.ttf');
     font-weight: 400;
   }
 
   @font-face {
-    font-family: Quicksand;
+    font-family: LocalQuicksand;
     src: url('/fonts/Quicksand-Bold.ttf');
     font-weight: 700;
   }

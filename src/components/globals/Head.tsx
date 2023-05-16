@@ -15,12 +15,9 @@ const Page: NextPage<Props> = ({ title, description, keywords, url = '' }) => {
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta property="og:url" content={`${NEXT_PUBLIC_BASE_URL}${url}`} />
       <meta property="og:title" content={title} />
-      <meta property="og:image" content={`${NEXT_PUBLIC_BASE_URL}/img/favicon.svg`} />
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keywords} />
-      <link rel="icon" type="image/svg" href="/img/favicon.svg"></link>
       <link rel="canonical" href={`${NEXT_PUBLIC_BASE_URL}${url}`} />
     </Head>
   );

@@ -28,8 +28,8 @@ module.exports = {
         '4xl': '2560px'
       },
       fontFamily: {
-        libre: ['LibreBaskerville', 'sans-serif'],
-        quicksand: ['Quicksand', 'sans-serif']
+        libre: ['Libre Baskerville', 'LocalLibreBaskerville', 'sans-serif'],
+        quicksand: ['Quicksand', 'LocalQuicksand', 'sans-serif']
       }
     }
   },
