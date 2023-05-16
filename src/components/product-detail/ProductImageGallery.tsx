@@ -28,19 +28,22 @@ const ProductImageGallery = ({ product }: ProductProp) => {
   });
 
   return (
-    <div id="product-gallery" className="h-full w-full">
-      <ImageGallery
-        showThumbnails={isMobile ? false : true}
-        items={images}
-        thumbnailPosition={isMobile ? 'bottom' : 'left'}
-        showPlayButton={false}
-        showNav={false}
-        isRTL={false}
-        useTranslate3D={false}
-        useBrowserFullscreen={true}
-        showFullscreenButton={true}
-      />
-    </div>
+    <>
+      <div id="product-gallery" className="h-full w-full">
+        <ImageGallery
+          showThumbnails={isMobile ? false : true}
+          items={images}
+          thumbnailPosition={isMobile ? 'bottom' : 'left'}
+          showPlayButton={false}
+          showNav={false}
+          showBullets={isMobile ? true : false}
+          isRTL={false}
+          useTranslate3D={false}
+          useBrowserFullscreen={true}
+          showFullscreenButton={true}
+        />
+      </div>
+    </>
   );
 };
 
