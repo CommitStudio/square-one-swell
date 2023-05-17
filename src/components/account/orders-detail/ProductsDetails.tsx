@@ -9,7 +9,7 @@ type OrderProps = {
 export const ProductsDetails = ({ order }: OrderProps) => {
   return (
     <div>
-      <h5 className="text-xl py-6 text-center">Products details</h5>
+      <h5 className="text-xl py-6 text-center font-libre">Products details</h5>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6  mb-4 border rounded border-light">
         {order.items.map((item, i) => (
           <div key={i} className="flex flex-row text-sm">
@@ -25,7 +25,7 @@ export const ProductsDetails = ({ order }: OrderProps) => {
               <div>
                 <p>{item.product.name}</p>
                 {item.discount_each > 0 && (
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray">
                     Discount: {order.currency} {formatCurrency(item.discount_each)}{' '}
                   </p>
                 )}

@@ -25,7 +25,7 @@ const Modal = ({ open, setOpen, children }: Props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-[#000000] bg-opacity-70 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-70 transition-opacity" />
           </Transition.Child>
 
           <Transition.Child
@@ -37,7 +37,7 @@ const Modal = ({ open, setOpen, children }: Props) => {
             leaveFrom="opacity-100 lg:scale-100"
             leaveTo="opacity-0 lg:scale-90"
           >
-            <div className="relative transform transition-all w-fit mx-auto bg-white flex justify-center">
+            <div className="relative transform transition-all w-fit mx-auto bg-white flex justify-center rounded">
               {children}
             </div>
           </Transition.Child>

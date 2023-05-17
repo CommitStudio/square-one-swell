@@ -12,10 +12,10 @@ interface Props {
 
 const AddressCard = ({ address }: Props) => {
   const [open, setOpen] = useState(false);
-  const [openConfModal, setOpenConfModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="flex rounded bg-primary-lightest p-5 shadow-md border border-gray-50 justify-between mb-2">
+    <div className="flex justify-between rounded p-5 shadow-md border border-gray mb-2">
       <div className="space-y-2">
         <p className="font-bold">
           {address.first_name} {address.last_name}
@@ -32,13 +32,13 @@ const AddressCard = ({ address }: Props) => {
         </button>
         <DeleteAddressModal
           addressId={address.id}
-          openConfModal={openConfModal}
-          setOpenConfModal={setOpenConfModal}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
         />
         <button
           className="hover:stroke-red-500"
           onClick={() => {
-            void setOpenConfModal(true);
+            void setOpenModal(true);
           }}
         >
           <TrashIcon />

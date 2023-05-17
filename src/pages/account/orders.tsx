@@ -26,7 +26,7 @@ const Orders = () => {
         <h4 className="text-3xl font-medium mb-5 font-libre">Orders</h4>
         {orders.length === 0 ? (
           <>
-            <p className="text-gray-400 font-quicksand">You haven&lsquo;t ordered anything yet.</p>
+            <p className="text-gray-dark font-quicksand">You haven&lsquo;t ordered anything yet.</p>
             <Link href="/products">
               <a>
                 <Button

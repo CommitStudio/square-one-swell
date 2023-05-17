@@ -23,30 +23,17 @@ interface AddProductProps {
 
 const AddToCart = ({ product, chosenOptions }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
-  const [areAllOptionsSelected, setAreAllOptionsSelected] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useStore();
   const { setCart } = useGlobalState();
 
   useEffect(() => {
-    product.options?.length === Object.keys(chosenOptions).length && setAreAllOptionsSelected(true);
+    product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(chosenOptions).length]);
 
-  const handleAddToCart = () => {
-    if (!areAllOptionsSelected) {
-      setPleaseSelectAllOptions('Please select the wanted options.');
-    } else if (state.isVariantActive) {
-      void addProduct({
-        product: product,
-        quantity: productAmount,
-        toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.
-        `
-      });
-    }
-  };
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
     setIsLoading(true);
@@ -80,6 +67,14 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
       });
   };
 
+  const handleAddToCart = () => {
+    void addProduct({
+      product: product,
+      quantity: productAmount,
+      toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
+    });
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 py-5">
@@ -110,11 +105,13 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
         <span className="flex items-center gap-2">
           <button
             onClick={() => handleAddToCart()}
-            disabled={!state.isVariantActive || isLoading}
+            disabled={product.options?.length === 0 ? false : !state.isVariantActive || isLoading}
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
            state.isVariantActive || product.options?.length === 0
-             ? 'bg-black hover:bg-white font-quicksand border text-white hover:text-black duration-200'
+             ? `${
+                 isLoading ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'
+               } bg-black font-quicksand border text-white duration-200 cursor-pointer`
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
           >

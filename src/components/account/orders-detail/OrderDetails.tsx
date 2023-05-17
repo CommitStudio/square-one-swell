@@ -7,10 +7,10 @@ import { DeliveryDetails } from './DeliveryDetails';
 import { PaymentDetail } from './PaymentDetails';
 import { ProductsDetails } from './ProductsDetails';
 
+import BackIcon from 'public/img/icons/BackIcon';
+
 import { useGetOrderById } from '~/hooks/useSwellAccount';
-import { backToTop } from '~/utils/backToTop';
 import { formatDate } from '~/utils/dates';
-import { toPascalCase } from '~/utils/format';
 import { formatCurrency } from '~/utils/numbers';
 
 interface Props {
@@ -27,34 +27,21 @@ export const OrderDetails = ({ orderId }: Props) => {
       ) : (
         <>
           <div
-            className="text-sm text-secondary cursor-pointer pb-8 font-quicksand"
+            className="flex items-center text-sm cursor-pointer pb-8 font-quicksand"
             onClick={() => {
               void router.push('/account/orders');
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 25 25"
-              fill="none"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="inline text-secondary"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            <span className="pl-2">Back to all orders</span>
+            <BackIcon />
+            <span className="pl-2 text-black">Back to all orders</span>
           </div>
           {/* Summary Details */}
           <h3 className="text-xl font-bold pb-4">Order number #{order.number}</h3>
           <div className="leading-7 py-4">
             <p>
               Status:{' '}
-              <span className="font-bold">
-                {toPascalCase(order.status.replace('_', ' ').toString())}
+              <span className="font-bold capitalize">
+                {order.status.replace('_', ' ').toString()}
               </span>
             </p>
             <p>
@@ -84,8 +71,13 @@ export const OrderDetails = ({ orderId }: Props) => {
           <hr className="mt-24 mb-3" />
           {/* Back to top */}
           <div
-            className="text-center text-sm text-secondary cursor-pointer"
-            onClick={() => backToTop()}
+            className="text-center text-sm cursor-pointer"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              })
+            }
           >
             Back to top
           </div>
