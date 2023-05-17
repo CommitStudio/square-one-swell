@@ -16,11 +16,10 @@ const AboutUs = () => {
         keywords={keywords.about_us}
         url={`${NEXT_PUBLIC_BASE_URL}/about-us`}
       />
-
       <Container className="py-20">
         <h1 className="text-align pb-20 text-4xl font-libre uppercase">About us</h1>
-        <div className="grid lg:grid-cols-2 gap-16">
-          <p className="font-quicksand">
+        <div className="font-quicksand grid lg:grid-cols-2 gap-16">
+          <p>
             Welcome to our eCommerce site! We are dedicated to providing a top-notch online shopping
             experience for our customers. Our team of experienced professionals is passionate about
             eCommerce and committed to sourcing high-quality products at competitive prices. We

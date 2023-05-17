@@ -26,13 +26,16 @@ type ProductsProps = {
   pagination: Pagination;
 };
 
+function keepLastWord(text: string) {
+  return text.split('-').pop();
+}
+
 const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
   const [searchValue, setSearchValue] = useState('');
   const { query } = useRouter();
-
   return (
     <>
       <Head
@@ -48,12 +51,22 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          {query && query.search && (
+          {query && Object.keys(query).length > 0 && (
             <Container>
               <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
-                Showing {products.length}
-                {products?.length > 1 ? ' products' : ' product'} for &quot;
-                {query.search}&quot;
+                <span>
+                  Showing {products.length} filtered
+                  {products?.length > 1 ? ' products' : ' product'} by{' '}
+                </span>
+                <span className="font-medium inline-block first-letter:uppercase">
+                  {query.category && keepLastWord(query.category.toString())}
+                </span>
+                {query.maxPrice && query.category && ` and `}
+                <span className="font-medium">
+                  {query.maxPrice &&
+                    query.minPrice &&
+                    `$${query.minPrice.toString()} - $${query.maxPrice.toString()}`}
+                </span>
               </p>
             </Container>
           )}

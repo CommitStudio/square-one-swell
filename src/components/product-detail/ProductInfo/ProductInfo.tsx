@@ -20,7 +20,6 @@ const ProductInfo = ({ product }: ProductProp) => {
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
       <ProductRating rating={3} />
-
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions
         product={product}

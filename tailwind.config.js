@@ -5,8 +5,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      primary: '#CCED60',
-      secondary: '#142644',
       green: '#1DD197',
       black: '#242323',
       white: '#FFFFFF',
@@ -15,11 +13,11 @@ module.exports = {
       'gray-dark': '#4A4A4A',
       current: 'currentColor',
       transparent: 'transparent',
-      // to be replaced
-      indigo: colors.indigo,
-      red: colors.rose,
-      yellow: colors.amber,
-      blue: colors.blue
+      red: colors.rose
+    },
+    fontFamily: {
+      libre: ['Libre Baskerville', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif']
     },
 
     extend: {
