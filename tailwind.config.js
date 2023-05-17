@@ -21,14 +21,15 @@ module.exports = {
       yellow: colors.amber,
       blue: colors.blue
     },
-    fontFamily: {
-      libre: ['Libre Baskerville', 'sans-serif'],
-      quicksand: ['Quicksand', 'sans-serif']
-    },
+
     extend: {
       screens: {
         '3xl': '1920px',
         '4xl': '2560px'
+      },
+      fontFamily: {
+        libre: ['Libre Baskerville', 'LocalLibreBaskerville', 'sans-serif'],
+        quicksand: ['Quicksand', 'LocalQuicksand', 'sans-serif']
       }
     }
   },

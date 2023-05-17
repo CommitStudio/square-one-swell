@@ -12,9 +12,8 @@ function FaqSingleQuestion({ question, answer }: Props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <hr className="bg-gray h-px border-none mt-[1.625rem] mb-8" />
             <Disclosure.Button>
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start border-t border-t-gray pt-5 pb-5">
                 <h3 className="text-left text-black">{question}</h3>
                 <div
                   id="chevron"
@@ -35,10 +34,10 @@ function FaqSingleQuestion({ question, answer }: Props) {
               leaveTo="transform scale-95 opacity-0"
             >
               <Disclosure.Panel>
-                <p className="font-light text-black mt-7 mr-6">{answer}</p>
+                <p className="font-light text-black pb-5 mr-6">{answer}</p>
               </Disclosure.Panel>
             </Transition>
-            <hr className="bg-gray hidden last-of-type:block h-px border-none mt-[1.625rem]" />
+            <hr className="bg-gray hidden last-of-type:block h-px border-none" />
           </>
         )}
       </Disclosure>

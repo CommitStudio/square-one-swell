@@ -2,8 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: LocalLibreBaskerville;
+    src: url('/fonts/LibreBaskerville-Regular.ttf');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: LocalLibreBaskerville;
+    src: url('/fonts/LibreBaskerville-Bold.ttf');
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: LocalQuicksand;
+    src: url('/fonts/Quicksand-Regular.ttf');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: LocalQuicksand;
+    src: url('/fonts/Quicksand-Bold.ttf');
+    font-weight: 700;
+  }
+}
+
 body {
   @apply mt-24;
+  @apply font-quicksand;
 }
 
 /* Navbar burger button------------------------------------------------------ */
