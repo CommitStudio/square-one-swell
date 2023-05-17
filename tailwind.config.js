@@ -15,6 +15,10 @@ module.exports = {
       transparent: 'transparent',
       red: colors.rose
     },
+    fontFamily: {
+      libre: ['Libre Baskerville', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif']
+    },
 
     extend: {
       screens: {
