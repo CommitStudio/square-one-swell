@@ -36,7 +36,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
     const newCart = { ...cart } as swell.Cart;
 
     const items = cart?.items.filter(
-      (item) => item.product.id !== cartItemId && item.variant.id !== productVariantId
+      (item) => item.product.id !== cartItemId && item.variant?.id !== productVariantId
     );
 
     if (items) {
@@ -109,7 +109,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                         </div>
                         <button
                           onClick={() => {
-                            void removeProductFromCart(product.id, product.variant.id);
+                            void removeProductFromCart(product.id, product.variant?.id);
                             notifySuccess('The item has been removed from your cart.');
                           }}
                           className="self-end hover:border-b"
