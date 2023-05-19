@@ -9,6 +9,7 @@ import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 import { formatCurrency } from '~/utils/numbers';
 import { notifySuccess } from '~/utils/toastifies';
+
 type Props = {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,11 +33,17 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
     setIsCartOpen(false);
   };
 
-  const removeProductFromCart = async (cartItemId: string, productVariantId: string) => {
+  const removeProductFromCart = async (
+    cartItemId: string,
+    productVariantId: string,
+    productID: string
+  ) => {
     const newCart = { ...cart } as swell.Cart;
 
-    const items = cart?.items.filter(
-      (item) => item.product.id !== cartItemId && item.variant?.id !== productVariantId
+    const items = cart?.items.filter((item) =>
+      item.variant
+        ? item.product_id !== cartItemId && item.variant?.id !== productVariantId
+        : item.product_id !== productID
     );
 
     if (items) {
@@ -102,14 +109,19 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                       <p className="font-bold uppercase">{product.product.name}</p>
                       <div className="flex justify-between">
                         <div>
-                          <p>Variant: {product.variant?.name}</p>
+                          {product.variant && <p>Variant: {product.variant?.name}</p>}
+
                           <p>
                             {product.quantity} x ${formatCurrency(product.price)}
                           </p>
                         </div>
                         <button
                           onClick={() => {
-                            void removeProductFromCart(product.id, product.variant?.id);
+                            void removeProductFromCart(
+                              product.id,
+                              product.variant?.id,
+                              product.product_id
+                            );
                             notifySuccess('The item has been removed from your cart.');
                           }}
                           className="self-end hover:border-b"
