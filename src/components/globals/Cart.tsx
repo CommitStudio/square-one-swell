@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { useEffect } from 'react';
+
 import Trash from 'public/img/icons/trash-02.svg';
 
 import Button from '~/components/globals/button/Button';
@@ -14,6 +16,17 @@ type Props = {
 
 const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
   const { cart, setCart } = useGlobalState();
+
+  useEffect(() => {
+    swell.cart
+      .get()
+      .then((cart) => {
+        setCart(cart);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const closeCart = () => {
     setIsCartOpen(false);
