@@ -109,9 +109,7 @@ const AddToCart = ({ product, chosenOptions }: ProductProp) => {
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
            state.isVariantActive || product.options?.length === 0
-             ? `${
-                 isLoading ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'
-               } bg-black font-quicksand border text-white duration-200 cursor-pointer`
+             ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
           >
