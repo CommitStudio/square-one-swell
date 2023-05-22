@@ -12,7 +12,6 @@ function keepLastWord(text: string) {
 
 export function ShowingFiltered({ products }: Props) {
   const { query } = useRouter();
-  console.log(query);
   return (
     <Container>
       <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
