@@ -14,7 +14,6 @@ const UserButtons = ({ toggleCart }: Props) => {
   const { cart } = useGlobalState();
   const { user } = useUserLogged();
   const quantity = cart?.item_quantity;
-  console.log(user);
 
   return (
     <div className="flex lg:order-2 space-x-2">
