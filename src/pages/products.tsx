@@ -11,6 +11,7 @@ import Pagination from '~/components/globals/Pagination';
 import Filter from '~/components/products/Filter';
 
 import Showing from '~/components/products/Showing';
+import ShowingFiltered from '~/components/products/ShowingFiltered';
 import keywords from '~/data/keywords.json';
 
 import { useStore } from '~/hooks/useStore';
@@ -25,10 +26,6 @@ type ProductsProps = {
   products: Product[];
   pagination: Pagination;
 };
-
-function keepLastWord(text: string) {
-  return text.split('-').pop();
-}
 
 const Products = ({ products, categories, pagination }: ProductsProps) => {
   const { state } = useStore();
@@ -53,25 +50,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          {filterKeys && filterKeys.length > 0 && (
-            <Container>
-              <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
-                <span>
-                  Showing {products.length} filtered
-                  {products?.length > 1 ? ' products' : ' product'} by{' '}
-                </span>
-                <span className="font-medium inline-block first-letter:uppercase">
-                  {query.category && keepLastWord(query.category.toString())}
-                </span>
-                {query.maxPrice && query.category && ` and `}
-                <span className="font-medium">
-                  {query.maxPrice &&
-                    query.minPrice &&
-                    `$${query.minPrice.toString()} - $${query.maxPrice.toString()}`}
-                </span>
-              </p>
-            </Container>
-          )}
+          {filterKeys && filterKeys.length > 0 && <ShowingFiltered products={products} />}
           <ProductList threeColumns products={products} />
           {pagination.pages.length > 0 && <Pagination pagination={pagination} />}
           <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
