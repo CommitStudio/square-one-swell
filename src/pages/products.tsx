@@ -36,6 +36,8 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
   const mainRoute = state.breadcrumbMainRoute;
   const [searchValue, setSearchValue] = useState('');
   const { query } = useRouter();
+
+  const filterKeys = Object.keys(query).filter((key) => key !== 'page' && key !== 'sort');
   return (
     <>
       <Head
@@ -51,7 +53,7 @@ const Products = ({ products, categories, pagination }: ProductsProps) => {
       <Filter categories={categories} searchValue={searchValue} setSearchValue={setSearchValue} />
       {products.length > 0 ? (
         <>
-          {query && Object.keys(query).length > 0 && (
+          {filterKeys && filterKeys.length > 0 && (
             <Container>
               <p className="inline-block font-quicksand text-xl mb-5 border-b text-black border-gray-medium">
                 <span>
