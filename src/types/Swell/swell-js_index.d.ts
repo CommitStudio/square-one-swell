@@ -97,7 +97,7 @@ declare module 'swell-js' {
     origPrice: number;
     price: number;
     priceTotal: number;
-    productId: string;
+    product_id: string;
     quantity: number;
     shipmentWeight: number;
     taxEach: number;
