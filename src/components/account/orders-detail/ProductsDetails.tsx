@@ -2,11 +2,7 @@ import Image from 'next/image';
 
 import { formatCurrency } from '~/utils/numbers';
 
-type OrderProps = {
-  order: Order;
-};
-
-export const ProductsDetails = ({ order }: OrderProps) => {
+export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (
     <div>
       <h5 className="text-xl py-6 text-center font-libre">Products details</h5>
@@ -24,9 +20,9 @@ export const ProductsDetails = ({ order }: OrderProps) => {
             <div className="px-3 flex flex-col justify-between">
               <div>
                 <p>{item.product.name}</p>
-                {item.discount_each > 0 && (
+                {item.discountEach > 0 && (
                   <p className="text-sm text-gray">
-                    Discount: {order.currency} {formatCurrency(item.discount_each)}{' '}
+                    Discount: {order.currency} {formatCurrency(item.discountEach)}{' '}
                   </p>
                 )}
                 <p>
@@ -34,10 +30,12 @@ export const ProductsDetails = ({ order }: OrderProps) => {
                 </p>
                 <p>Item quantity: {item.quantity}</p>
               </div>
-              <div>
-                Size/Color/Material:
-                <p>{item.variant.name}</p>
-              </div>
+              {item.variant?.name && (
+                <div>
+                  Size/Color/Material:
+                  <p>{item.variant?.name}</p>
+                </div>
+              )}
             </div>
           </div>
         ))}

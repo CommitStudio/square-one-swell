@@ -17,8 +17,6 @@ interface Props {
 }
 
 const OrderDetails = ({ orderId, orders }: Props) => {
-  console.log(orders);
-
   const order = orders.find((order) => order.id === orderId);
 
   return (
@@ -36,6 +34,7 @@ const OrderDetails = ({ orderId, orders }: Props) => {
             <BackIcon />
             <span className="pl-2 text-black">Back to all orders</span>
           </div>
+
           {/* Summary Details */}
           <h3 className="text-xl font-bold pb-4">Order number #{order.number}</h3>
           <div className="leading-7 py-4">
@@ -62,11 +61,11 @@ const OrderDetails = ({ orderId, orders }: Props) => {
             </p>
           </div>
 
-          {/* <ProductsDetails order={order} />
-          <CostDetails order={order} />
+          <ProductsDetails order={order} />
+          {/* <CostDetails order={order} /> */}
           <hr />
-          <DeliveryDetails order={order} />
-          <PaymentDetail order={order} /> */}
+          {/* <DeliveryDetails order={order} /> */}
+          {/* <PaymentDetail order={order} /> */}
 
           <hr className="mt-24 mb-3" />
           {/* Back to top */}

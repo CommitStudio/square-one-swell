@@ -27,14 +27,22 @@ interface SwellGraphQL_OrdersObject {
   dateCreated: string;
   itemQuantity: number;
   items: {
+    quantity: number;
+    price: number;
+    discountEach: number;
+    variant: {
+      name: string;
+    };
     product: {
+      name: string;
+      price: number;
       images: {
         file: {
           url: string;
         };
-      };
-    }[];
-  };
+      }[];
+    };
+  }[];
   currency: string;
   grandTotal: number;
   paid: boolean;

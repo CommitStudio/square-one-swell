@@ -54,7 +54,15 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
           dateCreated
           itemQuantity
           items {
+            quantity
+            price
+            discountEach
+            variant {
+              name
+            }
             product {
+              name
+              price
               images {
                 file {
                   url
