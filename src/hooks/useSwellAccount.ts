@@ -152,14 +152,18 @@ export const useUserLogged = () => {
  * Fetch required user data from Swell
  ****************************************************************************/
 const getUserData = async () => {
-  const accountPromise = swell.account.get();
-  const cartPromise = swell.cart.get();
+  const account = await swell.account.get();
+  const cart = await swell.cart.get();
+
+  if (!account) {
+    return { account: null, cart: cart, listOrders: [], addresses: [], userCards: [] };
+  }
+
   const orderPromise = getUserOrders();
   const AddressesPromise = swell.account.listAddresses();
   const listCards = swell.account.listCards();
-  const [account, cart, listOrders, addresses, userCards] = await Promise.all([
-    accountPromise,
-    cartPromise,
+
+  const [listOrders, addresses, userCards] = await Promise.all([
     orderPromise,
     AddressesPromise,
     listCards
