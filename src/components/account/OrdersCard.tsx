@@ -7,7 +7,7 @@ import { formatDate } from '~/utils/dates';
 import { formatCurrency } from '~/utils/numbers';
 
 interface OrderProps {
-  order: UserOrder;
+  order: SwellGraphQL_OrdersObject;
 }
 
 const OrderCard = ({ order }: OrderProps) => {
@@ -17,7 +17,7 @@ const OrderCard = ({ order }: OrderProps) => {
         <div className="flex">
           <span className="flex-col w-36 h-36 relative">
             <Image
-              src={order.image1}
+              src={order.items[0].product.images[0].file.url}
               layout="fill"
               objectFit="cover"
               alt={`'Image order ${order.number}`}
@@ -30,7 +30,7 @@ const OrderCard = ({ order }: OrderProps) => {
         <div className="text-sm space-y-1 pt-4">
           <p className="space-x-2">
             <span>Date:</span>
-            <span>{formatDate(order.date)}</span>
+            <span>{formatDate(order.dateCreated)}</span>
           </p>
           <p className="space-x-2">
             <span>Number:</span>
@@ -38,12 +38,12 @@ const OrderCard = ({ order }: OrderProps) => {
           </p>
           <p className="space-x-2">
             <span>Total items:</span>
-            <span>#{order.items}</span>
+            <span>#{order.itemQuantity}</span>
           </p>
           <p className="space-x-2 font-black pt-4">
             <span>Total:</span>
             <span>
-              {order.currency} {formatCurrency(order.total)}
+              {order.currency} {formatCurrency(order.grandTotal)}
             </span>
           </p>
         </div>

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { useStore } from '~/hooks/useStore';
 
@@ -9,7 +8,7 @@ type Props = {
 
 const DesktopMenu = ({ categories }: Props) => {
   const { state, updateState } = useStore();
-  const router = useRouter();
+
   const handleClick = () => {
     updateState({ ...state, isFilterOpen: false, breadcrumbSelectedCategory: '' });
   };
@@ -28,14 +27,14 @@ const DesktopMenu = ({ categories }: Props) => {
             <Link
               href={`/${category.slug}`}
               className={`h-full hover:border-b-4 hover:border-black hover:font-bold flex items-center ${
-                category.slug === router.asPath.split('/')[1]
-                  ? 'border-b-4 border-black font-bold'
-                  : ''
+                ''
+                // category.slug === router.asPath.split('/')[1]
+                //   ? 'border-b-4 border-black font-bold'
+                //   : ''
               }`}
-              onClick={handleClick}>
-
+              onClick={handleClick}
+            >
               {category.name}
-
             </Link>
           </li>
         );

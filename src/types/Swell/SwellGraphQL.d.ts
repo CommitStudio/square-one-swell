@@ -7,6 +7,9 @@ interface SwellGraphQL_AuthObject {
     accountId: string;
   };
   account: SwellGraphQL_AccountObject;
+  orders: {
+    results: SwellGraphQL_OrdersObject[];
+  };
 }
 
 interface SwellGraphQL_AccountObject {
@@ -14,4 +17,25 @@ interface SwellGraphQL_AccountObject {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+interface SwellGraphQL_OrdersObject {
+  id: string;
+  number: string;
+  status: string;
+  delivered: boolean;
+  dateCreated: string;
+  itemQuantity: number;
+  items: {
+    product: {
+      images: {
+        file: {
+          url: string;
+        };
+      };
+    }[];
+  };
+  currency: string;
+  grandTotal: number;
+  paid: boolean;
 }
