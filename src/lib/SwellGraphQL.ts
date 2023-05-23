@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 type RequestBody = {
   query: string;
@@ -30,7 +31,7 @@ const makeRequest = async (body: RequestBody) => {
 };
 
 /*****************************************************************************
- * Check if the user is logged in
+ * Get logged user information
  ****************************************************************************/
 export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> => {
   const { data } = (await makeRequest({
@@ -70,4 +71,20 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
   })) as SwellGraphQL_AuthResponse;
 
   return data;
+};
+
+/*****************************************************************************
+ *
+ ****************************************************************************/
+export const getUserInfo = async () => {
+  const user = await getLoggedUser();
+
+  if (!user?.session.accountId) {
+    return redirect('/account/login');
+  }
+
+  return {
+    user: user.account,
+    orders: user.orders.results
+  };
 };

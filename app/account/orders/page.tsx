@@ -1,30 +1,14 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { BiShoppingBag } from 'react-icons/bi';
 
 import AccountLayout from '~/components/account/AccountLayout';
 import OrderCard from '~/components/account/OrdersCard';
 import Button from '~/components/globals/button/Button';
 
-import { getLoggedUser } from '~/lib/SwellGraphQL';
-
-async function getData() {
-  const user = await getLoggedUser();
-
-  if (!user?.session.accountId) {
-    return redirect('/account/login');
-  }
-
-  return {
-    user: user.account,
-    orders: user.orders.results
-  };
-}
+import { getUserInfo } from '~/lib/SwellGraphQL';
 
 export default async function Test() {
-  const { user, orders } = await getData();
-
-  console.log(orders);
+  const { user, orders } = await getUserInfo();
 
   return (
     <AccountLayout account={user}>
