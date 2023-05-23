@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -35,10 +37,9 @@ const Navbar = () => {
         <Container className="w-full flex justify-between items-center h-24">
           <Link
             href="/"
-            className="flex self-center uppercase font-libre text-3xl text-black font-bold">
-            
-              Logo
-            
+            className="flex self-center uppercase font-libre text-3xl text-black font-bold"
+          >
+            Logo
           </Link>
           <UserButtons toggleCart={toggleCart} />
           <DesktopMenu categories={data.categories} />
