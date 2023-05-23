@@ -11,6 +11,10 @@ const makeRequest = async (body: RequestBody) => {
   const nextCookies = cookies();
   const session = nextCookies.get('swell-session')?.value as string;
 
+  if (!session) {
+    return null;
+  }
+
   const requestHeaders: HeadersInit = new Headers();
   requestHeaders.set('Content-Type', 'application/json');
   requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
@@ -28,8 +32,8 @@ const makeRequest = async (body: RequestBody) => {
 /*****************************************************************************
  * Check if the user is logged in
  ****************************************************************************/
-export const getLoggedUser = async (): Promise<SwellGraphQL_AuthResponse> => {
-  const data = (await makeRequest({
+export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> => {
+  const { data } = (await makeRequest({
     query: `query checkTokenValidity {
       session {
         accountId
