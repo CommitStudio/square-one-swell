@@ -1,7 +1,7 @@
 ## Introduction to Square One
 ---
 
-Square One is an ecommerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful ecommerce business.
+Square One is an e-commerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful e-commerce business.
 
 ## Overview
 ---
@@ -13,20 +13,20 @@ Square One is an ecommerce platform powered by Swell, designed to provide busine
 
 ## 1. Features
 ---
-- Ecommerce theme optimized for a Swell store
+- E-commerce theme optimized for a Swell store
 - Home page
   - Navbar
   - Hero gallery linked with categories
   - Category slider
   - Featured products
   - Promo section
-  - CTA to subscribe (needs to be conected with client email marketing automation platform)
+  - CTA to subscribe (needs to be connected with client e-mail marketing automation platform)
   - Product Listing with filter, search bar, sort by, and pagination
-- Product listing with filter, search bar, sort by and pagination
+- Product listing with filter, search bar, sort by, and pagination
 - Product detail and related products
-- Cart, and payment method (powered by Swell)
+- Cart and payment method (powered by Swell)
 - User area
-  - Create account, login, reset password
+  - Create an account, login, reset the password
   - Edit profile, manage your address and payment methods
   - List orders, orders details
 - About us, FAQ, Contact, Blog
@@ -49,11 +49,11 @@ To run the store locally:
 2. Install all the necessary modules and packages by typing `npm install` in the command line.
 3. To connect your store to the Store One project:
    3.1. Go to the Developer's dropdown menu in the API keys section, and grab your store ID, secret key, and public key.
-   3.2. Create your `.env` file, copying the `.env.example`, and set the relevants keys.
-   * In case needed, there is a variable available for a Google GTAG.
+   3.2. Create your `.env` file, copying the `.env.example`, and set the relevant keys.
+   * In case needed, a variable is available for a Google GTAG.
 4. Run the store by typing `npm run dev`.
 
-## 5. Licence
+## 5. License
 ---
 MIT License
 Copyright (c) 2023 Commit Studio
@@ -61,5 +61,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 - - -
-##### Thanks for working with us, any issues please contact us at [hello@commit.studio](mailto:hello@commit.studio)
+##### Thanks for working with us; any issues please contact us at [hello@commit.studio](mailto:hello@commit.studio)
 Copyright (c) 2023 Commit Studio. All Rights Reserved.
