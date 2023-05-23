@@ -30,6 +30,8 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
 
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
+  console.log(email);
+
   const {
     register,
     handleSubmit,
@@ -56,8 +58,8 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
   useEffect(() => {
     setValue('first_name', first_name || '');
     setValue('last_name', last_name || '');
-    setValue('email', email?.email || '');
-  }, [email?.email, first_name, last_name, setValue]);
+    setValue('email', email || '');
+  }, [email, first_name, last_name, setValue]);
 
   return (
     <>
@@ -82,6 +84,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               type="text"
               placeholder={first_name}
               {...register('first_name', {
+                required: 'You must provide the first name!',
                 maxLength: { value: 50, message: 'first name is too long.' }
               })}
             />
@@ -97,6 +100,7 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               type="text"
               placeholder={last_name}
               {...register('last_name', {
+                required: 'You must provide the last name!',
                 maxLength: { value: 50, message: 'Last name is too long.' }
               })}
             />
@@ -111,8 +115,9 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
               className="w-full mb-8 p-2 border"
               id="email"
               type="text"
-              placeholder={email?.email}
+              placeholder={email}
               {...register('email', {
+                required: 'You must provide the e-mail address!',
                 maxLength: { value: 50, message: 'e-mail is too long.' }
               })}
             />
