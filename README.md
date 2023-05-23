@@ -1,27 +1,65 @@
-## Introduction
+## Introduction to Square One
+---
 
-Commit Storefront is an ecommerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful ecommerce business.
+Square One is an ecommerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful ecommerce business.
 
-## Before Development
+## Overview
+---
+1. Features
+2. Main Technologies
+3. Before starting development
+4. Running StoreFront
+5. Licence
 
-To use Commit Storefront, you need to have a Swell account with a respective store. Visit the [Swell official website](https://www.swell.is/) for more information.
+## 1. Features
+---
+- Ecommerce theme optimized for a Swell store
+- Home page
+  - Navbar
+  - Hero gallery linked with categories
+  - Category slider
+  - Featured products
+  - Promo section
+  - CTA to subscribe (needs to be conected with client email marketing automation platform)
+  - Product Listing with filter, search bar, sort by, and pagination
+- Product listing with filter, search bar, sort by and pagination
+- Product detail and related products
+- Cart, and payment method (powered by Swell)
+- User area
+  - Create account, login, reset password
+  - Edit profile, manage your address and payment methods
+  - List orders, orders details
+- About us, FAQ, Contact, Blog
 
-## Running StoreFront
 
-To run the store:
+## 2. Main Technologies
+---
+- Typescript 
+- Nextjs v12.2.0 and Reactjs v17.0.2
+- Tailwind CSS
 
+## 3. Before starting development
+---
+To use Store One, you need to have a Swell account with a respective store. Visit the [Swell official website](https://www.swell.is/) for more information.
+
+## 4. Running Store One (local)
+---
+To run the store locally:
 1. Clone the repository.
-
 2. Install all the necessary modules and packages by typing `npm install` in the command line.
-
-3. To connect your store to the StoreFront project:
-
-    3.1. Go to the Developer's dropdown menu in the API keys section, and grab your store ID, secret key, and public key.
-
-    3.2. Create your `.env` file, mimicking the `.env.example`, and paste the aforementioned keys.
-
-    * In case needed, there is a variable available for a Google GTAG.
-
+3. To connect your store to the Store One project:
+   3.1. Go to the Developer's dropdown menu in the API keys section, and grab your store ID, secret key, and public key.
+   3.2. Create your `.env` file, copying the `.env.example`, and set the relevants keys.
+   * In case needed, there is a variable available for a Google GTAG.
 4. Run the store by typing `npm run dev`.
 
-#### Thanks for working with us, any issues please contact us at [hello@commit.studio](mailto:hello@commit.studio)
+## 5. Licence
+---
+MIT License
+Copyright (c) 2023 Commit Studio
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+- - -
+##### Thanks for working with us, any issues please contact us at [hello@commit.studio](mailto:hello@commit.studio)
+Copyright (c) 2023 Commit Studio. All Rights Reserved.
