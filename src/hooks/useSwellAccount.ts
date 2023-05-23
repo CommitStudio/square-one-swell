@@ -27,7 +27,7 @@ export const useRegister = (
         setAccount(account);
         setUser(account);
 
-        if (account.email?.code) {
+        if (typeof account.email === 'object' && account.email.code) {
           //if the account turns out a code message, it means that creating the new user was a problem, so bring the message
           notifyFailure(account.email.message || 'There was an error trying to create the user.');
           console.error(account.email.message || 'There was an error trying to create the user.');
