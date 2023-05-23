@@ -61,22 +61,22 @@ const Button = ({
 
   if (linkUrl) {
     return (
-      <Link href={linkUrl}>
-        <a
-          aria-label={`Redirect to ${
-            typeof linkUrl === 'string' ? linkUrl : linkUrl.query.category
-          }`}
-          className={`${baseStyles} ${buttonColors[color]} ${buttonVariants[variant]} ${
-            fullWidth ? 'w-full' : ''
-          } ${disabled ? disabledStyles : ''} ${classes ? classes : ''}`}
-          tabIndex={tabindex ? tabindex : 0}
-          target={`${_blank ? '_blank' : ''}`}
-          rel="noreferrer noopener"
-          {...props}
-        >
-          {label}
-        </a>
-      </Link>
+      (<Link
+        href={linkUrl}
+        aria-label={`Redirect to ${
+          typeof linkUrl === 'string' ? linkUrl : linkUrl.query.category
+        }`}
+        className={`${baseStyles} ${buttonColors[color]} ${buttonVariants[variant]} ${
+          fullWidth ? 'w-full' : ''
+        } ${disabled ? disabledStyles : ''} ${classes ? classes : ''}`}
+        tabIndex={tabindex ? tabindex : 0}
+        target={`${_blank ? '_blank' : ''}`}
+        rel="noreferrer noopener"
+        {...props}>
+
+        {label}
+
+      </Link>)
     );
   }
 

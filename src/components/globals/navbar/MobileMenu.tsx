@@ -33,14 +33,14 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
         {categories.map((category, i) => {
           return (
             <li key={`mobile-menu-category-${i}`}>
-              <Link href={`/${category.slug}`}>
-                <a
-                  onClick={() => handleClick(category.name)}
-                  className="
-                   block py-3 px-4 active:bg-black active:text-white focus:text-white focus:bg-black sm:px-6 lg:text-white border-b border-b-gray"
-                >
-                  {isLogged && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
-                </a>
+              <Link
+                href={`/${category.slug}`}
+                onClick={() => handleClick(category.name)}
+                className="
+                 block py-3 px-4 active:bg-black active:text-white focus:text-white focus:bg-black sm:px-6 lg:text-white border-b border-b-gray">
+
+                {isLogged && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
+
               </Link>
             </li>
           );

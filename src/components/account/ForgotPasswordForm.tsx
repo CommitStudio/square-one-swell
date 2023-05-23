@@ -87,11 +87,11 @@ const ForgotPasswordForm = () => {
             )}
             <Button label="SEND EMAIL" fullWidth type="submit" aria-label="" />
             <div className="flex items-center justify-center">
-              <Link href={'/account/login'}>
-                <a className="flex items-center justify-center text-sm mt-4 hover:underline group">
-                  <BsArrowLeft className="text-lg mr-1 group-hover:-translate-x-1" />
-                  Log in
-                </a>
+              <Link
+                href={'/account/login'}
+                className="flex items-center justify-center text-sm mt-4 hover:underline group">
+
+                <BsArrowLeft className="text-lg mr-1 group-hover:-translate-x-1" />Log in
               </Link>
             </div>
           </div>

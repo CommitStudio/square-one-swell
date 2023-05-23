@@ -67,7 +67,7 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
                 <Link
                   href={{ pathname: 'products', query: category.slug }}
                   className="cursor-pointer"
-                >
+                  legacyBehavior>
                   <Image
                     src={category.images[0].src}
                     alt={category.name}

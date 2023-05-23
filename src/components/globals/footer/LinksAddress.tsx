@@ -19,10 +19,10 @@ const LinksAddress = () => {
           {items.slice(0, 4).map(function (item, i) {
             return (
               <p key={`address-item-1.${i}`}>
-                <Link href={item.href}>
-                  <a className="hover:underline" href="/">
-                    {item.name}
-                  </a>
+                <Link href={item.href} className="hover:underline">
+
+                  {item.name}
+
                 </Link>
               </p>
             );
@@ -32,10 +32,10 @@ const LinksAddress = () => {
           {items.slice(4, 8).map(function (item, i) {
             return (
               <p key={`address-item-2.${i}`}>
-                <Link href={item.href}>
-                  <a className="hover:underline" href="/">
-                    {item.name}
-                  </a>
+                <Link href={item.href} className="hover:underline">
+
+                  {item.name}
+
                 </Link>
               </p>
             );

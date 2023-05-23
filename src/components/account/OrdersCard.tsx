@@ -50,7 +50,7 @@ const OrderCard = ({ order }: OrderProps) => {
       </div>
 
       <div className="flex flex-col justify-end">
-        <Link href={`/account/orders/${order.id}`}>
+        <Link href={`/account/orders/${order.id}`} legacyBehavior>
           <Button classes="text-xs rounded" label="VIEW MORE" />
         </Link>
       </div>

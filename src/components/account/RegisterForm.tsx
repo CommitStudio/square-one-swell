@@ -275,7 +275,7 @@ const RegisterForm = () => {
               type="submit"
             />
 
-            <Link href={'/account/login'}>
+            <Link href={'/account/login'} legacyBehavior>
               <span className="block text-center text-sm mt-4">
                 Already have an account?&nbsp;
                 <a className="font-bold cursor-pointer border-b hover:pb-0.5">Log in</a>.

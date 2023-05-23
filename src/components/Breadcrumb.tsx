@@ -36,8 +36,10 @@ const Breadcrumb = () => {
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
-          <Link href="/">
-            <a className="inline-flex items-center text-sm font-normal hover:underline">Home</a>
+          <Link
+            href="/"
+            className="inline-flex items-center text-sm font-normal hover:underline">
+            Home
           </Link>
         </li>
         {breadcrumbRoute.map((route, i) => {
@@ -57,14 +59,14 @@ const Breadcrumb = () => {
                   ></path>
                 </svg>
                 {i < breadcrumbRoute.length - 1 ? (
-                  <Link href={`/${route.toLowerCase()}`}>
-                    <a
-                      onClick={handleClick}
-                      className="ml-1 text-sm font-normal hover:underline md:ml-2"
-                    >
-                      {route}
-                    </a>
-                  </Link>
+                  (<Link
+                    href={`/${route.toLowerCase()}`}
+                    onClick={handleClick}
+                    className="ml-1 text-sm font-normal hover:underline md:ml-2">
+
+                    {route}
+
+                  </Link>)
                 ) : (
                   <span className="ml-1 text-sm font-normal md:ml-2">{route}</span>
                 )}

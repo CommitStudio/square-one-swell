@@ -38,7 +38,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                 key={`filter-item-${i}`}
                 href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
                 scroll={false}
-              >
+                legacyBehavior>
                 <div>
                   <a
                     onClick={() => handleClick(item.name)}
@@ -62,7 +62,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
               key={`filter-item-${i}`}
               href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
               scroll={false}
-            >
+              legacyBehavior>
               <div>
                 <a
                   onClick={() => {

@@ -43,32 +43,32 @@ const AccountLayout = ({ children }: Props) => {
           <EditProfileModal openEdit={openEdit} setOpenEdit={setOpenEdit} />
           <LogOutModal openLogOut={openLogOut} setOpenLogOut={setOpenLogOut} />
           <div className="space-y-4 my-10">
-            <Link href="/account/orders">
-              <a
-                className={`block ${
-                  router.pathname.includes('/account/orders') ? 'font-bold underline' : ''
-                }`}
-              >
+            <Link
+              href="/account/orders"
+              className={`block ${
+                router.pathname.includes('/account/orders') ? 'font-bold underline' : ''
+              }`}>
+              
                 Orders
-              </a>
+              
             </Link>
-            <Link href="/account/addresses">
-              <a
-                className={`block ${
-                  router.pathname.includes('/account/addresses') ? 'font-bold underline' : ''
-                }`}
-              >
+            <Link
+              href="/account/addresses"
+              className={`block ${
+                router.pathname.includes('/account/addresses') ? 'font-bold underline' : ''
+              }`}>
+              
                 Addresses
-              </a>
+              
             </Link>
-            <Link href="/account/payments">
-              <a
-                className={`block ${
-                  router.pathname.includes('/account/payments') ? 'font-bold underline' : ''
-                }`}
-              >
+            <Link
+              href="/account/payments"
+              className={`block ${
+                router.pathname.includes('/account/payments') ? 'font-bold underline' : ''
+              }`}>
+              
                 Payment methods
-              </a>
+              
             </Link>
           </div>
           <button

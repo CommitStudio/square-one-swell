@@ -80,7 +80,7 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
             handleSubmit={handleSubmit}
           />
           {searchValue !== '' && (
-            <Link href={{ pathname: '/products' }} scroll={false}>
+            <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
               <button
                 onClick={() => {
                   cleanSearchInput();
@@ -111,7 +111,7 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
             {/*FilterBy PRICE*/}
             <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
           </div>
-          <Link href={{ pathname: '/products' }} scroll={false}>
+          <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
             <button
               onClick={() => {
                 cleanSearchInput();

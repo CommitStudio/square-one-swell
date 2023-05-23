@@ -129,7 +129,7 @@ const LoginForm = () => {
             <label htmlFor="dontComplete">Don&apos;t fill this input</label>
             <input tabIndex={-1} type="text" id="dontComplete" {...register('dontComplete')} />
           </div>
-          <Link href={'/account/forgot-password'}>
+          <Link href={'/account/forgot-password'} legacyBehavior>
             <span className="inline-block text-sm mt-4 md:mt-6">
               Forgot your password?&nbsp;
               <a className="font-bold cursor-pointer border-b hover:pb-0.5">Reset it</a>.
@@ -138,7 +138,7 @@ const LoginForm = () => {
           <div className="mt-7 mb-4">
             <Button fullWidth type="submit" label="LOG IN" />
 
-            <Link href={'/account/create-account'}>
+            <Link href={'/account/create-account'} legacyBehavior>
               <span className="block text-center text-sm mt-4">
                 Don&apos;t have an account?&nbsp;
                 <a className="font-bold cursor-pointer border-b hover:pb-0.5">Create it</a>.
