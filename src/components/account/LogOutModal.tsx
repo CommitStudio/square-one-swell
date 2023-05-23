@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
+import { HiOutlineLogout } from 'react-icons/hi';
 
 import Button from '../globals/button/Button';
 
@@ -8,16 +10,21 @@ import Modal from './Modal';
 
 import { useLogout } from '~/hooks/useSwellAccount';
 
-type Props = {
-  openLogOut: boolean;
-  setOpenLogOut: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const LogOutModal = ({ openLogOut, setOpenLogOut }: Props) => {
+const LogOutModal = () => {
   const handleLogout = useLogout();
+
+  const [openLogOut, setOpenLogOut] = useState(false);
 
   return (
     <>
+      <button
+        className="flex items-center gap-1 hover:text-red-600 mt-10"
+        onClick={() => setOpenLogOut(true)}
+      >
+        <HiOutlineLogout />
+        Log out
+      </button>
+
       <Modal open={openLogOut} setOpen={setOpenLogOut}>
         <div className="p-8 font-quicksand rounded w-80 md:w-[500px]">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">

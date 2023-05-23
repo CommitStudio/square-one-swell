@@ -1,5 +1,3 @@
-import { HiOutlineLogout } from 'react-icons/hi';
-
 import EditProfileModal from './EditProfileModal';
 import AccountLink from './Link';
 import LogOutModal from './LogOutModal';
@@ -23,7 +21,6 @@ const AccountLayout = ({ account, children }: Props) => {
             {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
             <EditProfileModal />
           </div>
-          {/* <LogOutModal /> */}
           <div className="space-y-4 my-10">
             <AccountLink href="/account/orders" pathname="/account/orders">
               Orders
@@ -35,13 +32,7 @@ const AccountLayout = ({ account, children }: Props) => {
               Payment methods
             </AccountLink>
           </div>
-          <button
-            className="flex items-center gap-1 hover:text-red-600 mt-10"
-            // onClick={() => setOpenLogOut(true)}
-          >
-            <HiOutlineLogout />
-            Log out
-          </button>
+          <LogOutModal />
         </div>
         <div className="lg:col-span-9">{children}</div>
       </div>
