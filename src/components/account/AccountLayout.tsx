@@ -22,15 +22,17 @@ const AccountLayout = ({ account, children }: Props) => {
             <EditProfileModal />
           </div>
           <div className="space-y-4 my-10">
-            <AccountLink href="/account/orders" pathname="/account/orders">
-              Orders
-            </AccountLink>
-            <AccountLink href="/account/addresses" pathname="/account/addresses">
-              Addresses
-            </AccountLink>
-            <AccountLink href="/account/payments" pathname="/account/payments">
-              Payment methods
-            </AccountLink>
+            <AccountLink href="/account/orders" pathname="/account/orders" label="Orders" />
+            <AccountLink
+              href="/account/addresses"
+              pathname="/account/addresses"
+              label="Addresses"
+            />
+            <AccountLink
+              href="/account/payments"
+              pathname="/account/payments"
+              label="Payment methods"
+            />
           </div>
           <LogOutModal />
         </div>

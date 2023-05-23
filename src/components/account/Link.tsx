@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function AccountLink({
-  children,
+  label,
   href,
   pathname
 }: {
-  children: React.ReactNode;
+  label: string;
   href: string;
   pathname: string;
 }) {
@@ -19,7 +19,7 @@ export default function AccountLink({
       href={href}
       className={`block ${currentPath?.includes(pathname) ? 'font-bold underline' : ''}`}
     >
-      {children}
+      {label}
     </Link>
   );
 }
