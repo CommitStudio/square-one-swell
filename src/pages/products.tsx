@@ -15,7 +15,6 @@ import ShowingFiltered from '~/components/products/ShowingFiltered';
 import keywords from '~/data/keywords.json';
 
 import { useStore } from '~/hooks/useStore';
-import Container from '~/layouts/Container';
 
 import Store from '~/lib/Store';
 

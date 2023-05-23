@@ -12,7 +12,6 @@ function keepLastWord(text: string) {
 
 export function ShowingFiltered({ products }: Props) {
   const { query } = useRouter();
-
   const formatPriceRange = () => {
     const minPrice = query.minPrice?.toString();
     const maxPrice = query.maxPrice?.toString();
@@ -39,6 +38,9 @@ export function ShowingFiltered({ products }: Props) {
         <span className="font-medium inline-block first-letter:uppercase">{category}</span>
         {query.minPrice && query.category && ` and `}
         <span className="font-medium">{priceRange}</span>
+        <span className="font-medium inline-block first-letter:uppercase">
+          {Object.keys(query).toString() === 'search' && Object.values(query)}
+        </span>
       </p>
     </Container>
   );
