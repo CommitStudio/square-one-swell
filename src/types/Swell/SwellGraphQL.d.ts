@@ -6,10 +6,12 @@ interface SwellGraphQL_AuthObject {
   session: {
     accountId: string;
   };
-  account: {
-    name: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
+  account: SwellGraphQL_AccountObject;
+}
+
+interface SwellGraphQL_AccountObject {
+  name: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 }

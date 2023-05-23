@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import AccountLayout from '../AccountLayout';
+import AccountLayout from '~/components/account/AccountLayout';
 
 import { getLoggedUser } from '~/lib/SwellGraphQL';
 
@@ -16,5 +16,5 @@ async function getData() {
 
 export default async function Test() {
   const { user } = await getData();
-  return <div>Hello World!</div>;
+  return <AccountLayout account={user.account}>Hello World!</AccountLayout>;
 }

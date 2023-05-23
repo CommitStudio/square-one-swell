@@ -1,79 +1,51 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { TbEdit } from 'react-icons/tb';
 
 import EditProfileModal from './EditProfileModal';
+import AccountLink from './Link';
 import LogOutModal from './LogOutModal';
-
-import { useGlobalState } from '~/hooks/useStore';
 
 import Container from '~/layouts/Container';
 
 type Props = {
+  account: SwellGraphQL_AccountObject;
   children: React.ReactNode;
 };
 
-const AccountLayout = ({ children }: Props) => {
-  const router = useRouter();
-
-  const { account } = useGlobalState();
-
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openLogOut, setOpenLogOut] = useState(false);
-
+const AccountLayout = ({ account, children }: Props) => {
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10 font-quicksand space-x-10">
         <div className="lg:col-span-3 lg:border-r">
           <div className="h-24 flex flex-col justify-center">
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
-              {account?.first_name} {account?.last_name}
+              {account?.firstName} {account?.lastName}
             </h4>
             {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
             <button
               className="flex items-center gap-1 hover:text-red-600"
-              onClick={() => setOpenEdit(true)}
+              // onClick={() => setOpenEdit(true)}
             >
               <TbEdit />
               Edit profile
             </button>
           </div>
-          <EditProfileModal openEdit={openEdit} setOpenEdit={setOpenEdit} />
-          <LogOutModal openLogOut={openLogOut} setOpenLogOut={setOpenLogOut} />
+          {/* <EditProfileModal />
+          <LogOutModal /> */}
           <div className="space-y-4 my-10">
-            <Link
-              href="/account/orders"
-              className={`block ${
-                router.pathname.includes('/account/orders') ? 'font-bold underline' : ''
-              }`}>
-              
-                Orders
-              
-            </Link>
-            <Link
-              href="/account/addresses"
-              className={`block ${
-                router.pathname.includes('/account/addresses') ? 'font-bold underline' : ''
-              }`}>
-              
-                Addresses
-              
-            </Link>
-            <Link
-              href="/account/payments"
-              className={`block ${
-                router.pathname.includes('/account/payments') ? 'font-bold underline' : ''
-              }`}>
-              
-                Payment methods
-              
-            </Link>
+            <AccountLink href="/account/orders" pathname="/account/orders">
+              Orders
+            </AccountLink>
+            <AccountLink href="/account/addresses" pathname="/account/addresses">
+              Addresses
+            </AccountLink>
+            <AccountLink href="/account/payments" pathname="/account/payments">
+              Payment methods
+            </AccountLink>
           </div>
           <button
             className="flex items-center gap-1 hover:text-red-600 mt-10"
-            onClick={() => setOpenLogOut(true)}
+            // onClick={() => setOpenLogOut(true)}
           >
             <HiOutlineLogout />
             Log out

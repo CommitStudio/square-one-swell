@@ -1,3 +1,5 @@
+'use client';
+
 import { GrClose } from 'react-icons/gr';
 
 import Button from '../globals/button/Button';
