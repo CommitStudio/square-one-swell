@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
+import { TbEdit } from 'react-icons/tb';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import Button from '../globals/button/Button';
@@ -21,14 +23,10 @@ type Inputs = {
   confirmPassword?: string;
 };
 
-type Props = {
-  openEdit: boolean;
-  setOpenEdit: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
+const EditProfileModal = () => {
   const { account } = useGlobalState();
   const { first_name, last_name, email } = account || {};
+  const [openEdit, setOpenEdit] = useState(false);
 
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
@@ -63,6 +61,14 @@ const EditProfileModal = ({ openEdit, setOpenEdit }: Props) => {
 
   return (
     <>
+      <button
+        className="flex items-center gap-1 hover:text-red-600"
+        onClick={() => setOpenEdit(true)}
+      >
+        <TbEdit />
+        Edit profile
+      </button>
+
       <Modal open={openEdit} setOpen={setOpenEdit}>
         <div className="bg-gray-200 p-10 rounded w-80 md:w-[500px] font-quicksand">
           <div className="flex items-center justify-between mb-4 gap-x-4 w-full">

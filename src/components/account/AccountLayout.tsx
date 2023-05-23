@@ -1,5 +1,4 @@
 import { HiOutlineLogout } from 'react-icons/hi';
-import { TbEdit } from 'react-icons/tb';
 
 import EditProfileModal from './EditProfileModal';
 import AccountLink from './Link';
@@ -22,16 +21,9 @@ const AccountLayout = ({ account, children }: Props) => {
               {account?.firstName} {account?.lastName}
             </h4>
             {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
-            <button
-              className="flex items-center gap-1 hover:text-red-600"
-              // onClick={() => setOpenEdit(true)}
-            >
-              <TbEdit />
-              Edit profile
-            </button>
+            <EditProfileModal />
           </div>
-          {/* <EditProfileModal />
-          <LogOutModal /> */}
+          {/* <LogOutModal /> */}
           <div className="space-y-4 my-10">
             <AccountLink href="/account/orders" pathname="/account/orders">
               Orders
