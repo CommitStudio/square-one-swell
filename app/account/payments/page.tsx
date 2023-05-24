@@ -4,6 +4,11 @@ import PaymentCard from '~/components/account/payments/PaymentsCard';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
+export const metadata = {
+  title: 'SquareOne - Payments',
+  description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.'
+};
+
 export default async function Payments() {
   const { user, cards } = await getUserInfo();
 
