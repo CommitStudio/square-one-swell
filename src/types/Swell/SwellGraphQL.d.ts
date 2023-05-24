@@ -17,6 +17,9 @@ interface SwellGraphQL_AccountObject {
   firstName: string;
   lastName: string;
   email: string;
+  billing: {
+    accountCardId: string;
+  };
 }
 
 interface SwellGraphQL_OrdersObject {
@@ -89,6 +92,24 @@ interface SwellGraphQL_AddressObject {
   last_name: string;
   fingerprint: string;
   date_created: string;
+  date_updated: string;
+  id: string;
+}
+
+interface SwellGraphQL_CardObject {
+  parent_id: string;
+  exp_month: number;
+  exp_year: number;
+  token: string;
+  last4: string;
+  brand: string;
+  address_check: string;
+  zip_check: string;
+  cvc_check: string;
+  fingerprint: string;
+  date_created: string;
+  active: boolean;
+  billing: function[];
   date_updated: string;
   id: string;
 }

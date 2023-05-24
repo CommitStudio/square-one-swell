@@ -53,6 +53,9 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
         firstName
         lastName
         email
+        billing {
+          accountCardId
+        }
       }
       orders {
         results {
@@ -127,11 +130,13 @@ export const getUserInfo = async () => {
   }
 
   const addresses = await getAddresses();
+  const cards = await getCards();
 
   return {
     user: user.account,
     orders: user.orders.results || [],
-    addresses: addresses?.results || []
+    addresses: addresses?.results || [],
+    cards: cards?.results || []
   };
 };
 
@@ -157,4 +162,28 @@ const getAddresses = async () => {
   });
 
   return response.json() as Promise<{ results: SwellGraphQL_AddressObject[] }>;
+};
+
+/*****************************************************************************
+ * Get logged user cards using REST API
+ * (GraphQL API does not support addresses?)
+ ****************************************************************************/
+const getCards = async () => {
+  const session = getSessionCookie();
+
+  if (!session) {
+    return null;
+  }
+
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set('Content-Type', 'application/json');
+  requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
+  requestHeaders.set('X-Session', session);
+
+  const response = await fetch('https://square-one.swell.store/api/account/cards', {
+    method: 'GET',
+    headers: requestHeaders
+  });
+
+  return response.json() as Promise<{ results: SwellGraphQL_CardObject[] }>;
 };
