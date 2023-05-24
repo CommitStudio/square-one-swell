@@ -1,4 +1,4 @@
-import ToastContainer from '~/components/ToastContainer';
+import ToastLoader from '~/components/ToastLoader';
 import Footer from '~/components/globals/Footer';
 import Navbar from '~/components/globals/navbar/Navbar';
 
@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <ToastContainer />
+        <ToastLoader />
         <Navbar />
         <div className="min-h-[calc(100vh-600px)] sm:min-h-[calc(100vh-300px)]">{children}</div>
         <Footer />
