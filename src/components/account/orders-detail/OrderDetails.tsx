@@ -16,7 +16,7 @@ const OrderDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
     <>
       <Link
         href="/account/orders"
-        className="flex items-center text-sm cursor-pointer pb-8 font-quicksand"
+        className="inline-flex items-center text-sm cursor-pointer mb-8 font-quicksand"
       >
         <BackIcon />
         <span className="pl-2 text-black">Back to all orders</span>
