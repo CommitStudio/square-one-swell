@@ -1,5 +1,6 @@
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
 
+import BackToTop from './BackToTop';
 import { CostDetails } from './CostDetails';
 import { DeliveryDetails } from './DeliveryDetails';
 import { PaymentDetail } from './PaymentDetails';
@@ -7,7 +8,6 @@ import { ProductsDetails } from './ProductsDetails';
 
 import BackIcon from 'public/img/icons/BackIcon';
 
-import { useGetOrderById } from '~/hooks/useSwellAccount';
 import { formatDate } from '~/utils/dates';
 import { formatCurrency } from '~/utils/numbers';
 
@@ -35,7 +35,6 @@ const OrderDetails = ({ orderId, orders }: Props) => {
             <span className="pl-2 text-black">Back to all orders</span>
           </div>
 
-          {/* Summary Details */}
           <h3 className="text-xl font-bold pb-4">Order number #{order.number}</h3>
           <div className="leading-7 py-4">
             <p>
@@ -66,20 +65,8 @@ const OrderDetails = ({ orderId, orders }: Props) => {
           <hr />
           <DeliveryDetails order={order} />
           <PaymentDetail order={order} />
-
           <hr className="mt-24 mb-3" />
-          {/* Back to top */}
-          <div
-            className="text-center text-sm cursor-pointer"
-            // onClick={() =>
-            //   window.scrollTo({
-            //     top: 0,
-            //     behavior: 'smooth'
-            //   })
-            // }
-          >
-            Back to top
-          </div>
+          <BackToTop />
         </>
       )}
     </>
