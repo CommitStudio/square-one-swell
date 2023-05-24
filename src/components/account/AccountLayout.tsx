@@ -19,7 +19,7 @@ const AccountLayout = ({ account, children }: Props) => {
               {account?.firstName} {account?.lastName}
             </h4>
             {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
-            <EditProfileModal />
+            <EditProfileModal account={account} />
           </div>
           <div className="space-y-4 my-10">
             <AccountLink href="/account/orders" pathname="/account/orders" label="Orders" />

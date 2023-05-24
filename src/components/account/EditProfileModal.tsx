@@ -11,7 +11,6 @@ import Button from '../globals/button/Button';
 
 import Modal from '~/components/account/Modal';
 
-import { useGlobalState } from '~/hooks/useStore';
 import { useUpdateAccount } from '~/hooks/useSwellAccount';
 import { notifySuccess } from '~/utils/toastifies';
 
@@ -23,9 +22,8 @@ type Inputs = {
   confirmPassword?: string;
 };
 
-const EditProfileModal = () => {
-  const { account } = useGlobalState();
-  const { first_name, last_name, email } = account || {};
+const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) => {
+  const { firstName, lastName, email } = account || {};
   const [openEdit, setOpenEdit] = useState(false);
 
   const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
@@ -54,10 +52,10 @@ const EditProfileModal = () => {
   };
 
   useEffect(() => {
-    setValue('first_name', first_name || '');
-    setValue('last_name', last_name || '');
-    setValue('email', email?.email || '');
-  }, [email?.email, first_name, last_name, setValue]);
+    setValue('first_name', firstName || '');
+    setValue('last_name', lastName || '');
+    setValue('email', email || '');
+  }, [email, firstName, lastName, setValue]);
 
   return (
     <>
@@ -88,7 +86,7 @@ const EditProfileModal = () => {
               className="w-full mb-8 p-2 border"
               id="first_name"
               type="text"
-              placeholder={first_name}
+              placeholder={firstName}
               {...register('first_name', {
                 maxLength: { value: 50, message: 'first name is too long.' }
               })}
@@ -103,7 +101,7 @@ const EditProfileModal = () => {
               className="w-full mb-8 p-2 border"
               id="last_name"
               type="text"
-              placeholder={last_name}
+              placeholder={lastName}
               {...register('last_name', {
                 maxLength: { value: 50, message: 'Last name is too long.' }
               })}
@@ -119,7 +117,7 @@ const EditProfileModal = () => {
               className="w-full mb-8 p-2 border"
               id="email"
               type="text"
-              placeholder={email?.email}
+              placeholder={email}
               {...register('email', {
                 maxLength: { value: 50, message: 'e-mail is too long.' }
               })}
