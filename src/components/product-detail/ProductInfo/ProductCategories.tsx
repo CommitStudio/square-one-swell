@@ -17,14 +17,13 @@ const ProductCategories = ({ product, categories }: ProductProp) => {
       <span>Categories:</span>
       {productCategories?.map((category, i) => {
         return (
-          (<Link
+          <Link
             key={`product-category-${i}`}
             href={`/products?category=${category?.slug?.category as string}`}
-            className="border border-gray-dark px-2 mx-2.5 cursor-pointer hover:bg-black hover:text-green">
-
+            className="border border-gray-dark px-2 mx-2.5 cursor-pointer hover:bg-black hover:text-green"
+          >
             {category?.name}
-
-          </Link>)
+          </Link>
         );
       })}
     </div>

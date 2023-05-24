@@ -16,16 +16,15 @@ export const ArrowLeft = ({ current }: { current: number }) => {
   }
 
   return (
-    (<Link
+    <Link
       href={{
         pathname,
         query: { ...query, page: current - 1 }
       }}
-      className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500 hover:text-gray-dark z-10">
-
+      className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500 hover:text-gray-dark z-10"
+    >
       <ArrowLeftIcon />
-
-    </Link>)
+    </Link>
   );
 };
 
@@ -44,16 +43,15 @@ export const ArrowRight = ({ current, pages }: { current: number; pages: number[
   }
 
   return (
-    (<Link
+    <Link
       href={{
         pathname,
         query: { ...query, page: current + 1 }
       }}
-      className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500 hover:text-gray-dark z-10">
-
+      className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-gray-200 px-2 py-2 text-sm font-medium text-gray-500 hover:text-gray-dark z-10"
+    >
       <ArrowRightIcon />
-
-    </Link>)
+    </Link>
   );
 };
 

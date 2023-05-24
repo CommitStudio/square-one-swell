@@ -39,9 +39,7 @@ const ProductCard = ({ product }: Props) => {
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
           <Link href={`/product-detail/${product.slug}`}>
-
             <Image src={image.src} alt={image.alt} layout="fill" objectFit="cover" />
-
           </Link>
         </div>
         <p className="font-quicksand mt-3 mb-3 uppercase line-clamp-2 h-12">{product.name}</p>

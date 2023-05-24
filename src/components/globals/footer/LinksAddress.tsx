@@ -20,9 +20,7 @@ const LinksAddress = () => {
             return (
               <p key={`address-item-1.${i}`}>
                 <Link href={item.href} className="hover:underline">
-
                   {item.name}
-
                 </Link>
               </p>
             );
@@ -33,9 +31,7 @@ const LinksAddress = () => {
             return (
               <p key={`address-item-2.${i}`}>
                 <Link href={item.href} className="hover:underline">
-
                   {item.name}
-
                 </Link>
               </p>
             );

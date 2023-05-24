@@ -19,12 +19,11 @@ export const PageLink = ({ page }: { page: number }) => {
   const { pathname, query } = useRouter();
 
   return (
-    (<Link
+    <Link
       href={{ pathname, query: { ...query, page: page } }}
-      className="relative inline-flex items-center border border-gray-medium bg-white px-4 py-2 text-sm font-medium text-gray-medium hover:border-gray-dark hover:text-gray-dark hover:z-20">
-
+      className="relative inline-flex items-center border border-gray-medium bg-white px-4 py-2 text-sm font-medium text-gray-medium hover:border-gray-dark hover:text-gray-dark hover:z-20"
+    >
       {page}
-
-    </Link>)
+    </Link>
   );
 };
