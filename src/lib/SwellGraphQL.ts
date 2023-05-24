@@ -71,6 +71,9 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
             }
           }
           currency
+          subTotal
+          shipmentPrice
+          taxTotal
           grandTotal
           paid
         }

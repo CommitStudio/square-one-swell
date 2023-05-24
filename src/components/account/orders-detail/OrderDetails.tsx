@@ -62,7 +62,7 @@ const OrderDetails = ({ orderId, orders }: Props) => {
           </div>
 
           <ProductsDetails order={order} />
-          {/* <CostDetails order={order} /> */}
+          <CostDetails order={order} />
           <hr />
           {/* <DeliveryDetails order={order} /> */}
           {/* <PaymentDetail order={order} /> */}

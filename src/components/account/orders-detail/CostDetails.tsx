@@ -1,30 +1,26 @@
 import { formatCurrency } from '~/utils/numbers';
 
-type OrderProps = {
-  order: Order;
-};
-
-export const CostDetails = ({ order }: OrderProps) => {
+export const CostDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (
     <div className="py-6 flex flex-row justify-between">
-      <div className="">
+      <div>
         <p className="pb-3">Sub-Total</p>
-        <p className="">Shipping</p>
-        <p className="">Taxes</p>
+        <p>Shipping</p>
+        <p>Taxes</p>
         <p className="pt-3 font-bold">Total</p>
       </div>
       <div className="text-end">
         <p className="pb-3">
-          {order.currency} {formatCurrency(order.sub_total || 0)}
+          {order.currency} {formatCurrency(order.subTotal || 0)}
         </p>
-        <p className="">
-          {order.currency} {formatCurrency(order.shipment_price || 0)}
+        <p>
+          {order.currency} {formatCurrency(order.shipmentPrice || 0)}
         </p>
-        <p className="">
-          {order.currency} {formatCurrency(order.tax_total || 0)}
+        <p>
+          {order.currency} {formatCurrency(order.taxTotal || 0)}
         </p>
         <p className="pt-3 font-bold">
-          {order.currency} {formatCurrency(order.grand_total || 0)}
+          {order.currency} {formatCurrency(order.grandTotal || 0)}
         </p>
       </div>
     </div>
