@@ -6,11 +6,20 @@ type RequestBody = {
 };
 
 /*****************************************************************************
+ * Extract Swell session cookie
+ ****************************************************************************/
+const getSessionCookie = () => {
+  const nextCookies = cookies();
+  const session = nextCookies.get('swell-session')?.value as string;
+
+  return session;
+};
+
+/*****************************************************************************
  * Make GraphQL requests to Swell API
  ****************************************************************************/
 const makeRequest = async (body: RequestBody) => {
-  const nextCookies = cookies();
-  const session = nextCookies.get('swell-session')?.value as string;
+  const session = getSessionCookie();
 
   if (!session) {
     return null;
@@ -117,8 +126,35 @@ export const getUserInfo = async () => {
     return redirect('/account/login');
   }
 
+  const addresses = await getAddresses();
+
   return {
     user: user.account,
-    orders: user.orders.results
+    orders: user.orders.results || [],
+    addresses: addresses?.results || []
   };
+};
+
+/*****************************************************************************
+ * Get logged user addresses using REST API
+ * (GraphQL API does not support addresses?)
+ ****************************************************************************/
+const getAddresses = async () => {
+  const session = getSessionCookie();
+
+  if (!session) {
+    return null;
+  }
+
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set('Content-Type', 'application/json');
+  requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
+  requestHeaders.set('X-Session', session);
+
+  const response = await fetch('https://square-one.swell.store/api/account/addresses', {
+    method: 'GET',
+    headers: requestHeaders
+  });
+
+  return response.json() as Promise<{ results: SwellGraphQL_AddressObject[] }>;
 };

@@ -5,12 +5,16 @@ import { useState } from 'react';
 import AddressesBody from '~/components/account/address/AddressesBody';
 import NewAddressModal from '~/components/account/address/NewAddressModal';
 
-export default function AddressContainer() {
+type Props = {
+  addresses: SwellGraphQL_AddressObject[];
+};
+
+export default function AddressContainer({ addresses }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <AddressesBody setOpen={setOpen} />
+      <AddressesBody addresses={addresses} setOpen={setOpen} />
       <NewAddressModal open={open} setOpen={setOpen} />
     </>
   );

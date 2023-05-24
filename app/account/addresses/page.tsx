@@ -4,11 +4,11 @@ import AddressContainer from '~/components/account/address/AddressContainer';
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
 export default async function Addresses() {
-  const { user } = await getUserInfo();
+  const { user, addresses } = await getUserInfo();
 
   return (
     <AccountLayout account={user}>
-      <AddressContainer />
+      <AddressContainer addresses={addresses} />
     </AccountLayout>
   );
 }

@@ -74,3 +74,21 @@ interface SwellGraphQL_OrdersObject {
     };
   };
 }
+
+interface SwellGraphQL_AddressObject {
+  parent_id: string;
+  name: string;
+  address1: string;
+  address2: string;
+  city: string;
+  zip: string;
+  country: string;
+  phone: string;
+  active: boolean;
+  first_name: string;
+  last_name: string;
+  fingerprint: string;
+  date_created: string;
+  date_updated: string;
+  id: string;
+}
