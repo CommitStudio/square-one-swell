@@ -31,7 +31,7 @@ const makeRequest = async (body: RequestBody) => {
 };
 
 /*****************************************************************************
- * Get logged user information
+ * Get required data in a single GraphQL request
  ****************************************************************************/
 export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> => {
   const { data } = (await makeRequest({
@@ -108,7 +108,7 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
 };
 
 /*****************************************************************************
- *
+ * Get logged user information
  ****************************************************************************/
 export const getUserInfo = async () => {
   const user = await getLoggedUser();

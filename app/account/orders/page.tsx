@@ -7,7 +7,7 @@ import Button from '~/components/globals/button/Button';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
-export default async function Test() {
+export default async function Orders() {
   const { user, orders } = await getUserInfo();
 
   return (
