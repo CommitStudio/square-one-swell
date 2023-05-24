@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
@@ -7,11 +8,10 @@ import { TbEdit } from 'react-icons/tb';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import Button from '../globals/button/Button';
-
 import Modal from '~/components/account/Modal';
+import Button from '~/components/globals/button/Button';
 
-import { useUpdateAccount } from '~/hooks/useSwellAccount';
+import swell from '~/lib/SwellJS';
 import { notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {
@@ -23,10 +23,10 @@ type Inputs = {
 };
 
 const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) => {
+  const router = useRouter();
+
   const { firstName, lastName, email } = account || {};
   const [openEdit, setOpenEdit] = useState(false);
-
-  const [updateUser, setUpdateUser] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -38,17 +38,23 @@ const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) 
     mode: 'onChange'
   });
 
-  useUpdateAccount(updateUser);
-
   // Used to check if password and confirmPassword fields are the same
   const password = useRef({});
   password.current = watch('password');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     delete data?.confirmPassword; // Delete confirmPassword not required on the store
-    setUpdateUser(data);
-    setOpenEdit(false);
-    notifySuccess('Your account information has been successfully updated.');
+
+    swell.account
+      .update(data)
+      .then(() => {
+        setOpenEdit(false);
+        router.refresh();
+        notifySuccess('Your account information has been successfully updated.');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
