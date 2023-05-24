@@ -1,22 +1,19 @@
 ## Introduction to Square One
 
----
 
 Square One is an e-commerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful e-commerce business.
 
 ## Overview
 
----
 
 1. Features
 2. Main Technologies
 3. Before starting development
-4. Running StoreFront
+4. Running Square One
 5. License
 
 ## 1. Features
 
----
 
 - E-commerce theme optimized for a Swell store
 - Home page
@@ -38,7 +35,6 @@ Square One is an e-commerce platform powered by Swell, designed to provide busin
 
 ## 2. Main Technologies
 
----
 
 - Typescript
 - Next.js v12.2.0 and React.js v17.0.2
@@ -46,13 +42,11 @@ Square One is an e-commerce platform powered by Swell, designed to provide busin
 
 ## 3. Before starting development
 
----
 
 To use Square One, you need to have a Swell account with a respective store. Visit the [Swell official website](https://www.swell.is/) for more information.
 
 ## 4. Running Square One (local)
 
----
 
 To run the store locally:
 
@@ -66,7 +60,6 @@ To run the store locally:
 
 ## 5. License
 
----
 
 MIT License
 Copyright (c) 2023 Commit Studio
