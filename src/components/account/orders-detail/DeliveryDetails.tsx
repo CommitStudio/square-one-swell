@@ -1,10 +1,6 @@
 import { formatCurrency } from '~/utils/numbers';
 
-type OrderProps = {
-  order: Order;
-};
-
-export const DeliveryDetails = ({ order }: OrderProps) => {
+export const DeliveryDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (
     <>
       <h5 className="text-xl py-6 text-center">Delivery details</h5>
@@ -12,8 +8,8 @@ export const DeliveryDetails = ({ order }: OrderProps) => {
         <div className="pb-4">
           Method:{' '}
           <span>
-            {order.shipping.service_name} ({order.currency}{' '}
-            {formatCurrency(order.shipment_price || 0)})
+            {order.shipping.serviceName} ({order.currency}{' '}
+            {formatCurrency(order.shipmentPrice || 0)})
           </span>
         </div>
         <div className="pb-4">Address:</div>

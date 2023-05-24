@@ -44,9 +44,19 @@ interface SwellGraphQL_OrdersObject {
     };
   }[];
   currency: string;
+  paid: boolean;
   subTotal: number;
   shipmentPrice: number;
   taxTotal: number;
   grandTotal: number;
-  paid: boolean;
+  shipping: {
+    serviceName: string;
+    address1: string;
+    address2: string;
+    city: string;
+    zip: string;
+    state: string;
+    country: string;
+    phone: string;
+  };
 }

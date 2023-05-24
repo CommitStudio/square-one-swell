@@ -62,7 +62,6 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
             }
             product {
               name
-              price
               images {
                 file {
                   url
@@ -71,11 +70,21 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
             }
           }
           currency
+          paid
           subTotal
           shipmentPrice
           taxTotal
           grandTotal
-          paid
+          shipping {
+            serviceName
+            address1
+            address2
+            city
+            zip
+            state
+            country
+            phone
+          }
         }
       }
     }`
