@@ -16,13 +16,13 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
 
   // Transform the selected products, from object into an array, to compare them with the set of active ids.
-  const availableProductsId = Object.entries(selectedIds).map(([key, value]) => value);
+  const availableProductsId = Object.entries(selectedIds).map(([, value]) => value);
 
   // Find the first available (active) variant option and select it by default
   useEffect(() => {
     const firstActiveVariant = product.variants?.reverse().find((variant) => variant.active);
     const firstActiveLabel = firstActiveVariant?.name.split(', ');
-    product.options?.map((option, i, key) => {
+    product.options?.map((option, i) => {
       setChosenOptions((prev) => ({
         ...prev,
         [option.label]: firstActiveLabel ? firstActiveLabel[i] : ''
@@ -36,7 +36,7 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
     // When the options have an item clicked we ask if the selected ids are the same as in the active variant
     if (availableProductsId.length === product.options?.length) {
       // Returns true or false if the selected ids are the same in the active variant
-      const selectedIdsameAsActiveVariants = activeProductVariants?.map((variant, key) => {
+      const selectedIdsameAsActiveVariants = activeProductVariants?.map((variant) => {
         return variant.value_ids.every((id) => {
           return availableProductsId?.includes(id);
         });

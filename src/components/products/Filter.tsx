@@ -36,6 +36,8 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
   useEffect(() => {
     inputRef.current?.focus();
     query.search && setSearchValue(query.search as string);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = () => {

@@ -255,8 +255,8 @@ declare module 'swell-js' {
     function removeItem(itemId: string): Promise<Cart>;
     function setItems(input: CartInput[]): Promise<Cart>;
     function submitOrder(): Promise<unknown>;
-    function update(input: any): Promise<Cart>;
-    function updateItem(itemId: string, input: any): Promise<Cart>;
+    function update(input: unknown): Promise<Cart>;
+    function updateItem(itemId: string, input: unknown): Promise<Cart>;
   }
 
   export namespace categories {
@@ -301,6 +301,6 @@ declare module 'swell-js' {
     function list(): Promise<unknown>;
     function removeItem(id: string, itemId: string): Promise<unknown>;
     function update(id: string, input: object): Promise<unknown>;
-    function updateItem(id: string, itemId: string, input: any): Promise<unknown>;
+    function updateItem(id: string, itemId: string, input: unknown): Promise<unknown>;
   }
 }

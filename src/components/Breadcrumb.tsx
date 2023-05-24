@@ -19,6 +19,8 @@ const Breadcrumb = () => {
   // Set mainRoute globally at the first load
   useEffect(() => {
     updateStateProp('breadcrumbMainRoute', mainRoute);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Take the selected category from global store
@@ -36,9 +38,7 @@ const Breadcrumb = () => {
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
-          <Link
-            href="/"
-            className="inline-flex items-center text-sm font-normal hover:underline">
+          <Link href="/" className="inline-flex items-center text-sm font-normal hover:underline">
             Home
           </Link>
         </li>
@@ -59,14 +59,13 @@ const Breadcrumb = () => {
                   ></path>
                 </svg>
                 {i < breadcrumbRoute.length - 1 ? (
-                  (<Link
+                  <Link
                     href={`/${route.toLowerCase()}`}
                     onClick={handleClick}
-                    className="ml-1 text-sm font-normal hover:underline md:ml-2">
-
+                    className="ml-1 text-sm font-normal hover:underline md:ml-2"
+                  >
                     {route}
-
-                  </Link>)
+                  </Link>
                 ) : (
                   <span className="ml-1 text-sm font-normal md:ml-2">{route}</span>
                 )}
