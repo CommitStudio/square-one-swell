@@ -52,7 +52,7 @@ To run the store locally:
 
 1. Clone the repository.
 2. Install all the necessary modules and packages by typing `npm install` in the command line.
-3. To connect your store to the Store One project:
+3. To connect your store to the Square One project:
    3.1. Go to the Developer's dropdown menu in the API keys section, and grab your store ID, secret key, and public key.
    3.2. Create your `.env` file, copying the `.env.example`, and set the relevant keys.
    - In case needed, a variable is available for a Google GTAG.
