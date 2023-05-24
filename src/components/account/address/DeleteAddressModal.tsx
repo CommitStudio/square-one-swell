@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
@@ -5,7 +6,6 @@ import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 import Button from '~/components/globals/button/Button';
 
-import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 
 type Props = {
@@ -15,14 +15,16 @@ type Props = {
 };
 
 const DeleteAddressModal = ({ openModal, setOpenModal, addressId }: Props) => {
-  const { setAddresses } = useGlobalState();
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDeleteAddress = async (id: string) => {
     setIsLoading(true);
+
     await swell.account.deleteAddress(id);
-    const allAddress = await swell.account.listAddresses();
-    setAddresses(allAddress.results);
+
+    router.refresh();
     setOpenModal(false);
   };
 

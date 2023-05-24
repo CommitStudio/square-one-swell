@@ -1,10 +1,10 @@
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/components/account/Modal';
 import Button from '~/components/globals/button/Button';
 import countriesJSON from '~/data/countries.json';
-import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 
 const { countries } = countriesJSON;
@@ -26,7 +26,7 @@ type Props = {
 };
 
 const NewAddressModal = ({ open, setOpen }: Props) => {
-  const { setAddresses } = useGlobalState();
+  const router = useRouter();
 
   const {
     register,
@@ -37,6 +37,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const fullName = `${data.first_name} ${data.last_name}`;
+
     await swell.account.createAddress({
       name: fullName,
       address1: data.address1,
@@ -47,8 +48,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
       phone: data.phone
     });
 
-    const allAddress = await swell.account.listAddresses();
-    setAddresses(allAddress.results);
+    router.refresh();
     setOpen(false);
     reset();
   };

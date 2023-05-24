@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useReducer } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
@@ -5,7 +6,6 @@ import { GrClose } from 'react-icons/gr';
 import Modal from '~/components/account/Modal';
 import Button from '~/components/globals/button/Button';
 import countriesJSON from '~/data/countries.json';
-import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 
 const { countries } = countriesJSON;
@@ -28,7 +28,7 @@ type Props = {
 };
 
 const EditAddressModal = ({ open, setOpen, address }: Props) => {
-  const { setAddresses } = useGlobalState();
+  const router = useRouter();
 
   const {
     register,
@@ -59,15 +59,10 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
         swell.account.updateAddress(address.id, action.value).catch((err) => {
           console.error(err);
         });
-        swell.account
-          .listAddresses()
-          .then((allAddresses) => {
-            setAddresses(allAddresses.results);
-            setOpen(false);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+
+        router.refresh();
+        setOpen(false);
+
         break;
       case 'updateInputOnChange':
         return action.value;
