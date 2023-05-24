@@ -85,6 +85,20 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
             country
             phone
           }
+          billing {
+            address1
+            address2
+            city
+            zip
+            state
+            country
+            card {
+              brand
+              last4
+              expMonth
+              expYear
+            }
+          }
         }
       }
     }`

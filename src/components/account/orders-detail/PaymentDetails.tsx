@@ -1,8 +1,4 @@
-type OrderProps = {
-  order: Order;
-};
-
-export const PaymentDetail = ({ order }: OrderProps) => {
+export const PaymentDetail = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (
     <>
       <h5 className="text-xl py-8 text-center">Payment details</h5>
@@ -19,7 +15,7 @@ export const PaymentDetail = ({ order }: OrderProps) => {
           <p>
             <span>Exp. date: </span>
             <span className="font-bold">
-              {order.billing.card.exp_month}/{order.billing.card.exp_year}
+              {order.billing.card.expMonth}/{order.billing.card.expYear}
             </span>
           </p>
         </div>

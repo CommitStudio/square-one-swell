@@ -65,7 +65,7 @@ const OrderDetails = ({ orderId, orders }: Props) => {
           <CostDetails order={order} />
           <hr />
           <DeliveryDetails order={order} />
-          {/* <PaymentDetail order={order} /> */}
+          <PaymentDetail order={order} />
 
           <hr className="mt-24 mb-3" />
           {/* Back to top */}

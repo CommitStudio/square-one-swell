@@ -59,4 +59,18 @@ interface SwellGraphQL_OrdersObject {
     country: string;
     phone: string;
   };
+  billing: {
+    address1: string;
+    address2: string;
+    city: string;
+    zip: string;
+    state: string;
+    country: string;
+    card: {
+      brand: string;
+      last4: string;
+      expMonth: string;
+      expYear: string;
+    };
+  };
 }
