@@ -24,8 +24,6 @@ const ResetPasswordForm = () => {
   const [isConfirmHidden, setIsConfirmHidden] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  // http://localhost:3000/account/reset-password?key=c7727bf02ca21c4ab5d19a73b147e3e7
-
   const {
     register,
     handleSubmit,
