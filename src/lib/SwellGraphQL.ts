@@ -148,7 +148,7 @@ export const getUserInfo = async () => {
  ****************************************************************************/
 const getAddresses = async () => {
   const response = (await makeRequest('/api/account/addresses')) as {
-    results: SwellGraphQL_AddressObject;
+    results: SwellGraphQL_AddressObject[];
   };
 
   return response.results;
