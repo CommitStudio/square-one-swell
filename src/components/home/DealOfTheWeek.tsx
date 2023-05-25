@@ -1,6 +1,5 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
-
-import Countdown from './Countdown';
 
 import data from '~/data/promotions.json';
 import Container from '~/layouts/Container';
@@ -11,6 +10,8 @@ type DealOfTheWeekProps = {
   promotion: Promotion;
   imagePromotion?: string;
 };
+
+const Countdown = dynamic(() => import('./Countdown'), { ssr: false });
 
 const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
   const name = promotion.name;
@@ -23,8 +24,8 @@ const DealOfTheWeek = ({ promotion, imagePromotion }: DealOfTheWeekProps) => {
           <Image
             src={imagePromotion ? imagePromotion : promotions[0]?.image.src}
             alt={promotion.name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
           />
         </div>
         <Container>
