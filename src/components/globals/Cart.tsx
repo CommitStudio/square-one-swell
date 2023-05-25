@@ -80,7 +80,6 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             <Image
               src="/img/close-logo.svg"
               alt="Close icon"
-              layout="fixed"
               width={20}
               height={20}
               className="cursor-pointer"
