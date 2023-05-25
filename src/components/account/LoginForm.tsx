@@ -22,6 +22,7 @@ const LoginForm = () => {
   const router = useRouter();
 
   const [isHidden, setIsHidden] = useState(true);
+  const [invalidLogin, setInvalidLogin] = useState(false);
 
   const {
     register,
@@ -42,13 +43,13 @@ const LoginForm = () => {
       .login(email, password)
       .then((account) => {
         if (account) {
+          router.push('/');
           notifySuccess(
             'Welcome! You are now logged in and can proceed to checkout or continue shopping'
           );
-
-          return router.push('/account/orders');
         } else {
           notifyFailure('Something went wrong. Please check your credentials');
+          setInvalidLogin(true);
         }
       })
       .catch((e) => {
@@ -61,9 +62,9 @@ const LoginForm = () => {
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-libre first-line:font-semibold text-3xl mb-2">Log in</h1>
-          {/* {user === null && (
+          {invalidLogin && (
             <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
-          )} */}
+          )}
           <span>
             <span className="text-red-500">*</span> Indicates a required field
           </span>

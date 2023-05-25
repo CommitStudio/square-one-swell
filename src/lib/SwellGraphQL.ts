@@ -124,8 +124,12 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
 /*****************************************************************************
  * Get logged user information
  ****************************************************************************/
-export const getUserInfo = async () => {
+export const getUserInfo = async (noRedirect = false) => {
   const user = await getLoggedUser();
+
+  if (noRedirect && !user?.session.accountId) {
+    return null;
+  }
 
   if (!user?.session.accountId) {
     return redirect('/account/login');
@@ -151,7 +155,7 @@ const getAddresses = async () => {
     results: SwellGraphQL_AddressObject[];
   };
 
-  return response.results;
+  return response?.results;
 };
 
 /*****************************************************************************
@@ -163,5 +167,5 @@ const getCards = async () => {
     results: SwellGraphQL_CardObject[];
   };
 
-  return response.results;
+  return response?.results;
 };
