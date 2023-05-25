@@ -1,6 +1,7 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -17,18 +18,13 @@ interface CategoriesProps {
 }
 
 const CategoriesSlider = ({ categories }: CategoriesProps) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const { updateStateProp } = useStore();
+
   const handleClick = (categoryName: string) => {
     updateStateProp('breadcrumbSelectedCategory', categoryName);
   };
 
-  return isMounted ? (
+  return (
     <div id="slider" className="relative px-3 mb-5">
       <h5 className="text-center text-2xl pt-4 pb-8 uppercase font-libre">Categories</h5>
       <Swiper
@@ -87,14 +83,14 @@ const CategoriesSlider = ({ categories }: CategoriesProps) => {
                   linkUrl={{ pathname: 'products', query: category.slug }}
                   action={() => handleClick(category.name)}
                   classes="border-0 !py-0 hover:!bg-white hover:!text-black hover:underline"
-                ></Button>
+                />
               </div>
             </SwiperSlide>
           );
         })}
       </Swiper>
     </div>
-  ) : null;
+  );
 };
 
 export default CategoriesSlider;

@@ -1,12 +1,11 @@
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+import Countdown from './Countdown';
 
 import data from '~/data/promotions.json';
 import Container from '~/layouts/Container';
 
 const { promotions } = data;
-
-const Countdown = dynamic(() => import('./Countdown'), { ssr: false });
 
 type DealOfTheWeekProps = {
   promotion: Promotion;

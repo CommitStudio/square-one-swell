@@ -1,3 +1,5 @@
+'use client';
+
 import { useCountdown } from '~/hooks/useCountdown';
 
 type CountdownProps = {

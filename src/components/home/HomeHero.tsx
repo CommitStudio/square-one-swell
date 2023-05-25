@@ -1,22 +1,23 @@
+'use client';
+
 import Image from 'next/image';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import Button from '../globals/button/Button';
+import Button from '~/components/globals/button/Button';
 
 import data from '~/data/home-hero.json';
 import { useStore } from '~/hooks/useStore';
 
 const HomeHero = () => {
   const { hero_images } = data;
+
   const { updateStateProp } = useStore();
+
   const handleClick = (itemName: string) => {
     updateStateProp('breadcrumbSelectedCategory', itemName);
   };
