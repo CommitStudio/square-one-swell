@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
@@ -7,7 +8,6 @@ import Modal from '~/components/account/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 import Button from '~/components/globals/button/Button';
 
-import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
@@ -26,8 +26,10 @@ type Props = {
 };
 
 const PaymentsModal = ({ open, setOpen }: Props) => {
-  const { setCards, setAccount } = useGlobalState();
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -47,15 +49,16 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
         exp_year: year,
         cvc: data.cvc
       });
-      await swell.account.createCard(cardToken);
-      const { results } = await swell.account.listCards();
-      setCards(results);
+
+      const { id } = (await swell.account.createCard(cardToken)) as { id: string };
+
       if (data.isDefaultCard) {
-        const defaultCard = await swell.account.update({
-          billing: { account_card_id: results[0].id }
+        await swell.account.update({
+          billing: { account_card_id: id }
         });
-        setAccount(defaultCard);
       }
+
+      router.refresh();
       notifySuccess('New payment method added');
       setOpen(false);
     } catch (e) {

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
@@ -5,7 +6,6 @@ import Modal from '../Modal';
 
 import { Spinner } from '~/components/globals/Spinner';
 import Button from '~/components/globals/button/Button';
-import { useGlobalState } from '~/hooks/useStore';
 
 import swell from '~/lib/SwellJS';
 
@@ -16,14 +16,16 @@ type Props = {
 };
 
 const DeleteCardModal = ({ openConfModal, setOpenConfModal, cardId }: Props) => {
-  const { setCards } = useGlobalState();
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDeleteCard = async (id: string) => {
     setIsLoading(true);
     await swell.account.deleteCard(id);
-    const { results } = await swell.account.listCards();
-    setCards(results);
+
+    router.refresh();
+    setOpenConfModal(false);
   };
 
   return (

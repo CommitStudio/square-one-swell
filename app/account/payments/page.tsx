@@ -22,9 +22,9 @@ export default async function Payments() {
         <p className="text-gray-dark">There are no payment methods associated with this account.</p>
       ) : (
         <div className="grid gap-3 md:auto-rows-fr md:grid-cols-2 md:gap-8">
-          {cards?.map((card) => {
-            return <PaymentCard card={card} key={card.id} defaultCard={card.id === defaultCard} />;
-          })}
+          {cards?.map((card) => (
+            <PaymentCard card={card} key={card.id} defaultCard={card.id === defaultCard} />
+          ))}
         </div>
       )}
 
