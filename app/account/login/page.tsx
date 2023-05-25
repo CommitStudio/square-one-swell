@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import LoginForm from '~/components/account/LoginForm';
 
 import keywords from '~/data/keywords.json';
-import { getUserInfo } from '~/lib/SwellGraphQL';
+import { isAuthenticated } from '~/lib/SwellGraphQL';
 
 export const metadata = {
   title: 'SquareOne - Login',
@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 export default async function Login() {
-  const auth = await getUserInfo(true);
+  const auth = await isAuthenticated();
 
   if (auth) {
     redirect('/account/orders');
