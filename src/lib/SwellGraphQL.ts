@@ -5,6 +5,8 @@ type RequestBody = {
   query: string;
 };
 
+const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
+
 /*****************************************************************************
  * Extract Swell session cookie
  ****************************************************************************/
@@ -16,9 +18,9 @@ const getSessionCookie = () => {
 };
 
 /*****************************************************************************
- * Make GraphQL requests to Swell API
+ * Make API request to Swell using logged user session
  ****************************************************************************/
-const makeRequest = async (body: RequestBody) => {
+const makeRequest = async (path: string, method = 'GET', body?: RequestBody) => {
   const session = getSessionCookie();
 
   if (!session) {
@@ -30,8 +32,8 @@ const makeRequest = async (body: RequestBody) => {
   requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
   requestHeaders.set('X-Session', session);
 
-  const response = await fetch('https://square-one.swell.store/graphql', {
-    method: 'POST',
+  const response = await fetch(`https://${SWELL_STORE_ID}.swell.store${path}`, {
+    method: method,
     headers: requestHeaders,
     body: JSON.stringify(body)
   });
@@ -43,7 +45,7 @@ const makeRequest = async (body: RequestBody) => {
  * Get required data in a single GraphQL request
  ****************************************************************************/
 export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> => {
-  const response = (await makeRequest({
+  const response = (await makeRequest('/graphql', 'POST', {
     query: `query checkTokenValidity {
       session {
         accountId
@@ -135,8 +137,8 @@ export const getUserInfo = async () => {
   return {
     user: user.account,
     orders: user.orders.results || [],
-    addresses: addresses?.results || [],
-    cards: cards?.results || []
+    addresses: addresses || [],
+    cards: cards || []
   };
 };
 
@@ -145,23 +147,11 @@ export const getUserInfo = async () => {
  * (GraphQL API does not support addresses?)
  ****************************************************************************/
 const getAddresses = async () => {
-  const session = getSessionCookie();
+  const response = (await makeRequest('/api/account/addresses')) as {
+    results: SwellGraphQL_AddressObject;
+  };
 
-  if (!session) {
-    return null;
-  }
-
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set('Content-Type', 'application/json');
-  requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
-  requestHeaders.set('X-Session', session);
-
-  const response = await fetch('https://square-one.swell.store/api/account/addresses', {
-    method: 'GET',
-    headers: requestHeaders
-  });
-
-  return response.json() as Promise<{ results: SwellGraphQL_AddressObject[] }>;
+  return response.results;
 };
 
 /*****************************************************************************
@@ -169,21 +159,9 @@ const getAddresses = async () => {
  * (GraphQL API does not support addresses?)
  ****************************************************************************/
 const getCards = async () => {
-  const session = getSessionCookie();
+  const response = (await makeRequest('/api/account/cards')) as {
+    results: SwellGraphQL_CardObject[];
+  };
 
-  if (!session) {
-    return null;
-  }
-
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set('Content-Type', 'application/json');
-  requestHeaders.set('Authorization', String(process.env.SWELL_PUBLIC_KEY));
-  requestHeaders.set('X-Session', session);
-
-  const response = await fetch('https://square-one.swell.store/api/account/cards', {
-    method: 'GET',
-    headers: requestHeaders
-  });
-
-  return response.json() as Promise<{ results: SwellGraphQL_CardObject[] }>;
+  return response.results;
 };
