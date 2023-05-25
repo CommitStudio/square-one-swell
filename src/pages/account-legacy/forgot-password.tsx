@@ -1,4 +1,4 @@
-import ForgotPasswordForm from '~/components/account/ForgotPasswordForm';
+import ForgotPasswordForm from 'app/account/forgot-password/ForgotPasswordForm';
 import Head from '~/components/globals/Head';
 import keywords from '~/data/keywords.json';
 
