@@ -156,7 +156,7 @@ const getAddresses = async () => {
 
 /*****************************************************************************
  * Get logged user cards using REST API
- * (GraphQL API does not support addresses?)
+ * (GraphQL API does not support cards?)
  ****************************************************************************/
 const getCards = async () => {
   const response = (await makeRequest('/api/account/cards')) as {

@@ -1,12 +1,16 @@
+'use client';
+
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import Button from '~/components/globals/button/Button';
-import { useLogin } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
+import swell from '~/lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {
   email: string;
@@ -15,8 +19,9 @@ type Inputs = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const [isHidden, setIsHidden] = useState(true);
-  const [loginCredentials, setLoginCredentials] = useState<Inputs | null>(null);
 
   const {
     register,
@@ -24,19 +29,31 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  // Perform login when credentials are set
-  const { user } = useLogin(loginCredentials);
-
-  // If login is successful, redirect to the account page
-  if (user) {
-    document.location = '/';
-    return null;
-  }
-
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // If statement is declared incase captcha input is filled (probable bot).
-    if (!data.dontComplete) setLoginCredentials(data);
+    if (data.dontComplete) {
+      return;
+    }
+
+    const { email, password } = data;
+
+    swell.account
+      .login(email, password)
+      .then((account) => {
+        if (account) {
+          notifySuccess(
+            'Welcome! You are now logged in and can proceed to checkout or continue shopping'
+          );
+
+          return router.push('/account/orders');
+        } else {
+          notifyFailure('Something went wrong. Please check your credentials');
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -44,9 +61,9 @@ const LoginForm = () => {
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-libre first-line:font-semibold text-3xl mb-2">Log in</h1>
-          {user === null && (
+          {/* {user === null && (
             <p className="text-red-500 text-sm">There was an error logging in. Please try again.</p>
-          )}
+          )} */}
           <span>
             <span className="text-red-500">*</span> Indicates a required field
           </span>
