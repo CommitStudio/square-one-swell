@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import AddToCart from '~/components/product-detail/ProductInfo/AddToCart';

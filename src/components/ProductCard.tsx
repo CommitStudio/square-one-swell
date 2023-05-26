@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -17,6 +19,7 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -38,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
           </Tooltip>
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
-          <Link href={`/product-detail/${product.slug}`}>
+          <Link href={`/products/${product.slug}`}>
             <Image src={image.src} alt={image.alt} layout="fill" objectFit="cover" />
           </Link>
         </div>
@@ -67,7 +70,7 @@ const ProductCard = ({ product }: Props) => {
         label="VIEW PRODUCT"
         fullWidth
         color="black"
-        linkUrl={`/product-detail/${product.slug}`}
+        linkUrl={`/products/${product.slug}`}
         classes={`transition-all duration-300 ${isHovered ? '' : 'md:opacity-0'}`}
       />
     </div>

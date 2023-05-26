@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { AiFillFacebook, AiOutlineTwitter } from 'react-icons/ai';
 import { BsPinterest } from 'react-icons/bs';
 
 const ProductSocialMedia = () => {
-  const router = useRouter();
-  const route = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`;
+  const pathname = usePathname();
+  const route = `${process.env.NEXT_PUBLIC_BASE_URL}${pathname as string}`;
   const formattedRoute = route.replaceAll(':', '%3A').replaceAll('/', '%2F');
 
   return (
