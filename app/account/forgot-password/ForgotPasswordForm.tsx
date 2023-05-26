@@ -1,15 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import { useState } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsArrowLeft } from 'react-icons/bs';
 
 import Button from '~/components/globals/button/Button';
 import Container from '~/layouts/Container';
+
 import swell from '~/lib/SwellJS';
 import { notifyFailure } from '~/utils/toastifies';
-
-const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 type Inputs = {
   email: string;
@@ -17,7 +17,7 @@ type Inputs = {
 };
 
 const ForgotPasswordForm = () => {
-  const [confirmation, setConfirmation] = useState(false); // Used to show confirmation message after form is submitted
+  const [confirmation, setConfirmation] = useState(false);
 
   const {
     register,
@@ -29,9 +29,10 @@ const ForgotPasswordForm = () => {
     try {
       await swell.account.recover({
         email: data.email,
-        reset_url: `${NEXT_PUBLIC_BASE_URL}/account/reset-password?key={reset_key}`
+        reset_url: `${process.env.NEXT_PUBLIC_BASE_URL}/account/reset-password?key={reset_key}`
       });
-      setConfirmation(true); // Turn on confirmation that a message has been sent
+
+      setConfirmation(true);
     } catch (error) {
       notifyFailure('There was an error sending your email. Please try again.');
       console.error(error);
@@ -43,7 +44,7 @@ const ForgotPasswordForm = () => {
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <h1 className="font-libre font-semibold text-3xl pb-6 mb-4">Forgot your password?</h1>
         <p className="text-sm pb-6 mb-4">
-          Enter your email address and we’ll send you an email on how to reset your password.
+          Enter your email address and we&apos;ll send you an email on how to reset your password.
         </p>
         <form
           onSubmit={(e) => {
