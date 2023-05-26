@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import ProductSection from '~/components/product-detail/ProductSection';
 import RelatedProducts from '~/components/product-detail/RelatedProducts';
@@ -8,6 +8,12 @@ import RelatedProducts from '~/components/product-detail/RelatedProducts';
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 import Store from '~/lib/Store';
+
+interface ProductProp {
+  product: Product;
+  sameCategoryProducts: Product[];
+  categories: Category[];
+}
 
 export async function generateMetadata(slug: string): Promise<Metadata> {
   const { product } = await getData(slug);
@@ -24,25 +30,25 @@ const getData = async (slug: string) => {
   const product = await Store.getProduct(slug);
 
   if (!product) {
-    return { notFound: true };
+    return { product: null };
   }
+
   const categories = await Store.getCategories();
 
   const { products: sameCategoryProducts } = await Store.getProducts({
     maxProducts: 4,
     category: product?.categories?.[0]
   });
+
   return { product, sameCategoryProducts, categories };
 };
 
-interface ProductProp {
-  product: Product;
-  sameCategoryProducts: Product[];
-  categories: Category[];
-}
-
 const ProductDetail = async ({ params }: { params: { slug: string } }) => {
   const { product, sameCategoryProducts, categories } = (await getData(params.slug)) as ProductProp;
+
+  if (!product) {
+    notFound();
+  }
 
   return (
     <Container className="pt-8">
@@ -61,8 +67,11 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
         </svg>
         Product list
       </Link>
+
       <hr className="bg-gray h-px border-none" />
+
       <ProductSection product={product} categories={categories} />
+
       <RelatedProducts
         title={'Related Products'}
         product={product}
