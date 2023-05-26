@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
@@ -22,11 +21,11 @@ type Inputs = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
   const [invalidLogin, setInvalidLogin] = useState(false);
-
-  const router = useRouter();
 
   const {
     register,
@@ -49,6 +48,7 @@ const RegisterForm = () => {
           notifySuccess(
             'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
           );
+
           router.push('/');
         } else {
           // if the results turns out a code message, it means that creating the new user was a problem, so bring the message
