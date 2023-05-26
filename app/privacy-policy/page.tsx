@@ -6,6 +6,13 @@ import Container from '~/layouts/Container';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
+export const metadata = {
+  title: 'SquareOne - Privacy Policy',
+  description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.',
+  keywords: keywords.privacy_policy,
+  url: `${NEXT_PUBLIC_BASE_URL}/privacy-policy`
+};
+
 const PrivacyPolicy = () => {
   return (
     <>

@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 
-import Head from '~/components/globals/Head';
-
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 
@@ -42,16 +40,16 @@ const articles = [
   }
 ];
 
+export const metadata = {
+  title: 'SquareOne - Blog',
+  description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.',
+  keywords: keywords.blog,
+  url: `${NEXT_PUBLIC_BASE_URL}/blog`
+};
+
 const Blog = () => {
   return (
     <>
-      <Head
-        title="SquareOne - Blog"
-        description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
-        keywords={keywords.blog}
-        url={`${NEXT_PUBLIC_BASE_URL}/blog`}
-      />
-
       <Container className="py-20">
         <h1 className="text-align pb-20 text-4xl font-libre uppercase">Blog</h1>
         <ul>

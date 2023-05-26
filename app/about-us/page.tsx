@@ -1,21 +1,20 @@
 import Image from 'next/image';
 
-import Head from '~/components/globals/Head';
-
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
+export const metadata = {
+  title: 'SquareOne - About us',
+  description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.',
+  keywords: keywords.about_us,
+  url: `${NEXT_PUBLIC_BASE_URL}/about-us`
+};
+
 const AboutUs = () => {
   return (
     <>
-      <Head
-        title="SquareOne - About us"
-        description="Sit excepteur proident est commodo laboris consectetur ea tempor officia."
-        keywords={keywords.about_us}
-        url={`${NEXT_PUBLIC_BASE_URL}/about-us`}
-      />
       <Container className="py-20">
         <h1 className="text-align pb-20 text-4xl font-libre uppercase">About us</h1>
         <div className="font-quicksand grid lg:grid-cols-2 gap-16">
