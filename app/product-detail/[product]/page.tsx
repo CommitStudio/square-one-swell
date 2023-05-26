@@ -13,7 +13,7 @@ interface Params {
 }
 
 const getData = async (params: Params) => {
-  const slug = String(params?.product);
+  const slug = params?.product;
   const product = await Store.getProduct(slug);
 
   if (!product) {
