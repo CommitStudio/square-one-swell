@@ -203,7 +203,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <Button type="submit" fullWidth label="CREATE ADRESS" />
+          <Button type="submit" fullWidth label="CREATE ADDRESS" />
         </form>
       </div>
     </Modal>

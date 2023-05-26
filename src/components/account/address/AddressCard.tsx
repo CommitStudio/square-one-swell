@@ -37,6 +37,7 @@ const AddressCard = ({ address }: Props) => {
         />
         <button
           className="hover:stroke-red-500"
+          data-delete="address"
           onClick={() => {
             void setOpenModal(true);
           }}
