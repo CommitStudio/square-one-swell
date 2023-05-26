@@ -15,11 +15,11 @@ interface ProductProp {
   categories: Category[];
 }
 
-export async function generateMetadata(slug: string): Promise<Metadata> {
-  const { product } = await getData(slug);
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { product } = await getData(params.slug);
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL + '/products/' + slug),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL + '/products/' + params.slug),
     title: product?.name ? `Square One - ${product?.name}` : 'Square One',
     description: product?.description ? product?.description : 'Square One - Product Detail',
     keywords: keywords.product_detail
