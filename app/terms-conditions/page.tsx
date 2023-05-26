@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import keywords from '~/data/keywords.json';
-
 import Container from '~/layouts/Container';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
