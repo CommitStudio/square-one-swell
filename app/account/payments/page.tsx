@@ -12,7 +12,7 @@ export const metadata = {
 export default async function Payments() {
   const { user, cards } = await getUserInfo();
 
-  const defaultCard = user.billing.accountCardId;
+  const defaultCard = user?.billing?.accountCardId;
 
   return (
     <AccountLayout account={user}>
