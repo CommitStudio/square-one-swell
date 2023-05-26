@@ -1,12 +1,11 @@
 'use client';
 
-import { redirect, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { Spinner } from '~/components/globals/Spinner';
-
 import Button from '~/components/globals/button/Button';
 
 import swell from '~/lib/SwellJS';
@@ -18,7 +17,10 @@ type Inputs = {
 };
 
 const ResetPasswordForm = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const key = searchParams?.get('key');
+
   const [isHidden, setIsHidden] = useState(true);
   const [isConfirmHidden, setIsConfirmHidden] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,15 +35,16 @@ const ResetPasswordForm = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const key = searchParams?.get('key');
     setIsLoading(true);
+
     try {
       await swell.account.recover({
         password: data.password,
         reset_key: key
       });
+
       notifySuccess('Your password has been changed.');
-      redirect('/account/login');
+      router.push('/account/login');
     } catch (e) {
       console.error(e);
       notifyFailure('There was an error changing your password. Please try again.');
