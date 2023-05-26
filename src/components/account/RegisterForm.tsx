@@ -1,13 +1,17 @@
+'use client';
+
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import Button from '~/components/globals/button/Button';
-import { useRegister } from '~/hooks/useSwellAccount';
 
 import Container from '~/layouts/Container';
+import swell from '~/lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 type Inputs = {
   email: string;
@@ -20,7 +24,9 @@ type Inputs = {
 const RegisterForm = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [isHidden, setIsHidden] = useState(true);
-  const [registerCredentials, setRegisterCredentials] = useState<Inputs | null>(null);
+  const [invalidLogin, setInvalidLogin] = useState(false);
+
+  const router = useRouter();
 
   const {
     register,
@@ -28,28 +34,40 @@ const RegisterForm = () => {
     formState: { errors }
   } = useForm<Inputs>();
 
-  const { user } = useRegister(registerCredentials);
-
-  // If register is successful, redirect to the account page
-  if (user?.id) {
-    document.location = '/';
-    return null;
-  }
-
   // Submit register form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // If statement is declared incase captcha input is filled (probable bot).
-    if (!data.dontComplete) {
-      delete data.dontComplete;
-      setRegisterCredentials(data);
+    if (data.dontComplete) {
+      return;
     }
+
+    delete data.dontComplete;
+    swell.account
+      .create(data)
+      .then((results) => {
+        if (results.id) {
+          notifySuccess(
+            'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
+          );
+          router.push('/');
+        } else {
+          // if the results turns out a code message, it means that creating the new user was a problem, so bring the message
+          setInvalidLogin(true);
+          notifyFailure(results.email.message || 'There was an error trying to create the user.');
+          console.error(results.email.message || 'There was an error trying to create the user.');
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
+
   return (
     <Container className="font-quicksand h-full flex flex-grow flex-col justify-center items-center">
       <div className="w-11/12 border p-6 my-14 rounded sm:w-9/12 md:w-6/12 md:p-8 lg:w-6/12 lg:p-12">
         <div className="pb-6 mb-4">
           <h1 className="font-semibold font-libre text-3xl mb-2">Create account</h1>
-          {user && (
+          {invalidLogin && (
             <p className="text-red-500 text-sm">
               There was an error trying to create the user. Email already exists.
             </p>
