@@ -94,6 +94,7 @@ const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) 
               type="text"
               placeholder={firstName}
               {...register('first_name', {
+                required: 'You must provide the first name!',
                 maxLength: { value: 50, message: 'first name is too long.' }
               })}
             />
@@ -109,6 +110,7 @@ const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) 
               type="text"
               placeholder={lastName}
               {...register('last_name', {
+                required: 'You must provide the last name!',
                 maxLength: { value: 50, message: 'Last name is too long.' }
               })}
             />
@@ -125,6 +127,7 @@ const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) 
               type="text"
               placeholder={email}
               {...register('email', {
+                required: 'You must provide the e-mail address!',
                 maxLength: { value: 50, message: 'e-mail is too long.' }
               })}
             />
