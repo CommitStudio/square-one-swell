@@ -4,16 +4,23 @@ import Link from 'next/link';
 
 import ProductSection from '~/components/product-detail/ProductSection';
 import RelatedProducts from '~/components/product-detail/RelatedProducts';
+
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
 import Store from '~/lib/Store';
 
-interface Params {
-  product: string;
+export async function generateMetadata(slug: string): Promise<Metadata> {
+  const { product } = await getData(slug);
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL + '/products/' + slug),
+    title: product?.name ? `Square One - ${product?.name}` : 'Square One',
+    description: product?.description ? product?.description : 'Square One - Product Detail',
+    keywords: keywords.product_detail
+  };
 }
 
-const getData = async (params: Params) => {
-  const slug = params?.product;
+const getData = async (slug: string) => {
   const product = await Store.getProduct(slug);
 
   if (!product) {
@@ -28,25 +35,14 @@ const getData = async (params: Params) => {
   return { product, sameCategoryProducts, categories };
 };
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { product } = await getData(params);
-
-  return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL + '/product-detail/' + params.product),
-    title: product?.name ? `Square One - ${product?.name}` : 'Square One',
-    description: product?.description ? product?.description : 'Square One - Product Detail',
-    keywords: keywords.product_detail
-  };
-}
-
 interface ProductProp {
   product: Product;
   sameCategoryProducts: Product[];
   categories: Category[];
 }
 
-const ProductDetail = async ({ params }: { params: Params }) => {
-  const { product, sameCategoryProducts, categories } = (await getData(params)) as ProductProp;
+const ProductDetail = async ({ params }: { params: { slug: string } }) => {
+  const { product, sameCategoryProducts, categories } = (await getData(params.slug)) as ProductProp;
 
   return (
     <Container className="pt-8">
