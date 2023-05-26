@@ -102,13 +102,13 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                     <div className="relative h-24 w-24">
                       <Image
                         src={product.product?.images[0]?.file.url}
-                        alt={product.product.name}
+                        alt={product.product?.name}
                         layout="fill"
                         objectFit="cover"
                       />
                     </div>
                     <div className="flex flex-col space-y-4 w-full">
-                      <p className="font-bold uppercase">{product.product.name}</p>
+                      <p className="font-bold uppercase">{product.product?.name}</p>
                       <div className="flex justify-between">
                         <div>
                           {product.variant && <p>Variant: {product.variant?.name}</p>}
