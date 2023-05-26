@@ -6,6 +6,13 @@ import ProductHighlight from '~/components/home/ProductHighlight';
 import keywords from '~/data/keywords.json';
 import Store from '~/lib/Store';
 
+type DataObject = {
+  products: Product[];
+  categories: Category[];
+  promotion: Promotion;
+  firstProductPromotion: Product;
+};
+
 export const metadata = {
   title: 'SquareOne - Home',
   description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.',
@@ -27,17 +34,7 @@ async function getData() {
     ? await Store.getProduct(promotion?.discounts[0]?.buy_items[0]?.product_id)
     : {};
 
-  return {
-    products,
-    categories,
-    promotion,
-    firstProductPromotion
-  } as {
-    products: Product[];
-    categories: Category[];
-    promotion: Promotion;
-    firstProductPromotion: Product;
-  };
+  return { products, categories, promotion, firstProductPromotion } as DataObject;
 }
 
 export default async function Home() {

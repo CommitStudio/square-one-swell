@@ -47,42 +47,42 @@ export default function SwiperLoader({ categories }: { categories: Category[] })
       }}
       className="mySwipe"
     >
-      {categories.map((category, i) => {
-        if (category.name === 'Featured products') return;
-
-        return (
-          <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
-            <div
-              className={'h-[160px] md:h-[215px] md:max-h-[215px] w-auto relative aspect-square'}
-            >
-              <Link
-                href={{ pathname: 'products', query: category.slug }}
-                className="cursor-pointer"
-                legacyBehavior
+      {categories
+        .filter((category) => category.name !== 'Featured products')
+        .map((category, i) => {
+          return (
+            <SwiperSlide key={`category-slide-${i}`} className="relative grid place-items-center">
+              <div
+                className={'h-[160px] md:h-[215px] md:max-h-[215px] w-auto relative aspect-square'}
               >
-                <Image
-                  src={category.images[0].src}
-                  alt={category.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full cursor-pointer"
-                />
-              </Link>
-            </div>
+                <Link
+                  href={{ pathname: 'products', query: category.slug }}
+                  className="cursor-pointer"
+                  legacyBehavior
+                >
+                  <Image
+                    src={category.images[0].src}
+                    alt={category.name}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="rounded-full cursor-pointer"
+                  />
+                </Link>
+              </div>
 
-            <div className="absolute -bottom-14">
-              <Button
-                label={category.name.toUpperCase()}
-                variant="outlined"
-                color="black"
-                linkUrl={{ pathname: 'products', query: category.slug }}
-                action={() => handleClick(category.name)}
-                classes="border-0 !py-0 hover:!bg-white hover:!text-black hover:underline"
-              />
-            </div>
-          </SwiperSlide>
-        );
-      })}
+              <div className="absolute -bottom-14">
+                <Button
+                  label={category.name.toUpperCase()}
+                  variant="outlined"
+                  color="black"
+                  linkUrl={{ pathname: 'products', query: category.slug }}
+                  action={() => handleClick(category.name)}
+                  classes="border-0 !py-0 hover:!bg-white hover:!text-black hover:underline"
+                />
+              </div>
+            </SwiperSlide>
+          );
+        })}
     </Swiper>
   );
 }
