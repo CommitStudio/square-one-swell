@@ -49,32 +49,30 @@ const ProductDetail = async ({ params }: { params: Params }) => {
   const { product, sameCategoryProducts, categories } = (await getData(params)) as ProductProp;
 
   return (
-    <>
-      <Container className="pt-8">
-        <Link
-          href="/products"
-          className="font-quicksand inline-flex items-center gap-2 mb-8 hover:underline"
+    <Container className="pt-8">
+      <Link
+        href="/products"
+        className="font-quicksand inline-flex items-center gap-2 mb-8 hover:underline"
+      >
+        <svg
+          width="10"
+          height="18"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            width="10"
-            height="18"
-            viewBox="0 0 10 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M9 1L1 9L9 17" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Product list
-        </Link>
-        <hr className="bg-gray h-px border-none" />
-        <ProductSection product={product} categories={categories} />
-        <RelatedProducts
-          title={'Related Products'}
-          product={product}
-          products={sameCategoryProducts}
-        />
-      </Container>
-    </>
+          <path d="M9 1L1 9L9 17" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Product list
+      </Link>
+      <hr className="bg-gray h-px border-none" />
+      <ProductSection product={product} categories={categories} />
+      <RelatedProducts
+        title={'Related Products'}
+        product={product}
+        products={sameCategoryProducts}
+      />
+    </Container>
   );
 };
 
