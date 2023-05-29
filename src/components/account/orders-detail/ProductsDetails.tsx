@@ -30,7 +30,7 @@ export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject })
                 </p>
                 <p>Item quantity: {item.quantity}</p>
               </div>
-                {item.variant?.name && (
+              {item.variant?.name && (
                 <div>
                   Size/Color/Material:
                   <p>{item.variant?.name}</p>

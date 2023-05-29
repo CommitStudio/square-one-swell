@@ -53,8 +53,9 @@ const RegisterForm = () => {
         } else {
           // if the results turns out a code message, it means that creating the new user was a problem, so bring the message
           setInvalidLogin(true);
-          notifyFailure(results.email.message || 'There was an error trying to create the user.');
-          console.error(results.email.message || 'There was an error trying to create the user.');
+          const { message } = results?.email as { code: string; message: string };
+          notifyFailure(message || 'There was an error trying to create the user.');
+          console.error(message || 'There was an error trying to create the user.');
         }
       })
       .catch((e) => {
