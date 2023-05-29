@@ -2,10 +2,10 @@ import Filter from './_components/Filter';
 import Showing from './_components/Showing';
 import ShowingFiltered from './_components/ShowingFiltered';
 
+import Pagination from '~/_components/Pagination';
 import Hero from '~/_components/globals/Hero';
 import { NoResults } from '~/_components/globals/NoResults';
 import ProductList from '~/_components/globals/ProductList';
-import Pagination from '~/_components/pagination/Pagination';
 
 import keywords from '~/data/keywords.json';
 import Store from '~/lib/Store';
