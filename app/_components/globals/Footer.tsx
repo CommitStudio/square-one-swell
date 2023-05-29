@@ -2,9 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 
-import CTA from '~/components/globals/footer/CTA';
-import Copyright from '~/components/globals/footer/Copyright';
-import LinksAddress from '~/components/globals/footer/LinksAddress';
+import CTA from 'app/_components/footer/CTA';
+import Copyright from 'app/_components/footer/Copyright';
+import LinksAddress from 'app/_components/footer/LinksAddress';
 
 export default function Footer() {
   const pathname = usePathname();

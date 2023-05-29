@@ -1,9 +1,9 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Footer from 'app/_components/globals/Footer';
+import Navbar from 'app/_components/navbar/Navbar';
 import SkeletonPlaceholder from 'app/account/_components/SkeletonPlaceholder';
-import Footer from '~/components/globals/Footer';
-import Navbar from '~/components/globals/navbar/Navbar';
 
 import { useAuth } from '~/hooks/useAuth';
 

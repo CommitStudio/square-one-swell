@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
-import { Badge } from '../Badge';
+import { Badge } from '../globals/Badge';
 
 import { useGlobalState } from '~/hooks/useStore';
 import { useUserLogged } from '~/hooks/useSwellAccount';

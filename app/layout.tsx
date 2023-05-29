@@ -1,8 +1,8 @@
 import NextTopLoader from 'nextjs-toploader';
 
+import Footer from 'app/_components/globals/Footer';
+import Navbar from 'app/_components/navbar/Navbar';
 import ToastLoader from '~/components/ToastLoader';
-import Footer from '~/components/globals/Footer';
-import Navbar from '~/components/globals/navbar/Navbar';
 
 import '~/styles/global.css';
 

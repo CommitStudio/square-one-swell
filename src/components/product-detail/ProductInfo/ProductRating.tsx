@@ -1,7 +1,7 @@
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 
-import Tooltip from '~/components/globals/Tooltip';
+import Tooltip from 'app/_components/globals/Tooltip';
 
 type Rating = {
   rating?: number;

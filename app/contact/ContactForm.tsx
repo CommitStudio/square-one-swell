@@ -23,7 +23,7 @@ const ContactForm = () => {
     mode: 'onChange'
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = () => {
     setValue('name', '');
     setValue('phone', '');
     setValue('email', '');

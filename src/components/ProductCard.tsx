@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import { FaRegHeart } from 'react-icons/fa';
 
-import Tooltip from './globals/Tooltip';
+import Tooltip from '../../app/_components/globals/Tooltip';
 
 import Button from 'app/_components/button/Button';
 
