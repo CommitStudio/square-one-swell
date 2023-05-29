@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
-import Modal from '~/components/account/Modal';
+import Modal from 'app/account/_components/Modal';
 import { Spinner } from '~/components/globals/Spinner';
 import Button from '~/components/globals/button/Button';
 
