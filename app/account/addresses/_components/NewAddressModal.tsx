@@ -2,8 +2,8 @@ import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
+import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/button/Button';
-import Modal from '~/account/_components/Modal';
 
 import countriesJSON from '~/data/countries.json';
 import swell from '~/lib/SwellJS';

@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
+import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/button/Button';
 import { Spinner } from '~/_components/globals/Spinner';
-import Modal from '~/account/_components/Modal';
 
 import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';

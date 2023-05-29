@@ -8,8 +8,7 @@ import { TbEdit } from 'react-icons/tb';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import Modal from './Modal';
-
+import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/button/Button';
 
 import swell from '~/lib/SwellJS';
