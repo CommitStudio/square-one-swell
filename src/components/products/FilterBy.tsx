@@ -24,6 +24,7 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
       isFilterOpen: !state.isFilterOpen,
       breadcrumbSelectedCategory: itemName
     });
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

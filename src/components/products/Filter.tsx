@@ -20,13 +20,16 @@ interface FilterProps {
 }
 
 const Filter = ({ categories, query }: FilterProps) => {
-  const { state, updateStateProp, updateState } = useStore();
-  const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname() as string;
+
   const createQueryString = useCreateQueryString();
   const removeQueryString = useRemoveQueryString();
+
+  const { state, updateStateProp, updateState } = useStore();
+  const [searchValue, setSearchValue] = useState('');
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname() as string;
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -54,12 +57,14 @@ const Filter = ({ categories, query }: FilterProps) => {
     router.push(`${pathname}?${removeQueryString('search')}`);
 
     setSearchValue('');
+
     updateState({
       ...state,
       isFilterOpen: (state.isFilterOpen = false),
       breadcrumbSelectedCategory: '',
       breadcrumbMainRoute: 'Products'
     });
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

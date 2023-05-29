@@ -8,6 +8,7 @@ import { useStore } from '~/hooks/useStore';
 
 function Hero() {
   const { state } = useStore();
+
   const selectedCategory = state.breadcrumbSelectedCategory;
   const mainRoute = state.breadcrumbMainRoute;
   const title = selectedCategory.length > 0 ? selectedCategory : mainRoute;
@@ -18,8 +19,8 @@ function Hero() {
         src="/img/product-listing/products-two-persons.jpg"
         alt="Hero picture"
         priority
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: 'cover' }}
         className="object-top"
       />
       <div className="absolute top-0 left-0 opacity-50 w-full h-full bg-white" />

@@ -23,6 +23,7 @@ const getData = async (searchParams: FilterParams) => {
   const { maxProducts, minPrice, maxPrice, category, page, sort, search } = searchParams;
 
   const categories = await Store.getCategories();
+
   const { products, pagination } = await Store.getProducts({
     maxPrice: Number(maxPrice),
     maxProducts: Number(maxProducts),

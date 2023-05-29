@@ -21,6 +21,7 @@ export function ShowingFiltered({ products, query }: Props) {
     } else if (minPrice === '0' && !maxPrice) {
       return 'All Prices';
     }
+
     return '';
   };
 
