@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 import { Spinner } from '~/_components/globals/Spinner';
 
 import swell from '~/lib/SwellJS';

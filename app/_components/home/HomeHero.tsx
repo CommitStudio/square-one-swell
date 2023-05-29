@@ -8,7 +8,7 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 
 import data from '~/data/home-hero.json';
 import { useStore } from '~/hooks/useStore';

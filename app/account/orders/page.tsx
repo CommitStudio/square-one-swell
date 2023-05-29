@@ -3,7 +3,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import OrderCard from './_components/OrderCard';
 
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 

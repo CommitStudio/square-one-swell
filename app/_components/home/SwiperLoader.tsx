@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 
 import { useStore } from '~/hooks/useStore';
 

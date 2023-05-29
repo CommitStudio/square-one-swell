@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/_components/Account/Modal';
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 import { Spinner } from '~/_components/globals/Spinner';
 
 import swell from '~/lib/SwellJS';

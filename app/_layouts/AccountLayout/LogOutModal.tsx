@@ -5,7 +5,7 @@ import { GrClose } from 'react-icons/gr';
 import { HiOutlineLogout } from 'react-icons/hi';
 
 import Modal from '~/_components/Account/Modal';
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 
 import { useLogout } from '~/hooks/useSwellAccount';
 

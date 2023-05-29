@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 
 import Trash from 'public/img/icons/trash-02.svg';
-import Button from '~/_components/button/Button';
+import Button from '~/_components/Button';
 
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
