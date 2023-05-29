@@ -1,17 +1,15 @@
-import { useRouter } from 'next/router';
-
 import Container from '~/layouts/Container';
 
 type Props = {
   products: Product[];
+  query: FilterParams;
 };
 
 function keepLastWord(text: string) {
   return text.split('-').pop();
 }
 
-export function ShowingFiltered({ products }: Props) {
-  const { query } = useRouter();
+export function ShowingFiltered({ products, query }: Props) {
   const formatPriceRange = () => {
     const minPrice = query.minPrice?.toString();
     const maxPrice = query.maxPrice?.toString();
@@ -23,6 +21,7 @@ export function ShowingFiltered({ products }: Props) {
     } else if (minPrice === '0' && !maxPrice) {
       return 'All Prices';
     }
+
     return '';
   };
 

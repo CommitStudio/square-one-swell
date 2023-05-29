@@ -1,5 +1,7 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 import { useEffect } from 'react';
 
@@ -8,10 +10,10 @@ import { toPascalCase } from '~/utils/format';
 
 const Breadcrumb = () => {
   const { state, updateStateProp, updateState } = useStore();
-  const router = useRouter();
+  const pathname = usePathname() as string;
 
   // Break down the path between "/"s, removing empty entities - Ex:"/my/nested/path" --> ["my", "nested", "path"]
-  const mainRoute: string = router.pathname
+  const mainRoute: string = pathname
     .split('/')
     .filter((route) => route.length > 0)
     .map((route) => toPascalCase(route))[0]; // Take just the first one
