@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '~/_components/button/Button';
 
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 type Inputs = {
   newsletterUserEmail: string;

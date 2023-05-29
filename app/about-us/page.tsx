@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import keywords from '~/data/keywords.json';
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

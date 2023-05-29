@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from './Arrows';
 import { ActiveButton, PageLink } from './PagesButton';
 
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 interface Props {
   pagination: Pagination;

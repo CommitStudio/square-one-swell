@@ -1,4 +1,4 @@
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 type Props = {
   pagination: Pagination;

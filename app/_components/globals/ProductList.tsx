@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard';
 
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 interface Props {
   relatedProducts?: boolean;

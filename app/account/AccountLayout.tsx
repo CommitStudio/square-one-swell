@@ -1,9 +1,8 @@
 import AccountLink from './_components/Link';
 import LogOutModal from './_components/LogOutModal';
 
+import Container from '~/_layouts/Container';
 import EditProfileModal from '~/account/_components/EditProfileModal';
-
-import Container from '~/layouts/Container';
 
 type Props = {
   account: SwellGraphQL_AccountObject;

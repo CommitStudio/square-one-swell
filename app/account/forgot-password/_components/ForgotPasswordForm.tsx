@@ -7,7 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 
 import Button from '~/_components/button/Button';
 
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 import swell from '~/lib/SwellJS';
 import { notifyFailure } from '~/utils/toastifies';

@@ -2,7 +2,7 @@ import FaqSingleQuestion from './_components/FaqSingleQuestion';
 
 import faqJson from '~/data/faq.json';
 import keywords from '~/data/keywords.json';
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 const { faqs } = faqJson;
 const { questions } = faqs;

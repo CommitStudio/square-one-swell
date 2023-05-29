@@ -12,7 +12,7 @@ import SortBy from './SortBy';
 
 import { useCreateQueryString, useRemoveQueryString } from '~/hooks/useQueryStringHandler';
 import { useStore } from '~/hooks/useStore';
-import Container from '~/layouts/Container';
+import Container from '~/_layouts/Container';
 
 interface FilterProps {
   categories: Category[];

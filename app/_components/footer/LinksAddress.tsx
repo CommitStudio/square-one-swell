@@ -3,9 +3,9 @@ import Link from 'next/link';
 import React from 'react';
 import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 
+import Container from '~/_layouts/Container';
 import company from '~/data/company.json';
 import footer from '~/data/footer.json';
-import Container from '~/layouts/Container';
 
 const { items } = footer;
 

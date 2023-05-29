@@ -9,8 +9,8 @@ import Hamburger from '~/_components/navbar/Hamburger';
 import MobileMenu from '~/_components/navbar/MobileMenu';
 import UserButtons from '~/_components/navbar/UserButtons';
 
+import Container from '~/_layouts/Container';
 import data from '~/data/partials.json';
-import Container from '~/layouts/Container';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

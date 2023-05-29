@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
+import Container from '~/_layouts/Container';
 import data from '~/data/promotions.json';
-import Container from '~/layouts/Container';
 
 const { promotions } = data;
 
