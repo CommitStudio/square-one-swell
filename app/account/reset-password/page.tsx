@@ -1,4 +1,4 @@
-import ResetPasswordForm from './ResetPasswordForm';
+import ResetPasswordForm from './_components/ResetPasswordForm';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';

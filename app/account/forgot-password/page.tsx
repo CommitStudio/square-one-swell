@@ -1,4 +1,4 @@
-import ForgotPasswordForm from './ForgotPasswordForm';
+import ForgotPasswordForm from './_components/ForgotPasswordForm';
 
 import keywords from '~/data/keywords.json';
 const { NEXT_PUBLIC_BASE_URL } = process.env;
