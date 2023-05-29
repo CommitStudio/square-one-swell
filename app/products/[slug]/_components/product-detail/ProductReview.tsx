@@ -1,4 +1,4 @@
-import ProductRatings from '~/components/product-detail/ProductReview/ProductRatings';
+import ProductRatings from 'app/products/[slug]/_components/product-detail/ProductReview/ProductRatings';
 
 const ProductReview = () => {
   return (

@@ -1,5 +1,5 @@
 import Button from 'app/_components/button/Button';
-import ProductList from '~/components/ProductList';
+import ProductList from 'app/_components/globals/ProductList';
 
 type ProductHighlightProps = {
   products?: Product[];

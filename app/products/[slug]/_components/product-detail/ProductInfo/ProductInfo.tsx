@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 
-import AddToCart from '~/components/product-detail/ProductInfo/AddToCart';
-import ProductDescription from '~/components/product-detail/ProductInfo/ProductDescription';
-import ProductOptions from '~/components/product-detail/ProductInfo/ProductOptions';
-import ProductPriceOptions from '~/components/product-detail/ProductInfo/ProductPriceOptions';
-import ProductRating from '~/components/product-detail/ProductInfo/ProductRating';
-import ProductSocialMedia from '~/components/product-detail/ProductInfo/ProductSocialMedia';
-import ProductTitle from '~/components/product-detail/ProductInfo/ProductTitle';
+import AddToCart from 'app/products/[slug]/_components/product-detail/ProductInfo/AddToCart';
+import ProductDescription from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductDescription';
+import ProductOptions from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductOptions';
+import ProductPriceOptions from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductPriceOptions';
+import ProductRating from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductRating';
+import ProductSocialMedia from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductSocialMedia';
+import ProductTitle from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductTitle';
 
 interface ProductProp {
   product: Product;

@@ -8,8 +8,8 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import Search from './Search';
 
-import { FilterBy } from '~/components/products/FilterBy';
-import SortBy from '~/components/products/SortBy';
+import { FilterBy } from 'app/products/[slug]/_components/products/FilterBy';
+import SortBy from 'app/products/[slug]/_components/products/SortBy';
 import { useCreateQueryString, useRemoveQueryString } from '~/hooks/useQueryStringHandler';
 import { useStore } from '~/hooks/useStore';
 import Container from '~/layouts/Container';

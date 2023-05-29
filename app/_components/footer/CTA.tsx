@@ -20,7 +20,7 @@ const CTA = () => {
     mode: 'onChange'
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = () => {
     setValue('newsletterUserEmail', '');
 
     setIsThanksMessage(true);

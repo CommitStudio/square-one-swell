@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import ProductSection from '~/components/product-detail/ProductSection';
-import RelatedProducts from '~/components/product-detail/RelatedProducts';
+import ProductSection from 'app/products/[slug]/_components/product-detail/ProductSection';
+import RelatedProducts from 'app/products/[slug]/_components/product-detail/RelatedProducts';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';

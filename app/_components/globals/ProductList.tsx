@@ -1,4 +1,5 @@
-import ProductCard from '~/components/ProductCard';
+import ProductCard from './ProductCard';
+
 import Container from '~/layouts/Container';
 
 interface Props {
