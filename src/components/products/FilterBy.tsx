@@ -31,6 +31,7 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
     <div className="my-3">
       <h5 className="font-bold mb-4 md:mb-8 uppercase">{title}</h5>
       {items.map((item, i) => {
+        delete query.page;
         return title === 'Gender' ? (
           <div key={i}>
             {(item.name === 'Women' || item.name === 'Men') && (
