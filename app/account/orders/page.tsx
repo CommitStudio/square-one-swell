@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BiShoppingBag } from 'react-icons/bi';
 
-import OrderCard from '../_components/OrdersCard';
+import OrderCard from './_components/OrderCard';
 
 import Button from '~/_components/button/Button';
 import AccountLayout from '~/account/AccountLayout';
