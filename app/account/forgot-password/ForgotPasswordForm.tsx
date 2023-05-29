@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { BsArrowLeft } from 'react-icons/bs';
 
-import Button from 'app/_components/button/Button';
+import Button from '~/_components/button/Button';
+
 import Container from '~/layouts/Container';
 
 import swell from '~/lib/SwellJS';

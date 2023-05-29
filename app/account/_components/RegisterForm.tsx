@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import Button from 'app/_components/button/Button';
+import Button from '~/_components/button/Button';
 
 import Container from '~/layouts/Container';
 import swell from '~/lib/SwellJS';

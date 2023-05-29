@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Modal from './Modal';
 
-import Button from 'app/_components/button/Button';
+import Button from '~/_components/button/Button';
 
 import swell from '~/lib/SwellJS';
 import { notifySuccess } from '~/utils/toastifies';

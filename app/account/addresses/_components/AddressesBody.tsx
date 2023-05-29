@@ -2,7 +2,7 @@ import { FaRegAddressCard } from 'react-icons/fa';
 
 import AddressCard from './AddressCard';
 
-import Button from 'app/_components/button/Button';
+import Button from '~/_components/button/Button';
 
 interface Props {
   addresses: SwellGraphQL_AddressObject[];

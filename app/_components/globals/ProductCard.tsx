@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import { FaRegHeart } from 'react-icons/fa';
 
-import Button from 'app/_components/button/Button';
-import Tooltip from 'app/_components/globals/Tooltip';
+import Button from '~/_components/button/Button';
+import Tooltip from '~/_components/globals/Tooltip';
 
 import { formatCurrency } from '~/utils/numbers';
 

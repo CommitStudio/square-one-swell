@@ -1,4 +1,4 @@
-import ProductList from 'app/_components/globals/ProductList';
+import ProductList from '~/_components/globals/ProductList';
 
 interface ProductProp {
   product: Product;

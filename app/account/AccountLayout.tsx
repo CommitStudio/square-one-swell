@@ -1,7 +1,7 @@
 import AccountLink from './_components/Link';
 import LogOutModal from './_components/LogOutModal';
 
-import EditProfileModal from 'app/account/_components/EditProfileModal';
+import EditProfileModal from '~/account/_components/EditProfileModal';
 
 import Container from '~/layouts/Container';
 
