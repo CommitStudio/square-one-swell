@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import ProductSection from './_components/ProductSection';
 import RelatedProducts from './_components/RelatedProducts';
 
-import keywords from '~/data/keywords.json';
 import Container from '~/_layouts/Container';
+
+import keywords from '~/data/keywords.json';
 import Store from '~/lib/Store';
 
 interface ProductProp {
