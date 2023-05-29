@@ -1,5 +1,5 @@
-import ProductImageGallery from 'app/products/[slug]/_components/product-detail/ProductImageGallery';
-import ProductInfo from 'app/products/[slug]/_components/product-detail/ProductInfo/ProductInfo';
+import ProductImageGallery from './ProductImageGallery';
+import ProductInfo from './ProductInfo/ProductInfo';
 
 interface ProductProp {
   product: Product;

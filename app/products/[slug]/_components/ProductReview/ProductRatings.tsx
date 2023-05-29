@@ -1,6 +1,5 @@
+import Rating from './Rating';
 import WriteAReview from './WriteAReview';
-
-import Rating from 'app/products/[slug]/_components/product-detail/ProductReview/Rating';
 
 const ProductRatings = () => {
   return (

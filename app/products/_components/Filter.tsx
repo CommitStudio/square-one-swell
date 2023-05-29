@@ -6,10 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
+import { FilterBy } from './FilterBy';
 import Search from './Search';
+import SortBy from './SortBy';
 
-import { FilterBy } from 'app/products/[slug]/_components/products/FilterBy';
-import SortBy from 'app/products/[slug]/_components/products/SortBy';
 import { useCreateQueryString, useRemoveQueryString } from '~/hooks/useQueryStringHandler';
 import { useStore } from '~/hooks/useStore';
 import Container from '~/layouts/Container';
