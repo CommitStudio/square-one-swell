@@ -1,4 +1,4 @@
-import FaqSingleQuestion from 'app/faq/FaqSingleQuestion';
+import FaqSingleQuestion from './_components/FaqSingleQuestion';
 
 import faqJson from '~/data/faq.json';
 import keywords from '~/data/keywords.json';

@@ -1,4 +1,4 @@
-import ContactForm from './ContactForm';
+import ContactForm from './_components/ContactForm';
 
 import keywords from '~/data/keywords.json';
 import Container from '~/layouts/Container';
