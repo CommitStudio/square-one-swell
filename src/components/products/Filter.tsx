@@ -10,9 +10,9 @@ import Search from './Search';
 
 import { FilterBy } from '~/components/products/FilterBy';
 import SortBy from '~/components/products/SortBy';
+import { useCreateQueryString, useRemoveQueryString } from '~/hooks/useQueryStringHandler';
 import { useStore } from '~/hooks/useStore';
 import Container from '~/layouts/Container';
-import { useCreateQueryString, useRemoveQueryString } from '~/utils/queryStringHandler';
 
 interface FilterProps {
   categories: Category[];

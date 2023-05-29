@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
 import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
 
-import { useCreateQueryString, useRemoveQueryString } from '~/utils/queryStringHandler';
+import { useCreateQueryString, useRemoveQueryString } from '~/hooks/useQueryStringHandler';
 
 type SortParam = {
   value: string;
