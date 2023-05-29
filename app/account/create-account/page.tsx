@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import RegisterForm from '~/components/account/RegisterForm';
+import RegisterForm from '../_components/RegisterForm';
 
 import keywords from '~/data/keywords.json';
 import { isAuthenticated } from '~/lib/SwellGraphQL';

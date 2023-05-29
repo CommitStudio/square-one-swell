@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
-import Modal from '~/components/account/Modal';
+import Modal from 'app/account/_components/Modal';
 import Button from '~/components/globals/button/Button';
 import countriesJSON from '~/data/countries.json';
 import swell from '~/lib/SwellJS';

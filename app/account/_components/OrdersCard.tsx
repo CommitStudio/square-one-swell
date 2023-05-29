@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Button from '../globals/button/Button';
+import Button from '~/components/globals/button/Button';
 
 import { formatDate } from '~/utils/dates';
 import { formatCurrency } from '~/utils/numbers';

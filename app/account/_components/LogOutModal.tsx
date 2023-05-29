@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { HiOutlineLogout } from 'react-icons/hi';
 
-import Button from '../globals/button/Button';
-
 import Modal from './Modal';
+
+import Button from '~/components/globals/button/Button';
 
 import { useLogout } from '~/hooks/useSwellAccount';
 

@@ -24,8 +24,6 @@ const ContactForm = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('Form data', data);
-
     setValue('name', '');
     setValue('phone', '');
     setValue('email', '');

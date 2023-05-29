@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation';
 
+import OrderDetails from './_components/OrderDetails';
+
 import AccountLayout from 'app/account/AccountLayout';
-import OrderDetails from '~/components/account/orders-detail/OrderDetails';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
