@@ -6,7 +6,7 @@ import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
-import { Spinner } from '~/_components/globals/Spinner';
+import { Spinner } from '~/_components/Globals/Spinner';
 
 import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';

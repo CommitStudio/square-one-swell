@@ -4,8 +4,8 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Spinner } from '~/_components/globals/Spinner';
-import Tooltip from '~/_components/globals/Tooltip';
+import { Spinner } from '~/_components/Globals/Spinner';
+import Tooltip from '~/_components/Globals/Tooltip';
 
 import { useStore, useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import Button from '~/_components/Button';
-import { Spinner } from '~/_components/globals/Spinner';
+import { Spinner } from '~/_components/Globals/Spinner';
 
 import swell from '~/lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/utils/toastifies';

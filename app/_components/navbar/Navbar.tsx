@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import Cart from '~/_components/globals/Cart';
+import Cart from '~/_components/Globals/Cart';
 import DesktopMenu from '~/_components/navbar/DesktopMenu';
 import Hamburger from '~/_components/navbar/Hamburger';
 import MobileMenu from '~/_components/navbar/MobileMenu';
