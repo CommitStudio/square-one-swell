@@ -43,6 +43,7 @@ const LoginForm = () => {
       .login(email, password)
       .then((account) => {
         if (account) {
+          router.prefetch('/account/orders');
           router.push('/');
           notifySuccess(
             'Welcome! You are now logged in and can proceed to checkout or continue shopping'
