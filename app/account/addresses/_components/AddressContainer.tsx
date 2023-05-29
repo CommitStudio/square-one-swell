@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 
-import AddressesBody from '~/components/account/address/AddressesBody';
-import NewAddressModal from '~/components/account/address/NewAddressModal';
+import AddressesBody from './AddressesBody';
+
+import NewAddressModal from './NewAddressModal';
 
 type Props = {
   addresses: SwellGraphQL_AddressObject[];

@@ -1,6 +1,7 @@
 import { FaRegAddressCard } from 'react-icons/fa';
 
-import AddressCard from '~/components/account/address/AddressCard';
+import AddressCard from './AddressCard';
+
 import Button from '~/components/globals/button/Button';
 
 interface Props {

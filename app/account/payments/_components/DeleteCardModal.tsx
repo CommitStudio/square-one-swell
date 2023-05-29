@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
-import Modal from '../Modal';
+import Modal from '~/components/account/Modal';
 
 import { Spinner } from '~/components/globals/Spinner';
 import Button from '~/components/globals/button/Button';

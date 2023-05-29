@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { MdPayment } from 'react-icons/md';
 
-import PaymentsModal from '~/components/account/payments/PaymentsModal';
+import PaymentsModal from './PaymentsModal';
+
 import Button from '~/components/globals/button/Button';
 
 export default function CreatePayment() {

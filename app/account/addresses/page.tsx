@@ -1,5 +1,6 @@
-import AccountLayout from '~/components/account/AccountLayout';
-import AddressContainer from '~/components/account/address/AddressContainer';
+import AddressContainer from './_components/AddressContainer';
+
+import AccountLayout from 'app/account/AccountLayout';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 

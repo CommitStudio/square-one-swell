@@ -1,6 +1,6 @@
-import AccountLayout from '~/components/account/AccountLayout';
-import CreatePayment from '~/components/account/payments/CreatePayment';
-import PaymentCard from '~/components/account/payments/PaymentsCard';
+import AccountLayout from 'app/account/AccountLayout';
+import CreatePayment from 'app/account/payments/_components/CreatePayment';
+import PaymentCard from 'app/account/payments/_components/PaymentsCard';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
