@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 import { useStore } from '~/hooks/useStore';
 
@@ -11,11 +11,11 @@ export interface FilterItem {
 export interface FilterByProps {
   title: string;
   items: FilterItem[];
-  pathname: string;
+  query: FilterParams;
 }
 
-export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
-  const router = useRouter();
+export const FilterBy = ({ title, items, query }: FilterByProps) => {
+  const pathname = usePathname() as string;
   const { updateState, state } = useStore();
 
   const handleClick = (itemName: string) => {
@@ -32,11 +32,17 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
       <h5 className="font-bold mb-4 md:mb-8 uppercase">{title}</h5>
       {items.map((item, i) => {
         return title === 'Gender' ? (
-          <p>
+          <div key={i}>
             {(item.name === 'Women' || item.name === 'Men') && (
               <Link
                 key={`filter-item-${i}`}
-                href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
+                href={{
+                  pathname: pathname,
+                  query: {
+                    ...query,
+                    ...item.slug
+                  }
+                }}
                 scroll={false}
                 legacyBehavior
               >
@@ -46,7 +52,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                     className={`cursor-pointer w-fit hover:font-bold ${
                       Object.values(item.slug)
                         .map(String)
-                        .every((v) => Object.values(router.query).map(String).includes(v))
+                        .every((v) => Object.values(query).map(String).includes(v))
                         ? 'text-black font-semibold text'
                         : 'text-gray-500'
                     }`}
@@ -56,12 +62,12 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                 </div>
               </Link>
             )}
-          </p>
+          </div>
         ) : (
           item.name !== 'Men' && item.name !== 'Women' && (
             <Link
               key={`filter-item-${i}`}
-              href={{ pathname: pathname, query: { ...router.query, ...item.slug } }}
+              href={{ pathname: pathname, query: { ...query, ...item.slug } }}
               scroll={false}
               legacyBehavior
             >
@@ -73,7 +79,7 @@ export const FilterBy = ({ title, items, pathname }: FilterByProps) => {
                   className={`cursor-pointer w-fit hover:font-bold transition-opacity duration-300 ${
                     Object.values(item.slug)
                       .map(String)
-                      .every((v) => Object.values(router.query).map(String).includes(v))
+                      .every((v) => Object.values(query).map(String).includes(v))
                       ? 'text-black font-semibold text'
                       : 'text-gray-500'
                   }`}

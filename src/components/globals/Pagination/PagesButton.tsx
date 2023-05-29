@@ -1,5 +1,12 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
+
+interface Props {
+  page: number;
+  query: FilterParams;
+}
 
 /*****************************************************************************
  * Button used to show current page
@@ -15,8 +22,8 @@ export const ActiveButton = ({ page }: { page: number }) => {
 /*****************************************************************************
  * Button used to navigate to other pages
  ****************************************************************************/
-export const PageLink = ({ page }: { page: number }) => {
-  const { pathname, query } = useRouter();
+export const PageLink = ({ page, query }: Props) => {
+  const pathname = usePathname() as string;
 
   return (
     <Link

@@ -1,6 +1,8 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -10,17 +12,21 @@ import { FilterBy } from '~/components/products/FilterBy';
 import SortBy from '~/components/products/SortBy';
 import { useStore } from '~/hooks/useStore';
 import Container from '~/layouts/Container';
+import { useCreateQueryString, useRemoveQueryString } from '~/utils/queryStringHandler';
 
 interface FilterProps {
   categories: Category[];
-  searchValue: string;
-  setSearchValue: Dispatch<SetStateAction<string>>;
+  query: FilterParams;
 }
 
-const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
+const Filter = ({ categories, query }: FilterProps) => {
   const { state, updateStateProp, updateState } = useStore();
+  const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname() as string;
+  const createQueryString = useCreateQueryString();
+  const removeQueryString = useRemoveQueryString();
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
@@ -31,24 +37,22 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
     { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
   ];
 
-  const query = { ...router.query };
-
   useEffect(() => {
     inputRef.current?.focus();
-    query.search && setSearchValue(query.search as string);
+    query.search && setSearchValue(query.search);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = () => {
-    searchValue !== '' ? (query.search = searchValue) : delete query.search;
-    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
+    searchValue
+      ? router.push(`${pathname}?${createQueryString('search', searchValue)}`)
+      : router.push(`${pathname}?${removeQueryString('search')}`);
   };
 
   const cleanSearchInput = () => {
-    const query = { ...router.query };
-    delete query.search;
-    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
+    router.push(`${pathname}?${removeQueryString('search')}`);
+
     setSearchValue('');
     updateState({
       ...state,
@@ -82,19 +86,17 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
             handleSubmit={handleSubmit}
           />
           {searchValue !== '' && (
-            <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
-              <button
-                onClick={() => {
-                  cleanSearchInput();
-                }}
-                className="text-black hover:underline mb-3 md:mb-0"
-              >
-                Clear search
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                cleanSearchInput();
+              }}
+              className="text-black hover:underline mb-3 md:mb-0"
+            >
+              Clear search
+            </button>
           )}
         </div>
-        <SortBy />
+        <SortBy query={query} />
       </div>
       <hr className="mt-6 border-gray-medium" />
       <div
@@ -108,10 +110,10 @@ const Filter = ({ categories, searchValue, setSearchValue }: FilterProps) => {
         <div className="overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
             {/* FilterBy CATEGORIES info is coming from the store */}
-            <FilterBy title="Gender" items={categories} pathname={'products'} />
-            <FilterBy title="Categories" items={categories} pathname={'products'} />
+            <FilterBy title="Gender" items={categories} query={query} />
+            <FilterBy title="Categories" items={categories} query={query} />
             {/*FilterBy PRICE*/}
-            <FilterBy title="Prices" items={filteringPricesRanges} pathname={'products'} />
+            <FilterBy title="Prices" items={filteringPricesRanges} query={query} />
           </div>
           <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
             <button

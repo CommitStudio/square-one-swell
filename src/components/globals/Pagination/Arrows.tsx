@@ -1,11 +1,18 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
+
+interface Props {
+  current: number;
+  query: FilterParams;
+}
 
 /*****************************************************************************
  * Draw left arrow button
  ****************************************************************************/
-export const ArrowLeft = ({ current }: { current: number }) => {
-  const { pathname, query } = useRouter();
+export const ArrowLeft = ({ current, query }: Props) => {
+  const pathname = usePathname() as string;
 
   if (current === 1) {
     return (
@@ -31,8 +38,16 @@ export const ArrowLeft = ({ current }: { current: number }) => {
 /*****************************************************************************
  * Draw left arrow button
  ****************************************************************************/
-export const ArrowRight = ({ current, pages }: { current: number; pages: number[] }) => {
-  const { pathname, query } = useRouter();
+export const ArrowRight = ({
+  current,
+  pages,
+  query
+}: {
+  current: number;
+  pages: number[];
+  query: FilterParams;
+}) => {
+  const pathname = usePathname() as string;
 
   if (current === pages.length) {
     return (

@@ -1,8 +1,10 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { Fragment, useState } from 'react';
 import { BsChevronExpand } from 'react-icons/bs';
 import { MdOutlineRemoveCircle, MdSort } from 'react-icons/md';
+
+import { useCreateQueryString, useRemoveQueryString } from '~/utils/queryStringHandler';
 
 type SortParam = {
   value: string;
@@ -19,10 +21,13 @@ const sortParams: SortParam[] = [
   { value: 'Newest', sort: 'date_created desc' }
 ];
 
-const SortBy = () => {
+const SortBy = ({ query }: { query: FilterParams }) => {
   const router = useRouter();
+  const pathname = usePathname() as string;
+  const createQueryString = useCreateQueryString();
+  const removeQueryString = useRemoveQueryString();
 
-  const selectedQuery = router.query.sort as string;
+  const selectedQuery = query.sort as string;
   const selectedParam = sortParams.find((param) => param.sort === selectedQuery);
 
   const [selected, setSelected] = useState(selectedParam || sortParams[0]);
@@ -36,9 +41,11 @@ const SortBy = () => {
   const handleFilter = (param: SortParam) => {
     setIsOpen(false);
     setSelected(param);
-    const query = { ...router.query };
+
     param.value !== sortParams[0].value ? (query.sort = param.sort) : delete query.sort;
-    void router.push({ pathname: router.pathname, query }, undefined, { scroll: false });
+    param.sort
+      ? router.push(`${pathname}?${createQueryString('sort', param.sort)}`)
+      : router.push(`${pathname}?${removeQueryString('sort')}`);
   };
 
   return (
