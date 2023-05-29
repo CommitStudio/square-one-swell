@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Button from '~/components/globals/button/Button';
+import Button from 'app/_components/button/Button';
 
 type Inputs = {
   name: string;

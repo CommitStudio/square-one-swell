@@ -3,8 +3,8 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import OrderCard from '../_components/OrdersCard';
 
+import Button from 'app/_components/button/Button';
 import AccountLayout from 'app/account/AccountLayout';
-import Button from '~/components/globals/button/Button';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 

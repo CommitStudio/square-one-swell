@@ -8,7 +8,7 @@ import { FaRegHeart } from 'react-icons/fa';
 
 import Tooltip from './globals/Tooltip';
 
-import Button from './globals/button/Button';
+import Button from 'app/_components/button/Button';
 
 import { formatCurrency } from '~/utils/numbers';
 

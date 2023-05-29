@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 import { useEffect } from 'react';
 
+import Button from 'app/_components/button/Button';
 import Trash from 'public/img/icons/trash-02.svg';
 
-import Button from '~/components/globals/button/Button';
 import { useGlobalState } from '~/hooks/useStore';
 import swell from '~/lib/SwellJS';
 import { formatCurrency } from '~/utils/numbers';

@@ -2,9 +2,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
+import Button from 'app/_components/button/Button';
 import Modal from 'app/account/_components/Modal';
 import { Spinner } from '~/components/globals/Spinner';
-import Button from '~/components/globals/button/Button';
 
 import swell from '~/lib/SwellJS';
 

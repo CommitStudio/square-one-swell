@@ -5,7 +5,7 @@ import { MdPayment } from 'react-icons/md';
 
 import PaymentsModal from './PaymentsModal';
 
-import Button from '~/components/globals/button/Button';
+import Button from 'app/_components/button/Button';
 
 export default function CreatePayment() {
   const [open, setOpen] = useState(false);
