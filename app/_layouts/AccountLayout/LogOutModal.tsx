@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { HiOutlineLogout } from 'react-icons/hi';
@@ -7,12 +8,28 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
 
-import { useLogout } from '~/hooks/useSwellAccount';
+import swell from '~/lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/utils/toastifies';
 
 const LogOutModal = () => {
-  const handleLogout = useLogout();
-
+  const router = useRouter();
   const [openLogOut, setOpenLogOut] = useState(false);
+
+  const handleLogout = async () => {
+    await swell.account
+      .logout()
+      .then(() => {
+        router.push('/');
+        router.refresh();
+        setOpenLogOut(false);
+      })
+      .catch(() => notifyFailure('Something went wrong'))
+      .finally(() =>
+        notifySuccess(
+          'You have been successfully logged out. Thank you for shopping with us. We hope to see you again soon!'
+        )
+      );
+  };
 
   return (
     <>
@@ -40,7 +57,7 @@ const LogOutModal = () => {
               type="submit"
               variant="outlined"
               onClick={() => {
-                void handleLogout();
+                handleLogout();
               }}
             />
           </div>
