@@ -1,7 +1,7 @@
-import CategoriesSlider from '~/_components/home/CategoriesSlider';
-import DealOfTheWeek from '~/_components/home/DealOfTheWeek';
-import HomeHero from '~/_components/home/HomeHero';
-import ProductHighlight from '~/_components/home/ProductHighlight';
+import CategoriesSlider from '~/_components/Home/CategoriesSlider';
+import DealOfTheWeek from '~/_components/Home/DealOfTheWeek';
+import HomeHero from '~/_components/Home/HomeHero';
+import ProductHighlight from '~/_components/Home/ProductHighlight';
 
 import keywords from '~/data/keywords.json';
 import Store from '~/lib/Store';
