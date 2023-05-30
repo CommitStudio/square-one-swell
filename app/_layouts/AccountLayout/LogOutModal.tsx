@@ -57,7 +57,7 @@ const LogOutModal = () => {
               type="submit"
               variant="outlined"
               onClick={() => {
-                handleLogout();
+                void handleLogout();
               }}
             />
           </div>

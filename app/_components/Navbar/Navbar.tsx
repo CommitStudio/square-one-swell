@@ -48,10 +48,11 @@ const Navbar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
         </Container>
       </div>
       <MobileMenu
-        isOpen={isHamburgerNavOpen}
-        setIsMenuOpen={setIsHamburgerNavOpen}
         categories={data.categories}
+        isAuthenticated={isAuthenticated}
+        isOpen={isHamburgerNavOpen}
         isCartOpen={isCartOpen}
+        setIsMenuOpen={setIsHamburgerNavOpen}
         setIsCartOpen={setIsCartOpen}
       />
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />

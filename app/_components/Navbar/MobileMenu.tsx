@@ -1,20 +1,25 @@
 import Link from 'next/link';
 
-import { useGlobalState, useStore } from '~/hooks/useStore';
+import { useStore } from '~/hooks/useStore';
 
 type Props = {
-  isOpen: boolean;
-  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   categories: { name: string; slug: string; query?: string }[];
+  isAuthenticated: boolean;
+  isOpen: boolean;
   isCartOpen: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOpen }: Props) => {
+const MobileMenu = ({
+  categories,
+  isAuthenticated,
+  isOpen,
+  isCartOpen,
+  setIsMenuOpen,
+  setIsCartOpen
+}: Props) => {
   const { state, updateState } = useStore();
-  const { account } = useGlobalState();
-
-  const isLogged = account && account.id ? true : false;
 
   const handleClick = (category: string) => {
     updateState({ ...state, isFilterOpen: false, breadcrumbSelectedCategory: '' });
@@ -39,7 +44,7 @@ const MobileMenu = ({ isOpen, categories, setIsMenuOpen, isCartOpen, setIsCartOp
                 className="
                  block py-3 px-4 active:bg-black active:text-white focus:text-white focus:bg-black sm:px-6 lg:text-white border-b border-b-gray"
               >
-                {isLogged && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
+                {isAuthenticated && category.name === 'LOGIN' ? 'ACCOUNT' : category.name}
               </Link>
             </li>
           );
