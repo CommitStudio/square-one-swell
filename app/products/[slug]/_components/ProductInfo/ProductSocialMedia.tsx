@@ -4,7 +4,7 @@ import { BsPinterest } from 'react-icons/bs';
 
 const ProductSocialMedia = () => {
   const pathname = usePathname();
-  const route = `${process.env.NEXT_PUBLIC_BASE_URL}${pathname as string}`;
+  const route = `${process.env.NEXT_PUBLIC_BASE_URL}${pathname}`;
   const formattedRoute = route.replaceAll(':', '%3A').replaceAll('/', '%2F');
 
   return (

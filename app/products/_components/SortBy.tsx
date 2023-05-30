@@ -23,7 +23,7 @@ const sortParams: SortParam[] = [
 
 const SortBy = ({ query }: { query: FilterParams }) => {
   const router = useRouter();
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   const createQueryString = useCreateQueryString();
   const removeQueryString = useRemoveQueryString();

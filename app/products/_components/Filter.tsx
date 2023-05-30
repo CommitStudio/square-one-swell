@@ -30,7 +30,7 @@ const Filter = ({ categories, query }: FilterProps) => {
   const [searchValue, setSearchValue] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   const filteringPricesRanges = [
     { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },

@@ -10,7 +10,7 @@ import { toPascalCase } from '~/utils/format';
 
 const Breadcrumb = () => {
   const { state, updateStateProp, updateState } = useStore();
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   // Break down the path between "/"s, removing empty entities - Ex:"/my/nested/path" --> ["my", "nested", "path"]
   const mainRoute: string = pathname

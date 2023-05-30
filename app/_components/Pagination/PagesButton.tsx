@@ -23,7 +23,7 @@ export const ActiveButton = ({ page }: { page: number }) => {
  * Button used to navigate to other pages
  ****************************************************************************/
 export const PageLink = ({ page, query }: Props) => {
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   return (
     <Link

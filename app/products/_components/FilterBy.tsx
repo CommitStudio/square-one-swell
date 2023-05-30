@@ -15,7 +15,7 @@ export interface FilterByProps {
 }
 
 export const FilterBy = ({ title, items, query }: FilterByProps) => {
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
   const { updateState, state } = useStore();
 
   const handleClick = (itemName: string) => {

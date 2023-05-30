@@ -12,7 +12,7 @@ interface Props {
  * Draw left arrow button
  ****************************************************************************/
 export const ArrowLeft = ({ current, query }: Props) => {
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   if (current === 1) {
     return (
@@ -47,7 +47,7 @@ export const ArrowRight = ({
   pages: number[];
   query: FilterParams;
 }) => {
-  const pathname = usePathname() as string;
+  const pathname = usePathname();
 
   if (current === pages.length) {
     return (
