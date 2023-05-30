@@ -1,35 +1,15 @@
 import { atom, useAtom } from 'jotai';
 
-import type { AccountInformation, Cart } from 'swell-js';
+import type { Cart } from 'swell-js';
 
 /*****************************************************************************
  * Define and declare global state hook
  ****************************************************************************/
-const stateOrdes = atom<UserOrder[]>([]);
 const stateCart = atom<Cart | null>(null);
-const stateAddresses = atom<SwellAddress[]>([]);
-const stateCards = atom<SwellUserCards[]>([]);
-const stateAccount = atom<AccountInformation | null>(null);
 
 export function useGlobalState() {
-  const [orders, setOrders] = useAtom(stateOrdes);
   const [cart, setCart] = useAtom(stateCart);
-  const [addresses, setAddresses] = useAtom(stateAddresses);
-  const [cards, setCards] = useAtom(stateCards);
-  const [account, setAccount] = useAtom(stateAccount);
-
-  return {
-    orders,
-    cart,
-    addresses,
-    cards,
-    account,
-    setOrders,
-    setCart,
-    setAddresses,
-    setCards,
-    setAccount
-  };
+  return { cart, setCart };
 }
 
 /*****************************************************************************

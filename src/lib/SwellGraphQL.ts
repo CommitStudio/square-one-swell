@@ -147,7 +147,7 @@ export const getUserInfo = async () => {
  ****************************************************************************/
 export const isAuthenticated = async () => {
   const user = await getLoggedUser();
-  return user?.session.accountId;
+  return !!user?.session.accountId;
 };
 
 /*****************************************************************************

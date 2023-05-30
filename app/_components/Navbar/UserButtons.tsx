@@ -4,15 +4,14 @@ import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Badge } from '~/_components/Globals/Badge';
 
 import { useGlobalState } from '~/hooks/useStore';
-import { useUserLogged } from '~/hooks/useSwellAccount';
 
 type Props = {
   toggleCart: () => void;
+  isAuthenticated: boolean;
 };
 
-const UserButtons = ({ toggleCart }: Props) => {
+const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
   const { cart } = useGlobalState();
-  const { user } = useUserLogged();
   const quantity = cart?.item_quantity;
 
   return (
@@ -34,13 +33,16 @@ const UserButtons = ({ toggleCart }: Props) => {
         <FaShoppingCart />
         {typeof quantity == 'number' && quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
+
       <Link
         href="/account/orders"
         title="Login"
         className="relative text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
       >
         <FaUser />
-        {user && <div className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full" />}
+        {isAuthenticated && (
+          <div className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full" />
+        )}
       </Link>
     </div>
   );

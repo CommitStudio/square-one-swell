@@ -13,7 +13,7 @@ import Cart from '~/_components/Globals/Cart';
 import Container from '~/_layouts/Container';
 import data from '~/data/partials.json';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHamburgerNavOpen, setIsHamburgerNavOpen] = useState(false);
 
@@ -42,7 +42,7 @@ const Navbar = () => {
           >
             Logo
           </Link>
-          <UserButtons toggleCart={toggleCart} />
+          <UserButtons toggleCart={toggleCart} isAuthenticated={isAuthenticated} />
           <DesktopMenu categories={data.categories} />
           <Hamburger isOpen={isHamburgerNavOpen} toggle={toggleHamburgerNav} />
         </Container>
