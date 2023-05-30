@@ -6,9 +6,18 @@ import Navbar from '~/_components/Navbar';
 
 import '~/styles/global.css';
 
+const { NEXT_PUBLIC_BASE_URL } = process.env;
+
 export const metadata = {
   title: 'SquareOne',
-  description: 'Storefront for Swell'
+  description: 'Storefront for Swell',
+  icons: {
+    icon: '/favicon.ico'
+  },
+  openGraph: {
+    type: 'website',
+    images: `${NEXT_PUBLIC_BASE_URL}/favicon.ico`
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
