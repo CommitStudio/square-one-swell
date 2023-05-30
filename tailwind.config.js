@@ -36,5 +36,5 @@ module.exports = {
       fontWeight: ['hover', 'focus']
     }
   },
-  plugins: [require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')]
+  plugins: [require('@headlessui/tailwindcss')]
 };
