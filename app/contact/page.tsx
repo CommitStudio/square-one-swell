@@ -1,7 +1,8 @@
-import ContactForm from './ContactForm';
+import ContactForm from './_components/ContactForm';
+
+import Container from '~/_layouts/Container';
 
 import keywords from '~/data/keywords.json';
-import Container from '~/layouts/Container';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

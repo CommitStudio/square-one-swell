@@ -1,11 +1,11 @@
-import Hero from '~/components/Hero';
-import ProductList from '~/components/ProductList';
+import Filter from './_components/Filter';
+import Showing from './_components/Showing';
+import ShowingFiltered from './_components/ShowingFiltered';
 
-import { NoResults } from '~/components/globals/NoResults';
-import Pagination from '~/components/globals/Pagination';
-import Filter from '~/components/products/Filter';
-import Showing from '~/components/products/Showing';
-import ShowingFiltered from '~/components/products/ShowingFiltered';
+import Hero from '~/_components/Globals/Hero';
+import { NoResults } from '~/_components/Globals/NoResults';
+import ProductList from '~/_components/Globals/ProductList';
+import Pagination from '~/_components/Pagination';
 
 import keywords from '~/data/keywords.json';
 import Store from '~/lib/Store';

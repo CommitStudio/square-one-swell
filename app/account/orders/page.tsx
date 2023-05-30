@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { BiShoppingBag } from 'react-icons/bi';
 
-import AccountLayout from '~/components/account/AccountLayout';
-import OrderCard from '~/components/account/OrdersCard';
-import Button from '~/components/globals/button/Button';
+import OrderCard from './_components/OrderCard';
+
+import Button from '~/_components/Button';
+
+import AccountLayout from '~/_layouts/AccountLayout';
 
 import { getUserInfo } from '~/lib/SwellGraphQL';
 
