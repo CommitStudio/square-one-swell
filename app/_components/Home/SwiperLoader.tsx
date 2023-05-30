@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Button from '~/_components/Button';
 
-import { useStore } from '~/hooks/useStore';
+import { useStore } from '~/_hooks/useStore';
 
 export default function SwiperLoader({ categories }: { categories: Category[] }) {
   const { updateStateProp } = useStore();

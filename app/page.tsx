@@ -3,8 +3,8 @@ import DealOfTheWeek from '~/_components/Home/DealOfTheWeek';
 import HomeHero from '~/_components/Home/HomeHero';
 import ProductHighlight from '~/_components/Home/ProductHighlight';
 
-import keywords from '~/data/keywords.json';
-import Store from '~/lib/Store';
+import keywords from '~/_data/keywords.json';
+import Store from '~/_lib/Store';
 
 type DataObject = {
   products: Product[];

@@ -8,8 +8,8 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
 
-import swell from '~/lib/SwellJS';
-import { notifyFailure, notifySuccess } from '~/utils/toastifies';
+import swell from '~/_lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 const LogOutModal = () => {
   const router = useRouter();

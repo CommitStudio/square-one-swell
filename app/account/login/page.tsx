@@ -2,8 +2,8 @@ import { redirect } from 'next/navigation';
 
 import LoginForm from './_components/LoginForm';
 
-import keywords from '~/data/keywords.json';
-import { isAuthenticated } from '~/lib/SwellGraphQL';
+import keywords from '~/_data/keywords.json';
+import { isAuthenticated } from '~/_lib/SwellGraphQL';
 
 export const metadata = {
   title: 'SquareOne - Login',

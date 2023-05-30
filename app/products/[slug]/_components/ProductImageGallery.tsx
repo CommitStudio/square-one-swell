@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { useViewportWidth } from '~/hooks/useWindowHooks';
+import { useViewportWidth } from '~/_hooks/useWindowHooks';
 
 interface ProductProp {
   product: Product;

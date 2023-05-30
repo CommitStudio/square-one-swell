@@ -10,8 +10,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Button from '~/_components/Button';
 
-import data from '~/data/home-hero.json';
-import { useStore } from '~/hooks/useStore';
+import data from '~/_data/home-hero.json';
+import { useStore } from '~/_hooks/useStore';
 
 const HomeHero = () => {
   const { hero_images } = data;

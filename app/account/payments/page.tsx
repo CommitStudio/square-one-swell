@@ -3,7 +3,7 @@ import PaymentCard from './_components/PaymentsCard';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
-import { getUserInfo } from '~/lib/SwellGraphQL';
+import { getUserInfo } from '~/_lib/SwellGraphQL';
 
 export const metadata = {
   title: 'SquareOne - Payments',

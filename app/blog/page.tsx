@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 
+import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
-
-import keywords from '~/data/keywords.json';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

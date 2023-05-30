@@ -4,10 +4,10 @@ import { notFound } from 'next/navigation';
 import ProductSection from './_components/ProductSection';
 import RelatedProducts from './_components/RelatedProducts';
 
+import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
 
-import keywords from '~/data/keywords.json';
-import Store from '~/lib/Store';
+import Store from '~/_lib/Store';
 
 interface ProductProp {
   product: Product;

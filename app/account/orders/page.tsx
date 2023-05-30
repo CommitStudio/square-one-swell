@@ -7,7 +7,7 @@ import Button from '~/_components/Button';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
-import { getUserInfo } from '~/lib/SwellGraphQL';
+import { getUserInfo } from '~/_lib/SwellGraphQL';
 
 export const metadata = {
   title: 'SquareOne - Orders',

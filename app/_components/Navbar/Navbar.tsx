@@ -10,8 +10,8 @@ import UserButtons from './UserButtons';
 
 import Cart from '~/_components/Globals/Cart';
 
+import data from '~/_data/partials.json';
 import Container from '~/_layouts/Container';
-import data from '~/data/partials.json';
 
 const Navbar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);

@@ -1,6 +1,6 @@
 import ForgotPasswordForm from './_components/ForgotPasswordForm';
 
-import keywords from '~/data/keywords.json';
+import keywords from '~/_data/keywords.json';
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
 export const metadata = {

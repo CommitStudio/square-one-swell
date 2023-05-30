@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 
 import { useEffect } from 'react';
 
-import { useStore } from '~/hooks/useStore';
-import { toPascalCase } from '~/utils/format';
+import { useStore } from '~/_hooks/useStore';
+import { toPascalCase } from '~/_utils/format';
 
 const Breadcrumb = () => {
   const { state, updateStateProp, updateState } = useStore();

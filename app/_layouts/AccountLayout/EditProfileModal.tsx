@@ -11,8 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
 
-import swell from '~/lib/SwellJS';
-import { notifySuccess } from '~/utils/toastifies';
+import swell from '~/_lib/SwellJS';
+import { notifySuccess } from '~/_utils/toastifies';
 
 type Inputs = {
   first_name: string;

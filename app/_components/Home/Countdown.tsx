@@ -1,6 +1,6 @@
 'use client';
 
-import { useCountdown } from '~/hooks/useCountdown';
+import { useCountdown } from '~/_hooks/useCountdown';
 
 type CountdownProps = {
   promotion: Promotion;

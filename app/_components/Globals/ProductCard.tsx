@@ -9,7 +9,7 @@ import { FaRegHeart } from 'react-icons/fa';
 import Button from '~/_components/Button';
 import Tooltip from '~/_components/Globals/Tooltip';
 
-import { formatCurrency } from '~/utils/numbers';
+import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
