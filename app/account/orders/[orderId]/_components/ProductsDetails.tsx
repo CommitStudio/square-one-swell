@@ -11,7 +11,7 @@ export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject })
           <div key={i} className="flex flex-row text-sm">
             <div className="w-36 h-36 relative">
               <Image
-                src={item.product.images[0].file.url}
+                src={item.product?.images[0].file.url}
                 layout="fill"
                 objectFit="cover"
                 alt={`'Image order ${order.number}`}
@@ -19,7 +19,7 @@ export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject })
             </div>
             <div className="px-3 flex flex-col justify-between">
               <div>
-                <p>{item.product.name}</p>
+                <p>{item.product?.name}</p>
                 {item.discountEach > 0 && (
                   <p className="text-sm">
                     Discount: {order.currency} {formatCurrency(item.discountEach)}{' '}
