@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import DesktopMenu from './DesktopMenu';
+import Hamburger from './Hamburger';
+import MobileMenu from './MobileMenu';
+import UserButtons from './UserButtons';
+
 import Cart from '~/_components/Globals/Cart';
-import DesktopMenu from '~/_components/navbar/DesktopMenu';
-import Hamburger from '~/_components/navbar/Hamburger';
-import MobileMenu from '~/_components/navbar/MobileMenu';
-import UserButtons from '~/_components/navbar/UserButtons';
 
 import Container from '~/_layouts/Container';
 import data from '~/data/partials.json';

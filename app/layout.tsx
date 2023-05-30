@@ -2,7 +2,7 @@ import NextTopLoader from 'nextjs-toploader';
 
 import Footer from '~/_components/Globals/Footer';
 import ToastLoader from '~/_components/Globals/ToastLoader';
-import Navbar from '~/_components/navbar/Navbar';
+import Navbar from '~/_components/Navbar';
 
 import '~/styles/global.css';
 
