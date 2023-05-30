@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatCurrency } from '~/utils/numbers';
+import { formatCurrency } from '~/_utils/numbers';
 
 type PriceOptions = {
   price: number;

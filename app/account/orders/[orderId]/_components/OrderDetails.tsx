@@ -8,8 +8,8 @@ import { ProductsDetails } from './ProductsDetails';
 
 import BackIcon from 'public/img/icons/BackIcon';
 
-import { formatDate } from '~/utils/dates';
-import { formatCurrency } from '~/utils/numbers';
+import { formatDate } from '~/_utils/dates';
+import { formatCurrency } from '~/_utils/numbers';
 
 const OrderDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (

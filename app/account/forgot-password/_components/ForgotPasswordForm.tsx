@@ -9,8 +9,8 @@ import Button from '~/_components/Button';
 
 import Container from '~/_layouts/Container';
 
-import swell from '~/lib/SwellJS';
-import { notifyFailure } from '~/utils/toastifies';
+import swell from '~/_lib/SwellJS';
+import { notifyFailure } from '~/_utils/toastifies';
 
 type Inputs = {
   email: string;

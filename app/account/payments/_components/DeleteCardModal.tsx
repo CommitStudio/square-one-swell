@@ -6,7 +6,7 @@ import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
 
-import swell from '~/lib/SwellJS';
+import swell from '~/_lib/SwellJS';
 
 type Props = {
   openConfModal: boolean;

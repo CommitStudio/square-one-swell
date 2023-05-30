@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useStore } from '~/hooks/useStore';
+import { useStore } from '~/_hooks/useStore';
 
 type Props = {
   categories: { name: string; slug: string; query?: string; hideOnDesktop: boolean }[];

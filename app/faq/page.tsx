@@ -1,9 +1,8 @@
 import FaqSingleQuestion from './_components/FaqSingleQuestion';
 
+import faqJson from '~/_data/faq.json';
+import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
-
-import faqJson from '~/data/faq.json';
-import keywords from '~/data/keywords.json';
 
 const { faqs } = faqJson;
 const { questions } = faqs;

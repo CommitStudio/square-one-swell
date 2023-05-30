@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import Breadcrumb from './Breadcrumb';
 
-import { useStore } from '~/hooks/useStore';
+import { useStore } from '~/_hooks/useStore';
 
 function Hero() {
   const { state } = useStore();

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { formatCurrency } from '~/utils/numbers';
+import { formatCurrency } from '~/_utils/numbers';
 
 export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (

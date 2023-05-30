@@ -7,8 +7,8 @@ import { NoResults } from '~/_components/Globals/NoResults';
 import ProductList from '~/_components/Globals/ProductList';
 import Pagination from '~/_components/Pagination';
 
-import keywords from '~/data/keywords.json';
-import Store from '~/lib/Store';
+import keywords from '~/_data/keywords.json';
+import Store from '~/_lib/Store';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

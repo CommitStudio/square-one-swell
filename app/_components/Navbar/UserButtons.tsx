@@ -3,7 +3,7 @@ import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 import { Badge } from '~/_components/Globals/Badge';
 
-import { useGlobalState } from '~/hooks/useStore';
+import { useGlobalState } from '~/_hooks/useStore';
 
 type Props = {
   toggleCart: () => void;

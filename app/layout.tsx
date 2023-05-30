@@ -4,9 +4,9 @@ import Footer from '~/_components/Globals/Footer';
 import ToastLoader from '~/_components/Globals/ToastLoader';
 import Navbar from '~/_components/Navbar';
 
-import { isAuthenticated } from '~/lib/SwellGraphQL';
+import { isAuthenticated } from '~/_lib/SwellGraphQL';
 
-import '~/styles/global.css';
+import '~/_styles/global.css';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

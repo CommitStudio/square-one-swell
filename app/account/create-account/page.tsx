@@ -2,8 +2,8 @@ import { redirect } from 'next/navigation';
 
 import RegisterForm from './_components/RegisterForm';
 
-import keywords from '~/data/keywords.json';
-import { isAuthenticated } from '~/lib/SwellGraphQL';
+import keywords from '~/_data/keywords.json';
+import { isAuthenticated } from '~/_lib/SwellGraphQL';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 

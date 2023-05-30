@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import Trash from 'public/img/icons/trash-02.svg';
 import Button from '~/_components/Button';
 
-import { useGlobalState } from '~/hooks/useStore';
-import swell from '~/lib/SwellJS';
-import { formatCurrency } from '~/utils/numbers';
-import { notifySuccess } from '~/utils/toastifies';
+import { useGlobalState } from '~/_hooks/useStore';
+import swell from '~/_lib/SwellJS';
+import { formatCurrency } from '~/_utils/numbers';
+import { notifySuccess } from '~/_utils/toastifies';
 
 type Props = {
   isCartOpen: boolean;

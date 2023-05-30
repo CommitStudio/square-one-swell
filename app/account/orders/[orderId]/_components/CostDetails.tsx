@@ -1,4 +1,4 @@
-import { formatCurrency } from '~/utils/numbers';
+import { formatCurrency } from '~/_utils/numbers';
 
 export const CostDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
   return (

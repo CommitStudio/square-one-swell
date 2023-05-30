@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import Button from '~/_components/Button';
 
-import { formatDate } from '~/utils/dates';
-import { formatCurrency } from '~/utils/numbers';
+import { formatDate } from '~/_utils/dates';
+import { formatCurrency } from '~/_utils/numbers';
 
 interface OrderProps {
   order: SwellGraphQL_OrdersObject;

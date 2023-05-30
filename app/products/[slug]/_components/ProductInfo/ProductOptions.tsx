@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useStore } from '~/hooks/useStore';
+import { useStore } from '~/_hooks/useStore';
 
 interface ProductProp {
   product: Product;

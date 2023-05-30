@@ -8,8 +8,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
 
-import swell from '~/lib/SwellJS';
-import { notifyFailure, notifySuccess } from '~/utils/toastifies';
+import swell from '~/_lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 type Inputs = {
   password: string;
