@@ -35,8 +35,8 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
       </button>
 
       <Link
-        href="/account/orders"
-        title="Login"
+        href={`/account/${isAuthenticated ? 'orders' : 'login'}`}
+        title={isAuthenticated ? 'My Orders' : 'Login'}
         className="relative text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
       >
         <FaUser />
