@@ -13,6 +13,7 @@ const { NEXT_PUBLIC_BASE_URL } = process.env;
 export const metadata = {
   title: 'SquareOne',
   description: 'Storefront for Swell',
+  metadataBase: NEXT_PUBLIC_BASE_URL,
   icons: {
     icon: '/favicon.ico'
   },

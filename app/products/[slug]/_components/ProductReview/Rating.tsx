@@ -5,7 +5,12 @@ const Rating = () => {
   return (
     <div className="flex pb-5 border-b border-gray font-quicksand">
       <div className="rounded-full overflow-hidden flex justify-center w-32 h-20 md:h-auto bg-gray items-center relative">
-        <Image src="/img/products/black-tank-top.jpg" alt="test" layout="fill" objectFit="cover" />
+        <Image
+          src="/img/products/black-tank-top.jpg"
+          alt="Rating"
+          fill
+          style={{ objectFit: 'cover' }}
+        />
       </div>
       <div className="w-full flex flex-col justify-center ml-10">
         <div className="flex justify-between">

@@ -42,8 +42,8 @@ const HomeHero = () => {
                 <Image
                   src={image.src}
                   alt={image.alt_text}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
                   priority={true}
                   className="h-[75vh] w-full relative"
                 />

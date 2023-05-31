@@ -102,8 +102,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                       <Image
                         src={product.product?.images[0]?.file.url}
                         alt={product.product?.name}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                     <div className="flex flex-col space-y-4 w-full">

@@ -18,8 +18,8 @@ const OrderCard = ({ order }: OrderProps) => {
           <span className="flex-col w-36 h-36 relative">
             <Image
               src={order.items[0].product?.images[0].file.url}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover' }}
               alt={`'Image order ${order.number}`}
             />
           </span>

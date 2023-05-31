@@ -14,10 +14,10 @@ const Logo = ({ height, width, brandLogo, brandName }: Props) => {
         <Image
           height={height}
           width={width}
-          alt="brand-logo"
+          alt="Company Logo"
           src={brandLogo}
-          objectFit="contain"
-          layout="fixed"
+          fill
+          style={{ objectFit: 'cover' }}
           priority={true}
         />
       ) : (

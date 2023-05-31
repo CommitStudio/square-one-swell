@@ -12,8 +12,8 @@ export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject })
             <div className="w-36 h-36 relative">
               <Image
                 src={item.product?.images[0].file.url}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
                 alt={`'Image order ${order.number}`}
               />
             </div>
