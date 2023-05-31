@@ -49,7 +49,7 @@ const RegisterForm = () => {
             'Congratulations! Your registration is complete. You can now start shopping and enjoy exclusive deals and offers.'
           );
 
-          router.push('/');
+          document.location.href = '/';
         } else {
           // if the results turns out a code message, it means that creating the new user was a problem, so bring the message
           setInvalidLogin(true);

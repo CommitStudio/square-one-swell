@@ -44,7 +44,7 @@ const ResetPasswordForm = () => {
       });
 
       notifySuccess('Your password has been changed.');
-      router.push('/account/login');
+      document.location.href = '/account/login';
     } catch (e) {
       console.error(e);
       notifyFailure('There was an error changing your password. Please try again.');

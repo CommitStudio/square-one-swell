@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -19,8 +18,6 @@ type Inputs = {
 };
 
 const LoginForm = () => {
-  const router = useRouter();
-
   const [isHidden, setIsHidden] = useState(true);
   const [invalidLogin, setInvalidLogin] = useState(false);
 
@@ -43,11 +40,10 @@ const LoginForm = () => {
       .login(email, password)
       .then((account) => {
         if (account) {
-          router.prefetch('/account/orders');
-          router.push('/');
           notifySuccess(
             'Welcome! You are now logged in and can proceed to checkout or continue shopping'
           );
+          document.location.href = '/';
         } else {
           notifyFailure('Something went wrong. Please check your credentials');
           setInvalidLogin(true);

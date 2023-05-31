@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { HiOutlineLogout } from 'react-icons/hi';
@@ -12,15 +11,13 @@ import swell from '~/_lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 const LogOutModal = () => {
-  const router = useRouter();
   const [openLogOut, setOpenLogOut] = useState(false);
 
   const handleLogout = async () => {
     await swell.account
       .logout()
       .then(() => {
-        router.push('/');
-        router.refresh();
+        document.location.href = '/';
         setOpenLogOut(false);
       })
       .catch(() => notifyFailure('Something went wrong'))
