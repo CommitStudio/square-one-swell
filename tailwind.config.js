@@ -2,7 +2,7 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     colors: {
       green: '#1DD197',
@@ -36,5 +36,5 @@ module.exports = {
       fontWeight: ['hover', 'focus']
     }
   },
-  plugins: [require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')]
+  plugins: [require('@headlessui/tailwindcss')]
 };
