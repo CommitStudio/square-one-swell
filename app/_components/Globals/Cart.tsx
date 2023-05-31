@@ -180,6 +180,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               fullWidth
               color="black"
               classes="!p-3 text-base mt-1"
+              disabled={!cart?.items?.length}
             />
           </div>
         </nav>
