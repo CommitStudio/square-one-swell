@@ -41,7 +41,10 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
       >
         <FaUser id="user-icon" />
         {isAuthenticated && (
-          <div className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full" />
+          <div
+            id="logged-badge"
+            className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full"
+          />
         )}
       </Link>
     </div>
