@@ -111,9 +111,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                       <div className="flex justify-between">
                         <div>
                           {product.variant && <p>Variant: {product.variant?.name}</p>}
-
                           <p>
-                            {product.quantity} x ${formatCurrency(product.price)}
+                            {product.quantity} x{' '}
+                            {product.product?.sale && (
+                              <span className="text-gray line-through mx-2">
+                                ${formatCurrency(product.product?.price)}
+                              </span>
+                            )}
+                            ${formatCurrency(product.price)}
                           </p>
                         </div>
                         <button
@@ -139,7 +144,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           {/* checkout section */}
           <div className="w-full px-7 pb-7 bg-gray text-xs">
             <hr className="mb-5 opacity-0" />
-            <div className="grid grid-cols-2 text-base mb-3">
+            <div className="grid [grid-template-columns:2fr_1fr] text-base mb-3">
               <p>Subtotal</p>
               <p className="text-right">
                 ${' '}
@@ -152,6 +157,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                     )
                   : Number(0).toFixed(2)}
               </p>
+              {cart?.discount_total && (
+                <>
+                  <p>
+                    Promo discounts <span className="text-xs">(will apply after checkout)</span>
+                  </p>
+                  <p className="text-right">- $ {formatCurrency(cart.discount_total)}</p>
+                </>
+              )}
               <p>Taxes</p>
               <p className="text-right">
                 $ {cart?.tax_total ? formatCurrency(cart.tax_total) : Number(0).toFixed(2)}
