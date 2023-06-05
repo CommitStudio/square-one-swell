@@ -22,7 +22,7 @@ type Inputs = {
   confirmPassword?: string;
 };
 
-const EditProfileModal = ({ account }: { account: SwellGraphQL_AccountObject }) => {
+const EditProfileModal = ({ account }: { account: SwellAPI_Account }) => {
   const router = useRouter();
 
   const { firstName, lastName, email } = account || {};

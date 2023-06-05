@@ -1,6 +1,6 @@
 import { formatCurrency } from '~/_utils/numbers';
 
-export const DeliveryDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
+export const DeliveryDetails = ({ order }: { order: SwellAPI_Order }) => {
   return (
     <>
       <h5 className="text-xl py-6 text-center">Delivery details</h5>

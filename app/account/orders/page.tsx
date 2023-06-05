@@ -36,7 +36,7 @@ export default async function Orders() {
           </Link>
         </>
       ) : (
-        orders.map((order: SwellGraphQL_OrdersObject) => {
+        orders.map((order: SwellAPI_Order) => {
           return <OrderCard order={order} key={order.id} />;
         })
       )}

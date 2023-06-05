@@ -1,18 +1,18 @@
-interface SwellGraphQL_AuthResponse {
-  data: SwellGraphQL_AuthObject;
+interface SwellAPI_CustomerResponse {
+  data: SwellAPI_Customer;
 }
 
-interface SwellGraphQL_AuthObject {
+interface SwellAPI_Customer {
   session: {
     accountId: string;
   };
-  account: SwellGraphQL_AccountObject;
+  account: SwellAPI_Account;
   orders: {
-    results: SwellGraphQL_OrdersObject[];
+    results: SwellAPI_Order[];
   };
 }
 
-interface SwellGraphQL_AccountObject {
+interface SwellAPI_Account {
   name: string;
   firstName: string;
   lastName: string;
@@ -22,7 +22,7 @@ interface SwellGraphQL_AccountObject {
   };
 }
 
-interface SwellGraphQL_OrdersObject {
+interface SwellAPI_Order {
   id: string;
   number: string;
   status: string;
@@ -78,7 +78,7 @@ interface SwellGraphQL_OrdersObject {
   };
 }
 
-interface SwellGraphQL_AddressObject {
+interface SwellAPI_Address {
   parent_id: string;
   name: string;
   address1: string;
@@ -96,7 +96,7 @@ interface SwellGraphQL_AddressObject {
   id: string;
 }
 
-interface SwellGraphQL_CardObject {
+interface SwellAPI_Card {
   parent_id: string;
   exp_month: number;
   exp_year: number;

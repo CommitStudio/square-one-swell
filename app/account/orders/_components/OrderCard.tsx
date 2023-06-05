@@ -7,7 +7,7 @@ import { formatDate } from '~/_utils/dates';
 import { formatCurrency } from '~/_utils/numbers';
 
 interface OrderProps {
-  order: SwellGraphQL_OrdersObject;
+  order: SwellAPI_Order;
 }
 
 const OrderCard = ({ order }: OrderProps) => {

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { formatCurrency } from '~/_utils/numbers';
 
-export const ProductsDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
+export const ProductsDetails = ({ order }: { order: SwellAPI_Order }) => {
   return (
     <div>
       <h5 className="text-xl py-6 text-center font-libre">Products details</h5>

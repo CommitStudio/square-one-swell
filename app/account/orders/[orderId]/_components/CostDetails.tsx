@@ -1,6 +1,6 @@
 import { formatCurrency } from '~/_utils/numbers';
 
-export const CostDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
+export const CostDetails = ({ order }: { order: SwellAPI_Order }) => {
   return (
     <div className="py-6 flex flex-row justify-between">
       <div>

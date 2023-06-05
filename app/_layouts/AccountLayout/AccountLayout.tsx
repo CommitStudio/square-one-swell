@@ -5,7 +5,7 @@ import LogOutModal from './LogOutModal';
 import Container from '~/_layouts/Container';
 
 type Props = {
-  account: SwellGraphQL_AccountObject;
+  account: SwellAPI_Account;
   children: React.ReactNode;
 };
 

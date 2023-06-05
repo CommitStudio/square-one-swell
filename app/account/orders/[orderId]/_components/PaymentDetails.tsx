@@ -1,4 +1,4 @@
-export const PaymentDetail = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
+export const PaymentDetail = ({ order }: { order: SwellAPI_Order }) => {
   return (
     <>
       <h5 className="text-xl py-8 text-center">Payment details</h5>
