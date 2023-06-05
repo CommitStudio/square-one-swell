@@ -59,7 +59,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
       <div className="bg-gray-200 p-6 rounded w-full">
         <div className="flex items-center justify-between mb-4 w-full">
           <h3 className="font-medium font-libre text-3xl">Add new address</h3>{' '}
-          <GrClose className="cursor-pointer" onClick={() => setOpen(false)} />
+          <GrClose data-cy="close-icon" className="cursor-pointer" onClick={() => setOpen(false)} />
         </div>
         <span className="text-xs font-extralight">
           <span className="text-red-500">*</span> Indicates a required field

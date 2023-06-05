@@ -39,9 +39,12 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         title={isAuthenticated ? 'My Orders' : 'Login'}
         className="relative text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
       >
-        <FaUser />
+        <FaUser data-cy="user-icon" />
         {isAuthenticated && (
-          <div className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full" />
+          <div
+            id="logged-badge"
+            className="absolute top-0 -right-1 w-3 h-3 bg-green rounded-full"
+          />
         )}
       </Link>
     </div>

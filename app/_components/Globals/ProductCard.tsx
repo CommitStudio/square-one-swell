@@ -21,6 +21,7 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div
+      data-cy="product-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`flex flex-col justify-between border-l lg:border-l-0 border-r max-w-md border-gray transition-all duration-300 w-full ${

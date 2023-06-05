@@ -17,6 +17,7 @@ export default function AccountLink({
   return (
     <Link
       href={href}
+      data-cy={label}
       className={`block ${currentPath?.includes(pathname) ? 'font-bold underline' : ''}`}
     >
       {label}

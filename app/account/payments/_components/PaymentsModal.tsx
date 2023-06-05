@@ -76,7 +76,11 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       <div className="py-10 px-6 rounded md:w-[500px]">
         <div className="flex items-center justify-between mb-4 gap-x-4 w-full">
           <h3 className="font-medium text-2xl font-libre">Add New Payment Method</h3>
-          <GrClose className="cursor-pointer min-w-[16px]" onClick={() => setOpen(false)} />
+          <GrClose
+            data-cy="close-icon"
+            className="cursor-pointer min-w-[16px]"
+            onClick={() => setOpen(false)}
+          />
         </div>
         <span className="text-xs font-extralight">
           <span className="text-red-500">*</span> Indicates a required field
