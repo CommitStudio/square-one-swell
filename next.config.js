@@ -19,6 +19,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['cdn.schema.io', 'cdn-staging.swell.store']
+  },
+  experimental: {
+    serverActions: true
   }
 };
 
