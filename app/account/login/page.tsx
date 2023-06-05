@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import LoginForm from './_components/LoginForm';
 
 import keywords from '~/_data/keywords.json';
-import { isAuthenticated } from '~/_lib/SwellGraphQL';
+import { isAuthenticated } from '~/_lib/SwellAPI';
 
 export const metadata = {
   title: 'SquareOne - Login',

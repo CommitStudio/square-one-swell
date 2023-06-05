@@ -2,7 +2,7 @@ import AddressContainer from './_components/AddressContainer';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
-import { getUserInfo } from '~/_lib/SwellGraphQL';
+import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
   title: 'SquareOne - Addresses',
