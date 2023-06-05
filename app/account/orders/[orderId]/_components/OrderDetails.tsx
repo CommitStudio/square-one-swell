@@ -11,7 +11,7 @@ import BackIcon from 'public/img/icons/BackIcon';
 import { formatDate } from '~/_utils/dates';
 import { formatCurrency } from '~/_utils/numbers';
 
-const OrderDetails = ({ order }: { order: SwellGraphQL_OrdersObject }) => {
+const OrderDetails = ({ order }: { order: SwellAPI_Order }) => {
   return (
     <>
       <Link

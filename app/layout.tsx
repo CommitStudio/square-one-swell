@@ -4,7 +4,7 @@ import Footer from '~/_components/Globals/Footer';
 import ToastLoader from '~/_components/Globals/ToastLoader';
 import Navbar from '~/_components/Navbar';
 
-import { isAuthenticated } from '~/_lib/SwellGraphQL';
+import { isAuthenticated } from '~/_lib/SwellAPI';
 
 import '~/_styles/global.css';
 

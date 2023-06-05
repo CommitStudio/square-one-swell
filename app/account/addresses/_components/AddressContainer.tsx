@@ -7,7 +7,7 @@ import AddressesBody from './AddressesBody';
 import NewAddressModal from './NewAddressModal';
 
 type Props = {
-  addresses: SwellGraphQL_AddressObject[];
+  addresses: SwellAPI_Address[];
 };
 
 export default function AddressContainer({ addresses }: Props) {

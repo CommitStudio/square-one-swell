@@ -7,7 +7,7 @@ import Button from '~/_components/Button';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
-import { getUserInfo } from '~/_lib/SwellGraphQL';
+import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
   title: 'SquareOne - Orders',
@@ -36,7 +36,7 @@ export default async function Orders() {
           </Link>
         </>
       ) : (
-        orders.map((order: SwellGraphQL_OrdersObject) => {
+        orders.map((order: SwellAPI_Order) => {
           return <OrderCard order={order} key={order.id} />;
         })
       )}

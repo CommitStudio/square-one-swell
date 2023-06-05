@@ -44,7 +44,7 @@ const makeRequest = async (path: string, method = 'GET', body?: RequestBody) => 
 /*****************************************************************************
  * Get required data in a single GraphQL request
  ****************************************************************************/
-export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> => {
+export const getLoggedUser = async (): Promise<SwellAPI_Customer | null> => {
   const response = (await makeRequest('/graphql', 'POST', {
     query: `query checkTokenValidity {
       session {
@@ -116,7 +116,7 @@ export const getLoggedUser = async (): Promise<SwellGraphQL_AuthObject | null> =
         }
       }
     }`
-  })) as SwellGraphQL_AuthResponse;
+  })) as SwellAPI_CustomerResponse;
 
   return response?.data;
 };
@@ -156,7 +156,7 @@ export const isAuthenticated = async () => {
  ****************************************************************************/
 const getAddresses = async () => {
   const response = (await makeRequest('/api/account/addresses')) as {
-    results: SwellGraphQL_AddressObject[];
+    results: SwellAPI_Address[];
   };
 
   return response?.results;
@@ -168,7 +168,7 @@ const getAddresses = async () => {
  ****************************************************************************/
 const getCards = async () => {
   const response = (await makeRequest('/api/account/cards')) as {
-    results: SwellGraphQL_CardObject[];
+    results: SwellAPI_Card[];
   };
 
   return response?.results;

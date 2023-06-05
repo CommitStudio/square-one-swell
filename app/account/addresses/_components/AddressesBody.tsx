@@ -5,7 +5,7 @@ import AddressCard from './AddressCard';
 import Button from '~/_components/Button';
 
 interface Props {
-  addresses: SwellGraphQL_AddressObject[];
+  addresses: SwellAPI_Address[];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
