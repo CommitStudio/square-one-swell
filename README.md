@@ -37,7 +37,7 @@ Square One is an e-commerce platform powered by Swell, designed to provide busin
 
 
 - Typescript
-- Next.js v12.2.0 and React.js v17.0.2
+- Next.js v13.4.3 (using App Router) and React.js v18.2.0
 - Tailwind CSS
 
 ## 3. Before starting development
