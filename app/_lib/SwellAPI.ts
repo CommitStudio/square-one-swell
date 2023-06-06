@@ -203,9 +203,19 @@ const getCards = async () => {
 /*****************************************************************************
  * Get logged user wishlist
  ****************************************************************************/
-export const getWishlist = async (): Promise<string[]> => {
+export const getWishlist = async (): Promise<Product[]> => {
   const { content } = (await makeRequest('/api/account')) as WishlistBody;
-  return content.wishlist_ids;
+  const productsIds = content.wishlist_ids;
+
+  if (productsIds.length === 0) {
+    return [];
+  }
+
+  const { results } = (await makeRequest(
+    `/api/products?where[id][$in]=${productsIds.join(',')}`
+  )) as { results: Product[] };
+
+  return results;
 };
 
 /*****************************************************************************
