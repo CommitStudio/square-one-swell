@@ -201,7 +201,7 @@ const getCards = async () => {
 };
 
 /*****************************************************************************
- * Get logged user wishlist using REST API
+ * Get logged user wishlist
  ****************************************************************************/
 export const getWishlist = async (): Promise<string[]> => {
   const { content } = (await makeRequest('/api/account')) as WishlistBody;
@@ -209,7 +209,15 @@ export const getWishlist = async (): Promise<string[]> => {
 };
 
 /*****************************************************************************
- * Add product to logged user wishlist using REST API
+ * Check if product is in logged user wishlist
+ ****************************************************************************/
+export const isProductInWishlist = async (productId: string): Promise<boolean> => {
+  const wishlist = await getWishlist();
+  return wishlist.includes(productId);
+};
+
+/*****************************************************************************
+ * Add product to logged user wishlist
  ****************************************************************************/
 export const toggleWishlist = async (productId: string): Promise<string[]> => {
   const { id, content } = (await makeRequest('/api/account')) as WishlistBody;
