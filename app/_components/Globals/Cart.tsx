@@ -147,21 +147,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
             <div className="grid [grid-template-columns:2fr_1fr] text-base mb-3">
               <p>Subtotal</p>
               <p className="text-right">
-                ${' '}
-                {cart?.items
-                  ? formatCurrency(
-                      cart.items?.reduce(
-                        (acc, product) => acc + product.price * product.quantity,
-                        0
-                      )
-                    )
-                  : Number(0).toFixed(2)}
+                $ {cart?.items ? formatCurrency(cart.sub_total) : Number(0).toFixed(2)}
               </p>
               {cart?.discount_total && (
                 <>
-                  <p>
-                    Promo discounts <span className="text-xs">(will apply after checkout)</span>
-                  </p>
+                  <p>Promo discounts</p>
                   <p className="text-right">- $ {formatCurrency(cart.discount_total)}</p>
                 </>
               )}
@@ -171,15 +161,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
               </p>
               <p className="text-xl mt-3 font-bold">Total</p>
               <p className="text-xl mt-3 text-right font-bold">
-                ${' '}
-                {cart?.items
-                  ? formatCurrency(
-                      cart.items?.reduce(
-                        (acc, product) => acc + product.price * product.quantity,
-                        0
-                      ) + cart.tax_total
-                    )
-                  : Number(0).toFixed(2)}
+                $ {cart?.items ? formatCurrency(cart.grand_total) : Number(0).toFixed(2)}
               </p>
             </div>
 
