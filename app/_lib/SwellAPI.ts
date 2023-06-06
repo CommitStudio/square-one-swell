@@ -201,11 +201,18 @@ const getCards = async () => {
 };
 
 /*****************************************************************************
+ * Get logged user wishlist products ids
+ ****************************************************************************/
+const getWishlistIds = async (): Promise<string[]> => {
+  const { content } = (await makeRequest('/api/account')) as WishlistBody;
+  return content.wishlist_ids;
+};
+
+/*****************************************************************************
  * Get logged user wishlist
  ****************************************************************************/
 export const getWishlist = async (): Promise<Product[]> => {
-  const { content } = (await makeRequest('/api/account')) as WishlistBody;
-  const productsIds = content.wishlist_ids;
+  const productsIds = await getWishlistIds();
 
   if (productsIds.length === 0) {
     return [];
@@ -222,8 +229,8 @@ export const getWishlist = async (): Promise<Product[]> => {
  * Check if product is in logged user wishlist
  ****************************************************************************/
 export const isProductInWishlist = async (productId: string): Promise<boolean> => {
-  const wishlist = await getWishlist();
-  return wishlist.includes(productId);
+  const productsIds = await getWishlistIds();
+  return productsIds.includes(productId);
 };
 
 /*****************************************************************************
