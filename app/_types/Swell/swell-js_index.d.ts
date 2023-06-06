@@ -155,6 +155,7 @@ declare module 'swell-js' {
     shipmentDiscount: number;
     shipmentPrice: number;
     shipmentTotal: number;
+    shipment_total: number;
     shipping: unknown;
     subTotal: number;
     sub_total: number;

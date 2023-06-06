@@ -154,10 +154,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                 - ${' '}
                 {cart?.discount_total ? formatCurrency(cart.discount_total) : Number(0).toFixed(2)}
               </p>
-              {console.log(cart)}
               <p>Taxes</p>
               <p className="text-right">
                 $ {cart?.tax_total ? formatCurrency(cart.tax_total) : Number(0).toFixed(2)}
+              </p>
+              <p>Shipping</p>
+              <p className="text-right">
+                ${' '}
+                {cart?.shipment_total ? formatCurrency(cart.shipment_total) : Number(0).toFixed(2)}
               </p>
               <p className="text-xl mt-3 font-bold">Total</p>
               <p className="text-xl mt-3 text-right font-bold">
