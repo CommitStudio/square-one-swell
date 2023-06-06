@@ -25,6 +25,7 @@
     "react-image-gallery": "^1.2.9",
     "react-rater": "^6.0.5",
     "react-toastify": "^9.1.0",
+    "server-only": "^0.0.1",
     "swell-js": "^3.17.6",
     "swell-node": "^4.0.10",
     "swiper": "^8.3.2"

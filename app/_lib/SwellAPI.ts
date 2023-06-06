@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import 'server-only';
 
 type RequestBody = {
   query: string;
