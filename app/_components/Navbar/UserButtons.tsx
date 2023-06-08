@@ -30,7 +30,7 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         title="Cart"
         onClick={toggleCart}
       >
-        <FaShoppingCart />
+        <FaShoppingCart data-cy="cart-icon" />
         {typeof quantity == 'number' && quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
 
