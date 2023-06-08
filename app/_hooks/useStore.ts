@@ -13,6 +13,34 @@ export function useGlobalState() {
 }
 
 /*****************************************************************************
+ * Define and declare global state to be used on products
+ ****************************************************************************/
+
+type StateProduct = {
+  chosenOptions: { [key: string]: string };
+};
+
+const stateProduct = atom({
+  chosenOptions: {}
+});
+
+export function useProductState(): {
+  productState: StateProduct;
+  updateProductProp: (property: string, value: unknown) => void;
+} {
+  const [productState, setProductState] = useAtom(stateProduct);
+
+  const updateProductProp = (property: string, value: unknown) => {
+    setProductState({
+      ...productState,
+      [property]: value
+    });
+  };
+
+  return { productState, updateProductProp };
+}
+
+/*****************************************************************************
  * Global state used for UI
  ****************************************************************************/
 type Store = {
