@@ -1,11 +1,18 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import 'server-only';
 
 type RequestBody = {
   query: string;
 };
 
+type WishlistBody = {
+  id: string;
+  content: { wishlist_ids: string[] };
+};
+
 const SWELL_STORE_ID = process.env.SWELL_STORE_ID as string;
+const SWELL_SECRET_KEY = process.env.SWELL_SECRET_KEY as string;
 
 /*****************************************************************************
  * Extract Swell session cookie
@@ -33,6 +40,26 @@ const makeRequest = async (path: string, method = 'GET', body?: RequestBody) => 
   requestHeaders.set('X-Session', session);
 
   const response = await fetch(`https://${SWELL_STORE_ID}.swell.store${path}`, {
+    method: method,
+    headers: requestHeaders,
+    body: JSON.stringify(body)
+  });
+
+  return response.json();
+};
+
+/*****************************************************************************
+ * Make Admin API request to Swell using secret key
+ ****************************************************************************/
+const makeAdminRequest = async (path: string, method = 'GET', body?: unknown) => {
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set('Content-Type', 'application/json');
+  requestHeaders.set(
+    'Authorization',
+    `Basic ${Buffer.from(`${SWELL_STORE_ID}:${SWELL_SECRET_KEY}`).toString('base64')}`
+  );
+
+  const response = await fetch(`https://api.swell.store${path}`, {
     method: method,
     headers: requestHeaders,
     body: JSON.stringify(body)
@@ -172,4 +199,56 @@ const getCards = async () => {
   };
 
   return response?.results;
+};
+
+/*****************************************************************************
+ * Get logged user wishlist products ids
+ ****************************************************************************/
+const getWishlistIds = async (): Promise<string[]> => {
+  const { content } = (await makeRequest('/api/account')) as WishlistBody;
+  return content.wishlist_ids;
+};
+
+/*****************************************************************************
+ * Get logged user wishlist
+ ****************************************************************************/
+export const getWishlist = async (): Promise<Product[]> => {
+  const productsIds = await getWishlistIds();
+
+  if (productsIds.length === 0) {
+    return [];
+  }
+
+  const { results } = (await makeRequest(
+    `/api/products?where[id][$in]=${productsIds.join(',')}`
+  )) as { results: Product[] };
+
+  return results;
+};
+
+/*****************************************************************************
+ * Check if product is in logged user wishlist
+ ****************************************************************************/
+export const isProductInWishlist = async (productId: string): Promise<boolean> => {
+  const productsIds = await getWishlistIds();
+  return productsIds.includes(productId);
+};
+
+/*****************************************************************************
+ * Add product to logged user wishlist
+ ****************************************************************************/
+export const toggleWishlist = async (productId: string): Promise<string[]> => {
+  const { id, content } = (await makeRequest('/api/account')) as WishlistBody;
+
+  // Add or remove product depending on if it's already in the wishlist
+  const wishlistIds = content.wishlist_ids.includes(productId)
+    ? content.wishlist_ids.filter((id) => id !== productId)
+    : [...content.wishlist_ids, productId];
+
+  // Overwrite wishlist with new list of products
+  const wishlist = (await makeAdminRequest(`/accounts/${id}`, 'PUT', {
+    $set: { content: { wishlist_ids: wishlistIds } }
+  })) as WishlistBody;
+
+  return wishlist.content.wishlist_ids;
 };
