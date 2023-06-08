@@ -211,8 +211,6 @@ declare module 'swell-js' {
       type?: PurchaseOptions;
     };
   }
-  // discounts?: Amount;
-  // type Amount = number[];
 
   export function init(storeId: string, publicKey: string, options?: InitOptions): void;
 
