@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-
 import AddToCart from './AddToCart';
 import ProductDescription from './ProductDescription';
 import ProductOptions from './ProductOptions';
@@ -16,19 +12,13 @@ interface ProductProp {
 }
 
 const ProductInfo = ({ product }: ProductProp) => {
-  const [chosenOptions, setChosenOptions] = useState({});
-
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
       <ProductRating rating={3} />
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
-      <ProductOptions
-        product={product}
-        chosenOptions={chosenOptions}
-        setChosenOptions={setChosenOptions}
-      />
-      <AddToCart product={product} chosenOptions={chosenOptions} />
+      <ProductOptions product={product} />
+      <AddToCart product={product} />
       <ProductDescription description={product.description} />
       <ProductSocialMedia />
     </div>

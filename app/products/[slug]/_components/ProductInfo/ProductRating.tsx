@@ -1,3 +1,5 @@
+'use client';
+
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { usePathname } from 'next/navigation';
 import { AiFillFacebook, AiOutlineTwitter } from 'react-icons/ai';
 import { BsPinterest } from 'react-icons/bs';

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -7,13 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Spinner } from '~/_components/Globals/Spinner';
 import Tooltip from '~/_components/Globals/Tooltip';
 
-import { useStore, useGlobalState } from '~/_hooks/useStore';
+import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
-  chosenOptions: { [key: string]: string };
 }
 
 interface AddProductProps {
@@ -22,18 +23,20 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({ product, chosenOptions }: ProductProp) => {
+const AddToCart = ({ product }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useStore();
+  const { productState } = useProductState();
   const { setCart } = useGlobalState();
+
+  const { chosenOptions } = productState;
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Object.keys(chosenOptions).length]);
+  }, [chosenOptions, product.options?.length]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting

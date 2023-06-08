@@ -1,16 +1,17 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
-import { useStore } from '~/_hooks/useStore';
+import { useStore, useProductState } from '~/_hooks/useStore';
 
 interface ProductProp {
   product: Product;
-  chosenOptions: { [key: string]: string };
-  setChosenOptions: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
 }
 
-const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductProp) => {
+const ProductOptions = ({ product }: ProductProp) => {
   const [selectedIds, setSelectedIds] = useState({});
   const { state, updateState } = useStore();
+  const { productState, updateProductProp } = useProductState();
 
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
@@ -22,14 +23,20 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
   useEffect(() => {
     const firstActiveVariant = product.variants?.reverse().find((variant) => variant.active);
     const firstActiveLabel = firstActiveVariant?.name.split(', ');
+
+    let initialOptions = {};
+
     product.options?.map((option, i) => {
-      setChosenOptions((prev) => ({
-        ...prev,
+      initialOptions = {
+        ...initialOptions,
         [option.label]: firstActiveLabel ? firstActiveLabel[i] : ''
-      }));
+      };
+
       setSelectedIds((prev) => ({ ...prev, [option.label]: firstActiveVariant?.value_ids[i] }));
     });
-  }, [product, setChosenOptions]);
+
+    updateProductProp('chosenOptions', initialOptions);
+  }, [product]);
 
   // Declare useEffect to 'listen' for variant selections
   useEffect(() => {
@@ -73,7 +80,10 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
                             }`}
                             style={{ backgroundColor: `${value.name}` }}
                             onClick={() => {
-                              setChosenOptions({ ...chosenOptions, [option.label]: value.name });
+                              updateProductProp('chosenOptions', {
+                                ...productState.chosenOptions,
+                                [option.label]: value.name
+                              });
                               setSelectedIds({ ...selectedIds, [option.label]: value.id });
                             }}
                           ></li>
@@ -84,7 +94,10 @@ const ProductOptions = ({ product, setChosenOptions, chosenOptions }: ProductPro
                             }`}
                             key={'color' + index.toString()}
                             onClick={() => {
-                              setChosenOptions({ ...chosenOptions, [option.label]: value.name });
+                              updateProductProp('chosenOptions', {
+                                ...productState.chosenOptions,
+                                [option.label]: value.name
+                              });
                               setSelectedIds({ ...selectedIds, [option.label]: value.id });
                             }}
                           >
