@@ -111,9 +111,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                       <div className="flex justify-between">
                         <div>
                           {product.variant && <p>Variant: {product.variant?.name}</p>}
-
                           <p>
-                            {product.quantity} x ${formatCurrency(product.price)}
+                            {product.quantity} x{' '}
+                            {product.product?.sale && (
+                              <span className="text-gray line-through mx-2">
+                                ${formatCurrency(product.product?.price)}
+                              </span>
+                            )}
+                            ${formatCurrency(product.price)}
                           </p>
                         </div>
                         <button
@@ -139,33 +144,21 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           {/* checkout section */}
           <div className="w-full px-7 pb-7 bg-gray text-xs">
             <hr className="mb-5 opacity-0" />
-            <div className="grid grid-cols-2 text-base mb-3">
+            <div className="grid [grid-template-columns:2fr_1fr] text-base mb-3">
               <p>Subtotal</p>
               <p className="text-right">
-                ${' '}
-                {cart?.items
-                  ? formatCurrency(
-                      cart.items?.reduce(
-                        (acc, product) => acc + product.price * product.quantity,
-                        0
-                      )
-                    )
-                  : Number(0).toFixed(2)}
+                $ {cart?.items ? formatCurrency(cart.sub_total) : Number(0).toFixed(2)}
               </p>
-              <p>Taxes</p>
+              <p>Promo discounts</p>
               <p className="text-right">
-                $ {cart?.tax_total ? formatCurrency(cart.tax_total) : Number(0).toFixed(2)}
+                - ${' '}
+                {cart?.discount_total ? formatCurrency(cart.discount_total) : Number(0).toFixed(2)}
               </p>
               <p className="text-xl mt-3 font-bold">Total</p>
               <p className="text-xl mt-3 text-right font-bold">
                 ${' '}
                 {cart?.items
-                  ? formatCurrency(
-                      cart.items?.reduce(
-                        (acc, product) => acc + product.price * product.quantity,
-                        0
-                      ) + cart.tax_total
-                    )
+                  ? formatCurrency(cart?.sub_total - cart?.discount_total)
                   : Number(0).toFixed(2)}
               </p>
             </div>

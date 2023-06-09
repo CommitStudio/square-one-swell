@@ -137,8 +137,10 @@ declare module 'swell-js' {
     dateCreated: string;
     discounts: unknown;
     discountTotal: number;
+    discount_total: number;
     giftcardTotal: number;
     grandTotal: number;
+    grand_total: number;
     guest: true;
     id: string;
     itemDiscount: number;
@@ -153,8 +155,10 @@ declare module 'swell-js' {
     shipmentDiscount: number;
     shipmentPrice: number;
     shipmentTotal: number;
+    shipment_total: number;
     shipping: unknown;
     subTotal: number;
+    sub_total: number;
     taxes: unknown;
     taxIncludedTotal: number;
     tax_total: number;
