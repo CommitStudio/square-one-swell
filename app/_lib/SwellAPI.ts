@@ -204,9 +204,9 @@ const getCards = async () => {
 /*****************************************************************************
  * Get logged user wishlist products ids
  ****************************************************************************/
-const getWishlistIds = async (): Promise<string[]> => {
+export const getWishlistIds = async (): Promise<string[]> => {
   const { content } = (await makeRequest('/api/account')) as WishlistBody;
-  return content.wishlist_ids;
+  return content?.wishlist_ids || [];
 };
 
 /*****************************************************************************
@@ -241,9 +241,9 @@ export const toggleWishlist = async (productId: string): Promise<string[]> => {
   const { id, content } = (await makeRequest('/api/account')) as WishlistBody;
 
   // Add or remove product depending on if it's already in the wishlist
-  const wishlistIds = content.wishlist_ids.includes(productId)
+  const wishlistIds = content?.wishlist_ids.includes(productId)
     ? content.wishlist_ids.filter((id) => id !== productId)
-    : [...content.wishlist_ids, productId];
+    : [...(content?.wishlist_ids || []), productId];
 
   // Overwrite wishlist with new list of products
   const wishlist = (await makeAdminRequest(`/accounts/${id}`, 'PUT', {

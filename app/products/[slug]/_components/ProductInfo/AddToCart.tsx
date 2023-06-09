@@ -7,7 +7,6 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/_components/Globals/Spinner';
-import Tooltip from '~/_components/Globals/Tooltip';
 
 import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
@@ -15,6 +14,8 @@ import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
+  wishlist: string[];
+  toggleWishlistAction: (productId: string) => Promise<string[]>;
 }
 
 interface AddProductProps {
@@ -23,10 +24,12 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({ product }: ProductProp) => {
+const AddToCart = ({ product, toggleWishlistAction, wishlist }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
+  const [isOnWishlist, setIsOnWishlist] = useState(false);
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -37,6 +40,14 @@ const AddToCart = ({ product }: ProductProp) => {
     product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
   }, [chosenOptions, product.options?.length]);
+
+  useEffect(() => {
+    if (wishlist.includes(product.id)) {
+      setIsOnWishlist(true);
+    } else {
+      setIsOnWishlist(false);
+    }
+  }, [wishlist, product.id]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -77,6 +88,19 @@ const AddToCart = ({ product }: ProductProp) => {
       quantity: productAmount,
       toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
     });
+  };
+
+  const handleToggleWishlist = async () => {
+    setIsWishlistLoading(true);
+    wishlist = await toggleWishlistAction(product.id);
+
+    if (wishlist.includes(product.id)) {
+      setIsOnWishlist(true);
+      setIsWishlistLoading(false);
+    } else {
+      setIsOnWishlist(false);
+      setIsWishlistLoading(false);
+    }
   };
 
   return (
@@ -125,11 +149,19 @@ const AddToCart = ({ product }: ProductProp) => {
               'UNAVAILABLE'
             )}
           </button>
-          <Tooltip content="Feature coming soon!">
-            <button className="py-3 hover:text-secondary hover:border-secondary duration-200">
-              <AiOutlineHeart className="h-6 w-6" />
+
+          {isWishlistLoading ? (
+            <Spinner size={6} />
+          ) : (
+            <button
+              onClick={() => {
+                handleToggleWishlist().catch((err) => console.log(err));
+              }}
+              className="py-3 hover:text-secondary hover:border-secondary duration-200"
+            >
+              <AiOutlineHeart className={`h-6 w-6 ${isOnWishlist ? 'text-red-500' : ''}`} />
             </button>
-          </Tooltip>
+          )}
         </span>
       </div>
       {pleaseSelectAllOptions && (

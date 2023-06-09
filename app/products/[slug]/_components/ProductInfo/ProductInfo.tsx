@@ -1,3 +1,5 @@
+import { toggleWishlistAction, getWishlistIdsAction } from '../../_actions/wishlist';
+
 import AddToCart from './AddToCart';
 import ProductDescription from './ProductDescription';
 import ProductOptions from './ProductOptions';
@@ -11,14 +13,20 @@ interface ProductProp {
   categories: Category[];
 }
 
-const ProductInfo = ({ product }: ProductProp) => {
+const ProductInfo = async ({ product }: ProductProp) => {
+  const wishlist = await getWishlistIdsAction();
+
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
       <ProductRating rating={3} />
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions product={product} />
-      <AddToCart product={product} />
+      <AddToCart
+        product={product}
+        toggleWishlistAction={toggleWishlistAction}
+        wishlist={wishlist}
+      />
       <ProductDescription description={product.description} />
       <ProductSocialMedia />
     </div>
