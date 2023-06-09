@@ -63,7 +63,8 @@ class Store {
       images: this.transformImages(category),
       description: category.slug,
       active: category.active,
-      slug: { category: category.slug }
+      slug: { category: category.slug },
+      parent_id: category.parent_id
     }));
   }
 
