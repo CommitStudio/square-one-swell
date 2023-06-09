@@ -106,7 +106,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
                         style={{ objectFit: 'cover' }}
                       />
                     </div>
-                    <div className="flex flex-col space-y-4 w-full">
+                    <div className="flex flex-col space-y-4 w-full" data-cy="cart-product">
                       <p className="font-bold uppercase">{product.product?.name}</p>
                       <div className="flex justify-between">
                         <div>

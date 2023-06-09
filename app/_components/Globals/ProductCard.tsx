@@ -41,11 +41,13 @@ const ProductCard = ({ product }: Props) => {
           </Tooltip>
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
-          <Link href={`/products/${product.slug}`}>
+          <Link href={`/products/${product.slug}`} data-cy="product-link">
             <Image src={image.src} alt={image.alt} fill style={{ objectFit: 'cover' }} />
           </Link>
         </div>
-        <p className="font-quicksand mt-3 mb-3 uppercase line-clamp-2 h-12">{product.name}</p>
+        <p data-cy="product-name" className="font-quicksand mt-3 mb-3 uppercase line-clamp-2 h-12">
+          {product.name}
+        </p>
         {product.salePrice ? (
           <div className="mt-auto">
             <span className="flex">
