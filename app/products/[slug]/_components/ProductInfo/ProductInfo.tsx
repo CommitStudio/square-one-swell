@@ -13,9 +13,7 @@ interface ProductProp {
   categories: Category[];
 }
 
-const ProductInfo = async ({ product }: ProductProp) => {
-  const wishlist = await getWishlistIdsAction();
-
+const ProductInfo = ({ product }: ProductProp) => {
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
@@ -25,7 +23,7 @@ const ProductInfo = async ({ product }: ProductProp) => {
       <AddToCart
         product={product}
         toggleWishlistAction={toggleWishlistAction}
-        wishlist={wishlist}
+        getWishlistIdsAction={getWishlistIdsAction}
       />
       <ProductDescription description={product.description} />
       <ProductSocialMedia />

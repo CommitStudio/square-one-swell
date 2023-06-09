@@ -14,8 +14,9 @@ import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
-  wishlist: string[];
+
   toggleWishlistAction: (productId: string) => Promise<string[]>;
+  getWishlistIdsAction: () => Promise<string[]>;
 }
 
 interface AddProductProps {
@@ -24,7 +25,7 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({ product, toggleWishlistAction, wishlist }: ProductProp) => {
+const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,13 +42,18 @@ const AddToCart = ({ product, toggleWishlistAction, wishlist }: ProductProp) => 
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
   }, [chosenOptions, product.options?.length]);
 
+  // Check if product is on wishlist on first render
   useEffect(() => {
-    if (wishlist.includes(product.id)) {
-      setIsOnWishlist(true);
-    } else {
-      setIsOnWishlist(false);
-    }
-  }, [wishlist, product.id]);
+    const getWishlistOnFirstRender = async () => {
+      const wishlistIds = await getWishlistIdsAction();
+      if (wishlistIds.includes(product.id)) {
+        setIsOnWishlist(true);
+      } else {
+        setIsOnWishlist(false);
+      }
+    };
+    getWishlistOnFirstRender().catch((err) => console.log(err));
+  }, [getWishlistIdsAction, product.id]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -92,9 +98,9 @@ const AddToCart = ({ product, toggleWishlistAction, wishlist }: ProductProp) => 
 
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
-    wishlist = await toggleWishlistAction(product.id);
+    const wishlistIds = await toggleWishlistAction(product.id);
 
-    if (wishlist.includes(product.id)) {
+    if (wishlistIds.includes(product.id)) {
       setIsOnWishlist(true);
       setIsWishlistLoading(false);
     } else {
