@@ -32,12 +32,12 @@ const Filter = ({ categories, query }: FilterProps) => {
   const pathname = usePathname();
 
   const filteringPricesRanges = [
-    { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
-    { name: '$10 - $20', slug: { minPrice: 10, maxPrice: 20 } },
-    { name: '$20 - $30', slug: { minPrice: 20, maxPrice: 30 } },
-    { name: '$30 - $40', slug: { minPrice: 30, maxPrice: 40 } },
-    { name: '+$40', slug: { minPrice: 40, maxPrice: '' } },
-    { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
+    { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 }, parent_id: null },
+    { name: '$10 - $20', slug: { minPrice: 10, maxPrice: 20 }, parent_id: null },
+    { name: '$20 - $30', slug: { minPrice: 20, maxPrice: 30 }, parent_id: null },
+    { name: '$30 - $40', slug: { minPrice: 30, maxPrice: 40 }, parent_id: null },
+    { name: '+$40', slug: { minPrice: 40, maxPrice: '' }, parent_id: null },
+    { name: 'All prices', slug: { minPrice: 0, maxPrice: '' }, parent_id: null }
   ];
 
   useEffect(() => {
