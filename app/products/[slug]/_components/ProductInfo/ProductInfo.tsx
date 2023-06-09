@@ -1,4 +1,4 @@
-import { toggleWishlistAction, getWishlistIdsAction } from '../../_actions/wishlist';
+import { toggleWishlistAction, getWishlistIdsAction } from '../../../_actions/wishlist';
 
 import AddToCart from './AddToCart';
 import ProductDescription from './ProductDescription';

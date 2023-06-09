@@ -2,22 +2,52 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FaRegHeart } from 'react-icons/fa';
 
 import Button from '~/_components/Button';
-import Tooltip from '~/_components/Globals/Tooltip';
+import { Spinner } from '~/_components/Globals/Spinner';
 
 import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
+  toggleWishlistAction: (productId: string) => Promise<string[]>;
+  getWishlistIdsAction: () => Promise<string[]>;
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
+  const [isOnWishlist, setIsOnWishlist] = useState(false);
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
+
+  // Check if product is on wishlist on first render
+  useEffect(() => {
+    const getWishlistOnFirstRender = async () => {
+      const wishlistIds = await getWishlistIdsAction();
+      if (wishlistIds.includes(product.id)) {
+        setIsOnWishlist(true);
+      } else {
+        setIsOnWishlist(false);
+      }
+    };
+    getWishlistOnFirstRender().catch((err) => console.log(err));
+  }, [getWishlistIdsAction, product.id]);
+
+  const handleToggleWishlist = async () => {
+    setIsWishlistLoading(true);
+    const wishlistIds = await toggleWishlistAction(product.id);
+
+    if (wishlistIds.includes(product.id)) {
+      setIsOnWishlist(true);
+      setIsWishlistLoading(false);
+    } else {
+      setIsOnWishlist(false);
+      setIsWishlistLoading(false);
+    }
+  };
 
   return (
     <div
@@ -30,15 +60,23 @@ const ProductCard = ({ product }: Props) => {
     >
       <div className="px-5 py-4">
         <div className="flex justify-end">
-          <Tooltip content="Feature coming soon!">
-            <div>
+          {isWishlistLoading ? (
+            <span className="mb-3">
+              <Spinner size={4} />
+            </span>
+          ) : (
+            <button
+              onClick={() => {
+                handleToggleWishlist().catch((err) => console.log(err));
+              }}
+            >
               <FaRegHeart
                 className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                  isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'
-                }`}
+                  isOnWishlist ? 'text-red-500' : ''
+                } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
               />
-            </div>
-          </Tooltip>
+            </button>
+          )}
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
           <Link href={`/products/${product.slug}`} data-cy="product-link">

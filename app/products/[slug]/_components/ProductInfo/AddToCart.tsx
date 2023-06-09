@@ -14,7 +14,6 @@ import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
-
   toggleWishlistAction: (productId: string) => Promise<string[]>;
   getWishlistIdsAction: () => Promise<string[]>;
 }
@@ -157,7 +156,7 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
           </button>
 
           {isWishlistLoading ? (
-            <Spinner size={6} />
+            <Spinner size={5} />
           ) : (
             <button
               onClick={() => {
