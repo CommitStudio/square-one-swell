@@ -8,6 +8,7 @@ import { FaRegHeart } from 'react-icons/fa';
 
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
+import Tooltip from '~/_components/Globals/Tooltip';
 import { useWishlistState } from '~/_hooks/useStore';
 
 import { formatCurrency } from '~/_utils/numbers';
@@ -70,10 +71,13 @@ const ProductCard = ({
               <Spinner size={4} />
             </span>
           ) : (
-            isAuthenticated && (
+            <Tooltip
+              content="Please log in to use this funtionality"
+              className={`${isAuthenticated ? 'hidden' : ''}`}
+            >
               <button
                 onClick={() => {
-                  handleToggleWishlist().catch((err) => console.log(err));
+                  isAuthenticated && handleToggleWishlist().catch((err) => console.log(err));
                 }}
               >
                 <FaRegHeart
@@ -82,7 +86,7 @@ const ProductCard = ({
                   } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
                 />
               </button>
-            )
+            </Tooltip>
           )}
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">

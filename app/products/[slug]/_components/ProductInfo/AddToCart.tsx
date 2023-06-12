@@ -7,6 +7,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/_components/Globals/Spinner';
+import Tooltip from '~/_components/Globals/Tooltip';
 
 import { useStore, useProductState, useGlobalState, useWishlistState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
@@ -161,10 +162,13 @@ const AddToCart = ({
           {isWishlistLoading ? (
             <Spinner size={5} />
           ) : (
-            isAuthenticated && (
+            <Tooltip
+              content="Please log in to use this funtionality"
+              className={`${isAuthenticated ? 'hidden' : ''}`}
+            >
               <button
                 onClick={() => {
-                  handleToggleWishlist().catch((err) => console.log(err));
+                  isAuthenticated && handleToggleWishlist().catch((err) => console.log(err));
                 }}
                 className="py-3 hover:text-secondary hover:border-secondary duration-200"
               >
@@ -172,7 +176,7 @@ const AddToCart = ({
                   className={`h-6 w-6 ${wishlistIds?.includes(product.id) ? 'text-red-500' : ''}`}
                 />
               </button>
-            )
+            </Tooltip>
           )}
         </span>
       </div>
