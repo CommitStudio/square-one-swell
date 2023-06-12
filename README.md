@@ -1,16 +1,13 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCommitStudio%2Fsquare-one-swell&env=NEXT_PUBLIC_BASE_URL,SWELL_STORE_ID,SWELL_SECRET_KEY,SWELL_PUBLIC_KEY,NEXT_PUBLIC_GTM_ID)
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.storage%2Fstorage-account-create%2Fazuredeploy.json)
-
-
+###### DEPLOYMENT BUTTONS
+| vercel | azure |
+|---|---|
+| [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCommitStudio%2Fsquare-one-swell&env=NEXT_PUBLIC_BASE_URL,SWELL_STORE_ID,SWELL_SECRET_KEY,SWELL_PUBLIC_KEY,NEXT_PUBLIC_GTM_ID) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.storage%2Fstorage-account-create%2Fazuredeploy.json) |
 
 ## Introduction to Square One
-
 
 Square One is an e-commerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful e-commerce business.
 
 ## Overview
-
 
 1. Features
 2. Main Technologies
@@ -19,7 +16,6 @@ Square One is an e-commerce platform powered by Swell, designed to provide busin
 5. License
 
 ## 1. Features
-
 
 - E-commerce theme optimized for a Swell store
 - Home page
@@ -41,18 +37,15 @@ Square One is an e-commerce platform powered by Swell, designed to provide busin
 
 ## 2. Main Technologies
 
-
 - Typescript
 - Next.js v13.4.3 (using App Router) and React.js v18.2.0
 - Tailwind CSS
 
 ## 3. Before starting development
 
-
 To use Square One, you need to have a Swell account with a respective store. Visit the [Swell official website](https://www.swell.is/) for more information.
 
 ## 4. Running Square One (local)
-
 
 To run the store locally:
 
@@ -65,7 +58,6 @@ To run the store locally:
 4. Run the store by typing `npm run dev`.
 
 ## 5. License
-
 
 MIT License
 Copyright (c) 2023 Commit Studio
