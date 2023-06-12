@@ -104,7 +104,7 @@ class Store {
       salePrice: product.sale_price || null,
       sku: product.sku || null,
       images: this.transformImages(product),
-      categories: product.category_index.id
+      categories: product.category_index?.id
     };
   }
 
@@ -137,7 +137,7 @@ class Store {
    * Convert SwellProduct variants to a Product variants format
    ****************************************************************************/
   transformProductVariants(product: SwellProduct) {
-    return product.variants.results.map((variant) => ({
+    return product.variants?.results?.map((variant) => ({
       name: variant.name,
       active: variant.active,
       value_ids: variant.option_value_ids

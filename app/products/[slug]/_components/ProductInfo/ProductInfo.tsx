@@ -1,4 +1,4 @@
-import { toggleWishlistAction, getWishlistIdsAction } from '../../../_actions/wishlist';
+import { toggleWishlistAction, getWishlistAction } from '../../../_actions/wishlist';
 
 import AddToCart from './AddToCart';
 import ProductDescription from './ProductDescription';
@@ -26,7 +26,7 @@ const ProductInfo = async ({ product }: ProductProp) => {
       <AddToCart
         product={product}
         toggleWishlistAction={toggleWishlistAction}
-        getWishlistIdsAction={getWishlistIdsAction}
+        getWishlistAction={getWishlistAction}
         isAuthenticated={auth}
       />
       <ProductDescription description={product.description} />

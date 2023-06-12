@@ -2,7 +2,7 @@ import ProductCard from './ProductCard';
 
 import Container from '~/_layouts/Container';
 import { isAuthenticated } from '~/_lib/SwellAPI';
-import { toggleWishlistAction, getWishlistIdsAction } from '~/products/_actions/wishlist';
+import { toggleWishlistAction, getWishlistAction } from '~/products/_actions/wishlist';
 
 interface Props {
   relatedProducts?: boolean;
@@ -28,7 +28,7 @@ const ProductList = async ({ relatedProducts, threeColumns, products }: Props) =
           <ProductCard
             product={product}
             toggleWishlistAction={toggleWishlistAction}
-            getWishlistIdsAction={getWishlistIdsAction}
+            getWishlistAction={getWishlistAction}
             isAuthenticated={auth}
             key={`card-${i}`}
           />

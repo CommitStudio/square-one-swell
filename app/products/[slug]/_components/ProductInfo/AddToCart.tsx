@@ -15,8 +15,8 @@ import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
-  toggleWishlistAction: (productId: string) => Promise<string[]>;
-  getWishlistIdsAction: () => Promise<string[]>;
+  toggleWishlistAction: (productId: string) => Promise<Product[]>;
+  getWishlistAction: () => Promise<Product[]>;
   isAuthenticated: boolean;
 }
 
@@ -29,14 +29,15 @@ interface AddProductProps {
 const AddToCart = ({
   product,
   toggleWishlistAction,
-  getWishlistIdsAction,
+
+  getWishlistAction,
   isAuthenticated
 }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const { wishlistIds, setwishlistIds } = useWishlistState();
+  const { wishlist, setwishlist } = useWishlistState();
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -50,14 +51,15 @@ const AddToCart = ({
 
   // Check if wishlist is on global store, if not, get it from Swell
   useEffect(() => {
-    if (wishlistIds != null || !isAuthenticated) return;
+    if (wishlist != null || !isAuthenticated) return;
 
     const getWishlistOnFirstRender = async () => {
-      const wishlistIds = await getWishlistIdsAction();
-      setwishlistIds([...wishlistIds]);
+      const wishlist = await getWishlistAction();
+      setwishlist([...wishlist]);
     };
+
     getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistIdsAction, isAuthenticated, setwishlistIds, wishlistIds]);
+  }, [getWishlistAction, isAuthenticated, setwishlist, wishlist]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -102,13 +104,13 @@ const AddToCart = ({
 
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
-    const wishlistIds = await toggleWishlistAction(product.id);
+    const wishlist = await toggleWishlistAction(product.id);
 
-    if (wishlistIds.includes(product.id)) {
-      setwishlistIds([...wishlistIds]);
+    if (wishlist.some(({ id }) => id === product.id)) {
+      setwishlist([...wishlist]);
       setIsWishlistLoading(false);
     } else {
-      setwishlistIds([...wishlistIds]);
+      setwishlist([...wishlist]);
       setIsWishlistLoading(false);
     }
   };
@@ -173,7 +175,9 @@ const AddToCart = ({
                 className="py-3 hover:text-secondary hover:border-secondary duration-200"
               >
                 <AiOutlineHeart
-                  className={`h-6 w-6 ${wishlistIds?.includes(product.id) ? 'text-red-500' : ''}`}
+                  className={`h-6 w-6 ${
+                    wishlist?.some(({ id }) => id === product.id) ? 'text-red-500' : ''
+                  }`}
                 />
               </button>
             </Tooltip>

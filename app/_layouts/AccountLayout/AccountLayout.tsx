@@ -33,6 +33,7 @@ const AccountLayout = ({ account, children }: Props) => {
               pathname="/account/payments"
               label="Payment methods"
             />
+            <AccountLink href="/account/wishlist" pathname="/account/wishlist" label="Wishlist" />
           </div>
           <LogOutModal />
         </div>

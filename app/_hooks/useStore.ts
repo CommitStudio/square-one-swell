@@ -43,11 +43,11 @@ export function useProductState(): {
 /*****************************************************************************
  * Global state used for wishlist
  ****************************************************************************/
-const stateWishlistIds = atom<string[] | null>(null);
+const stateWishlist = atom<Product[] | null>(null);
 
 export function useWishlistState() {
-  const [wishlistIds, setwishlistIds] = useAtom(stateWishlistIds);
-  return { wishlistIds, setwishlistIds };
+  const [wishlist, setwishlist] = useAtom(stateWishlist);
+  return { wishlist, setwishlist };
 }
 
 /*****************************************************************************
