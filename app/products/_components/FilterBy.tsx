@@ -68,20 +68,18 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
                   scroll={false}
                   legacyBehavior
                 >
-                  <div>
-                    <a
-                      onClick={() => handleClick(item.name)}
-                      className={`cursor-pointer w-fit hover:font-bold ${
-                        Object.values(item.slug)
-                          .map(String)
-                          .every((v) => Object.values(query).map(String).includes(v))
-                          ? 'text-black font-semibold text'
-                          : 'text-gray-500'
-                      }`}
-                    >
-                      {item.name}
-                    </a>
-                  </div>
+                  <a
+                    onClick={() => handleClick(item.name)}
+                    className={`cursor-pointer w-fit hover:font-bold ${
+                      Object.values(item.slug)
+                        .map(String)
+                        .every((v) => Object.values(query).map(String).includes(v))
+                        ? 'text-black font-semibold text'
+                        : 'text-gray-500'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
                 </Link>
                 {item.subCategories.map((subcategory, i) => {
                   return (
@@ -93,21 +91,19 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
                           ...subcategory.slug
                         }
                       }}
-                      key={i}
+                      key={`filter-item-${i}`}
                     >
-                      <div>
-                        <a
-                          onClick={() => handleClick(subcategory.name)}
-                          className={`cursor-pointer w-fit hover:font-bold pl-3 text-sm ${
-                            Object.values(subcategory.slug)
-                              .map(String)
-                              .every((v) => Object.values(query).map(String).includes(v))
-                              ? 'text-black font-semibold underline'
-                              : ''
-                          }`}
-                        >
-                          {subcategory.name}
-                        </a>
+                      <div
+                        onClick={() => handleClick(subcategory.name)}
+                        className={`cursor-pointer w-fit hover:font-bold pl-3 text-sm ${
+                          Object.values(subcategory.slug)
+                            .map(String)
+                            .every((v) => Object.values(query).map(String).includes(v))
+                            ? 'text-black font-semibold underline'
+                            : ''
+                        }`}
+                      >
+                        {subcategory.name}
                       </div>
                     </Link>
                   );
