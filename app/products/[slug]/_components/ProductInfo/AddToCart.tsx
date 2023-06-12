@@ -16,6 +16,7 @@ interface ProductProp {
   product: Product;
   toggleWishlistAction: (productId: string) => Promise<string[]>;
   getWishlistIdsAction: () => Promise<string[]>;
+  isAuthenticated: boolean;
 }
 
 interface AddProductProps {
@@ -24,7 +25,12 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: ProductProp) => {
+const AddToCart = ({
+  product,
+  toggleWishlistAction,
+  getWishlistIdsAction,
+  isAuthenticated
+}: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -43,14 +49,14 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
 
   // Check if wishlist is on global store, if not, get it from Swell
   useEffect(() => {
-    if (wishlistIds != null) return;
+    if (wishlistIds != null || !isAuthenticated) return;
 
     const getWishlistOnFirstRender = async () => {
       const wishlistIds = await getWishlistIdsAction();
       setwishlistIds([...wishlistIds]);
     };
     getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistIdsAction, setwishlistIds, wishlistIds]);
+  }, [getWishlistIdsAction, isAuthenticated, setwishlistIds, wishlistIds]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -152,20 +158,21 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
               'UNAVAILABLE'
             )}
           </button>
-
           {isWishlistLoading ? (
             <Spinner size={5} />
           ) : (
-            <button
-              onClick={() => {
-                handleToggleWishlist().catch((err) => console.log(err));
-              }}
-              className="py-3 hover:text-secondary hover:border-secondary duration-200"
-            >
-              <AiOutlineHeart
-                className={`h-6 w-6 ${wishlistIds?.includes(product.id) ? 'text-red-500' : ''}`}
-              />
-            </button>
+            isAuthenticated && (
+              <button
+                onClick={() => {
+                  handleToggleWishlist().catch((err) => console.log(err));
+                }}
+                className="py-3 hover:text-secondary hover:border-secondary duration-200"
+              >
+                <AiOutlineHeart
+                  className={`h-6 w-6 ${wishlistIds?.includes(product.id) ? 'text-red-500' : ''}`}
+                />
+              </button>
+            )
           )}
         </span>
       </div>

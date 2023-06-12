@@ -16,9 +16,15 @@ interface Props {
   product: Product;
   toggleWishlistAction: (productId: string) => Promise<string[]>;
   getWishlistIdsAction: () => Promise<string[]>;
+  isAuthenticated: boolean;
 }
 
-const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Props) => {
+const ProductCard = ({
+  product,
+  toggleWishlistAction,
+  getWishlistIdsAction,
+  isAuthenticated
+}: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
@@ -26,14 +32,14 @@ const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Pr
 
   // Check if wishlist is on global store, if not, get it from Swell
   useEffect(() => {
-    if (wishlistIds != null) return;
+    if (wishlistIds != null || !isAuthenticated) return;
 
     const getWishlistOnFirstRender = async () => {
       const wishlistIds = await getWishlistIdsAction();
       setwishlistIds([...wishlistIds]);
     };
     getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistIdsAction, setwishlistIds, wishlistIds]);
+  }, [getWishlistIdsAction, isAuthenticated, setwishlistIds, wishlistIds]);
 
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
@@ -64,17 +70,19 @@ const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Pr
               <Spinner size={4} />
             </span>
           ) : (
-            <button
-              onClick={() => {
-                handleToggleWishlist().catch((err) => console.log(err));
-              }}
-            >
-              <FaRegHeart
-                className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                  wishlistIds?.includes(product.id) ? 'text-red-500' : ''
-                } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
-              />
-            </button>
+            isAuthenticated && (
+              <button
+                onClick={() => {
+                  handleToggleWishlist().catch((err) => console.log(err));
+                }}
+              >
+                <FaRegHeart
+                  className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
+                    wishlistIds?.includes(product.id) ? 'text-red-500' : ''
+                  } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
+                />
+              </button>
+            )
           )}
         </div>
         <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">

@@ -8,12 +8,15 @@ import ProductRating from './ProductRating';
 import ProductSocialMedia from './ProductSocialMedia';
 import ProductTitle from './ProductTitle';
 
+import { isAuthenticated } from '~/_lib/SwellAPI';
+
 interface ProductProp {
   product: Product;
   categories: Category[];
 }
 
-const ProductInfo = ({ product }: ProductProp) => {
+const ProductInfo = async ({ product }: ProductProp) => {
+  const auth = await isAuthenticated();
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
@@ -24,6 +27,7 @@ const ProductInfo = ({ product }: ProductProp) => {
         product={product}
         toggleWishlistAction={toggleWishlistAction}
         getWishlistIdsAction={getWishlistIdsAction}
+        isAuthenticated={auth}
       />
       <ProductDescription description={product.description} />
       <ProductSocialMedia />
