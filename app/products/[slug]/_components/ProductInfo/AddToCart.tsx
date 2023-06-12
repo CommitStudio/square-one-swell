@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/_components/Globals/Spinner';
 
-import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
+import { useStore, useProductState, useGlobalState, useWishlistState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
@@ -29,7 +29,7 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const [isOnWishlist, setIsOnWishlist] = useState(false);
+  const { wishlistIds, setwishlistIds } = useWishlistState();
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -41,18 +41,16 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
   }, [chosenOptions, product.options?.length]);
 
-  // Check if product is on wishlist on first render
+  // Check if wishlist is on global store, if not, get it from Swell
   useEffect(() => {
+    if (wishlistIds != null) return;
+
     const getWishlistOnFirstRender = async () => {
       const wishlistIds = await getWishlistIdsAction();
-      if (wishlistIds.includes(product.id)) {
-        setIsOnWishlist(true);
-      } else {
-        setIsOnWishlist(false);
-      }
+      setwishlistIds([...wishlistIds]);
     };
     getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistIdsAction, product.id]);
+  }, [getWishlistIdsAction, setwishlistIds, wishlistIds]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -100,10 +98,10 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
     const wishlistIds = await toggleWishlistAction(product.id);
 
     if (wishlistIds.includes(product.id)) {
-      setIsOnWishlist(true);
+      setwishlistIds([...wishlistIds]);
       setIsWishlistLoading(false);
     } else {
-      setIsOnWishlist(false);
+      setwishlistIds([...wishlistIds]);
       setIsWishlistLoading(false);
     }
   };
@@ -164,7 +162,9 @@ const AddToCart = ({ product, toggleWishlistAction, getWishlistIdsAction }: Prod
               }}
               className="py-3 hover:text-secondary hover:border-secondary duration-200"
             >
-              <AiOutlineHeart className={`h-6 w-6 ${isOnWishlist ? 'text-red-500' : ''}`} />
+              <AiOutlineHeart
+                className={`h-6 w-6 ${wishlistIds?.includes(product.id) ? 'text-red-500' : ''}`}
+              />
             </button>
           )}
         </span>

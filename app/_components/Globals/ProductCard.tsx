@@ -8,6 +8,7 @@ import { FaRegHeart } from 'react-icons/fa';
 
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
+import { useWishlistState } from '~/_hooks/useStore';
 
 import { formatCurrency } from '~/_utils/numbers';
 
@@ -20,31 +21,29 @@ interface Props {
 const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const [isOnWishlist, setIsOnWishlist] = useState(false);
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
+  const { wishlistIds, setwishlistIds } = useWishlistState();
 
-  // Check if product is on wishlist on first render
+  // Check if wishlist is on global store, if not, get it from Swell
   useEffect(() => {
+    if (wishlistIds != null) return;
+
     const getWishlistOnFirstRender = async () => {
       const wishlistIds = await getWishlistIdsAction();
-      if (wishlistIds.includes(product.id)) {
-        setIsOnWishlist(true);
-      } else {
-        setIsOnWishlist(false);
-      }
+      setwishlistIds([...wishlistIds]);
     };
     getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistIdsAction, product.id]);
+  }, [getWishlistIdsAction, setwishlistIds, wishlistIds]);
 
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
     const wishlistIds = await toggleWishlistAction(product.id);
 
     if (wishlistIds.includes(product.id)) {
-      setIsOnWishlist(true);
+      setwishlistIds([...wishlistIds]);
       setIsWishlistLoading(false);
     } else {
-      setIsOnWishlist(false);
+      setwishlistIds([...wishlistIds]);
       setIsWishlistLoading(false);
     }
   };
@@ -72,7 +71,7 @@ const ProductCard = ({ product, toggleWishlistAction, getWishlistIdsAction }: Pr
             >
               <FaRegHeart
                 className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                  isOnWishlist ? 'text-red-500' : ''
+                  wishlistIds?.includes(product.id) ? 'text-red-500' : ''
                 } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
               />
             </button>
