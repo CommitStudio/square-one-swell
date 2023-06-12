@@ -6,7 +6,7 @@ import { getUserInfo, isAuthenticated } from '~/_lib/SwellAPI';
 import { getWishlistAction, toggleWishlistAction } from '~/products/_actions/wishlist';
 
 export const metadata = {
-  title: 'SquareOne - Addresses',
+  title: 'SquareOne - Wishlist',
   description: 'Sit excepteur proident est commodo laboris consectetur ea tempor officia.'
 };
 
