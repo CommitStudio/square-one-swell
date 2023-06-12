@@ -165,7 +165,7 @@ const AddToCart = ({
             <Spinner size={5} />
           ) : (
             <Tooltip
-              content="Please log in to use this funtionality"
+              content="Please log in to use this functionality"
               className={`${isAuthenticated ? 'hidden' : ''}`}
             >
               <button

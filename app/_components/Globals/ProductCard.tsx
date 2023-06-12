@@ -66,14 +66,14 @@ const ProductCard = ({
       }`}
     >
       <div className="px-5 py-4">
-        <div className="flex justify-end">
+        <div className="flex justify-end h-8">
           {isWishlistLoading ? (
             <span className="mb-3">
               <Spinner size={4} />
             </span>
           ) : (
             <Tooltip
-              content="Please log in to use this funtionality"
+              content="Please log in to use this functionality"
               className={`${isAuthenticated ? 'hidden' : ''}`}
             >
               <button
