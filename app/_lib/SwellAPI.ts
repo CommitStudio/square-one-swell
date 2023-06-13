@@ -208,8 +208,8 @@ const getCards = async () => {
  * Get logged user wishlist products ids
  ****************************************************************************/
 export const getWishlistIds = async (): Promise<string[]> => {
-  const { content } = (await makeRequest('/api/account')) as WishlistBody;
-  return content?.wishlist_ids || [];
+  const response = (await makeRequest('/api/account')) as WishlistBody;
+  return response?.content?.wishlist_ids || [];
 };
 
 /*****************************************************************************
