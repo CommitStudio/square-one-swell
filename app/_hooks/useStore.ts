@@ -15,7 +15,6 @@ export function useGlobalState() {
 /*****************************************************************************
  * Define and declare global state to be used on products
  ****************************************************************************/
-
 type StateProduct = {
   chosenOptions: { [key: string]: string };
 };
@@ -38,16 +37,6 @@ export function useProductState(): {
   };
 
   return { productState, updateProductProp };
-}
-
-/*****************************************************************************
- * Global state used for wishlist
- ****************************************************************************/
-const stateWishlist = atom<Product[] | null>(null);
-
-export function useWishlistState() {
-  const [wishlist, setwishlist] = useAtom(stateWishlist);
-  return { wishlist, setwishlist };
 }
 
 /*****************************************************************************
