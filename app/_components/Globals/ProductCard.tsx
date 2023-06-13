@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { FaRegHeart } from 'react-icons/fa';
@@ -20,6 +21,8 @@ interface Props {
 }
 
 const ProductCard = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: Props) => {
+  const router = useRouter();
+
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const [wishlist, setWishlist] = useState<boolean>(inWishlist);
@@ -31,6 +34,7 @@ const ProductCard = ({ product, isAuthenticated, inWishlist, toggleWishlistActio
     const wishlist = await toggleWishlistAction(product.id);
     setWishlist(wishlist.includes(product.id));
     setIsWishlistLoading(false);
+    router.refresh();
   };
 
   return (

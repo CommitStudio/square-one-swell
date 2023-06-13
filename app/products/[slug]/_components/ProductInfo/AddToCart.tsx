@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -27,6 +28,8 @@ interface AddProductProps {
 }
 
 const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: ProductProp) => {
+  const router = useRouter();
+
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -90,6 +93,7 @@ const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction 
     const wishlist = await toggleWishlistAction(product.id);
     setWishlist(wishlist.includes(product.id));
     setIsWishlistLoading(false);
+    router.refresh();
   };
 
   return (
