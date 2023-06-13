@@ -25,13 +25,15 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         <FaSearch />
       </Link>
 
-      <Link
-        href={`/account/${isAuthenticated ? 'wishlist' : 'login'}`}
-        title="Wishlist"
-        className="text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
-      >
-        <FaHeart />
-      </Link>
+      {isAuthenticated && (
+        <Link
+          href={`/account/${isAuthenticated ? 'wishlist' : 'login'}`}
+          title="Wishlist"
+          className="text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
+        >
+          <FaHeart />
+        </Link>
+      )}
 
       <button
         type="button"

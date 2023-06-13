@@ -1,6 +1,10 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect } from 'react';
+import { BiShoppingBag } from 'react-icons/bi';
+
+import Button from '~/_components/Button';
 
 import ProductCard from '~/_components/Globals/ProductCard';
 import { useWishlistState } from '~/_hooks/useStore';
@@ -27,19 +31,41 @@ const ProductList = ({ isAuthenticated, toggleWishlistAction, getWishlistAction 
   }, [getWishlistAction, isAuthenticated, setwishlist, wishlist]);
 
   return (
-    <div className="grid grid-cols-3 gap-5">
-      {wishlist?.map((product, i) => {
-        return (
-          <ProductCard
-            product={product}
-            toggleWishlistAction={toggleWishlistAction}
-            getWishlistAction={getWishlistAction}
-            isAuthenticated={isAuthenticated}
-            key={`card-${i}`}
-          />
-        );
-      })}
-    </div>
+    <>
+      {wishlist?.length === 0 ? (
+        <>
+          <p className="text-gray-dark font-quicksand">
+            You don&apos;t have any product on your wishlist yet.
+          </p>
+          <Link href="/products">
+            <Button
+              classes="mt-10 rounded"
+              label={
+                <div className="flex items-center justify-center space-x-2">
+                  <BiShoppingBag />
+                  <span>Start shopping</span>
+                </div>
+              }
+            />
+          </Link>
+        </>
+      ) : (
+        <div className="grid grid-cols-3 gap-5">
+          {wishlist?.map((product, i) => {
+            return (
+              <ProductCard
+                product={product}
+                toggleWishlistAction={toggleWishlistAction}
+                getWishlistAction={getWishlistAction}
+                isAuthenticated={isAuthenticated}
+                key={`card-${i}`}
+                isWishlistCard
+              />
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

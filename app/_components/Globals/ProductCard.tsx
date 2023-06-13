@@ -18,13 +18,15 @@ interface Props {
   toggleWishlistAction: (productId: string) => Promise<Product[]>;
   getWishlistAction: () => Promise<Product[]>;
   isAuthenticated: boolean;
+  isWishlistCard?: boolean;
 }
 
 const ProductCard = ({
   product,
   toggleWishlistAction,
   getWishlistAction,
-  isAuthenticated
+  isAuthenticated,
+  isWishlistCard
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
@@ -90,7 +92,11 @@ const ProductCard = ({
             </Tooltip>
           )}
         </div>
-        <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
+        <div
+          className={`flex mx-auto cursor-pointer relative max-w-full max-h-full ${
+            isWishlistCard ? 'h-[200px]' : 'h-[436px]'
+          } `}
+        >
           <Link href={`/products/${product.slug}`} data-cy="product-link">
             <Image src={image.src} alt={image.alt} fill style={{ objectFit: 'cover' }} />
           </Link>

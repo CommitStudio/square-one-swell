@@ -36,7 +36,7 @@ const MobileMenu = ({
     >
       <ul aria-labelledby="navbarMenu">
         {categories.map((category, i) => {
-          return (
+          return !isAuthenticated && category.name === 'WISHLIST' ? null : (
             <li key={`mobile-menu-category-${i}`}>
               <Link
                 href={`/${category.slug}`}

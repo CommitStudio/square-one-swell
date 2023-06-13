@@ -16,6 +16,7 @@ export default async function Addresses() {
 
   return (
     <AccountLayout account={user}>
+      <h4 className="text-3xl font-medium mb-5 font-libre">Wishlist</h4>
       <ProductList
         isAuthenticated={auth}
         toggleWishlistAction={toggleWishlistAction}
