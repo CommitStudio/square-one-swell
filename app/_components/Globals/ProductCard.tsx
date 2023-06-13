@@ -14,12 +14,12 @@ import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
-  toggleWishlistAction: (productId: string) => Promise<Product[]>;
   isAuthenticated: boolean;
   inWishlist: boolean;
+  toggleWishlistAction: (productId: string) => Promise<Product[]>;
 }
 
-const ProductCard = ({ product, toggleWishlistAction, isAuthenticated, inWishlist }: Props) => {
+const ProductCard = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const [wishlist, setWishlist] = useState<boolean>(inWishlist);

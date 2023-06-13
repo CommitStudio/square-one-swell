@@ -1,8 +1,8 @@
 import ProductCard from './ProductCard';
 
 import Container from '~/_layouts/Container';
-import { isAuthenticated } from '~/_lib/SwellAPI';
-import { toggleWishlistAction, getWishlistAction } from '~/products/_actions/wishlist';
+import { isAuthenticated, getWishlist } from '~/_lib/SwellAPI';
+import { toggleWishlistAction } from '~/products/_actions/wishlist';
 
 interface Props {
   relatedProducts?: boolean;
@@ -12,6 +12,7 @@ interface Props {
 
 const ProductList = async ({ relatedProducts, threeColumns, products }: Props) => {
   const auth = await isAuthenticated();
+  const wishlist = await getWishlist();
 
   return (
     <Container className="mb-10">
@@ -24,15 +25,19 @@ const ProductList = async ({ relatedProducts, threeColumns, products }: Props) =
             : 'lg:grid-cols-4'
         }  gap-y-4 justify-items-center`}
       >
-        {products?.map((product, i) => (
-          <ProductCard
-            product={product}
-            toggleWishlistAction={toggleWishlistAction}
-            getWishlistAction={getWishlistAction}
-            isAuthenticated={auth}
-            key={`card-${i}`}
-          />
-        ))}
+        {products?.map((product, i) => {
+          const inWishlist = wishlist?.some((item) => item.id === product.id);
+
+          return (
+            <ProductCard
+              key={`card-${i}`}
+              product={product}
+              isAuthenticated={auth}
+              inWishlist={inWishlist}
+              toggleWishlistAction={toggleWishlistAction}
+            />
+          );
+        })}
       </div>
     </Container>
   );
