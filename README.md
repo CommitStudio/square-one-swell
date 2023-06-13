@@ -73,7 +73,7 @@ The Extended GPL3 license preserves the core principles of the GPL3 license such
 #### 0. Definitions
 
 - "This License" refers to the Extended General Public License.
-- "The Program" refers to any copyrightable work licensed under this License. Each licensee is addressed as "you". "Licensees" and "recipients" may be individuals or organizations.
+- "The Program" refers to any copyrightable work licensed under this License. Each license is addressed as "you". "Licensees" and "recipients" may be individuals or organizations.
 - A "theme" in this context refers to a predefined set of aesthetics and design elements that can be applied to an end product.
 
 #### 1. Permissions
