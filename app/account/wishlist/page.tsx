@@ -1,4 +1,4 @@
-import ProductList from './_components/ProductList';
+import ProductCard from '~/_components/Globals/ProductCard';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
@@ -16,11 +16,17 @@ export default async function Addresses() {
 
   return (
     <AccountLayout account={user}>
-      <ProductList
-        isAuthenticated={authenticated}
-        wishlist={wishlist}
-        toggleWishlistAction={toggleWishlistAction}
-      />
+      <div className="grid grid-cols-3 gap-5">
+        {wishlist?.map((product, i) => (
+          <ProductCard
+            key={`card-${i}`}
+            product={product}
+            isAuthenticated={authenticated}
+            inWishlist={true}
+            toggleWishlistAction={toggleWishlistAction}
+          />
+        ))}
+      </div>
     </AccountLayout>
   );
 }
