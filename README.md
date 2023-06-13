@@ -57,12 +57,11 @@ To run the store locally:
 
 ## 5. Deployment
 
-For deployment in Vercel, click the button and set the environment variables [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCommitStudio%2Fsquare-one-swell&env=NEXT_PUBLIC_BASE_URL,SWELL_STORE_ID,SWELL_SECRET_KEY,SWELL_PUBLIC_KEY,NEXT_PUBLIC_GTM_ID) 
-
-For deployment in Azure, click the button, and complete the process. You will have to set the environment variables yourself [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.storage%2Fstorage-account-create%2Fazuredeploy.json)
-
-For deployment in Netlify, click the button and set the environment variables 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/CommitStudio/square-one-swell)
+| Platform   | Specification  |
+|:-:|---|
+| [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCommitStudio%2Fsquare-one-swell&env=NEXT_PUBLIC_BASE_URL,SWELL_STORE_ID,SWELL_SECRET_KEY,SWELL_PUBLIC_KEY,NEXT_PUBLIC_GTM_ID)  | For deployment in Vercel, click the button and set the environment variables   |
+| [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.storage%2Fstorage-account-create%2Fazuredeploy.json)  | For deployment in Azure, click the button, and complete the process. You will have to set the environment variables yourself   |
+| [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/CommitStudio/square-one-swell)   | For deployment in Netlify, click the button and set the environment variables    |
 
 
 ## 6. License
