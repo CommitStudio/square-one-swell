@@ -16,7 +16,7 @@ interface Props {
   product: Product;
   isAuthenticated: boolean;
   inWishlist: boolean;
-  toggleWishlistAction: (productId: string) => Promise<Product[]>;
+  toggleWishlistAction: (productId: string) => Promise<string[]>;
 }
 
 const ProductCard = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: Props) => {
@@ -29,7 +29,7 @@ const ProductCard = ({ product, isAuthenticated, inWishlist, toggleWishlistActio
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
     const wishlist = await toggleWishlistAction(product.id);
-    setWishlist(wishlist.some(({ id }) => id === product.id));
+    setWishlist(wishlist.includes(product.id));
     setIsWishlistLoading(false);
   };
 

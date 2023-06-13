@@ -244,7 +244,7 @@ export const isProductInWishlist = async (productId: string): Promise<boolean> =
 /*****************************************************************************
  * Add product to logged user wishlist
  ****************************************************************************/
-export const toggleWishlist = async (productId: string): Promise<Product[]> => {
+export const toggleWishlist = async (productId: string): Promise<string[]> => {
   const { id, content } = (await makeRequest('/api/account')) as WishlistBody;
 
   // Add or remove product depending on if it's already in the wishlist
@@ -253,11 +253,9 @@ export const toggleWishlist = async (productId: string): Promise<Product[]> => {
     : [...(content?.wishlist_ids || []), productId];
 
   // Overwrite wishlist with new list of products
-  (await makeAdminRequest(`/accounts/${id}`, 'PUT', {
+  const wishlist = (await makeAdminRequest(`/accounts/${id}`, 'PUT', {
     $set: { content: { wishlist_ids: wishlistIds } }
   })) as WishlistBody;
 
-  const wishlist = await getWishlist();
-
-  return wishlist;
+  return wishlist.content.wishlist_ids;
 };
