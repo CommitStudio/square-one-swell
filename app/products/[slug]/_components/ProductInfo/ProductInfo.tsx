@@ -1,5 +1,3 @@
-import { toggleWishlistAction, getWishlistAction } from '../../../_actions/wishlist';
-
 import AddToCart from './AddToCart';
 import ProductDescription from './ProductDescription';
 import ProductOptions from './ProductOptions';
@@ -8,7 +6,8 @@ import ProductRating from './ProductRating';
 import ProductSocialMedia from './ProductSocialMedia';
 import ProductTitle from './ProductTitle';
 
-import { isAuthenticated } from '~/_lib/SwellAPI';
+import { isAuthenticated, isProductInWishlist } from '~/_lib/SwellAPI';
+import { toggleWishlistAction } from '~/products/_actions/wishlist';
 
 interface ProductProp {
   product: Product;
@@ -17,6 +16,8 @@ interface ProductProp {
 
 const ProductInfo = async ({ product }: ProductProp) => {
   const auth = await isAuthenticated();
+  const inWishlist = await isProductInWishlist(product.id);
+
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
@@ -26,7 +27,7 @@ const ProductInfo = async ({ product }: ProductProp) => {
       <AddToCart
         product={product}
         toggleWishlistAction={toggleWishlistAction}
-        getWishlistAction={getWishlistAction}
+        inWishlist={inWishlist}
         isAuthenticated={auth}
       />
       <ProductDescription description={product.description} />

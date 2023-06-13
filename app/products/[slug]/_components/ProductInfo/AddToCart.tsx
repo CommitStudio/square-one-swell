@@ -9,15 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Spinner } from '~/_components/Globals/Spinner';
 import Tooltip from '~/_components/Globals/Tooltip';
 
-import { useStore, useProductState, useGlobalState, useWishlistState } from '~/_hooks/useStore';
+import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 interface ProductProp {
   product: Product;
-  toggleWishlistAction: (productId: string) => Promise<Product[]>;
-  getWishlistAction: () => Promise<Product[]>;
   isAuthenticated: boolean;
+  inWishlist: boolean;
+  toggleWishlistAction: (productId: string) => Promise<Product[]>;
 }
 
 interface AddProductProps {
@@ -26,21 +26,16 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({
-  product,
-  toggleWishlistAction,
+const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: ProductProp) => {
+  const { state } = useStore();
+  const { productState } = useProductState();
+  const { setCart } = useGlobalState();
 
-  getWishlistAction,
-  isAuthenticated
-}: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const { wishlist, setwishlist } = useWishlistState();
-  const { state } = useStore();
-  const { productState } = useProductState();
-  const { setCart } = useGlobalState();
+  const [wishlist, setWishlist] = useState<boolean>(inWishlist);
 
   const { chosenOptions } = productState;
 
@@ -48,18 +43,6 @@ const AddToCart = ({
     product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
   }, [chosenOptions, product.options?.length]);
-
-  // Check if wishlist is on global store, if not, get it from Swell
-  useEffect(() => {
-    if (wishlist != null || !isAuthenticated) return;
-
-    const getWishlistOnFirstRender = async () => {
-      const wishlist = await getWishlistAction();
-      setwishlist([...wishlist]);
-    };
-
-    getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistAction, isAuthenticated, setwishlist, wishlist]);
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -105,14 +88,8 @@ const AddToCart = ({
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
     const wishlist = await toggleWishlistAction(product.id);
-
-    if (wishlist.some(({ id }) => id === product.id)) {
-      setwishlist([...wishlist]);
-      setIsWishlistLoading(false);
-    } else {
-      setwishlist([...wishlist]);
-      setIsWishlistLoading(false);
-    }
+    setWishlist(wishlist.some(({ id }) => id === product.id));
+    setIsWishlistLoading(false);
   };
 
   return (
@@ -161,8 +138,11 @@ const AddToCart = ({
               'UNAVAILABLE'
             )}
           </button>
+
           {isWishlistLoading ? (
-            <Spinner size={5} />
+            <div className="pb-1 pl-1">
+              <Spinner size={5} />
+            </div>
           ) : (
             <Tooltip
               content="Please log in to use this functionality"
@@ -174,11 +154,7 @@ const AddToCart = ({
                 }}
                 className="py-3 hover:text-secondary hover:border-secondary duration-200"
               >
-                <AiOutlineHeart
-                  className={`h-6 w-6 ${
-                    wishlist?.some(({ id }) => id === product.id) ? 'text-red-500' : ''
-                  }`}
-                />
+                <AiOutlineHeart className={`h-6 w-6 ${wishlist ? 'text-red-500' : ''}`} />
               </button>
             </Tooltip>
           )}
