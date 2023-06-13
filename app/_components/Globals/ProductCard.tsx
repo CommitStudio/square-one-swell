@@ -2,58 +2,35 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { FaRegHeart } from 'react-icons/fa';
 
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
 import Tooltip from '~/_components/Globals/Tooltip';
-import { useWishlistState } from '~/_hooks/useStore';
 
 import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
   toggleWishlistAction: (productId: string) => Promise<Product[]>;
-  getWishlistAction: () => Promise<Product[]>;
   isAuthenticated: boolean;
+  inWishlist: boolean;
 }
 
-const ProductCard = ({
-  product,
-  toggleWishlistAction,
-  getWishlistAction,
-  isAuthenticated
-}: Props) => {
+const ProductCard = ({ product, toggleWishlistAction, isAuthenticated, inWishlist }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
+  const [wishlist, setWishlist] = useState<boolean>(inWishlist);
+
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
-  const { wishlist, setwishlist } = useWishlistState();
-
-  // Check if wishlist is on global store, if not, get it from Swell
-  useEffect(() => {
-    if (wishlist != null || !isAuthenticated) return;
-
-    const getWishlistOnFirstRender = async () => {
-      const wishlist = await getWishlistAction();
-      setwishlist([...wishlist]);
-    };
-
-    getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistAction, isAuthenticated, setwishlist, wishlist]);
 
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
     const wishlist = await toggleWishlistAction(product.id);
-
-    if (wishlist.some(({ id }) => id === product.id)) {
-      setwishlist([...wishlist]);
-      setIsWishlistLoading(false);
-    } else {
-      setwishlist([...wishlist]);
-      setIsWishlistLoading(false);
-    }
+    setWishlist(wishlist.some(({ id }) => id === product.id));
+    setIsWishlistLoading(false);
   };
 
   return (
@@ -82,9 +59,9 @@ const ProductCard = ({
                 }}
               >
                 <FaRegHeart
-                  className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                    wishlist?.some(({ id }) => id === product.id) ? 'text-red-500' : ''
-                  } ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
+                  className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500
+                  ${wishlist ? 'text-red-500' : ''}
+                  ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
                 />
               </button>
             </Tooltip>

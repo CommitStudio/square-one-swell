@@ -164,6 +164,7 @@ export const getUserInfo = async () => {
   const cards = await getCards();
 
   return {
+    authenticated: true,
     user: user.account,
     orders: user.orders.results || [],
     addresses: addresses || [],

@@ -2,8 +2,8 @@ import ProductList from './_components/ProductList';
 
 import AccountLayout from '~/_layouts/AccountLayout';
 
-import { getUserInfo, isAuthenticated } from '~/_lib/SwellAPI';
-import { getWishlistAction, toggleWishlistAction } from '~/products/_actions/wishlist';
+import { getUserInfo, getWishlist } from '~/_lib/SwellAPI';
+import { toggleWishlistAction } from '~/products/_actions/wishlist';
 
 export const metadata = {
   title: 'SquareOne - Wishlist',
@@ -11,15 +11,15 @@ export const metadata = {
 };
 
 export default async function Addresses() {
-  const { user } = await getUserInfo();
-  const auth = await isAuthenticated();
+  const { authenticated, user } = await getUserInfo();
+  const wishlist = await getWishlist();
 
   return (
     <AccountLayout account={user}>
       <ProductList
-        isAuthenticated={auth}
+        isAuthenticated={authenticated}
+        wishlist={wishlist}
         toggleWishlistAction={toggleWishlistAction}
-        getWishlistAction={getWishlistAction}
       />
     </AccountLayout>
   );

@@ -1,31 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import ProductCard from '~/_components/Globals/ProductCard';
-import { useWishlistState } from '~/_hooks/useStore';
 
 interface Props {
   isAuthenticated: boolean;
   toggleWishlistAction: (productId: string) => Promise<Product[]>;
-  getWishlistAction: () => Promise<Product[]>;
+  wishlist: Product[];
 }
 
-const ProductList = ({ isAuthenticated, toggleWishlistAction, getWishlistAction }: Props) => {
-  const { wishlist, setwishlist } = useWishlistState();
-
-  // Check if wishlist is on global store, if not, get it from Swell
-  useEffect(() => {
-    if (wishlist != null || !isAuthenticated) return;
-
-    const getWishlistOnFirstRender = async () => {
-      const wishlist = await getWishlistAction();
-      setwishlist([...wishlist]);
-    };
-
-    getWishlistOnFirstRender().catch((err) => console.log(err));
-  }, [getWishlistAction, isAuthenticated, setwishlist, wishlist]);
-
+const ProductList = ({ isAuthenticated, toggleWishlistAction, wishlist }: Props) => {
   return (
     <div className="grid grid-cols-3 gap-5">
       {wishlist?.map((product, i) => {
@@ -33,8 +16,8 @@ const ProductList = ({ isAuthenticated, toggleWishlistAction, getWishlistAction 
           <ProductCard
             product={product}
             toggleWishlistAction={toggleWishlistAction}
-            getWishlistAction={getWishlistAction}
             isAuthenticated={isAuthenticated}
+            inWishlist={true}
             key={`card-${i}`}
           />
         );
