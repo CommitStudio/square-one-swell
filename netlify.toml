@@ -1,7 +1,5 @@
-[template]
-  incoming-hooks = ["Contentful"]
-  
-[template.environment]
+
+[build.environment]
   NEXT_PUBLIC_BASE_URL=""
   SWELL_STORE_ID=""
   SWELL_SECRET_KEY=""
