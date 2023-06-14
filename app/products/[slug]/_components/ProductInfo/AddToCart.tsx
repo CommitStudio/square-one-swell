@@ -74,11 +74,12 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
-    void addProduct({
-      product: product,
-      quantity: productAmount,
-      toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
-    });
+    !isLoading &&
+      void addProduct({
+        product: product,
+        quantity: productAmount,
+        toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
+      });
   };
 
   return (
