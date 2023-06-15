@@ -121,7 +121,12 @@ const ResetPasswordForm = () => {
           <p className="text-red-600 text-xs mt-2 mb-4">{errors.confirmPassword.message}</p>
         )}
       </div>
-      <Button type="submit" label={!isLoading ? 'SAVE' : <Spinner size={4} />} fullWidth />
+      <Button
+        type="submit"
+        label={!isLoading ? 'SAVE' : <Spinner size={4} />}
+        fullWidth
+        disabled={isLoading}
+      />
     </form>
   );
 };

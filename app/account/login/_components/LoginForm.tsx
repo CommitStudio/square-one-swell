@@ -20,6 +20,7 @@ type Inputs = {
 const LoginForm = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [invalidLogin, setInvalidLogin] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState(false);
 
   const {
     register,
@@ -29,6 +30,7 @@ const LoginForm = () => {
 
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setIsSubmiting(true);
     // If statement is declared incase captcha input is filled (probable bot).
     if (data.dontComplete) {
       return;
@@ -51,6 +53,9 @@ const LoginForm = () => {
       })
       .catch((e) => {
         console.log(e);
+      })
+      .finally(() => {
+        setIsSubmiting(false);
       });
   };
 
@@ -151,7 +156,7 @@ const LoginForm = () => {
             </span>
           </Link>
           <div className="mt-7 mb-4">
-            <Button fullWidth type="submit" label="LOG IN" />
+            <Button fullWidth type="submit" label="LOG IN" disabled={isSubmiting} />
 
             <Link href={'/account/create-account'} legacyBehavior>
               <span className="block text-center text-sm mt-4">

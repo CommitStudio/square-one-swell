@@ -21,9 +21,8 @@ type Inputs = {
 };
 
 const RegisterForm = () => {
-  const router = useRouter();
-
   const [isChecked, setIsChecked] = useState(true);
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
   const [invalidLogin, setInvalidLogin] = useState(false);
 
@@ -35,6 +34,7 @@ const RegisterForm = () => {
 
   // Submit register form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setIsSubmiting(true);
     // If statement is declared incase captcha input is filled (probable bot).
     if (data.dontComplete) {
       return;
@@ -60,6 +60,9 @@ const RegisterForm = () => {
       })
       .catch((e) => {
         console.log(e);
+      })
+      .finally(() => {
+        setIsSubmiting(false);
       });
   };
 
@@ -290,7 +293,7 @@ const RegisterForm = () => {
             <Button
               label="CREATE ACCOUNT"
               fullWidth
-              disabled={isChecked ? true : false}
+              disabled={isChecked ? true : false || isSubmiting}
               type="submit"
             />
 
