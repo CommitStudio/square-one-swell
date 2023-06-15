@@ -1,26 +1,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { UpdatedCategory } from './Categories';
+
 import { useStore } from '~/_hooks/useStore';
 
-type PricesRanges = {
-  name: string;
-  slug: { minPrice: number | string; maxPrice: number | string };
-};
-export interface FilterItem {
-  id: string;
-  name: string;
-  slug: { minPrice?: number; maxPrice?: number | string; category?: string };
-  parent_id: string;
-}
-
-export interface FilterByProps {
-  title: string;
-  items: Category[] | PricesRanges[];
+interface FilterByProps {
   query: FilterParams;
+  category: UpdatedCategory;
 }
 
-export const FilterBy = ({ title, items, query }: FilterByProps) => {
+export const FilterBy = ({ query, category }: FilterByProps) => {
   const pathname = usePathname();
   const { updateState, state } = useStore();
 
@@ -34,140 +24,39 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const categoryNames = Object.keys(items);
-  const allCategories: FilterItem[] = [];
-
-  categoryNames.forEach((categoryName) => {
-    allCategories.push(items[categoryName as keyof typeof items] as FilterItem);
-  });
-
-  const mainCategories = allCategories.filter((item) => !item.parent_id);
-
-  const mainPopulated = mainCategories.map((item) => ({
-    ...item,
-    subCategories: allCategories.filter((i) => i.parent_id === item.id)
-  }));
-
   return (
     <div className="my-3">
-      <h5 className="font-bold mb-4 md:mb-8 uppercase">{title}</h5>
-      {mainPopulated.map((item, i) => {
-        return title === 'Gender' ? (
-          <div key={i}>
-            {(item.name === 'Women' || item.name === 'Men') && (
-              <>
-                <Link
-                  key={`filter-item-${i}`}
-                  href={{
-                    pathname: pathname,
-                    query: {
-                      ...query,
-                      ...item.slug
-                    }
-                  }}
-                  scroll={false}
-                  legacyBehavior
-                >
-                  <a
-                    onClick={() => handleClick(item.name)}
-                    className={`cursor-pointer w-fit hover:font-bold ${
-                      Object.values(item.slug)
-                        .map(String)
-                        .every((v) => Object.values(query).map(String).includes(v))
-                        ? 'text-black font-semibold text'
-                        : 'text-gray-500'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
-                </Link>
-                {item.subCategories.map((subcategory, i) => {
-                  return (
-                    <Link
-                      href={{
-                        pathname: pathname,
-                        query: {
-                          ...query,
-                          ...subcategory.slug
-                        }
-                      }}
-                      key={`filter-item-${i}`}
-                    >
-                      <div
-                        onClick={() => handleClick(subcategory.name)}
-                        className={`cursor-pointer w-fit hover:font-bold pl-3 text-sm ${
-                          Object.values(subcategory.slug)
-                            .map(String)
-                            .every((v) => Object.values(query).map(String).includes(v))
-                            ? 'text-black font-semibold underline'
-                            : ''
-                        }`}
-                      >
-                        {subcategory.name}
-                      </div>
-                    </Link>
-                  );
-                })}
-              </>
-            )}
-          </div>
-        ) : (
-          item.name !== 'Men' && item.name !== 'Women' && (
-            <>
-              <Link
-                key={`filter-item-${i}`}
-                href={{ pathname: pathname, query: { ...query, ...item.slug } }}
-                scroll={false}
-                legacyBehavior
-              >
-                <div>
-                  <a
-                    onClick={() => {
-                      handleClick(item.name);
-                    }}
-                    className={`cursor-pointer w-fit hover:font-bold transition-opacity duration-300 ${
-                      Object.values(item.slug)
-                        .map(String)
-                        .every((v) => Object.values(query).map(String).includes(v))
-                        ? 'text-black font-semibold text'
-                        : 'text-gray-500'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              </Link>
-              {item.subCategories.map((subcategory, i) => {
-                return (
-                  <Link
-                    href={{
-                      pathname: pathname,
-                      query: {
-                        ...query,
-                        ...subcategory.slug
-                      }
-                    }}
-                    key={i}
-                  >
-                    <div>
-                      <a
-                        onClick={() => handleClick(subcategory.name)}
-                        className={`cursor-pointer w-fit hover:font-bold ${
-                          Object.values(subcategory.slug)
-                            .map(String)
-                            .every((v) => Object.values(query).map(String).includes(v))
-                            ? 'text-black font-semibold text'
-                            : 'text-black'
-                        }`}
-                      >
-                        {subcategory.name}
-                      </a>
-                    </div>
-                  </Link>
-                );
-              })}
-            </>
-          )
+      <Link
+        href={{
+          pathname: pathname,
+          query: {
+            ...query,
+            ...category.slug
+          }
+        }}
+        onClick={() => handleClick(category.name)}
+        className={Object.values(query).includes(category.slug.category) ? 'underline' : ''}
+      >
+        <h5 className="font-bold uppercase">{category.name}</h5>
+      </Link>
+      {category.subCategories.map((subcategory, i) => {
+        return (
+          <Link
+            href={{
+              pathname: pathname,
+              query: {
+                ...query,
+                ...subcategory.slug
+              }
+            }}
+            onClick={() => handleClick(subcategory.name)}
+            key={`filter-item-${i}`}
+            className={`cursor-pointer w-fit hover:font-bold block ${
+              Object.values(query).includes(subcategory.slug.category) ? 'font-bold underline' : ''
+            }`}
+          >
+            {subcategory.name}
+          </Link>
         );
       })}
     </div>
