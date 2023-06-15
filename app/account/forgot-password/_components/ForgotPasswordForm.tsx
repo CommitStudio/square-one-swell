@@ -87,7 +87,7 @@ const ForgotPasswordForm = () => {
                 <p>If the email is not in our system, you will not receive an email.</p>
               </div>
             )}
-            <Button label="SEND EMAIL" fullWidth type="submit" aria-label="" />
+            <Button label="SEND EMAIL" fullWidth type="submit" disabled={confirmation} />
             <div className="flex items-center justify-center">
               <Link
                 href={'/account/login'}

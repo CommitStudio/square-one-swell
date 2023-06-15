@@ -27,6 +27,7 @@ const EditProfileModal = ({ account }: { account: SwellAPI_Account }) => {
 
   const { firstName, lastName, email } = account || {};
   const [openEdit, setOpenEdit] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const {
     register,
@@ -43,6 +44,7 @@ const EditProfileModal = ({ account }: { account: SwellAPI_Account }) => {
   password.current = watch('password');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setIsSaving(true);
     delete data?.confirmPassword; // Delete confirmPassword not required on the store
 
     swell.account
@@ -54,6 +56,9 @@ const EditProfileModal = ({ account }: { account: SwellAPI_Account }) => {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setIsSaving(false);
       });
   };
 
@@ -165,7 +170,7 @@ const EditProfileModal = ({ account }: { account: SwellAPI_Account }) => {
             {errors.confirmPassword && (
               <p className="text-red-600 text-xs -mt-4 mb-4">{errors.confirmPassword.message}</p>
             )}
-            <Button fullWidth type="submit" label="SAVE CHANGES" />
+            <Button fullWidth type="submit" label="SAVE CHANGES" disabled={isSaving} />
           </form>
         </div>
       </Modal>
