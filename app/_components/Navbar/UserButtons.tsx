@@ -26,9 +26,11 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
       </Link>
 
       <Link
-        href={`/account/${isAuthenticated ? 'wishlist' : 'login'}`}
+        href="/account/wishlist"
         title="Wishlist"
-        className="text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
+        className={`text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 hover:bg-black hover:text-white active:bg-black active:text-white ${
+          isAuthenticated ? 'lg:block' : 'lg:hidden'
+        }`}
       >
         <FaHeart />
       </Link>
@@ -42,7 +44,6 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         <FaShoppingCart data-cy="cart-icon" />
         {typeof quantity == 'number' && quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
-
       <Link
         href={`/account/${isAuthenticated ? 'orders' : 'login'}`}
         title={isAuthenticated ? 'My Orders' : 'Login'}
