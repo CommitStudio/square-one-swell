@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import ProductCard from './ProductCard';
 
 import useFetch from '~/_hooks/useFetch';
@@ -22,15 +24,14 @@ const ProductList = ({ relatedProducts, threeColumns, products, isAuthenticated 
   const { data } = useFetch<{ wishlist: string[] }>(wishlistUrl);
 
   /** Once wishlist is retrieved, set it to the store */
-  if (data && wishlist.length === 0) {
-    setWishlist(data.wishlist);
-  }
+  useEffect(() => {
+    if (data && wishlist === null) {
+      setWishlist(data.wishlist);
+    }
+  }, [data, wishlist, setWishlist]);
 
   return (
     <Container className="mb-10">
-      <pre className="p-2 bg-gray-100 border-2 border-gray-200 whitespace-pre overflow-auto">
-        {JSON.stringify(wishlist, null, 2)}
-      </pre>
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${
           threeColumns
