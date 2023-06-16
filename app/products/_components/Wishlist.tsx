@@ -27,13 +27,8 @@ export default function Wishlist({
    ****************************************************************************/
   const handleToggleWishlist = async () => {
     setIsWishlistLoading(true);
-
-    const wishlistReq = await fetch(`/api/wishlist/${productId}`, {
-      method: 'PUT'
-    });
-
+    const wishlistReq = await fetch(`/api/wishlist/${productId}`, { method: 'PUT' });
     const { wishlist } = (await wishlistReq.json()) as { wishlist: string[] };
-
     setWishlist(wishlist.includes(productId));
     setIsWishlistLoading(false);
   };

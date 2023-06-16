@@ -2,47 +2,24 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { FaRegHeart } from 'react-icons/fa';
+import ProductWishlist from './ProductWishlist';
 
 import Button from '~/_components/Button';
-import { Spinner } from '~/_components/Globals/Spinner';
-import Tooltip from '~/_components/Globals/Tooltip';
 
 import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
-  isAuthenticated: boolean;
-  inWishlist: boolean;
-  toggleWishlistAction: (productId: string) => Promise<string[]>;
+  isAuthenticated?: boolean;
   isWishlistCard?: boolean;
 }
 
-const ProductCard = ({
-  product,
-  isAuthenticated,
-  inWishlist,
-  toggleWishlistAction,
-  isWishlistCard
-}: Props) => {
-  const router = useRouter();
-
+const ProductCard = ({ product, isAuthenticated, isWishlistCard }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const [wishlist, setWishlist] = useState<boolean>(inWishlist);
 
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
-
-  const handleToggleWishlist = async () => {
-    setIsWishlistLoading(true);
-    const wishlist = await toggleWishlistAction(product.id);
-    setWishlist(wishlist.includes(product.id));
-    setIsWishlistLoading(false);
-    router.refresh();
-  };
 
   return (
     <div
@@ -55,28 +32,11 @@ const ProductCard = ({
     >
       <div className="px-5 py-4">
         <div className="flex justify-end h-8">
-          {isWishlistLoading ? (
-            <span className="mb-3">
-              <Spinner size={4} />
-            </span>
-          ) : (
-            <Tooltip
-              content="Please log in to use this functionality"
-              className={`${isAuthenticated ? 'hidden' : ''}`}
-            >
-              <button
-                onClick={() => {
-                  isAuthenticated && handleToggleWishlist().catch((err) => console.log(err));
-                }}
-              >
-                <FaRegHeart
-                  className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500
-                  ${wishlist ? 'text-red-500' : ''}
-                  ${isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'}`}
-                />
-              </button>
-            </Tooltip>
-          )}
+          <ProductWishlist
+            product={product}
+            isAuthenticated={isAuthenticated}
+            isHovered={isHovered}
+          />
         </div>
         <div
           className={`flex mx-auto cursor-pointer relative max-w-full max-h-full ${

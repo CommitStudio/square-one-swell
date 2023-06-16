@@ -215,22 +215,9 @@ export const getWishlistIds = async (): Promise<string[]> => {
 /*****************************************************************************
  * Get logged user wishlist
  ****************************************************************************/
-export const getWishlist = async (): Promise<Product[]> => {
+export const getWishlist = async (): Promise<string[]> => {
   const productsIds = await getWishlistIds();
-
-  if (productsIds.length === 0) {
-    return [];
-  }
-
-  const { results } = (await makeRequest(
-    `/api/products?where[id][$in]=${productsIds.join(',')}`
-  )) as { results: SwellProduct[] };
-
-  const formattedWishlist: Product[] = results.map((product) => {
-    return Store.tranformProduct(product);
-  });
-
-  return formattedWishlist;
+  return productsIds;
 };
 
 /*****************************************************************************
