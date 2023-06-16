@@ -14,6 +14,8 @@ import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
 import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
+import Wishlist from '~/products/_components/Wishlist';
+
 interface ProductProp {
   product: Product;
   isAuthenticated: boolean;
@@ -142,26 +144,7 @@ const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction 
               'UNAVAILABLE'
             )}
           </button>
-
-          {isWishlistLoading ? (
-            <div className="pb-1 pl-1">
-              <Spinner size={5} />
-            </div>
-          ) : (
-            <Tooltip
-              content="Please log in to use this functionality"
-              className={`${isAuthenticated ? 'hidden' : ''}`}
-            >
-              <button
-                onClick={() => {
-                  isAuthenticated && handleToggleWishlist().catch((err) => console.log(err));
-                }}
-                className="py-3 hover:text-secondary hover:border-secondary duration-200"
-              >
-                <AiOutlineHeart className={`h-6 w-6 ${wishlist ? 'text-red-500' : ''}`} />
-              </button>
-            </Tooltip>
-          )}
+          <Wishlist isAuthenticated={isAuthenticated} productId={product.id} />
         </span>
       </div>
       {pleaseSelectAllOptions && (
