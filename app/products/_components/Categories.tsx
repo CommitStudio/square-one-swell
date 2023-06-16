@@ -24,15 +24,17 @@ const Categories = ({ categories, query }: FilterByProps) => {
 
   const mainCategories = allCategories.filter((item) => !item.parent_id);
 
-  const mainPopulated = mainCategories.map((item) => ({
-    ...item,
-    subCategories: allCategories
-      .filter((i) => i.parent_id === item.id)
-      .map((i) => ({ name: i.name, slug: { category: i.slug.category ?? '' } }))
-  }));
+  const mainPopulated = mainCategories
+    .map((item) => ({
+      ...item,
+      subCategories: allCategories
+        .filter((i) => i.parent_id === item.id)
+        .map((i) => ({ name: i.name, slug: { category: i.slug.category ?? '' } }))
+    }))
+    .sort((a, b) => (a.subCategories.length < b.subCategories.length ? 1 : -1));
 
   return (
-    <div className="grid grid-cols-6 my-3">
+    <div className={`grid auto-cols-auto grid-flow-col mt-3 mb-16`}>
       {mainPopulated.map((category, i) => {
         return <FilterBy key={i} category={category} query={query} />;
       })}
