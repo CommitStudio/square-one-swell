@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 
 import { Spinner } from '~/_components/Globals/Spinner';
 import Tooltip from '~/_components/Globals/Tooltip';
+
 import useFetch from '~/_hooks/useFetch';
 
-export default function Wishlist({
-  isAuthenticated,
-  productId
-}: {
+type Props = {
   isAuthenticated: boolean;
   productId: string;
-}) {
-  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const [wishlist, setWishlist] = useState<boolean | null>(null);
+};
 
+export default function Wishlist({ isAuthenticated, productId }: Props) {
+  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
+  const [inWishlist, setInWishlist] = useState<boolean | null>(null);
+
+  /*****************************************************************************
+   * Retrieve wishlist status
+   ****************************************************************************/
   const wishlistUrl = isAuthenticated ? `/api/wishlist/${productId}` : null;
   const { data, loading } = useFetch<{ status: boolean }>(wishlistUrl);
 
-  if (loading) {
-    return null;
-  }
+  /*****************************************************************************
+   * Define "wishlisted" status
+   ****************************************************************************/
+  useEffect(() => {
+    setInWishlist(data?.status ?? null);
+  }, [data]);
 
   /*****************************************************************************
    * Toggle product from wishlist
@@ -29,15 +35,16 @@ export default function Wishlist({
     setIsWishlistLoading(true);
     const wishlistReq = await fetch(`/api/wishlist/${productId}`, { method: 'PUT' });
     const { wishlist } = (await wishlistReq.json()) as { wishlist: string[] };
-    setWishlist(wishlist.includes(productId));
+    setInWishlist(wishlist.includes(productId));
     setIsWishlistLoading(false);
   };
 
-  /*****************************************************************************
-   * Define "wishlisted" status
-   ****************************************************************************/
-  const inWishlist = data?.status === true || wishlist === true;
+  /** Wait for wishlist status to be retrieved */
+  if (loading) {
+    return null;
+  }
 
+  /** Show spinner while toggling from wishlist */
   if (isWishlistLoading) {
     return (
       <div className="pb-1 pl-1">
@@ -46,6 +53,7 @@ export default function Wishlist({
     );
   }
 
+  /** Show wishlist indicator & toggle button */
   return (
     <Tooltip
       content="Please log in to use this functionality"

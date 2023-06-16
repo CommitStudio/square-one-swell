@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ProductList = ({ relatedProducts, threeColumns, products, isAuthenticated }: Props) => {
-  const { wishlist, setWishlist } = useWishlistState();
+  const { setWishlist } = useWishlistState();
 
   /** Get user wishlist */
   const wishlistUrl = isAuthenticated ? '/api/wishlist/' : null;
@@ -25,10 +25,8 @@ const ProductList = ({ relatedProducts, threeColumns, products, isAuthenticated 
 
   /** Once wishlist is retrieved, set it to the store */
   useEffect(() => {
-    if (data && wishlist === null) {
-      setWishlist(data.wishlist);
-    }
-  }, [data, wishlist, setWishlist]);
+    if (data) setWishlist(data.wishlist);
+  }, [data, setWishlist]);
 
   return (
     <Container className="mb-10">
