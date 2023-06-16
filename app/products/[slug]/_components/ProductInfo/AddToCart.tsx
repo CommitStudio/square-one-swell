@@ -1,14 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Spinner } from '~/_components/Globals/Spinner';
-import Tooltip from '~/_components/Globals/Tooltip';
 
 import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
 import swell from '~/_lib/SwellJS';
@@ -19,8 +16,6 @@ import Wishlist from '~/products/_components/Wishlist';
 interface ProductProp {
   product: Product;
   isAuthenticated: boolean;
-  inWishlist: boolean;
-  toggleWishlistAction: (productId: string) => Promise<string[]>;
 }
 
 interface AddProductProps {
@@ -29,9 +24,7 @@ interface AddProductProps {
   toastifyMessage: string;
 }
 
-const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction }: ProductProp) => {
-  const router = useRouter();
-
+const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -39,8 +32,6 @@ const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction 
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-  const [wishlist, setWishlist] = useState<boolean>(inWishlist);
 
   const { chosenOptions } = productState;
 
@@ -88,14 +79,6 @@ const AddToCart = ({ product, isAuthenticated, inWishlist, toggleWishlistAction 
       quantity: productAmount,
       toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
     });
-  };
-
-  const handleToggleWishlist = async () => {
-    setIsWishlistLoading(true);
-    const wishlist = await toggleWishlistAction(product.id);
-    setWishlist(wishlist.includes(product.id));
-    setIsWishlistLoading(false);
-    router.refresh();
   };
 
   return (
