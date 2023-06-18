@@ -31,13 +31,16 @@ const ProductCard = ({ product, isAuthenticated, isWishlistCard }: Props) => {
       }`}
     >
       <div className="px-5 py-4">
-        <div className="flex justify-end h-8">
-          <ProductWishlist
-            product={product}
-            isAuthenticated={isAuthenticated}
-            isHovered={isHovered}
-          />
-        </div>
+        {!isWishlistCard && (
+          <div className="flex justify-end h-8">
+            <ProductWishlist
+              product={product}
+              isAuthenticated={isAuthenticated}
+              isHovered={isHovered}
+            />
+          </div>
+        )}
+
         <div
           className={`flex mx-auto cursor-pointer relative max-w-full max-h-full ${
             isWishlistCard ? 'h-[200px]' : 'h-[436px]'

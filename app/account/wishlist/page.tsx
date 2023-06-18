@@ -7,7 +7,6 @@ import ProductCard from '~/_components/Globals/ProductCard';
 import AccountLayout from '~/_layouts/AccountLayout';
 
 import { getUserInfo, getWishlist } from '~/_lib/SwellAPI';
-import { toggleWishlistAction } from '~/products/_actions/wishlist';
 
 export const metadata = {
   title: 'SquareOne - Wishlist',
@@ -48,8 +47,6 @@ export default async function Addresses() {
               key={`card-${i}`}
               product={product}
               isAuthenticated={authenticated}
-              inWishlist={true}
-              toggleWishlistAction={toggleWishlistAction}
               isWishlistCard
             />
           ))}
