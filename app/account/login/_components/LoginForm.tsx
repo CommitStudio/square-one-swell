@@ -30,11 +30,11 @@ const LoginForm = () => {
 
   // Submit login form
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setIsSubmiting(true);
     // If statement is declared incase captcha input is filled (probable bot).
     if (data.dontComplete) {
       return;
     }
+    setIsSubmiting(true);
 
     const { email, password } = data;
 
@@ -53,9 +53,6 @@ const LoginForm = () => {
       })
       .catch((e) => {
         console.log(e);
-      })
-      .finally(() => {
-        setIsSubmiting(false);
       });
   };
 
