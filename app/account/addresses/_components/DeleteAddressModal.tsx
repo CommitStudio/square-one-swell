@@ -17,10 +17,10 @@ type Props = {
 const DeleteAddressModal = ({ openModal, setOpenModal, addressId }: Props) => {
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleDeleteAddress = async (id: string) => {
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     await swell.account.deleteAddress(id);
 
@@ -40,7 +40,7 @@ const DeleteAddressModal = ({ openModal, setOpenModal, addressId }: Props) => {
           <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
             <Button label="NO" fullWidth onClick={() => setOpenModal(false)} />
             <Button
-              label={isLoading ? <Spinner size={6} /> : 'YES'}
+              label={isSubmitting ? <Spinner size={6} /> : 'YES'}
               variant="outlined"
               type="submit"
               fullWidth

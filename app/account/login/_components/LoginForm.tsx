@@ -20,7 +20,7 @@ type Inputs = {
 const LoginForm = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [invalidLogin, setInvalidLogin] = useState(false);
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -34,7 +34,7 @@ const LoginForm = () => {
     if (data.dontComplete) {
       return;
     }
-    setIsSubmiting(true);
+    setIsSubmitting(true);
 
     const { email, password } = data;
 
@@ -55,7 +55,7 @@ const LoginForm = () => {
         console.log(e);
       })
       .finally(() => {
-        setIsSubmiting(false);
+        setIsSubmitting(false);
       });
   };
 
@@ -156,7 +156,7 @@ const LoginForm = () => {
             </span>
           </Link>
           <div className="mt-7 mb-4">
-            <Button fullWidth type="submit" label="LOG IN" disabled={isSubmiting} />
+            <Button fullWidth type="submit" label="LOG IN" disabled={isSubmitting} />
 
             <Link href={'/account/create-account'} legacyBehavior>
               <span className="block text-center text-sm mt-4">
