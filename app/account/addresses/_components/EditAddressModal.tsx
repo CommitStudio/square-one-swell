@@ -1,13 +1,15 @@
 import { useRouter } from 'next/navigation';
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
+import { Spinner } from '~/_components/Globals/Spinner';
 
 import countriesJSON from '~/_data/countries.json';
 import swell from '~/_lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 const { countries } = countriesJSON;
 
@@ -30,6 +32,7 @@ type Props = {
 
 const EditAddressModal = ({ open, setOpen, address }: Props) => {
   const router = useRouter();
+  const [isSubmiting, setIsSubmiting] = useState(false);
 
   const {
     register,
@@ -57,12 +60,21 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
   const reducer = (data: SwellAddress, action: { type: string; value: SwellAddress }) => {
     switch (action.type) {
       case 'updateAddress':
-        swell.account.updateAddress(address.id, action.value).catch((err) => {
-          console.error(err);
-        });
+        setIsSubmiting(true);
+        swell.account
+          .updateAddress(address.id, action.value)
+          .then(() => {
+            console.log('updates');
+            notifySuccess('Address updated successfully');
+            setOpen(false);
 
+            setIsSubmiting(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            notifyFailure('Something went wrong. Please try again');
+          });
         router.refresh();
-        setOpen(false);
 
         break;
       case 'updateInputOnChange':
@@ -72,7 +84,6 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
     }
     return data;
   };
-
   const [data, dispatch] = useReducer(reducer, initialAddress);
 
   const onSubmit: SubmitHandler<Inputs> = () => {
@@ -93,6 +104,7 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
         <form
           className="overflow-y-auto max-h-[80vh] mt-3"
           onSubmit={(e) => {
+            e.preventDefault();
             void handleSubmit(onSubmit)(e);
           }}
         >
@@ -279,7 +291,13 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <Button label="SAVE CHANGES" classes="mt-5" fullWidth type="submit" />
+          <Button
+            label={!isSubmiting ? 'SAVE CHANGES' : <Spinner size={5} />}
+            classes="mt-5"
+            fullWidth
+            type="submit"
+            disabled={isSubmiting}
+          />
         </form>
       </div>
     </Modal>
