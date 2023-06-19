@@ -62,7 +62,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
         console.error(error), notifyFailure('Something went wrong. Please try again');
       })
       .finally(() => {
-        setIsSubmiting(true);
+        setIsSubmiting(false);
       });
 
     router.refresh();
