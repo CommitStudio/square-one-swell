@@ -12,10 +12,10 @@ import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 const LogOutModal = () => {
   const [openLogOut, setOpenLogOut] = useState(false);
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleLogout = async () => {
-    setIsSubmiting(true);
+    setIsSubmitting(true);
     await swell.account
       .logout()
       .then(() => {
@@ -27,7 +27,7 @@ const LogOutModal = () => {
         notifySuccess(
           'You have been successfully logged out. Thank you for shopping with us. We hope to see you again soon!'
         );
-        setIsSubmiting(false);
+        setIsSubmitting(false);
       });
   };
 
@@ -59,7 +59,7 @@ const LogOutModal = () => {
               onClick={() => {
                 void handleLogout();
               }}
-              disabled={isSubmiting}
+              disabled={isSubmitting}
             />
           </div>
         </div>

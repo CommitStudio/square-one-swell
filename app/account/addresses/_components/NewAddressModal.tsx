@@ -31,7 +31,7 @@ type Props = {
 
 const NewAddressModal = ({ open, setOpen }: Props) => {
   const router = useRouter();
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -42,7 +42,7 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const fullName = `${data.first_name} ${data.last_name}`;
-    setIsSubmiting(true);
+    setIsSubmitting(true);
     await swell.account
       .createAddress({
         name: fullName,
@@ -56,13 +56,13 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
       .then(() => {
         notifySuccess('Your new address was added');
         setOpen(false);
-        setIsSubmiting(false);
+        setIsSubmitting(false);
       })
       .catch((error) => {
         console.error(error), notifyFailure('Something went wrong. Please try again');
       })
       .finally(() => {
-        setIsSubmiting(false);
+        setIsSubmitting(false);
       });
 
     router.refresh();
@@ -223,8 +223,8 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
           <Button
             type="submit"
             fullWidth
-            label={!isSubmiting ? 'CREATE ADDRESS' : <Spinner size={5} />}
-            disabled={isSubmiting}
+            label={!isSubmitting ? 'CREATE ADDRESS' : <Spinner size={5} />}
+            disabled={isSubmitting}
           />
         </form>
       </div>

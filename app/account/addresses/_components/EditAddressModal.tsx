@@ -32,7 +32,7 @@ type Props = {
 
 const EditAddressModal = ({ open, setOpen, address }: Props) => {
   const router = useRouter();
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -60,13 +60,13 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
   const reducer = (data: SwellAddress, action: { type: string; value: SwellAddress }) => {
     switch (action.type) {
       case 'updateAddress':
-        setIsSubmiting(true);
+        setIsSubmitting(true);
         swell.account
           .updateAddress(address.id, action.value)
           .then(() => {
             notifySuccess('Address updated successfully');
             setOpen(false);
-            setIsSubmiting(false);
+            setIsSubmitting(false);
           })
           .catch((err) => {
             console.error(err);
@@ -290,11 +290,11 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
           <Button
-            label={!isSubmiting ? 'SAVE CHANGES' : <Spinner size={5} />}
+            label={!isSubmitting ? 'SAVE CHANGES' : <Spinner size={5} />}
             classes="mt-5"
             fullWidth
             type="submit"
-            disabled={isSubmiting}
+            disabled={isSubmitting}
           />
         </form>
       </div>
