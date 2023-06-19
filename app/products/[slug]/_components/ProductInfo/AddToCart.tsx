@@ -26,7 +26,7 @@ interface AddProductProps {
 const AddToCart = ({ product }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
@@ -40,7 +40,7 @@ const AddToCart = ({ product }: ProductProp) => {
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     // Add product to cart on Swell
     await swell.cart
@@ -67,12 +67,12 @@ const AddToCart = ({ product }: ProductProp) => {
       })
       .finally(() => {
         // Turn off spinner
-        setIsLoading(false);
+        setIsSubmitting(false);
       });
   };
 
   const handleAddToCart = () => {
-    !isLoading &&
+    !isSubmitting &&
       void addProduct({
         product: product,
         quantity: productAmount,
@@ -110,7 +110,9 @@ const AddToCart = ({ product }: ProductProp) => {
         <span className="flex items-center gap-2">
           <button
             onClick={() => handleAddToCart()}
-            disabled={product.options?.length === 0 ? false : !state.isVariantActive || isLoading}
+            disabled={
+              product.options?.length === 0 ? false : !state.isVariantActive || isSubmitting
+            }
             className={`font-bold py-3 px-5 md:min-w-[240px]
          ${
            state.isVariantActive || product.options?.length === 0
@@ -118,9 +120,9 @@ const AddToCart = ({ product }: ProductProp) => {
              : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
          }`}
           >
-            {(state.isVariantActive || product.options?.length === 0) && !isLoading ? (
+            {(state.isVariantActive || product.options?.length === 0) && !isSubmitting ? (
               'ADD TO CART'
-            ) : isLoading ? (
+            ) : isSubmitting ? (
               <Spinner size={6} />
             ) : (
               'UNAVAILABLE'
