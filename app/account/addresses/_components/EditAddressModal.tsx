@@ -64,10 +64,8 @@ const EditAddressModal = ({ open, setOpen, address }: Props) => {
         swell.account
           .updateAddress(address.id, action.value)
           .then(() => {
-            console.log('updates');
             notifySuccess('Address updated successfully');
             setOpen(false);
-
             setIsSubmiting(false);
           })
           .catch((err) => {
