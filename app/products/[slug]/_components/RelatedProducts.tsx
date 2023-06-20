@@ -15,7 +15,7 @@ const RelatedProducts = ({ title, product, products }: ProductProp) => {
 
   return (
     <>
-      <div className="flex flex-col text-center mt-12 mb-16">
+      <div className="flex flex-col text-center mt-12 mb-4">
         <p className="text-3xl py-4 font-libre">{title}</p>
       </div>
       <ProductList relatedProducts={true} products={relatedProducts} />
