@@ -1,11 +1,12 @@
 interface SpinnerProp {
   position?: 'center' | 'left' | 'right';
   size?: 4 | 5 | 6 | 8 | 10;
+  className?: string;
 }
 
-export const Spinner = ({ position = 'center', size = 10 }: SpinnerProp) => {
+export const Spinner = ({ position = 'center', size = 10, className }: SpinnerProp) => {
   return (
-    <div className={`text-${position}`}>
+    <div className={`text-${position} ${className ? className : ''}`}>
       <div role="status">
         <svg
           className={`inline mr-2 w-${size} h-${size} text-gray-medium animate-spin dark:text-gray-dark fill-gray`}

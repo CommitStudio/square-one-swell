@@ -15,7 +15,7 @@ const ProductHighlight = ({ products, title }: ProductHighlightProps) => {
         <h5 className="text-2xl py-4 uppercase">{title}</h5>
       </div>
 
-      <ProductList threeColumns products={randomProducts} />
+      <ProductList threeColumns products={randomProducts} isAuthenticated />
 
       <div className="w-full flex justify-center my-10">
         <Button

@@ -9,6 +9,7 @@ import Pagination from '~/_components/Pagination';
 
 import keywords from '~/_data/keywords.json';
 import Store from '~/_lib/Store';
+import { isAuthenticated } from '~/_lib/SwellAPI';
 
 const { NEXT_PUBLIC_BASE_URL } = process.env;
 
@@ -38,6 +39,8 @@ const getData = async (searchParams: FilterParams) => {
 };
 
 const Products = async ({ searchParams }: { searchParams: FilterParams }) => {
+  const auth = await isAuthenticated();
+
   const { categories, products, pagination } = await getData(searchParams);
   const filterKeys = Object.keys(searchParams).filter((key) => key !== 'page' && key !== 'sort');
 
@@ -50,10 +53,13 @@ const Products = async ({ searchParams }: { searchParams: FilterParams }) => {
           {filterKeys && filterKeys.length > 0 && (
             <ShowingFiltered products={products} query={searchParams} />
           )}
-          <ProductList threeColumns products={products} />
+
+          <ProductList threeColumns products={products} isAuthenticated={auth} />
+
           {pagination.pages.length > 0 && (
             <Pagination pagination={pagination} query={searchParams} />
           )}
+
           <Showing className="mb-2 md:my-10 text-center font-quicksand" pagination={pagination} />
         </>
       ) : (
