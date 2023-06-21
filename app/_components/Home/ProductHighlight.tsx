@@ -4,9 +4,10 @@ import ProductList from '~/_components/Globals/ProductList';
 type ProductHighlightProps = {
   products?: Product[];
   title: string;
+  isAuthenticated: boolean;
 };
 
-const ProductHighlight = ({ products, title }: ProductHighlightProps) => {
+const ProductHighlight = ({ products, title, isAuthenticated }: ProductHighlightProps) => {
   const randomProducts = products ? products.sort(() => Math.random() - 0.5).slice(0, 3) : [];
 
   return (
@@ -15,7 +16,7 @@ const ProductHighlight = ({ products, title }: ProductHighlightProps) => {
         <h5 className="text-2xl py-4 uppercase">{title}</h5>
       </div>
 
-      <ProductList threeColumns products={randomProducts} isAuthenticated />
+      <ProductList threeColumns products={randomProducts} isAuthenticated={isAuthenticated} />
 
       <div className="w-full flex justify-center my-10">
         <Button
