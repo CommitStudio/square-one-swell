@@ -5,6 +5,7 @@ import ProductHighlight from '~/_components/Home/ProductHighlight';
 
 import keywords from '~/_data/keywords.json';
 import Store from '~/_lib/Store';
+import { isAuthenticated } from '~/_lib/SwellAPI';
 
 type DataObject = {
   products: Product[];
@@ -38,6 +39,8 @@ async function getData() {
 }
 
 export default async function Home() {
+  const auth = await isAuthenticated();
+
   const { products, categories, promotion, firstProductPromotion } = await getData();
   const imagePromotion = firstProductPromotion.images && firstProductPromotion?.images[0]?.src;
 
@@ -45,7 +48,7 @@ export default async function Home() {
     <>
       <HomeHero />
       <CategoriesSlider categories={categories} />
-      <ProductHighlight title="Featured Products" products={products} />
+      <ProductHighlight title="Featured Products" products={products} isAuthenticated={auth} />
       <DealOfTheWeek promotion={promotion} imagePromotion={imagePromotion} />
     </>
   );

@@ -4,19 +4,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { FaRegHeart } from 'react-icons/fa';
+import ProductWishlist from './ProductWishlist';
 
 import Button from '~/_components/Button';
-import Tooltip from '~/_components/Globals/Tooltip';
 
 import { formatCurrency } from '~/_utils/numbers';
 
 interface Props {
   product: Product;
+  isAuthenticated?: boolean;
+  isWishlistCard?: boolean;
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, isAuthenticated, isWishlistCard }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
+
   const image = product.images?.[0] || { src: '', alt: 'Not Found' };
 
   return (
@@ -29,18 +31,21 @@ const ProductCard = ({ product }: Props) => {
       }`}
     >
       <div className="px-5 py-4">
-        <div className="flex justify-end">
-          <Tooltip content="Feature coming soon!">
-            <div>
-              <FaRegHeart
-                className={`cursor-pointer mb-3 transition-all duration-300 hover:text-red-500 ${
-                  isHovered ? 'md:-translate-x-0' : 'md:opacity-0 md:translate-x-3'
-                }`}
-              />
-            </div>
-          </Tooltip>
-        </div>
-        <div className="flex mx-auto cursor-pointer relative max-w-full max-h-full h-[436px]">
+        {!isWishlistCard && (
+          <div className="flex justify-end h-8">
+            <ProductWishlist
+              product={product}
+              isAuthenticated={isAuthenticated}
+              isHovered={isHovered}
+            />
+          </div>
+        )}
+
+        <div
+          className={`flex mx-auto cursor-pointer relative max-w-full max-h-full ${
+            isWishlistCard ? 'h-[200px]' : 'h-[436px]'
+          }`}
+        >
           <Link href={`/products/${product.slug}`} data-cy="product-link">
             <Image src={image.src} alt={image.alt} fill style={{ objectFit: 'cover' }} />
           </Link>

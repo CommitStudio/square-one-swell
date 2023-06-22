@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
+
+import { FaHeart, FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 import { Badge } from '~/_components/Globals/Badge';
 
@@ -24,6 +25,16 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         <FaSearch />
       </Link>
 
+      <a
+        href="/account/wishlist"
+        title="Wishlist"
+        className={`text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 hover:bg-black hover:text-white active:bg-black active:text-white ${
+          isAuthenticated ? 'lg:block' : 'lg:hidden'
+        }`}
+      >
+        <FaHeart />
+      </a>
+
       <button
         type="button"
         className="relative text-black border-2 border-black self-center rounded-full px-2.5 py-2.5 hidden transition-all duration-300 lg:block hover:bg-black hover:text-white active:bg-black active:text-white"
@@ -33,7 +44,6 @@ const UserButtons = ({ toggleCart, isAuthenticated }: Props) => {
         <FaShoppingCart data-cy="cart-icon" />
         {typeof quantity == 'number' && quantity > 0 && <Badge itemsQuantity={quantity} />}
       </button>
-
       <Link
         href={`/account/${isAuthenticated ? 'orders' : 'login'}`}
         title={isAuthenticated ? 'My Orders' : 'Login'}

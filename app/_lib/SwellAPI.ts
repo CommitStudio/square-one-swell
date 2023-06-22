@@ -2,6 +2,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import 'server-only';
 
+import Store from './Store';
+
 type RequestBody = {
   query: string;
 };
@@ -162,6 +164,7 @@ export const getUserInfo = async () => {
   const cards = await getCards();
 
   return {
+    authenticated: true,
     user: user.account,
     orders: user.orders.results || [],
     addresses: addresses || [],
@@ -204,9 +207,9 @@ const getCards = async () => {
 /*****************************************************************************
  * Get logged user wishlist products ids
  ****************************************************************************/
-const getWishlistIds = async (): Promise<string[]> => {
-  const { content } = (await makeRequest('/api/account')) as WishlistBody;
-  return content.wishlist_ids;
+export const getWishlistIds = async (): Promise<string[]> => {
+  const response = (await makeRequest('/api/account')) as WishlistBody;
+  return response?.content?.wishlist_ids || [];
 };
 
 /*****************************************************************************
@@ -221,9 +224,13 @@ export const getWishlist = async (): Promise<Product[]> => {
 
   const { results } = (await makeRequest(
     `/api/products?where[id][$in]=${productsIds.join(',')}`
-  )) as { results: Product[] };
+  )) as { results: SwellProduct[] };
 
-  return results;
+  const formattedWishlist: Product[] = results.map((product) => {
+    return Store.tranformProduct(product);
+  });
+
+  return formattedWishlist;
 };
 
 /*****************************************************************************
@@ -241,9 +248,9 @@ export const toggleWishlist = async (productId: string): Promise<string[]> => {
   const { id, content } = (await makeRequest('/api/account')) as WishlistBody;
 
   // Add or remove product depending on if it's already in the wishlist
-  const wishlistIds = content.wishlist_ids.includes(productId)
+  const wishlistIds = content?.wishlist_ids.includes(productId)
     ? content.wishlist_ids.filter((id) => id !== productId)
-    : [...content.wishlist_ids, productId];
+    : [...(content?.wishlist_ids || []), productId];
 
   // Overwrite wishlist with new list of products
   const wishlist = (await makeAdminRequest(`/accounts/${id}`, 'PUT', {

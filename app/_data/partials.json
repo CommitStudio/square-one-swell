@@ -5,6 +5,7 @@
     { "name": "CONTACT", "slug": "contact", "hideOnDesktop": false },
     { "name": "SEARCH", "slug": "products", "hideOnDesktop": true },
     { "name": "CART", "slug": "", "hideOnDesktop": true },
+    { "name": "WISHLIST", "slug": "account/wishlist", "hideOnDesktop": true },
     { "name": "LOGIN", "slug": "account/login", "hideOnDesktop": true }
   ]
 }
