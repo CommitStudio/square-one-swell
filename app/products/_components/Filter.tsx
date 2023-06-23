@@ -104,13 +104,7 @@ const Filter = ({ categories, query }: FilterProps) => {
         }`}
       >
         <div className="overflow-hidden">
-          <div>
-            <Categories categories={categories} query={query} />
-            {/* FilterBy CATEGORIES info is coming from the store */}
-            {/* <FilterBy title="Gender" items={categories} query={query} />
-            <FilterBy title="Categories" items={categories} query={query} /> */}
-            {/*FilterBy PRICE*/}
-          </div>
+          <Categories categories={categories} query={query} />
           <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
             <button
               onClick={() => {

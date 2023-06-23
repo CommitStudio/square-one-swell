@@ -34,7 +34,7 @@ const Categories = ({ categories, query }: FilterByProps) => {
     .sort((a, b) => (a.subCategories.length < b.subCategories.length ? 1 : -1));
 
   return (
-    <div className={`grid auto-cols-auto grid-flow-col mt-3 mb-16`}>
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
       {mainPopulated.map((category, i) => {
         return <FilterBy key={i} category={category} query={query} />;
       })}

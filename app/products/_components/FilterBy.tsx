@@ -49,13 +49,21 @@ export const FilterBy = ({ query, category }: FilterByProps) => {
                 ...subcategory.slug
               }
             }}
-            onClick={() => handleClick(subcategory.name)}
             key={`filter-item-${i}`}
-            className={`cursor-pointer w-fit hover:font-bold block ${
-              Object.values(query).includes(subcategory.slug.category) ? 'font-bold underline' : ''
-            }`}
           >
-            {subcategory.name}
+            <div>
+              <a
+                onClick={() => handleClick(subcategory.name)}
+                className={`transition-opacity duration-300 inline-block hover:font-bold
+                    ${
+                      Object.values(query).includes(subcategory.slug.category)
+                        ? 'font-bold underline'
+                        : ''
+                    }`}
+              >
+                {subcategory.name}
+              </a>
+            </div>
           </Link>
         );
       })}
