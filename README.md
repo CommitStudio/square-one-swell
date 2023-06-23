@@ -62,11 +62,42 @@ To run the store locally:
 
 ## 6. License
 
-MIT License
-Copyright (c) 2023 Commit Studio
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The Extended General Public License (GPL) is a free, copyleft license for software and other kinds of works, which extends the terms of the original GPL version 3.0 to encompass certain explicit permissions and restrictions pertaining to the utilization of themes.
+
+### Preamble
+
+The Extended GPL3 license preserves the core principles of the GPL3 license such as the freedom to run the program, to study and change it, and to redistribute copies with or without changes. This specific version, however, modifies the redistribution principle to align with certain provisions listed below, especially focusing on theme utilization.
+
+### Terms and Conditions
+
+#### 0. Definitions
+
+- "This License" refers to the Extended General Public License.
+- "The Program" refers to any copyrightable work licensed under this License. Each license is addressed as "you". "Licensees" and "recipients" may be individuals or organizations.
+- A "theme" in this context refers to a predefined set of aesthetics and design elements that can be applied to an end product.
+
+#### 1. Permissions
+
+Under this License, you are permitted to:
+
+1. Use the theme to create unlimited end products.
+2. Modify the theme to create your own version of the store. Those store themes are subject to this License.
+3. Use the theme to create unlimited end products for unlimited clients.
+4. Use the theme to create end products where the end product is sold to end users.
+5. Use the theme to create end products that are open source and freely available to end users.
+
+#### 2. Restrictions
+
+Under this License, you are not permitted to:
+
+1. Use the theme to create end products that are designed to allow an end user to build their own end products using the theme or derivatives of the theme.
+2. Re-distribute the theme or derivatives of the theme separately from an end product, neither in code or as design assets.
+
+### NO WARRANTY
+
+BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+## End of Terms and Conditions
 
 ---
 
