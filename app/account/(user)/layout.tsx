@@ -7,7 +7,7 @@ import Container from '~/_layouts/Container';
 import { getUserInfo } from '~/_lib/SwellAPI';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const { user } = await getUserInfo();
+  const { user: account } = await getUserInfo();
 
   return (
     <Container className="mb-10">
@@ -15,10 +15,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
         <div className="lg:col-span-3 lg:border-r">
           <div className="h-24 flex flex-col justify-center">
             <h4 className="flex items-center h-7 font-semibold text-xl mb-2">
-              {user?.firstName} {user?.lastName}
+              {account?.firstName} {account?.lastName}
             </h4>
-            {user?.email && <p className="h-6 mb-2">{user?.email}</p>}
-            <EditProfileModal account={user} />
+            {account?.email && <p className="h-6 mb-2">{account?.email}</p>}
+            <EditProfileModal account={account} />
           </div>
           <div className="space-y-4 my-10">
             <AccountLink href="/account/orders" pathname="/account/orders" label="Orders" />
