@@ -20,7 +20,7 @@ const ProductInfo = async ({ product }: ProductProp) => {
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
-      <ProductStock product={product} />
+      <ProductStock stock={product.stock} />
       <ProductRating rating={3} />
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions product={product} />

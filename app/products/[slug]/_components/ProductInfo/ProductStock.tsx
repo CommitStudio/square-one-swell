@@ -1,23 +1,15 @@
-import React from 'react';
-
-interface ProductProp {
-  product: Product;
+interface StockProp {
+  stock: number | undefined;
 }
 
-function ProductStock({ product }: ProductProp) {
-  const alertStock = product.stock && product.stock <= 5;
-  const minStock = product.stock && product.stock <= 1;
-
+function ProductStock({ stock }: StockProp) {
   return (
     <>
-      {product.stock
-        ? alertStock &&
-          minStock && (
-            <p className="text-red-400">
-              {`Only ${product.stock} item${product.stock > 1 ? 's' : ''} left!`}
-            </p>
-          )
-        : ''}
+      {stock && stock > 0 && stock <= 5 ? (
+        <p className="text-red-400">{`Only ${stock} item${stock > 1 ? 's' : ''} left!`}</p>
+      ) : (
+        ''
+      )}
     </>
   );
 }
