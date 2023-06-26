@@ -5,8 +5,6 @@ import OrderCard from './_components/OrderCard';
 
 import Button from '~/_components/Button';
 
-import AccountLayout from '~/_layouts/AccountLayout';
-
 import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
@@ -15,10 +13,10 @@ export const metadata = {
 };
 
 export default async function Orders() {
-  const { user, orders } = await getUserInfo();
+  const { orders } = await getUserInfo();
 
   return (
-    <AccountLayout account={user}>
+    <>
       <h4 className="text-3xl font-medium mb-5 font-libre">Orders</h4>
       {orders.length === 0 ? (
         <>
@@ -40,6 +38,6 @@ export default async function Orders() {
           return <OrderCard order={order} key={order.id} />;
         })
       )}
-    </AccountLayout>
+    </>
   );
 }

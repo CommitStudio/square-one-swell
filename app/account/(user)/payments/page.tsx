@@ -1,8 +1,6 @@
 import CreatePayment from './_components/CreatePayment';
 import PaymentCard from './_components/PaymentsCard';
 
-import AccountLayout from '~/_layouts/AccountLayout';
-
 import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
@@ -16,7 +14,7 @@ export default async function Payments() {
   const defaultCard = user?.billing?.accountCardId;
 
   return (
-    <AccountLayout account={user}>
+    <>
       <h4 className="text-3xl font-libre font-medium mb-5">Payment methods</h4>
 
       {cards.length === 0 ? (
@@ -30,6 +28,6 @@ export default async function Payments() {
       )}
 
       <CreatePayment />
-    </AccountLayout>
+    </>
   );
 }

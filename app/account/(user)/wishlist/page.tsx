@@ -4,8 +4,6 @@ import { BiShoppingBag } from 'react-icons/bi';
 import Button from '~/_components/Button';
 import ProductCard from '~/_components/Globals/ProductCard';
 
-import AccountLayout from '~/_layouts/AccountLayout';
-
 import { getUserInfo, getWishlist } from '~/_lib/SwellAPI';
 
 export const metadata = {
@@ -14,11 +12,11 @@ export const metadata = {
 };
 
 export default async function Addresses() {
-  const { authenticated, user } = await getUserInfo();
+  const { authenticated } = await getUserInfo();
   const wishlist = await getWishlist();
 
   return (
-    <AccountLayout account={user}>
+    <>
       <h4 className="text-3xl font-medium mb-5 font-libre">Wishlist</h4>
 
       {wishlist.length === 0 && (
@@ -52,6 +50,6 @@ export default async function Addresses() {
           ))}
         </div>
       )}
-    </AccountLayout>
+    </>
   );
 }

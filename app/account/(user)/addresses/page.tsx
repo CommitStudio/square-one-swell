@@ -1,7 +1,5 @@
 import AddressContainer from './_components/AddressContainer';
 
-import AccountLayout from '~/_layouts/AccountLayout';
-
 import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
@@ -10,11 +8,6 @@ export const metadata = {
 };
 
 export default async function Addresses() {
-  const { user, addresses } = await getUserInfo();
-
-  return (
-    <AccountLayout account={user}>
-      <AddressContainer addresses={addresses} />
-    </AccountLayout>
-  );
+  const { addresses } = await getUserInfo();
+  return <AddressContainer addresses={addresses} />;
 }
