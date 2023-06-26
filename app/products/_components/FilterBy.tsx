@@ -1,20 +1,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { UpdatedCategory } from './Categories';
+
 import { useStore } from '~/_hooks/useStore';
 
-export interface FilterItem {
-  name: string;
-  slug: { minPrice?: number; maxPrice?: number | string; category?: string };
-}
-
-export interface FilterByProps {
-  title: string;
-  items: FilterItem[];
+interface FilterByProps {
   query: FilterParams;
+  category: UpdatedCategory;
 }
 
-export const FilterBy = ({ title, items, query }: FilterByProps) => {
+export const FilterBy = ({ query, category }: FilterByProps) => {
   const pathname = usePathname();
   const { updateState, state } = useStore();
 
@@ -30,67 +26,45 @@ export const FilterBy = ({ title, items, query }: FilterByProps) => {
 
   return (
     <div className="my-3">
-      <h5 className="font-bold mb-4 md:mb-8 uppercase">{title}</h5>
-      {items.map((item, i) => {
-        delete query.page;
-        return title === 'Gender' ? (
-          <div key={i}>
-            {(item.name === 'Women' || item.name === 'Men') && (
-              <Link
-                key={`filter-item-${i}`}
-                href={{
-                  pathname: pathname,
-                  query: {
-                    ...query,
-                    ...item.slug
-                  }
-                }}
-                scroll={false}
-                legacyBehavior
-              >
-                <div>
-                  <a
-                    onClick={() => handleClick(item.name)}
-                    className={`cursor-pointer w-fit hover:font-bold ${
-                      Object.values(item.slug)
-                        .map(String)
-                        .every((v) => Object.values(query).map(String).includes(v))
-                        ? 'text-black font-semibold text'
-                        : 'text-gray-500'
+      <Link
+        href={{
+          pathname: pathname,
+          query: {
+            ...query,
+            ...category.slug
+          }
+        }}
+        onClick={() => handleClick(category.name)}
+        className={Object.values(query).includes(category.slug.category) ? 'underline' : ''}
+      >
+        <h5 className="font-bold uppercase">{category.name}</h5>
+      </Link>
+      {category.subCategories.map((subcategory, i) => {
+        return (
+          <Link
+            href={{
+              pathname: pathname,
+              query: {
+                ...query,
+                ...subcategory.slug
+              }
+            }}
+            key={`filter-item-${i}`}
+          >
+            <div>
+              <a
+                onClick={() => handleClick(subcategory.name)}
+                className={`transition-opacity duration-300 inline-block hover:font-bold
+                    ${
+                      Object.values(query).includes(subcategory.slug.category)
+                        ? 'font-bold underline'
+                        : ''
                     }`}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              </Link>
-            )}
-          </div>
-        ) : (
-          item.name !== 'Men' && item.name !== 'Women' && (
-            <Link
-              key={`filter-item-${i}`}
-              href={{ pathname: pathname, query: { ...query, ...item.slug } }}
-              scroll={false}
-              legacyBehavior
-            >
-              <div>
-                <a
-                  onClick={() => {
-                    handleClick(item.name);
-                  }}
-                  className={`cursor-pointer w-fit hover:font-bold transition-opacity duration-300 ${
-                    Object.values(item.slug)
-                      .map(String)
-                      .every((v) => Object.values(query).map(String).includes(v))
-                      ? 'text-black font-semibold text'
-                      : 'text-gray-500'
-                  }`}
-                >
-                  {item.name}
-                </a>
-              </div>
-            </Link>
-          )
+              >
+                {subcategory.name}
+              </a>
+            </div>
+          </Link>
         );
       })}
     </div>

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
-import { FilterBy } from './FilterBy';
+import Categories from './Categories';
 import Search from './Search';
 import SortBy from './SortBy';
 
@@ -30,15 +30,6 @@ const Filter = ({ categories, query }: FilterProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
-
-  const filteringPricesRanges = [
-    { name: '$0 - $10', slug: { minPrice: 0, maxPrice: 10 } },
-    { name: '$10 - $20', slug: { minPrice: 10, maxPrice: 20 } },
-    { name: '$20 - $30', slug: { minPrice: 20, maxPrice: 30 } },
-    { name: '$30 - $40', slug: { minPrice: 30, maxPrice: 40 } },
-    { name: '+$40', slug: { minPrice: 40, maxPrice: '' } },
-    { name: 'All prices', slug: { minPrice: 0, maxPrice: '' } }
-  ];
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -113,13 +104,7 @@ const Filter = ({ categories, query }: FilterProps) => {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-3 mb-8">
-            {/* FilterBy CATEGORIES info is coming from the store */}
-            <FilterBy title="Gender" items={categories} query={query} />
-            <FilterBy title="Categories" items={categories} query={query} />
-            {/*FilterBy PRICE*/}
-            <FilterBy title="Prices" items={filteringPricesRanges} query={query} />
-          </div>
+          <Categories categories={categories} query={query} />
           <Link href={{ pathname: '/products' }} scroll={false} legacyBehavior>
             <button
               onClick={() => {
