@@ -76,12 +76,11 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
-    !isLoading &&
-      void addProduct({
-        product: product,
-        quantity: productAmount,
-        toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
-      });
+    void addProduct({
+      product: product,
+      quantity: productAmount,
+      toastifyMessage: `${productAmount} x ${product.name} has been successfully added to your cart.`
+    });
   };
 
   const buttonLabel = () => {
