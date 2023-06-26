@@ -28,7 +28,7 @@ type Props = {
 const PaymentsModal = ({ open, setOpen }: Props) => {
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -40,7 +40,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
   const onSubmit = async (data: Inputs) => {
     const month = data.expirationDate.slice(5, 7);
     const year = data.expirationDate.slice(0, 4);
-    setIsLoading(true); //Turn on spinner while waiting
+    setIsSubmitting(true); //Turn on spinner while waiting
 
     try {
       const cardToken = await swell.card.createToken({
@@ -66,7 +66,7 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
       console.error(e);
     } finally {
       //Turn off spinner
-      setIsLoading(false);
+      setIsSubmitting(false);
       reset();
     }
   };
@@ -196,10 +196,10 @@ const PaymentsModal = ({ open, setOpen }: Props) => {
           </div>
           <Button
             classes="mt-4"
-            label={!isLoading ? 'ADD NEW' : <Spinner size={5} />}
+            label={!isSubmitting ? 'ADD NEW' : <Spinner size={5} />}
             fullWidth
             type="submit"
-            disabled={isLoading}
+            disabled={isSubmitting}
           />
         </form>
       </div>

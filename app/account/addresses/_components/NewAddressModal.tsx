@@ -1,12 +1,15 @@
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GrClose } from 'react-icons/gr';
 
 import Modal from '~/_components/Account/Modal';
 import Button from '~/_components/Button';
+import { Spinner } from '~/_components/Globals/Spinner';
 
 import countriesJSON from '~/_data/countries.json';
 import swell from '~/_lib/SwellJS';
+import { notifyFailure, notifySuccess } from '~/_utils/toastifies';
 
 const { countries } = countriesJSON;
 
@@ -28,6 +31,7 @@ type Props = {
 
 const NewAddressModal = ({ open, setOpen }: Props) => {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -38,16 +42,28 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const fullName = `${data.first_name} ${data.last_name}`;
-
-    await swell.account.createAddress({
-      name: fullName,
-      address1: data.address1,
-      address2: data.address2,
-      city: data.city,
-      zip: data.zip,
-      country: data.country,
-      phone: data.phone
-    });
+    setIsSubmitting(true);
+    await swell.account
+      .createAddress({
+        name: fullName,
+        address1: data.address1,
+        address2: data.address2,
+        city: data.city,
+        zip: data.zip,
+        country: data.country,
+        phone: data.phone
+      })
+      .then(() => {
+        notifySuccess('Your new address was added');
+        setOpen(false);
+        setIsSubmitting(false);
+      })
+      .catch((error) => {
+        console.error(error), notifyFailure('Something went wrong. Please try again');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
 
     router.refresh();
     setOpen(false);
@@ -204,7 +220,12 @@ const NewAddressModal = ({ open, setOpen }: Props) => {
           {errors.phone && (
             <p className="text-red-600 text-xs -mt-4 mb-4">{errors.phone.message}</p>
           )}
-          <Button type="submit" fullWidth label="CREATE ADDRESS" />
+          <Button
+            type="submit"
+            fullWidth
+            label={!isSubmitting ? 'CREATE ADDRESS' : <Spinner size={5} />}
+            disabled={isSubmitting}
+          />
         </form>
       </div>
     </Modal>

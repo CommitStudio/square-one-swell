@@ -17,10 +17,10 @@ type Props = {
 const DeleteCardModal = ({ openConfModal, setOpenConfModal, cardId }: Props) => {
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleDeleteCard = async (id: string) => {
-    setIsLoading(true);
+    setIsSubmitting(true);
     await swell.account.deleteCard(id);
 
     router.refresh();
@@ -47,7 +47,7 @@ const DeleteCardModal = ({ openConfModal, setOpenConfModal, cardId }: Props) => 
               onClick={() => setOpenConfModal(false)}
             />
             <Button
-              label={isLoading ? <Spinner size={6} /> : 'YES'}
+              label={isSubmitting ? <Spinner size={6} /> : 'YES'}
               fullWidth
               onClick={() => {
                 handleDeleteCard(cardId).catch((err) => console.error(err));

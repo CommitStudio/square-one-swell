@@ -17,13 +17,12 @@ type Inputs = {
 };
 
 const ResetPasswordForm = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams?.get('key');
 
   const [isHidden, setIsHidden] = useState(true);
   const [isConfirmHidden, setIsConfirmHidden] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -35,7 +34,7 @@ const ResetPasswordForm = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     try {
       await swell.account.recover({
@@ -50,7 +49,7 @@ const ResetPasswordForm = () => {
       notifyFailure('There was an error changing your password. Please try again.');
     } finally {
       // Turn off spinner
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
   // Used to check if password and confirmPassword fields are the same
@@ -121,7 +120,12 @@ const ResetPasswordForm = () => {
           <p className="text-red-600 text-xs mt-2 mb-4">{errors.confirmPassword.message}</p>
         )}
       </div>
-      <Button type="submit" label={!isLoading ? 'SAVE' : <Spinner size={4} />} fullWidth />
+      <Button
+        type="submit"
+        label={!isSubmitting ? 'SAVE' : <Spinner size={4} />}
+        fullWidth
+        disabled={isSubmitting}
+      />
     </form>
   );
 };
