@@ -96,6 +96,19 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
     return 'UNAVAILABLE';
   };
 
+  const buttonLabel = () => {
+    if (product.stock === 0) {
+      return 'COMING SOON!';
+    }
+    if (isLoading) {
+      return <Spinner size={6} />;
+    }
+    if (state.isVariantActive || product.options?.length === 0) {
+      return 'ADD TO CART';
+    }
+    return 'UNAVAILABLE';
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 py-5">
@@ -134,7 +147,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
                 : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
             }`}
           />
-
           <Wishlist isAuthenticated={isAuthenticated} productId={product.id} />
         </span>
       </div>
