@@ -45,7 +45,6 @@ class Store {
       active: true,
       expand: ['variants:*']
     });
-
     return product ? this.tranformProduct(product) : undefined;
   }
 
@@ -105,7 +104,8 @@ class Store {
       salePrice: product.sale_price || null,
       sku: product.sku || null,
       images: this.transformImages(product),
-      categories: product.category_index?.id
+      categories: product.category_index?.id,
+      stock: product.stock_level
     };
   }
 

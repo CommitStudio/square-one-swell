@@ -14,6 +14,7 @@ interface Product {
   salePrice?: number | null;
   sku?: string | null;
   categories?: string[];
+  stock?: number;
 }
 
 interface ProductImage {
