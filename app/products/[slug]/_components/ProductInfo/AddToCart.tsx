@@ -5,6 +5,8 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import Button from '~/_components/Button';
+
 import { Spinner } from '~/_components/Globals/Spinner';
 
 import { useStore, useProductState, useGlobalState } from '~/_hooks/useStore';
@@ -81,6 +83,19 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
       });
   };
 
+  const buttonLabel = () => {
+    if (product.stock === 0) {
+      return 'COMING SOON!';
+    }
+    if (isSubmitting) {
+      return <Spinner size={6} />;
+    }
+    if (state.isVariantActive || product.options?.length === 0) {
+      return 'ADD TO CART';
+    }
+    return 'UNAVAILABLE';
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 py-5">
@@ -109,26 +124,16 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           </div>
         </div>
         <span className="flex items-center gap-2">
-          <button
+          <Button
             onClick={() => handleAddToCart()}
-            disabled={
-              product.options?.length === 0 ? false : !state.isVariantActive || isSubmitting
-            }
-            className={`font-bold py-3 px-5 md:min-w-[240px]
-         ${
-           state.isVariantActive || product.options?.length === 0
-             ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
-             : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
-         }`}
-          >
-            {(state.isVariantActive || product.options?.length === 0) && !isSubmitting ? (
-              'ADD TO CART'
-            ) : isSubmitting ? (
-              <Spinner size={6} />
-            ) : (
-              'UNAVAILABLE'
-            )}
-          </button>
+            label={buttonLabel()}
+            variant="fill"
+            className={`font-bold py-3 px-5 md:min-w-[240px] ${
+              state.isVariantActive || (product.options?.length === 0 && product.stock !== 0)
+                ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
+                : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
+            }`}
+          />
           <Wishlist isAuthenticated={isAuthenticated} productId={product.id} />
         </span>
       </div>
