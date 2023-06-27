@@ -177,6 +177,32 @@ class Store {
       limit
     };
   }
+
+  async getReviews(productId: string) {
+    const reviews = await swell.get('/products:reviews', {
+      parent_id: productId
+    });
+    return reviews;
+  }
+
+  async postReview(reviewInfo: {
+    userId: string;
+    comments: string;
+    productId: string;
+    rating: number;
+    title: string;
+  }) {
+    const { userId, comments, productId, rating, title } = reviewInfo;
+
+    const reviews = await swell.post('/products:reviews', {
+      account_id: userId,
+      comments: comments,
+      parent_id: productId,
+      rating: rating,
+      title: title
+    });
+    return reviews;
+  }
 }
 
 export default new Store();
