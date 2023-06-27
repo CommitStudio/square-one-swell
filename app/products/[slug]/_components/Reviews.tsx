@@ -20,7 +20,7 @@ interface Props {
     title: string;
   }) => Promise<Review>;
   getReviewsAction: (productId: string) => Promise<Reviews>;
-  userId: string;
+  userId: string | null;
   productId: string;
 }
 
@@ -47,6 +47,10 @@ const Reviews = ({ postReviewAction, getReviewsAction, userId, productId }: Prop
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    if (!userId) {
+      setErrorMessage('You must be logged in to post a review.');
+      return;
+    }
     setIsLoading(true);
     //Post new review
     const review = await postReviewAction({
@@ -84,22 +88,25 @@ const Reviews = ({ postReviewAction, getReviewsAction, userId, productId }: Prop
           type="text"
           className="block w-full border focus:outline-0 md:w-[350px] border-black rounded-lg p-2 pl-4 mb-3"
           placeholder="Title..."
-          {...register('title', { required: true })}
+          {...register('title', { required: 'Title is required' })}
         />
+        {errors.title && <p className="text-red-600 text-xs">{errors.title.message}</p>}
 
         <input
           type="text"
           className="block w-full border focus:outline-0 md:w-[350px] border-black rounded-lg p-2 pl-4 mb-3"
           placeholder="Comments..."
-          {...register('comments', { required: true })}
+          {...register('comments', { required: 'Comments are required' })}
         />
+        {errors.comments && <p className="text-red-600 text-xs">{errors.comments.message}</p>}
 
         <input
           type="number"
           className="block w-full border focus:outline-0 md:w-[350px] border-black rounded-lg p-2 pl-4 mb-3"
           placeholder="Rating..."
-          {...register('rating', { required: true })}
+          {...register('rating', { required: 'Rating is required' })}
         />
+        {errors.rating && <p className="text-red-600 text-xs">{errors.rating.message}</p>}
 
         <button
           disabled={isLoading}

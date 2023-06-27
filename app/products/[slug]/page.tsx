@@ -11,7 +11,7 @@ import Reviews from './_components/Reviews';
 import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
 import Store from '~/_lib/Store';
-import { getUserInfo } from '~/_lib/SwellAPI';
+import { getLoggedUser } from '~/_lib/SwellAPI';
 
 interface ProductProp {
   product: Product;
@@ -45,7 +45,11 @@ const getData = async (slug: string) => {
     category: product?.categories?.[0]
   });
 
-  const { userId } = await getUserInfo();
+  // const { userId } = await getUserInfo();
+
+  const user: SwellAPI_Customer | null = await getLoggedUser();
+
+  const userId: string | null = user?.session?.accountId || null;
 
   return { product, sameCategoryProducts, categories, userId };
 };
