@@ -1,18 +1,23 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { postReviewAction, getReviewsAction } from '../_actions/reviews';
+
 import ProductSection from './_components/ProductSection';
 import RelatedProducts from './_components/RelatedProducts';
 
+import Reviews from './_components/Reviews';
+
 import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
-
 import Store from '~/_lib/Store';
+import { getUserInfo } from '~/_lib/SwellAPI';
 
 interface ProductProp {
   product: Product;
   sameCategoryProducts: Product[];
   categories: Category[];
+  userId: string;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
@@ -40,11 +45,15 @@ const getData = async (slug: string) => {
     category: product?.categories?.[0]
   });
 
-  return { product, sameCategoryProducts, categories };
+  const { userId } = await getUserInfo();
+
+  return { product, sameCategoryProducts, categories, userId };
 };
 
 const ProductDetail = async ({ params }: { params: { slug: string } }) => {
-  const { product, sameCategoryProducts, categories } = (await getData(params.slug)) as ProductProp;
+  const { product, sameCategoryProducts, categories, userId } = (await getData(
+    params.slug
+  )) as ProductProp;
 
   if (!product) {
     notFound();
@@ -71,6 +80,13 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
       <hr className="bg-gray h-px border-none" />
 
       <ProductSection product={product} categories={categories} />
+
+      <Reviews
+        getReviewsAction={getReviewsAction}
+        postReviewAction={postReviewAction}
+        userId={userId}
+        productId={product.id}
+      />
 
       <RelatedProducts
         title={'Related Products'}
