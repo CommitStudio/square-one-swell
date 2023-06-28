@@ -2,8 +2,6 @@ import { redirect } from 'next/navigation';
 
 import OrderDetails from './_components/OrderDetails';
 
-import AccountLayout from '~/_layouts/AccountLayout';
-
 import { getUserInfo } from '~/_lib/SwellAPI';
 
 export const metadata = {
@@ -12,16 +10,12 @@ export const metadata = {
 };
 
 export default async function OrderId({ params }: { params: { orderId: string } }) {
-  const { user, orders } = await getUserInfo();
+  const { orders } = await getUserInfo();
   const order = orders.find((order) => order.id === params.orderId);
 
   if (!order) {
     return redirect('/account/orders');
   }
 
-  return (
-    <AccountLayout account={user}>
-      <OrderDetails order={order} />
-    </AccountLayout>
-  );
+  return <OrderDetails order={order} />;
 }

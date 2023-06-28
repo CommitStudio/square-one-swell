@@ -1,15 +1,14 @@
-import EditProfileModal from './EditProfileModal';
-import AccountLink from './Link';
-import LogOutModal from './LogOutModal';
+import EditProfileModal from './_components/EditProfileModal';
+import AccountLink from './_components/Link';
+import LogOutModal from './_components/LogOutModal';
 
 import Container from '~/_layouts/Container';
 
-type Props = {
-  account: SwellAPI_Account;
-  children: React.ReactNode;
-};
+import { getUserInfo } from '~/_lib/SwellAPI';
 
-const AccountLayout = ({ account, children }: Props) => {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const { user: account } = await getUserInfo();
+
   return (
     <Container className="mb-10">
       <div className="grid gap-10 lg:gap-0 lg:grid-cols-12 pt-10 font-quicksand space-x-10">
@@ -41,6 +40,4 @@ const AccountLayout = ({ account, children }: Props) => {
       </div>
     </Container>
   );
-};
-
-export default AccountLayout;
+}
