@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { postReviewAction, getReviewsAction } from '../_actions/reviews';
+import {
+  postReviewAction,
+  getReviewsAction,
+  deleteReviewAction,
+  editReviewAction
+} from '../_actions/reviews';
 
 import ProductSection from './_components/ProductSection';
 import RelatedProducts from './_components/RelatedProducts';
@@ -88,6 +93,8 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
       <Reviews
         getReviewsAction={getReviewsAction}
         postReviewAction={postReviewAction}
+        deleteReviewAction={deleteReviewAction}
+        editReviewAction={editReviewAction}
         userId={userId}
         productId={product.id}
       />
