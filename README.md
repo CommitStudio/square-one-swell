@@ -1,6 +1,6 @@
 ## Introduction to Square One
 
-Square One is an e-commerce platform powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful e-commerce business.
+Square One is an e-commerce storefront powered by Swell, designed to provide businesses with a flexible solution for selling products online. You can easily design and brand your online store, process payments, and manage shipping to create a successful e-commerce business.
 
 ## Overview
 
