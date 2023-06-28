@@ -28,18 +28,39 @@ interface AddProductProps {
 
 const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   const [productAmount, setProductAmount] = useState(1);
+  const [isDisable, setIsDisable] = useState(false);
   const [pleaseSelectAllOptions, setPleaseSelectAllOptions] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { state } = useStore();
   const { productState } = useProductState();
   const { setCart } = useGlobalState();
+  const selectedStock = Number(productState.chosenOptions.stockByOption);
 
   const { chosenOptions } = productState;
 
   useEffect(() => {
     product.options?.length === Object.keys(chosenOptions).length;
     product.options?.length === Object.keys(chosenOptions).length && setPleaseSelectAllOptions('');
+    setProductAmount(1);
   }, [chosenOptions, product.options?.length]);
+
+  useEffect(() => {
+    product.stock === productAmount || productAmount === selectedStock
+      ? setIsDisable(true)
+      : setIsDisable(false);
+  }, [productAmount, product.stock, selectedStock]);
+
+  // const quantityVsStock = () => {
+  //   if (product.variants?.length === 0) {
+  //     console.log(product.stock, productAmount, 'product.stock, productAmount');
+  //     //if there is no active variants, use the general stock
+  //     return product.stock && product.stock < productAmount ? product.stock : productAmount;
+  //   } else {
+  //     //if there are variants, use the variant stock as per chosen options
+  //     const selectedStock = Number(productState.chosenOptions.stockByOption);
+  //     return selectedStock && selectedStock > productAmount ? selectedStock : productAmount;
+  //   }
+  // };
 
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
@@ -96,6 +117,14 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
     return 'UNAVAILABLE';
   };
 
+  const handleProductAmount = () => {
+    product.stock
+      ? product.variants?.length === 0 //if no variants, use general stock
+        ? setProductAmount(productAmount < product.stock ? productAmount + 1 : productAmount)
+        : setProductAmount(productAmount < selectedStock ? productAmount + 1 : productAmount) //else use stock as per the selected options
+      : setProductAmount(productAmount + 1); //if no stock, use there is no limit
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 py-5">
@@ -110,8 +139,11 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           />
           <div className="flex flex-col">
             <button
-              className="bg-gray hover:bg-gray-medium border border-gray border-b-0 hover:border-gray-300 p-1"
-              onClick={() => setProductAmount(productAmount + 1)}
+              disabled={isDisable}
+              className={`bg-gray hover:bg-gray-medium border border-gray border-b-0 hover:border-gray-300 p-1 ${
+                isDisable ? 'opacity-50 hover:bg-gray hover:border-gray-300' : ''
+              }`}
+              onClick={() => handleProductAmount()}
             >
               <IoIosArrowUp />
             </button>
@@ -127,6 +159,9 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           <Button
             onClick={() => handleAddToCart()}
             label={buttonLabel()}
+            disabled={
+              product.options?.length === 0 ? false : !state.isVariantActive || isSubmitting
+            }
             variant="fill"
             className={`font-bold py-3 px-5 md:min-w-[240px] ${
               state.isVariantActive || (product.options?.length === 0 && product.stock !== 0)
@@ -140,6 +175,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
       {pleaseSelectAllOptions && (
         <p className="text-red-500 font-quicksand">{pleaseSelectAllOptions}</p>
       )}
+      {isDisable && <p className="text-red-500 font-quicksand">More items coming soon!</p>}
     </>
   );
 };

@@ -29,6 +29,7 @@ interface ProductOption {
 }
 
 interface Variant {
+  stock: number;
   name: string;
   active: boolean;
   value_ids: string[];

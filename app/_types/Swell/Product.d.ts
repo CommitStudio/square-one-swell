@@ -94,6 +94,8 @@ interface SwellVariants {
   page: number;
 }
 interface SwellVariant {
+  stock_level: number;
+  stock: number;
   parent_id: string;
   name: string;
   active: boolean;

@@ -138,11 +138,13 @@ class Store {
    * Convert SwellProduct variants to a Product variants format
    ****************************************************************************/
   transformProductVariants(product: SwellProduct) {
-    return product.variants?.results?.map((variant) => ({
+    const productVariant = product.variants?.results?.map((variant) => ({
       name: variant.name,
       active: variant.active,
-      value_ids: variant.option_value_ids
+      value_ids: variant.option_value_ids,
+      stock: variant.stock_level
     }));
+    return productVariant;
   }
 
   /*****************************************************************************

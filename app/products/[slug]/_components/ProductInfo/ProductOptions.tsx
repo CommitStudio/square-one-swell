@@ -29,13 +29,15 @@ const ProductOptions = ({ product }: ProductProp) => {
     product.options?.map((option, i) => {
       initialOptions = {
         ...initialOptions,
-        [option.label]: firstActiveLabel ? firstActiveLabel[i] : ''
+        [option.label]: firstActiveLabel ? firstActiveLabel[i] : '',
+        stockByOption: firstActiveVariant?.stock
       };
 
       setSelectedIds((prev) => ({ ...prev, [option.label]: firstActiveVariant?.value_ids[i] }));
     });
 
     updateProductProp('chosenOptions', initialOptions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   // Declare useEffect to 'listen' for variant selections
@@ -80,10 +82,19 @@ const ProductOptions = ({ product }: ProductProp) => {
                             }`}
                             style={{ backgroundColor: `${value.name}` }}
                             onClick={() => {
-                              updateProductProp('chosenOptions', {
+                              const updatedChosenOptions = {
                                 ...productState.chosenOptions,
                                 [option.label]: value.name
+                              };
+                              const updatedVariant = product.variants?.find(
+                                (variant) => variant.name === value.name
+                              );
+                              const updatedStockByOption = updatedVariant?.stock;
+                              updateProductProp('chosenOptions', {
+                                ...updatedChosenOptions,
+                                stockByOption: updatedStockByOption
                               });
+
                               setSelectedIds({ ...selectedIds, [option.label]: value.id });
                             }}
                           ></li>
@@ -94,10 +105,19 @@ const ProductOptions = ({ product }: ProductProp) => {
                             }`}
                             key={'color' + index.toString()}
                             onClick={() => {
-                              updateProductProp('chosenOptions', {
+                              const updatedChosenOptions = {
                                 ...productState.chosenOptions,
                                 [option.label]: value.name
+                              };
+                              const updatedVariant = product.variants?.find(
+                                (variant) => variant.name === value.name
+                              );
+                              const updatedStockByOption = updatedVariant?.stock;
+                              updateProductProp('chosenOptions', {
+                                ...updatedChosenOptions,
+                                stockByOption: updatedStockByOption
                               });
+
                               setSelectedIds({ ...selectedIds, [option.label]: value.id });
                             }}
                           >
