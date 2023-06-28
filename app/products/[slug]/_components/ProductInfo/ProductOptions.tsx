@@ -60,6 +60,21 @@ const ProductOptions = ({ product }: ProductProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIds]);
 
+  const handleOptions = (label: string, name: string, id: string) => {
+    const updatedChosenOptions = {
+      ...productState.chosenOptions,
+      [label]: name
+    };
+    const updatedVariant = product.variants?.find((variant) => variant.name === name);
+    const updatedStockByOption = updatedVariant?.stock;
+    updateProductProp('chosenOptions', {
+      ...updatedChosenOptions,
+      stockByOption: updatedStockByOption
+    });
+
+    setSelectedIds({ ...selectedIds, [label]: id });
+  };
+
   return (
     <div className="space-y-3">
       {product.options?.map((option, index) => {
@@ -81,22 +96,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                                 : ''
                             }`}
                             style={{ backgroundColor: `${value.name}` }}
-                            onClick={() => {
-                              const updatedChosenOptions = {
-                                ...productState.chosenOptions,
-                                [option.label]: value.name
-                              };
-                              const updatedVariant = product.variants?.find(
-                                (variant) => variant.name === value.name
-                              );
-                              const updatedStockByOption = updatedVariant?.stock;
-                              updateProductProp('chosenOptions', {
-                                ...updatedChosenOptions,
-                                stockByOption: updatedStockByOption
-                              });
-
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
-                            }}
+                            onClick={() => handleOptions(option.label, value.name, value.id)}
                           ></li>
                         ) : (
                           <li
@@ -104,22 +104,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                               availableProductsId.includes(value.id) ? 'bg-black text-white' : ''
                             }`}
                             key={'color' + index.toString()}
-                            onClick={() => {
-                              const updatedChosenOptions = {
-                                ...productState.chosenOptions,
-                                [option.label]: value.name
-                              };
-                              const updatedVariant = product.variants?.find(
-                                (variant) => variant.name === value.name
-                              );
-                              const updatedStockByOption = updatedVariant?.stock;
-                              updateProductProp('chosenOptions', {
-                                ...updatedChosenOptions,
-                                stockByOption: updatedStockByOption
-                              });
-
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
-                            }}
+                            onClick={() => handleOptions(option.label, value.name, value.id)}
                           >
                             {value.name}
                           </li>
