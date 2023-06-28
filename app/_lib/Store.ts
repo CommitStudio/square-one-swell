@@ -203,6 +203,29 @@ class Store {
     });
     return reviews;
   }
+
+  async deleteReview(reviewId: string) {
+    const review = await swell.delete(`/products:reviews/${reviewId}`);
+    return review;
+  }
+
+  async editReview(
+    reviewId: string,
+    reviewInfo: {
+      comments: string;
+      rating: number;
+      title: string;
+    }
+  ) {
+    const { comments, rating, title } = reviewInfo;
+
+    const review = await swell.put(`/products:reviews/${reviewId}`, {
+      comments: comments,
+      rating: rating,
+      title: title
+    });
+    return review;
+  }
 }
 
 export default new Store();
