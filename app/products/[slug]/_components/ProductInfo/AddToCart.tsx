@@ -45,10 +45,14 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   }, [chosenOptions, product.options?.length]);
 
   useEffect(() => {
-    product.stock === productAmount || productAmount === selectedStock
+    product.options?.length === 0 ||
+    product.stock === 0 ||
+    !state.isVariantActive ||
+    isSubmitting ||
+    selectedStock === 0
       ? setIsDisable(true)
       : setIsDisable(false);
-  }, [productAmount, product.stock, selectedStock]);
+  }, [product, productAmount, product.stock, selectedStock, state.isVariantActive, isSubmitting]);
 
   // const quantityVsStock = () => {
   //   if (product.variants?.length === 0) {
@@ -106,7 +110,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
 
   const buttonLabel = () => {
     if (product.stock === 0) {
-      return 'COMING SOON!';
+      return 'OUT OF STOCK';
     }
     if (isSubmitting) {
       return <Spinner size={6} />;
@@ -139,17 +143,24 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           />
           <div className="flex flex-col">
             <button
-              disabled={isDisable}
+              disabled={isDisable || productAmount === selectedStock || product.stock === 0}
               className={`bg-gray hover:bg-gray-medium border border-gray border-b-0 hover:border-gray-300 p-1 ${
-                isDisable ? 'opacity-50 hover:bg-gray hover:border-gray-300' : ''
+                productAmount === selectedStock || product.stock === 0
+                  ? 'opacity-50 hover:bg-gray hover:border-gray-300'
+                  : ''
               }`}
               onClick={() => handleProductAmount()}
             >
               <IoIosArrowUp />
             </button>
             <button
-              onClick={() => productAmount > 1 && setProductAmount(productAmount - 1)}
-              className="bg-gray hover:bg-gray-medium border border-t-0 border-gray hover:border-gray-300 p-1"
+              onClick={() => {
+                productAmount > 1 && setProductAmount(productAmount - 1);
+              }}
+              disabled={isDisable || product.stock === 0}
+              className={`bg-gray hover:bg-gray-medium border border-t-0 border-gray hover:border-gray-300 p-1 ${
+                product.stock === 0 ? 'opacity-50 hover:border-gray-300 bg-gray hover:bg-gray' : ''
+              }`}
             >
               <IoIosArrowDown />
             </button>
@@ -160,11 +171,14 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
             onClick={() => handleAddToCart()}
             label={buttonLabel()}
             disabled={
-              product.options?.length === 0 ? false : !state.isVariantActive || isSubmitting
+              product.options?.length === 0 ||
+              product.stock === 0 ||
+              !state.isVariantActive ||
+              isSubmitting
             }
             variant="fill"
             className={`font-bold py-3 px-5 md:min-w-[240px] ${
-              state.isVariantActive || (product.options?.length === 0 && product.stock !== 0)
+              !isDisable
                 ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
                 : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
             }`}
