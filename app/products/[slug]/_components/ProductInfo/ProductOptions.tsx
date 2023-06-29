@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import ProductStock from './ProductStock';
+
 import { useStore, useProductState } from '~/_hooks/useStore';
 
 interface ProductProp {
@@ -12,6 +14,7 @@ const ProductOptions = ({ product }: ProductProp) => {
   const [selectedIds, setSelectedIds] = useState({});
   const { state, updateState } = useStore();
   const { productState, updateProductProp } = useProductState();
+  const selectedStock = Number(productState.chosenOptions.stockByOption);
 
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
@@ -112,6 +115,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                       </>
                     );
                   })}
+                  <ProductStock stock={selectedStock} />
                 </ul>
               </>
             )}

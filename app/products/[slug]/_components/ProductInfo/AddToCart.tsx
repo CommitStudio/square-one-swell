@@ -122,7 +122,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
       ? product.variants?.length === 0 //if no variants, use general stock
         ? setProductAmount(productAmount < product.stock ? productAmount + 1 : productAmount)
         : setProductAmount(productAmount < selectedStock ? productAmount + 1 : productAmount) //else use stock as per the selected options
-      : setProductAmount(productAmount + 1); //if no stock, use there is no limit
+      : setProductAmount(productAmount + 1); //if no stock, there is no limit
   };
 
   return (
@@ -175,7 +175,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
       {pleaseSelectAllOptions && (
         <p className="text-red-500 font-quicksand">{pleaseSelectAllOptions}</p>
       )}
-      {isDisable && <p className="text-red-500 font-quicksand">More items coming soon!</p>}
     </>
   );
 };
