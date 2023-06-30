@@ -7,6 +7,7 @@ import {
   UseFormSetValue
 } from 'react-hook-form';
 import Rater from 'react-rater';
+
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
 
@@ -50,7 +51,7 @@ const WriteAReview = ({
       </div>
       <div className="mt-3">
         <p>Rating:</p>
-        <Rater total={5} rating={0} onRate={({ rating }) => setValue('rating', rating)} />
+        <Rater total={5} rating={0} onRate={({ rating }) => setValue('rating', rating as string)} />
       </div>
       {errors.rating && <p className="text-red-600 text-xs">{errors.rating.message}</p>}
       <div className="mt-4">
