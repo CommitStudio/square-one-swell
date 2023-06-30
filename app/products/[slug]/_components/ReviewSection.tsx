@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ProductReviews from './ProductReview/ProductReviews';
 
-import { Spinner } from '~/_components/Globals/Spinner';
 import WriteAReview from './ProductReview/WriteAReview';
+
 import { deleteReviewAction } from '~/products/_actions/reviews';
 
 type Inputs = {
