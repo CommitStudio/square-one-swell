@@ -13,7 +13,7 @@ const ProductRating = ({ rating }: Rating) => {
   return (
     <Tooltip content="Feature coming soon!">
       <div className="w-fit">
-        <Rater total={5} rating={rating} />
+        <Rater total={5} rating={rating} interactive={false} />
       </div>
     </Tooltip>
   );

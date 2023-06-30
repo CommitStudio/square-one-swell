@@ -11,7 +11,7 @@ import {
 import ProductSection from './_components/ProductSection';
 import RelatedProducts from './_components/RelatedProducts';
 
-import Reviews from './_components/Reviews';
+import ReviewSection from './_components/ReviewSection';
 
 import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
@@ -90,10 +90,9 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
 
       <ProductSection product={product} categories={categories} />
 
-      <Reviews
+      <ReviewSection
         getReviewsAction={getReviewsAction}
         postReviewAction={postReviewAction}
-        deleteReviewAction={deleteReviewAction}
         editReviewAction={editReviewAction}
         userId={userId}
         productId={product.id}

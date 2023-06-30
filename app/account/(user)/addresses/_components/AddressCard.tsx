@@ -28,7 +28,7 @@ const AddressCard = ({ address }: Props) => {
       </div>
       <div className="flex flex-col justify-between">
         <button className="flex justify-center items-center pt-1" onClick={() => setOpen(true)}>
-          <EditIcon />
+          <EditIcon strokeColor="black" />
         </button>
         <DeleteAddressModal
           addressId={address.id}
@@ -36,13 +36,12 @@ const AddressCard = ({ address }: Props) => {
           setOpenModal={setOpenModal}
         />
         <button
-          className="hover:stroke-red-500"
           data-delete="address"
           onClick={() => {
             void setOpenModal(true);
           }}
         >
-          <TrashIcon />
+          <TrashIcon strokeColor="red" />
         </button>
         <EditAddressModal open={open} setOpen={setOpen} address={address} />
       </div>
