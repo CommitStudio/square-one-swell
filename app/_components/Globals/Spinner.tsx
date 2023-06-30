@@ -9,7 +9,7 @@ export const Spinner = ({ position = 'center', size = 10, className }: SpinnerPr
     <div className={`text-${position} ${className ? className : ''}`}>
       <div role="status">
         <svg
-          className={`inline mr-2 w-${size} h-${size} text-gray-medium animate-spin dark:text-gray-dark fill-gray`}
+          className={`inline w-${size} h-${size} text-gray-medium animate-spin dark:text-gray-dark fill-gray`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

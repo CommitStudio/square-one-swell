@@ -37,7 +37,7 @@ const PaymentCard = ({ card, defaultCard }: PaymentCardProps) => {
       <div className={`flex flex-col ${defaultCard ? 'justify-between items-end' : 'justify-end'}`}>
         {defaultCard && <p className="bg-gray shadow p-1 px-2 text-xs">Default</p>}
         <button onClick={() => setOpenConfModal(true)}>
-          <TrashIcon />
+          <TrashIcon strokeColor="red" />
         </button>
       </div>
       <DeleteCardModal

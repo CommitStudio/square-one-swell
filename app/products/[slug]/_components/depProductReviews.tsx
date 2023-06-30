@@ -1,4 +1,4 @@
-import ProductRatings from './ProductReview/ProductRatings';
+import ProductRatings from './ProductReview/ProductReviews';
 
 const ProductReview = () => {
   return (
