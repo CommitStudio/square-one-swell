@@ -6,7 +6,7 @@ import {
   UseFormRegister,
   UseFormSetValue
 } from 'react-hook-form';
-import Rater from 'react-rater';
+import { Rating } from 'react-simple-star-rating';
 
 import Button from '~/_components/Button';
 import { Spinner } from '~/_components/Globals/Spinner';
@@ -27,6 +27,8 @@ interface Props {
   >;
   isPostReviewLoading: boolean;
   isEditing: boolean;
+  rating: number;
+  setRating: (rate: number) => void;
 }
 
 const WriteAReview = ({
@@ -36,8 +38,15 @@ const WriteAReview = ({
   errors,
   isPostReviewLoading,
   isEditing,
-  setValue
+  setValue,
+  rating,
+  setRating
 }: Props) => {
+  const handleRating = (rate: number) => {
+    setValue('rating', rate.toString(), { shouldValidate: true });
+    setRating(rate);
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -51,7 +60,14 @@ const WriteAReview = ({
       </div>
       <div className="mt-3">
         <p>Rating:</p>
-        <Rater total={5} rating={0} onRate={({ rating }) => setValue('rating', rating as string)} />
+        <Rating
+          initialValue={rating}
+          onClick={handleRating}
+          size={20}
+          SVGclassName="inline"
+          fillColor="#242323"
+          {...register('rating', { required: 'Rating is required' })}
+        />
       </div>
       {errors.rating && <p className="text-red-600 text-xs">{errors.rating.message}</p>}
       <div className="mt-4">

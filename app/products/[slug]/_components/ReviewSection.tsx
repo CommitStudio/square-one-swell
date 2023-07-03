@@ -7,8 +7,6 @@ import ProductReviews from './ProductReview/ProductReviews';
 
 import WriteAReview from './ProductReview/WriteAReview';
 
-import { deleteReviewAction } from '~/products/_actions/reviews';
-
 type Inputs = {
   title: string;
   comments: string;
@@ -33,6 +31,7 @@ interface Props {
       title: string;
     }
   ) => Promise<Review>;
+  deleteReviewAction: (reviewId: string) => Promise<Review>;
   userId: string | null;
   productId: string;
 }
@@ -41,6 +40,7 @@ const ReviewSection = ({
   postReviewAction,
   getReviewsAction,
   editReviewAction,
+  deleteReviewAction,
   userId,
   productId
 }: Props) => {
@@ -58,6 +58,7 @@ const ReviewSection = ({
   const [isDeleteReviewLoading, setIsDeleteReviewLoading] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [rating, setRating] = useState<number>(0);
 
   // Fetch reviews on mount
   useEffect(() => {
@@ -67,8 +68,6 @@ const ReviewSection = ({
     };
     getReviews().catch((err) => console.log(err));
   }, []);
-
-  console.log(allReviews);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (!userId) {
@@ -85,10 +84,6 @@ const ReviewSection = ({
         rating: Number(data.rating),
         title: data.title
       });
-      setValue('title', '');
-      setValue('comments', '');
-      setValue('rating', '');
-      setValue('reviewId', '');
     } else {
       //Post new review
       const review = await postReviewAction({
@@ -98,6 +93,7 @@ const ReviewSection = ({
         rating: Number(data.rating),
         title: data.title
       });
+
       // If user already has a review for this product, show error message
       if (!review.comments) {
         setIsPostReviewLoading(false);
@@ -107,6 +103,11 @@ const ReviewSection = ({
         return;
       }
     }
+    setValue('title', '');
+    setValue('comments', '');
+    setValue('rating', '');
+    setValue('reviewId', '');
+    setRating(0);
     // Fetch reviews after submitting a new review
     const updatedReviews = await getReviewsAction(productId);
     // Update reviews state
@@ -142,6 +143,7 @@ const ReviewSection = ({
             setIsEditing={setIsEditing}
             setValue={setValue}
             isDeleteReviewLoading={isDeleteReviewLoading}
+            setRating={setRating}
           />
           <WriteAReview
             onSubmit={onSubmit}
@@ -151,6 +153,8 @@ const ReviewSection = ({
             isPostReviewLoading={isPostReviewLoading}
             isEditing={isEditing}
             setValue={setValue}
+            rating={rating}
+            setRating={setRating}
           />
           <p className="text-red-600">{errorMessage}</p>
         </div>

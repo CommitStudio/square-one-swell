@@ -1,5 +1,6 @@
 import { UseFormSetValue } from 'react-hook-form';
-import Rater from 'react-rater';
+
+import { Rating } from 'react-simple-star-rating';
 
 import EditIcon from 'public/img/icons/EditIcon';
 
@@ -20,6 +21,7 @@ interface Props {
   isDeleteReviewLoading: boolean;
   setValue: UseFormSetValue<Inputs>;
   handleDelete: (reviewId: string) => Promise<void>;
+  setRating: (arg0: number) => void;
 }
 
 const ProductReviews = ({
@@ -28,13 +30,15 @@ const ProductReviews = ({
   handleDelete,
   isDeleteReviewLoading,
   setIsEditing,
-  setValue
+  setValue,
+  setRating
 }: Props) => {
   const editReview = (review: Review) => {
     setIsEditing(true);
     setValue('title', review.title);
     setValue('comments', review.comments);
     setValue('rating', review.rating.toString());
+    setRating(review.rating);
     setValue('reviewId', review.id);
     const formReview = document?.getElementById('form-review');
     if (formReview) {
@@ -50,7 +54,13 @@ const ProductReviews = ({
               <div className="text-lg font-semibold">{review.name}</div>
               {new Date(review.date_created).toISOString().split('T')[0]}
             </div>
-            <Rater total={5} rating={review.rating} interactive={false} />
+            <Rating
+              initialValue={review.rating}
+              readonly
+              size={20}
+              SVGclassName="inline"
+              fillColor="#242323"
+            />
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold my-2">{review.title}</p>

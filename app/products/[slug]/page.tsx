@@ -50,8 +50,6 @@ const getData = async (slug: string) => {
     category: product?.categories?.[0]
   });
 
-  // const { userId } = await getUserInfo();
-
   const user: SwellAPI_Customer | null = await getLoggedUser();
 
   const userId: string | null = user?.session?.accountId || null;
@@ -94,6 +92,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
         getReviewsAction={getReviewsAction}
         postReviewAction={postReviewAction}
         editReviewAction={editReviewAction}
+        deleteReviewAction={deleteReviewAction}
         userId={userId}
         productId={product.id}
       />

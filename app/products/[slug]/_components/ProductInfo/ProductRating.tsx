@@ -1,20 +1,13 @@
 'use client';
 
-import Rater from 'react-rater';
-import 'react-rater/lib/react-rater.css';
+import { Rating } from 'react-simple-star-rating';
 
 import Tooltip from '~/_components/Globals/Tooltip';
 
-type Rating = {
-  rating?: number;
-};
-
-const ProductRating = ({ rating }: Rating) => {
+const ProductRating = () => {
   return (
     <Tooltip content="Feature coming soon!">
-      <div className="w-fit">
-        <Rater total={5} rating={rating} interactive={false} />
-      </div>
+      <Rating initialValue={2} readonly size={20} SVGclassName="inline" fillColor="#242323" />
     </Tooltip>
   );
 };
