@@ -178,9 +178,12 @@ class Store {
     };
   }
 
-  async getReviews(productId: string) {
+  async getReviews(reviewInfo: { productId: string; limit?: number; page?: number }) {
+    const { productId, limit = 10, page } = reviewInfo;
     const reviews = await swell.get('/products:reviews', {
-      parent_id: productId
+      parent_id: productId,
+      limit,
+      page
     });
     return reviews;
   }

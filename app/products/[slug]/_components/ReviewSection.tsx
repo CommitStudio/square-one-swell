@@ -22,7 +22,11 @@ interface Props {
     rating: number;
     title: string;
   }) => Promise<Review>;
-  getReviewsAction: (productId: string) => Promise<Reviews>;
+  getReviewsAction: (reviewInfo: {
+    productId: string;
+    limit?: number;
+    page?: number;
+  }) => Promise<Reviews>;
   editReviewAction: (
     reviewId: string,
     data: {
@@ -63,7 +67,7 @@ const ReviewSection = ({
   // Fetch reviews on mount
   useEffect(() => {
     const getReviews = async () => {
-      const reviews = await getReviewsAction(productId);
+      const reviews = await getReviewsAction({ productId });
       setAllReviews(reviews);
     };
     getReviews().catch((err) => console.log(err));
@@ -109,7 +113,7 @@ const ReviewSection = ({
     setValue('reviewId', '');
     setRating(0);
     // Fetch reviews after submitting a new review
-    const updatedReviews = await getReviewsAction(productId);
+    const updatedReviews = await getReviewsAction({ productId });
     // Update reviews state
     setAllReviews(updatedReviews);
     setErrorMessage('');
@@ -121,7 +125,7 @@ const ReviewSection = ({
     // Delete review
     await deleteReviewAction(reviewId);
     // Fetch reviews after deleting a review
-    const updatedReviews = await getReviewsAction(productId);
+    const updatedReviews = await getReviewsAction({ productId });
     // Update reviews state
     setAllReviews(updatedReviews);
     setIsDeleteReviewLoading(false);

@@ -2,8 +2,12 @@
 
 import Store from '~/_lib/Store';
 
-export async function getReviewsAction(productId: string) {
-  return (await Store.getReviews(productId)) as Reviews;
+export async function getReviewsAction(reviewInfo: {
+  productId: string;
+  limit?: 10;
+  page?: number;
+}) {
+  return (await Store.getReviews(reviewInfo)) as Reviews;
 }
 
 export async function postReviewAction(reviewInfo: {
