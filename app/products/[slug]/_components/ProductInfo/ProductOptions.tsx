@@ -12,12 +12,15 @@ interface ProductProp {
 
 const ProductOptions = ({ product }: ProductProp) => {
   const [selectedIds, setSelectedIds] = useState({});
-  const { state, updateState } = useStore();
+  // const { state, updateState } = useStore();
   const { productState, updateProductProp } = useProductState();
   const selectedStock = Number(productState.chosenOptions.stockByOption);
 
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
+
+  // Save only the ids of the active variants
+  const activeVariantsId = activeProductVariants?.map((variant) => variant.value_ids);
 
   // Transform the selected products, from object into an array, to compare them with the set of active ids.
   const availableProductsId = Object.entries(selectedIds).map(([, value]) => value);
@@ -44,24 +47,24 @@ const ProductOptions = ({ product }: ProductProp) => {
   }, [product]);
 
   // Declare useEffect to 'listen' for variant selections
-  useEffect(() => {
-    // When the options have an item clicked we ask if the selected ids are the same as in the active variant
-    if (availableProductsId.length === product.options?.length) {
-      // Returns true or false if the selected ids are the same in the active variant
-      const selectedIdsameAsActiveVariants = activeProductVariants?.map((variant) => {
-        return variant.value_ids.every((id) => {
-          return availableProductsId?.includes(id);
-        });
-      });
-      // Set global state accordingly if its active or not
-      if (selectedIdsameAsActiveVariants?.includes(true)) {
-        updateState({ ...state, isVariantActive: true });
-      } else {
-        updateState({ ...state, isVariantActive: false });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedIds]);
+  // useEffect(() => {
+  //   // When the options have an item clicked we ask if the selected ids are the same as in the active variant
+  //   if (availableProductsId.length === product.options?.length) {
+  //     // Returns true or false if the selected ids are the same in the active variant
+  //     const selectedIdsameAsActiveVariants = activeProductVariants?.map((variant) => {
+  //       return variant.value_ids.every((id) => {
+  //         return availableProductsId?.includes(id);
+  //       });
+  //     });
+  //     // Set global state accordingly if its active or not
+  //     if (selectedIdsameAsActiveVariants?.includes(true)) {
+  //       updateState({ ...state, isVariantActive: true });
+  //     } else {
+  //       updateState({ ...state, isVariantActive: false });
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedIds]);
 
   const handleOptions = (label: string, name: string, id: string) => {
     const updatedChosenOptions = {
@@ -85,33 +88,37 @@ const ProductOptions = ({ product }: ProductProp) => {
           <div key={'option' + index.toString()} className="space-y-1">
             {option.active && (
               <>
+                {/* Title of the option, could be more than one: */}
                 <p className="pr-3 font-quicksand">{option.label}:</p>
+                {/* The options itselves */}
                 <ul className="flex gap-x-3 font-quicksand">
                   {option.values.map((value, index) => {
+                    const isActive = activeVariantsId?.some((values) => values.includes(value.id));
                     return (
                       <>
-                        {option.label === 'Color' ? (
-                          <li
-                            key={'color' + index.toString()}
-                            className={`border w-5 h-5 cursor-pointer opacity-50 ${
-                              availableProductsId.includes(value.id)
-                                ? 'border-green opacity-95'
-                                : ''
-                            }`}
-                            style={{ backgroundColor: `${value.name}` }}
-                            onClick={() => handleOptions(option.label, value.name, value.id)}
-                          ></li>
-                        ) : (
-                          <li
-                            className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
-                              availableProductsId.includes(value.id) ? 'bg-black text-white' : ''
-                            }`}
-                            key={'color' + index.toString()}
-                            onClick={() => handleOptions(option.label, value.name, value.id)}
-                          >
-                            {value.name}
-                          </li>
-                        )}
+                        {isActive &&
+                          (option.label === 'Color' ? (
+                            <li
+                              key={'color' + index.toString()}
+                              className={`border w-5 h-5 cursor-pointer opacity-50 ${
+                                availableProductsId.includes(value.id)
+                                  ? 'border-green opacity-95'
+                                  : ''
+                              }`}
+                              style={{ backgroundColor: `${value.name}` }}
+                              onClick={() => handleOptions(option.label, value.name, value.id)}
+                            ></li>
+                          ) : (
+                            <li
+                              className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
+                                availableProductsId.includes(value.id) ? 'bg-black text-white' : ''
+                              }`}
+                              key={'color' + index.toString()}
+                              onClick={() => handleOptions(option.label, value.name, value.id)}
+                            >
+                              {value.name}
+                            </li>
+                          ))}
                       </>
                     );
                   })}

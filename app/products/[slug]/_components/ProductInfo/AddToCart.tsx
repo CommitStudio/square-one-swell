@@ -51,21 +51,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
       : setIsDisable(false);
   }, [product, productAmount, product.stock, selectedStock, state.isVariantActive, isSubmitting]);
 
-  console.log(product.options?.length, 'options.lenght');
-  console.log(product.stock, 'product.stock');
-  console.log(state.isVariantActive, 'state.isVariantActive');
-  // const quantityVsStock = () => {
-  //   if (product.variants?.length === 0) {
-  //     console.log(product.stock, productAmount, 'product.stock, productAmount');
-  //     //if there is no active variants, use the general stock
-  //     return product.stock && product.stock < productAmount ? product.stock : productAmount;
-  //   } else {
-  //     //if there are variants, use the variant stock as per chosen options
-  //     const selectedStock = Number(productState.chosenOptions.stockByOption);
-  //     return selectedStock && selectedStock > productAmount ? selectedStock : productAmount;
-  //   }
-  // };
-
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
     setIsSubmitting(true);
@@ -100,6 +85,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
+    console.log('handleAddToCart');
     !isSubmitting &&
       void addProduct({
         product: product,
