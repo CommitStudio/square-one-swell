@@ -11,6 +11,8 @@ interface Props {
 const Pagination = ({ pagination, query }: Props) => {
   const { pages, current } = pagination;
 
+  console.log('query', query);
+
   return (
     <Container className="flex justify-center font-quicksand">
       <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">

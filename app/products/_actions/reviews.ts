@@ -4,7 +4,7 @@ import Store from '~/_lib/Store';
 
 export async function getReviewsAction(reviewInfo: {
   productId: string;
-  limit?: 10;
+  limit?: number;
   page?: number;
 }) {
   return (await Store.getReviews(reviewInfo)) as Reviews;

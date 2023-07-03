@@ -38,6 +38,9 @@ interface Props {
   deleteReviewAction: (reviewId: string) => Promise<Review>;
   userId: string | null;
   productId: string;
+  query: {
+    page: number;
+  };
 }
 
 const ReviewSection = ({
@@ -46,7 +49,8 @@ const ReviewSection = ({
   editReviewAction,
   deleteReviewAction,
   userId,
-  productId
+  productId,
+  query
 }: Props) => {
   const {
     register,
@@ -67,7 +71,7 @@ const ReviewSection = ({
   // Fetch reviews on mount
   useEffect(() => {
     const getReviews = async () => {
-      const reviews = await getReviewsAction({ productId });
+      const reviews = await getReviewsAction({ productId, page: query.page });
       setAllReviews(reviews);
     };
     getReviews().catch((err) => console.log(err));
@@ -148,6 +152,7 @@ const ReviewSection = ({
             setValue={setValue}
             isDeleteReviewLoading={isDeleteReviewLoading}
             setRating={setRating}
+            query={query}
           />
           <WriteAReview
             onSubmit={onSubmit}

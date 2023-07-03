@@ -14,7 +14,7 @@ export default function Showing({ pagination, className }: Props) {
 
   const fromProduct = limit * (current - 1) + 1;
   const toProductRaw = limit * current;
-  const toProduct = toProductRaw > total ? total : toProductRaw;
+  const toProduct = total && toProductRaw > total ? total : toProductRaw;
 
   return (
     <Container>

@@ -6,6 +6,7 @@ import EditIcon from 'public/img/icons/EditIcon';
 
 import TrashIcon from 'public/img/icons/TrashIcon';
 import { Spinner } from '~/_components/Globals/Spinner';
+import Pagination from '~/_components/Pagination';
 
 type Inputs = {
   title: string;
@@ -22,6 +23,9 @@ interface Props {
   setValue: UseFormSetValue<Inputs>;
   handleDelete: (reviewId: string) => Promise<void>;
   setRating: (arg0: number) => void;
+  query: {
+    page: number;
+  };
 }
 
 const ProductReviews = ({
@@ -31,7 +35,8 @@ const ProductReviews = ({
   isDeleteReviewLoading,
   setIsEditing,
   setValue,
-  setRating
+  setRating,
+  query
 }: Props) => {
   const editReview = (review: Review) => {
     setIsEditing(true);
@@ -44,6 +49,22 @@ const ProductReviews = ({
     if (formReview) {
       formReview.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const pageArray = (value: number) => {
+    return Array.from({ length: value }, (_, index) => index + 1);
+  };
+
+  console.log('hola', allReviews);
+
+  const paginationLimit =
+    allReviews && allReviews.pages[1] ? allReviews.pages[1].end - allReviews.pages[1].start + 1 : 0;
+
+  const paginationObject = {
+    total: allReviews?.count,
+    pages: pageArray(allReviews?.page_count || 0),
+    current: Number(query.page),
+    limit: paginationLimit
   };
   return (
     <>
@@ -102,6 +123,9 @@ const ProductReviews = ({
           </div>
         </div>
       ))}
+      {allReviews && allReviews.page_count > 1 && (
+        <Pagination pagination={paginationObject} query={query} />
+      )}
     </>
   );
 };

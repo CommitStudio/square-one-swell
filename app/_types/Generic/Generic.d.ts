@@ -1,5 +1,5 @@
 interface Pagination {
-  total: number;
+  total?: number;
   pages: number[];
   current: number;
   limit: number;

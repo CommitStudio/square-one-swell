@@ -3,6 +3,9 @@ type Reviews = {
   page_count: number;
   page: number;
   results: Review[];
+  pages: {
+    [key: string]: { start: number; end: number };
+  };
 };
 
 interface Review {

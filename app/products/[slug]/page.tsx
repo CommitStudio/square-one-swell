@@ -25,6 +25,11 @@ interface ProductProp {
   userId: string;
 }
 
+interface Props {
+  params: { slug: string };
+  searchParams: { page: number };
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { product } = await getData(params.slug);
 
@@ -57,7 +62,7 @@ const getData = async (slug: string) => {
   return { product, sameCategoryProducts, categories, userId };
 };
 
-const ProductDetail = async ({ params }: { params: { slug: string } }) => {
+const ProductDetail = async ({ params, searchParams }: Props) => {
   const { product, sameCategoryProducts, categories, userId } = (await getData(
     params.slug
   )) as ProductProp;
@@ -65,6 +70,8 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
   if (!product) {
     notFound();
   }
+
+  console.log('params', searchParams);
 
   return (
     <Container className="pt-8">
@@ -95,6 +102,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
         deleteReviewAction={deleteReviewAction}
         userId={userId}
         productId={product.id}
+        query={searchParams}
       />
 
       <RelatedProducts
