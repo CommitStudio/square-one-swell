@@ -24,7 +24,7 @@ interface Props {
   }) => Promise<Review>;
   getReviewsAction: (reviewInfo: {
     productId: string;
-    limit?: number;
+    limit?: 10;
     page?: number;
   }) => Promise<Reviews>;
   editReviewAction: (

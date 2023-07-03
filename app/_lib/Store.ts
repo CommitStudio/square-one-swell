@@ -202,7 +202,8 @@ class Store {
       comments: comments,
       parent_id: productId,
       rating: rating,
-      title: title
+      title: title,
+      approved: true
     });
     return reviews;
   }
