@@ -45,15 +45,15 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   }, [chosenOptions, product.options?.length]);
 
   useEffect(() => {
-    product.options?.length === 0 ||
-    product.stock === 0 ||
-    !state.isVariantActive ||
-    isSubmitting ||
-    selectedStock === 0
+    // product.options?.length === 0 ||
+    product.stock === 0 || isSubmitting || selectedStock === 0
       ? setIsDisable(true)
       : setIsDisable(false);
   }, [product, productAmount, product.stock, selectedStock, state.isVariantActive, isSubmitting]);
 
+  console.log(product.options?.length, 'options.lenght');
+  console.log(product.stock, 'product.stock');
+  console.log(state.isVariantActive, 'state.isVariantActive');
   // const quantityVsStock = () => {
   //   if (product.variants?.length === 0) {
   //     console.log(product.stock, productAmount, 'product.stock, productAmount');
@@ -143,9 +143,11 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           />
           <div className="flex flex-col">
             <button
-              disabled={isDisable || productAmount === selectedStock || product.stock === 0}
+              disabled={
+                isDisable || productAmount === selectedStock || productAmount === product.stock
+              }
               className={`bg-gray hover:bg-gray-medium border border-gray border-b-0 hover:border-gray-300 p-1 ${
-                productAmount === selectedStock || product.stock === 0
+                productAmount === selectedStock || productAmount === product.stock
                   ? 'opacity-50 hover:bg-gray hover:border-gray-300'
                   : ''
               }`}
@@ -157,7 +159,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
               onClick={() => {
                 productAmount > 1 && setProductAmount(productAmount - 1);
               }}
-              disabled={isDisable || product.stock === 0}
+              disabled={isDisable}
               className={`bg-gray hover:bg-gray-medium border border-t-0 border-gray hover:border-gray-300 p-1 ${
                 product.stock === 0 ? 'opacity-50 hover:border-gray-300 bg-gray hover:bg-gray' : ''
               }`}
@@ -170,12 +172,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
           <Button
             onClick={() => handleAddToCart()}
             label={buttonLabel()}
-            disabled={
-              product.options?.length === 0 ||
-              product.stock === 0 ||
-              !state.isVariantActive ||
-              isSubmitting
-            }
+            disabled={product.stock === 0 || !state.isVariantActive || isSubmitting}
             variant="fill"
             className={`font-bold py-3 px-5 md:min-w-[240px] ${
               !isDisable
