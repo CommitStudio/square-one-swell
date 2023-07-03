@@ -105,7 +105,8 @@ class Store {
       sku: product.sku || null,
       images: this.transformImages(product),
       categories: product.category_index?.id,
-      stock: product.stock_level
+      stock: product.stock_level,
+      reviewRating: product.review_rating
     };
   }
 

@@ -34,6 +34,7 @@ interface SwellProduct {
   sale_price?: number | null;
   sku?: string;
   category_index: CategoryIndex;
+  review_rating: number;
   id: string;
 }
 
