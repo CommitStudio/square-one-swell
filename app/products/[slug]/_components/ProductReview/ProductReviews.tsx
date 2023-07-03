@@ -55,15 +55,15 @@ const ProductReviews = ({
     return Array.from({ length: value }, (_, index) => index + 1);
   };
 
-  console.log('hola', allReviews);
-
   const paginationLimit =
-    allReviews && allReviews.pages[1] ? allReviews.pages[1].end - allReviews.pages[1].start + 1 : 0;
+    allReviews && allReviews.pages && allReviews.pages[1]
+      ? allReviews.pages[1].end - allReviews.pages[1].start + 1
+      : 0;
 
   const paginationObject = {
     total: allReviews?.count,
     pages: pageArray(allReviews?.page_count || 0),
-    current: Number(query.page),
+    current: Number(query.page) || 1,
     limit: paginationLimit
   };
   return (
