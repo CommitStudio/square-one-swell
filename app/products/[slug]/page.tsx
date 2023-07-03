@@ -71,8 +71,6 @@ const ProductDetail = async ({ params, searchParams }: Props) => {
     notFound();
   }
 
-  console.log('params', searchParams);
-
   return (
     <Container className="pt-8">
       <Link

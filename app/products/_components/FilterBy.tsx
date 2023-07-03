@@ -51,8 +51,8 @@ export const FilterBy = ({ query, category }: FilterByProps) => {
             }}
             key={`filter-item-${i}`}
           >
-            <div>
-              <a
+            <span className="block">
+              <span
                 onClick={() => handleClick(subcategory.name)}
                 className={`transition-opacity duration-300 inline-block hover:font-bold
                     ${
@@ -62,8 +62,8 @@ export const FilterBy = ({ query, category }: FilterByProps) => {
                     }`}
               >
                 {subcategory.name}
-              </a>
-            </div>
+              </span>
+            </span>
           </Link>
         );
       })}
