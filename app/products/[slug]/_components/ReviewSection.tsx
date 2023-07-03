@@ -132,7 +132,7 @@ const ReviewSection = ({
       <div className="my-16">
         <div className="flex space-x-10 -mb-[1px] font-libre">
           <span className="border border-gray-medium py-1 px-3 flex items-center cursor-pointer rounded-tl rounded-tr border-b-white text-lg">
-            Reviews
+            Reviews ({allReviews?.count})
           </span>
         </div>
         <div className="border border-gray-medium rounded-bl rounded-br rounded-tr mx-auto p-10 space-y-5">
