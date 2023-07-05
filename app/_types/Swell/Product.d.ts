@@ -104,4 +104,5 @@ interface SwellVariant {
   date_updated: string;
   sku?: string;
   id: string;
+  stock_level: number;
 }
