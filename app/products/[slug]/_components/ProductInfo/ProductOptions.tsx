@@ -13,6 +13,7 @@ const ProductOptions = ({ product }: ProductProp) => {
   const { state, updateState } = useStore();
   const { productState, updateProductProp } = useProductState();
 
+  console.log(product, 'product');
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
 
