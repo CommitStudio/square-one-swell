@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import 'server-only';
 
 import Store from './Store';
@@ -157,7 +156,7 @@ export const getUserInfo = async () => {
   const user = await getLoggedUser();
 
   if (!user?.session.accountId) {
-    return redirect('/account/login');
+    return { authenticated: false, user: null, userId: null, orders: [], addresses: [], cards: [] };
   }
 
   const addresses = await getAddresses();

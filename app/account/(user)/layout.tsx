@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import EditProfileModal from './_components/EditProfileModal';
 import AccountLink from './_components/Link';
 import LogOutModal from './_components/LogOutModal';
@@ -8,6 +10,11 @@ import { getUserInfo } from '~/_lib/SwellAPI';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const { user: account } = await getUserInfo();
+
+  // Prevent access to account pages if user is not logged in
+  if (!account) {
+    return redirect('/account/login');
+  }
 
   return (
     <Container className="mb-10">
