@@ -16,7 +16,7 @@ import ReviewSection from './_components/ReviewSection';
 import keywords from '~/_data/keywords.json';
 import Container from '~/_layouts/Container';
 import Store from '~/_lib/Store';
-import { getLoggedUser } from '~/_lib/SwellAPI';
+import { getUserInfo } from '~/_lib/SwellAPI';
 
 interface ProductProp {
   product: Product;
@@ -55,21 +55,18 @@ const getData = async (slug: string) => {
     category: product?.categories?.[0]
   });
 
-  const user: SwellAPI_Customer | null = await getLoggedUser();
-
-  const userId: string | null = user?.session?.accountId || null;
-
-  return { product, sameCategoryProducts, categories, userId };
+  return { product, sameCategoryProducts, categories };
 };
 
 const ProductDetail = async ({ params, searchParams }: Props) => {
-  const { product, sameCategoryProducts, categories, userId } = (await getData(
-    params.slug
-  )) as ProductProp;
+  const { product, sameCategoryProducts, categories } = (await getData(params.slug)) as ProductProp;
 
   if (!product) {
     notFound();
   }
+  const { userId, orders } = await getUserInfo();
+
+  const orderedProductIds = orders.flatMap((order) => order.items.map((item) => item.product.id));
 
   return (
     <Container className="pt-8">
@@ -101,6 +98,7 @@ const ProductDetail = async ({ params, searchParams }: Props) => {
         userId={userId}
         productId={product.id}
         query={searchParams}
+        orderedProductIds={orderedProductIds}
       />
 
       <RelatedProducts

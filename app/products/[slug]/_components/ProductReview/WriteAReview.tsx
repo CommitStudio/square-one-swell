@@ -76,7 +76,7 @@ const WriteAReview = ({
         </label>
         <input
           type="text"
-          className="border border-black rounded-lg p-3"
+          className="border border-black rounded-lg p-3 w-full"
           {...register('title', { required: 'Title is required' })}
         />
         {errors.title && <p className="text-red-600 text-xs">{errors.title.message}</p>}

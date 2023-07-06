@@ -103,6 +103,7 @@ export const getLoggedUser = async (): Promise<SwellAPI_Customer | null> => {
               name
             }
             product {
+              id
               name
               images {
                 file {

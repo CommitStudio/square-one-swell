@@ -7,6 +7,8 @@ import ProductReviews from './ProductReview/ProductReviews';
 
 import WriteAReview from './ProductReview/WriteAReview';
 
+import Button from '~/_components/Button';
+
 type Inputs = {
   title: string;
   comments: string;
@@ -41,6 +43,7 @@ interface Props {
   query: {
     page: number;
   };
+  orderedProductIds: string[];
 }
 
 const ReviewSection = ({
@@ -50,7 +53,8 @@ const ReviewSection = ({
   deleteReviewAction,
   userId,
   productId,
-  query
+  query,
+  orderedProductIds
 }: Props) => {
   const {
     register,
@@ -67,6 +71,9 @@ const ReviewSection = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
+  const [showWriteAReview, setShowWriteAReview] = useState<boolean>(false);
+  const [hasReviews, setHasReviews] = useState<boolean>(false);
+  const [userHasOrderedThisProduct, setUserHasOrderedThisProduct] = useState<boolean>(false);
 
   // Fetch reviews on mount
   useEffect(() => {
@@ -76,6 +83,16 @@ const ReviewSection = ({
     };
     getReviews().catch((err) => console.log(err));
   }, []);
+
+  // Check if user has a review for this product
+  useEffect(() => {
+    if (allReviews) {
+      setHasReviews(allReviews?.results.some((review) => review.account_id === userId));
+    }
+    if (orderedProductIds) {
+      setUserHasOrderedThisProduct(orderedProductIds.includes(productId));
+    }
+  }, [allReviews]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (!userId) {
@@ -144,27 +161,63 @@ const ReviewSection = ({
           </span>
         </div>
         <div className="border border-gray-medium rounded-bl rounded-br rounded-tr mx-auto p-10 space-y-5">
-          <ProductReviews
-            allReviews={allReviews}
-            userId={userId}
-            handleDelete={handleDelete}
-            setIsEditing={setIsEditing}
-            setValue={setValue}
-            isDeleteReviewLoading={isDeleteReviewLoading}
-            setRating={setRating}
-            query={query}
-          />
-          <WriteAReview
-            onSubmit={onSubmit}
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            isPostReviewLoading={isPostReviewLoading}
-            isEditing={isEditing}
-            setValue={setValue}
-            rating={rating}
-            setRating={setRating}
-          />
+          {allReviews?.count !== 0 ? (
+            <ProductReviews
+              allReviews={allReviews}
+              userId={userId}
+              handleDelete={handleDelete}
+              setIsEditing={setIsEditing}
+              setValue={setValue}
+              isDeleteReviewLoading={isDeleteReviewLoading}
+              setRating={setRating}
+              query={query}
+            />
+          ) : userId ? (
+            <p>Be the first to review this product!</p>
+          ) : (
+            <p>No reviews available</p>
+          )}
+
+          {userHasOrderedThisProduct &&
+            (userId ? (
+              !hasReviews ? (
+                !showWriteAReview ? (
+                  <Button
+                    label="Write a review"
+                    onClick={() => {
+                      setShowWriteAReview(true);
+                    }}
+                  />
+                ) : (
+                  <WriteAReview
+                    onSubmit={onSubmit}
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    isPostReviewLoading={isPostReviewLoading}
+                    isEditing={isEditing}
+                    setValue={setValue}
+                    rating={rating}
+                    setRating={setRating}
+                  />
+                )
+              ) : isEditing ? (
+                <WriteAReview
+                  onSubmit={onSubmit}
+                  register={register}
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                  isPostReviewLoading={isPostReviewLoading}
+                  isEditing={isEditing}
+                  setValue={setValue}
+                  rating={rating}
+                  setRating={setRating}
+                />
+              ) : (
+                <p>You already reviewed this product. Thanks!</p>
+              )
+            ) : null)}
+
           <p className="text-red-600">{errorMessage}</p>
         </div>
       </div>
