@@ -68,13 +68,14 @@ const ProductOptions = ({ product }: ProductProp) => {
 
     // Get the label of the selected options to look for the variant. It returns for example, "M, red" or "L, blue"
     const variantLabelSelected = joinValues(productState.chosenOptions);
-    // Look for the selected variant, with the variantLabel
+    // Look for the selected variant, with the variantLabelSelected
     const variantSelected: Variant | undefined = product.variants?.find((variant) =>
       variant.name.includes(variantLabelSelected)
     );
-    // Update de productState under chosenVariant with the values that we need
+    // Update de chosenVariant under the productState with the values that we need
     updateProductProp('chosenVariant', {
       ...productState.chosenVariant,
+      variantLabel: variantSelected?.name,
       variantId: variantSelected?.id,
       variantActive: variantSelected?.active,
       variantStock: variantSelected?.stock_variant

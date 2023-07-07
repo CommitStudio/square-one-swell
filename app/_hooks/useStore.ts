@@ -17,12 +17,17 @@ export function useGlobalState() {
  ****************************************************************************/
 type StateProduct = {
   chosenOptions: { [key: string]: string };
-  chosenVariant: { variantId: string; variantActive: boolean; variantStock: number };
+  chosenVariant: {
+    variantLabel: string;
+    variantId: string;
+    variantActive: boolean;
+    variantStock: number;
+  };
 };
 
 const stateProduct = atom<StateProduct>({
   chosenOptions: {},
-  chosenVariant: { variantId: '', variantActive: true, variantStock: 0 }
+  chosenVariant: { variantId: '', variantActive: true, variantLabel: '', variantStock: 0 }
 });
 
 export function useProductState(): {
