@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import ProductStock from './ProductStock';
+
 import { useStore, useProductState } from '~/_hooks/useStore';
 
 interface ProductProp {
@@ -13,12 +15,18 @@ const ProductOptions = ({ product }: ProductProp) => {
   const { state, updateState } = useStore();
   const { productState, updateProductProp } = useProductState();
 
-  console.log(product, 'product');
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
 
   // Transform the selected products, from object into an array, to compare them with the set of active ids.
   const availableProductsId = Object.entries(selectedIds).map(([, value]) => value);
+
+  // Join the values to get the label for get the active variant.
+  // It returns for example: "M, red" or "L, blue"
+  function joinValues(obj: { [key: string]: string }) {
+    const values = Object.values(obj);
+    return values.join(', ');
+  }
 
   // Find the first available (active) variant option and select it by default
   useEffect(() => {
@@ -49,6 +57,7 @@ const ProductOptions = ({ product }: ProductProp) => {
           return availableProductsId?.includes(id);
         });
       });
+
       // Set global state accordingly if its active or not
       if (selectedIdsameAsActiveVariants?.includes(true)) {
         updateState({ ...state, isVariantActive: true });
@@ -56,11 +65,28 @@ const ProductOptions = ({ product }: ProductProp) => {
         updateState({ ...state, isVariantActive: false });
       }
     }
+
+    // Get the label of the selected options to look for the variant. It returns for example, "M, red" or "L, blue"
+    const variantLabelSelected = joinValues(productState.chosenOptions);
+    // Look for the selected variant, with the variantLabel
+    const variantSelected: Variant | undefined = product.variants?.find((variant) =>
+      variant.name.includes(variantLabelSelected)
+    );
+    // Update de productState under chosenVariant with the values that we need
+    updateProductProp('chosenVariant', {
+      ...productState.chosenVariant,
+      variantId: variantSelected?.id,
+      variantActive: variantSelected?.active,
+      variantStock: variantSelected?.stock_variant
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIds]);
 
   return (
     <div className="space-y-3">
+      {productState.chosenVariant.variantActive && (
+        <ProductStock stock={productState.chosenVariant.variantStock} />
+      )}
       {product.options?.map((option, index) => {
         return (
           <div key={'option' + index.toString()} className="space-y-1">
@@ -85,7 +111,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                                 ...productState.chosenOptions,
                                 [option.label]: value.name
                               });
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
+                              setSelectedIds({ ...selectedIds, [option.label]: value.id }); // ex {Color: 'red'}
                             }}
                           ></li>
                         ) : (
@@ -99,7 +125,7 @@ const ProductOptions = ({ product }: ProductProp) => {
                                 ...productState.chosenOptions,
                                 [option.label]: value.name
                               });
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id });
+                              setSelectedIds({ ...selectedIds, [option.label]: value.id }); // ex {Size: 'L'}
                             }}
                           >
                             {value.name}
