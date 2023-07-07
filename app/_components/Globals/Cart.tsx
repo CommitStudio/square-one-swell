@@ -88,7 +88,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: Props) => {
           </div>
           {/* products sections */}
           <div className="overflow-y-auto px-7 mb-auto">
-            {cart?.items.length === 0 || cart === null ? (
+            {cart?.items?.length === 0 || cart === null ? (
               <p>There are no items in your cart yet!</p>
             ) : (
               <>

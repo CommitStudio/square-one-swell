@@ -29,9 +29,12 @@ interface ProductOption {
 }
 
 interface Variant {
+  id: string;
   name: string;
   active: boolean;
   value_ids: string[];
+  stock_variant: number;
+  variantActive: boolean;
 }
 
 interface GenericProductsList {
