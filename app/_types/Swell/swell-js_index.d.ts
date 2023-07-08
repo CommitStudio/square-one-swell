@@ -104,6 +104,7 @@ declare module 'swell-js' {
     variant: { name: string; id: string };
     taxTotal: number;
     product: Product;
+    variant_id: string;
   }
 
   export interface CartItemSnakeCase {
@@ -120,6 +121,7 @@ declare module 'swell-js' {
     variant: { name: string; id: string };
     tax_total: number;
     product: Product;
+    variant_id: string;
   }
 
   export type CartItem = CartItemCamelCase | CartItemSnakeCase;
