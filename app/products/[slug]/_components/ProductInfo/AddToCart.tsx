@@ -35,7 +35,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
 
   const { state } = useStore();
   const { productState } = useProductState();
-  const { setCart } = useGlobalState();
+  const { cart, setCart } = useGlobalState();
 
   const { chosenOptions, chosenVariant } = productState;
 
@@ -62,7 +62,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   const addProduct = async ({ product, quantity, toastifyMessage }: AddProductProps) => {
     // Turn on spinner while waiting
     setIsSubmitting(true);
-
     // Add product to cart on Swell
     await swell.cart
       .addItem({
@@ -93,6 +92,19 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
+    const variantInCart =
+      cart && cart?.items.find((item) => item.variant_id?.includes(chosenVariant.variantId));
+
+    const productInCart = cart && cart?.items.find((item) => item.product_id.includes(product.id));
+
+    if (variantInCart && variantInCart?.quantity + productAmount > chosenVariant.variantStock) {
+      return notifyFailure("The amount selected exced the stock available. We're sorry.");
+    }
+
+    if (product.stock && productInCart && productInCart?.quantity + productAmount > product.stock) {
+      return notifyFailure("The amount selected exced the stock available. We're sorry.");
+    }
+
     !isSubmitting &&
       void addProduct({
         product: product,
@@ -173,7 +185,9 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
             onClick={() => handleAddToCart()}
             label={buttonLabel()}
             variant="fill"
-            disabled={product.stock === 0 || !state.isVariantActive || isSubmitting}
+            disabled={
+              product.stock === 0 || (productHasVariant && !state.isVariantActive) || isSubmitting
+            }
             className={`font-bold py-3 px-5 md:min-w-[240px] ${
               state.isVariantActive || (product.options?.length === 0 && product.stock !== 0)
                 ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
