@@ -115,7 +115,7 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
 
   const buttonLabel = () => {
     if (product.stock === 0) {
-      return 'COMING SOON!';
+      return 'OUT OF STOCK';
     }
     if (isSubmitting) {
       return <Spinner size={6} />;
