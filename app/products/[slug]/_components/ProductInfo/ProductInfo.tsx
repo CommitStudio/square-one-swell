@@ -21,7 +21,7 @@ const ProductInfo = async ({ product }: ProductProp) => {
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
       <ProductStock stock={product.stock} />
-      <ProductRating rating={3} />
+      <ProductRating rating={product.reviewRating as number} />
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions product={product} />
       <AddToCart product={product} isAuthenticated={auth} />

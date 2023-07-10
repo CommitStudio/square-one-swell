@@ -105,7 +105,8 @@ class Store {
       sku: product.sku || null,
       images: this.transformImages(product),
       categories: product.category_index?.id,
-      stock: product.stock_level
+      stock: product.stock_level,
+      reviewRating: product.review_rating
     };
   }
 
@@ -176,6 +177,59 @@ class Store {
       current: page,
       limit
     };
+  }
+
+  async getReviews(reviewInfo: { productId: string; limit?: number; page?: number }) {
+    const { productId, limit = 10, page } = reviewInfo;
+    const reviews = await swell.get('/products:reviews', {
+      parent_id: productId,
+      limit,
+      page
+    });
+    return reviews;
+  }
+
+  async postReview(reviewInfo: {
+    userId: string;
+    comments: string;
+    productId: string;
+    rating: number;
+    title: string;
+  }) {
+    const { userId, comments, productId, rating, title } = reviewInfo;
+
+    const reviews = await swell.post('/products:reviews', {
+      account_id: userId,
+      comments: comments,
+      parent_id: productId,
+      rating: rating,
+      title: title,
+      approved: true
+    });
+    return reviews;
+  }
+
+  async deleteReview(reviewId: string) {
+    const review = await swell.delete(`/products:reviews/${reviewId}`);
+    return review;
+  }
+
+  async editReview(
+    reviewId: string,
+    reviewInfo: {
+      comments: string;
+      rating: number;
+      title: string;
+    }
+  ) {
+    const { comments, rating, title } = reviewInfo;
+
+    const review = await swell.put(`/products:reviews/${reviewId}`, {
+      comments: comments,
+      rating: rating,
+      title: title
+    });
+    return review;
   }
 }
 

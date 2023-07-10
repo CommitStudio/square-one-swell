@@ -15,6 +15,7 @@ interface Product {
   sku?: string | null;
   categories?: string[];
   stock?: number;
+  reviewRating?: number;
 }
 
 interface ProductImage {

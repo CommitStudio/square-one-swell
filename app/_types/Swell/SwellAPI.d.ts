@@ -37,6 +37,7 @@ interface SwellAPI_Order {
       name: string;
     };
     product: {
+      id: string;
       name: string;
       price: number;
       images: {

@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import 'server-only';
 
 import Store from './Store';
@@ -104,6 +103,7 @@ export const getLoggedUser = async (): Promise<SwellAPI_Customer | null> => {
               name
             }
             product {
+              id
               name
               images {
                 file {
@@ -157,7 +157,7 @@ export const getUserInfo = async () => {
   const user = await getLoggedUser();
 
   if (!user?.session.accountId) {
-    return redirect('/account/login');
+    return { authenticated: false, user: null, userId: null, orders: [], addresses: [], cards: [] };
   }
 
   const addresses = await getAddresses();
@@ -166,6 +166,7 @@ export const getUserInfo = async () => {
   return {
     authenticated: true,
     user: user.account,
+    userId: user.session.accountId,
     orders: user.orders.results || [],
     addresses: addresses || [],
     cards: cards || []
