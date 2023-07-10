@@ -92,17 +92,21 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
+    console.log(chosenVariant, 'en el add to cart');
+
+    // to check if the product (with no variant) is in the cart
+    const productInCart = cart && cart?.items?.find((item) => item.product_id.includes(product.id));
+
+    // to check if the variant is in the cart
     const variantInCart =
-      cart && cart?.items.find((item) => item.variant_id?.includes(chosenVariant.variantId));
+      cart && cart?.items?.find((item) => item.variant_id?.includes(chosenVariant.variantId));
 
-    const productInCart = cart && cart?.items.find((item) => item.product_id.includes(product.id));
-
-    if (variantInCart && variantInCart?.quantity + productAmount > chosenVariant.variantStock) {
-      return notifyFailure("The amount selected exced the stock available. We're sorry.");
+    // to check the stock of the product in the cart
+    if (productInCart && product.stock && productInCart?.quantity + productAmount > product.stock) {
+      return notifyFailure("The amount selected exceeds the stock available. We're sorry.");
     }
-
-    if (product.stock && productInCart && productInCart?.quantity + productAmount > product.stock) {
-      return notifyFailure("The amount selected exced the stock available. We're sorry.");
+    if (variantInCart && variantInCart?.quantity + productAmount > chosenVariant.variantStock) {
+      return notifyFailure("The amount selected exceeds the stock available. We're sorry.");
     }
 
     !isSubmitting &&

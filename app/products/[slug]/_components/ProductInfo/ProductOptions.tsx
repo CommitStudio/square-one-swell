@@ -13,7 +13,7 @@ interface ProductProp {
 const ProductOptions = ({ product }: ProductProp) => {
   const [selectedIds, setSelectedIds] = useState({});
   const { state, updateState } = useStore();
-  const { productState, updateProductProp } = useProductState();
+  const { productState, updateProductProp, updateProductState } = useProductState();
 
   // Save only the variants with active states
   const activeProductVariants = product.variants?.filter((variant) => variant.active);
@@ -21,11 +21,28 @@ const ProductOptions = ({ product }: ProductProp) => {
   // Transform the selected products, from object into an array, to compare them with the set of active ids.
   const availableProductsId = Object.entries(selectedIds).map(([, value]) => value);
 
-  // Join the values to get the label for get the active variant.
-  // It returns for example: "M, red" or "L, blue"
-  function joinValues(obj: { [key: string]: string }) {
-    const values = Object.values(obj);
-    return values.join(', ');
+  // Find the matching object in an array of objects, used to find the variant that matches the selected options
+  function findMatchingObject(variants: Variant[], valueIdsArray: string[]) {
+    for (let i = 0; i < variants.length; i++) {
+      const item = variants[i];
+      const valueIds = item.value_ids.map(String); // Convert to strings
+      if (arraysContain(valueIds, valueIdsArray)) {
+        return item;
+      }
+    }
+    return null; // Return null if no matching object is found
+  }
+
+  function arraysContain(array1: string[], array2: string[]) {
+    if (array1.length !== array2.length) {
+      return false;
+    }
+    for (let i = 0; i < array1.length; i++) {
+      if (!array2.includes(array1[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   // Find the first available (active) variant option and select it by default
@@ -42,9 +59,26 @@ const ProductOptions = ({ product }: ProductProp) => {
       };
 
       setSelectedIds((prev) => ({ ...prev, [option.label]: firstActiveVariant?.value_ids[i] }));
+      console.log(selectedIds, 'en el product.map');
     });
 
-    updateProductProp('chosenOptions', initialOptions);
+    console.log(firstActiveLabel, 'en el primer usefect');
+    const variantSelectedbyOptionsId =
+      product.variants && findMatchingObject(product.variants, Object.values(selectedIds));
+
+    updateProductState({
+      ...productState,
+      chosenOptions: initialOptions,
+      chosenOptionsId: Object.values(selectedIds),
+      chosenVariant: {
+        variantLabel: variantSelectedbyOptionsId?.name,
+        variantId: variantSelectedbyOptionsId?.id,
+        variantActive: variantSelectedbyOptionsId?.active,
+        variantStock: variantSelectedbyOptionsId?.stock_variant
+      }
+    });
+
+    console.log(productState, 'en el primer useeffect');
   }, [product]);
 
   // Declare useEffect to 'listen' for variant selections
@@ -66,20 +100,26 @@ const ProductOptions = ({ product }: ProductProp) => {
       }
     }
 
-    // Get the label of the selected options to look for the variant. It returns for example, "M, red" or "L, blue"
-    const variantLabelSelected = joinValues(productState.chosenOptions);
-    // Look for the selected variant, with the variantLabelSelected
-    const variantSelected: Variant | undefined = product.variants?.find((variant) =>
-      variant.name.includes(variantLabelSelected)
-    );
-    // Update de chosenVariant under the productState with the values that we need
-    updateProductProp('chosenVariant', {
-      ...productState.chosenVariant,
-      variantLabel: variantSelected?.name,
-      variantId: variantSelected?.id,
-      variantActive: variantSelected?.active,
-      variantStock: variantSelected?.stock_variant
+    // Get the variant that match with the selected options ids
+    const variantSelectedbyOptionsId =
+      product.variants && findMatchingObject(product.variants, Object.values(selectedIds));
+
+    // console.log('variantSelectedbyId:', variantSelectedbyOptionsId);
+
+    updateProductState({
+      ...productState,
+      chosenOptionsId: Object.values(selectedIds),
+      chosenVariant: {
+        ...productState.chosenVariant,
+        variantLabel: variantSelectedbyOptionsId?.name,
+        variantId: variantSelectedbyOptionsId?.id,
+        variantActive: variantSelectedbyOptionsId?.active,
+        variantStock: variantSelectedbyOptionsId?.stock_variant
+      }
     });
+
+    console.log(productState.chosenOptions, 'en el segundo useeffect');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIds]);
 
