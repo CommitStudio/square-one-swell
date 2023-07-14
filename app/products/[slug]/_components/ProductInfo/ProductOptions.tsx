@@ -4,46 +4,40 @@ import { useEffect, useState } from 'react';
 
 import ProductStock from './ProductStock';
 
-import { useStore, useProductState } from '~/_hooks/useStore';
+import { useProductState } from '~/_hooks/useStore';
 
 interface ProductProp {
   product: Product;
 }
 
 const ProductOptions = ({ product }: ProductProp) => {
-  const [selectedIds, setSelectedIds] = useState({});
-  const { state, updateState } = useStore();
-  const { productState, updateProductProp, updateProductState } = useProductState();
+  const { productState, updateProductState } = useProductState();
+  const [currentOptionValue, setCurrentOptionValue] = useState();
+  const [currentOption, setCurrentOption] = useState();
+  const [selectedIds, setSelectedIds] = useState();
+  // cambiar a un useState
 
-  // Save only the variants with active states
-  const activeProductVariants = product.variants?.filter((variant) => variant.active);
-
-  // Transform the selected products, from object into an array, to compare them with the set of active ids.
-  const availableProductsId = Object.entries(selectedIds).map(([, value]) => value);
-
-  // Find the matching object in an array of objects, used to find the variant that matches the selected options
-  function findMatchingObject(variants: Variant[], valueIdsArray: string[]) {
+  function findMatchingObject(variants, valueIdsObject) {
     for (let i = 0; i < variants.length; i++) {
       const item = variants[i];
-      const valueIds = item.value_ids.map(String); // Convert to strings
-      if (arraysContain(valueIds, valueIdsArray)) {
+      const valueIds = Object.values(item.value_ids);
+      if (objectContainsAllValues(valueIds, valueIdsObject)) {
         return item;
       }
     }
     return null; // Return null if no matching object is found
   }
 
-  function arraysContain(array1: string[], array2: string[]) {
-    if (array1.length !== array2.length) {
-      return false;
-    }
-    for (let i = 0; i < array1.length; i++) {
-      if (!array2.includes(array1[i])) {
+  function objectContainsAllValues(valuesArray, valueIdsObject) {
+    for (const key in valueIdsObject) {
+      if (!valuesArray.includes(valueIdsObject[key])) {
         return false;
       }
     }
     return true;
   }
+
+  let selectIds = {};
 
   // Find the first available (active) variant option and select it by default
   useEffect(() => {
@@ -58,18 +52,17 @@ const ProductOptions = ({ product }: ProductProp) => {
         [option.label]: firstActiveLabel ? firstActiveLabel[i] : ''
       };
 
-      setSelectedIds((prev) => ({ ...prev, [option.label]: firstActiveVariant?.value_ids[i] }));
-      console.log(selectedIds, 'en el product.map');
+      selectIds = { ...selectIds, [option.label]: firstActiveVariant?.value_ids[i] };
+      setSelectedIds({ ...selectIds, [option.label]: firstActiveVariant?.value_ids[i] });
     });
 
-    console.log(firstActiveLabel, 'en el primer usefect');
     const variantSelectedbyOptionsId =
-      product.variants && findMatchingObject(product.variants, Object.values(selectedIds));
+      product.variants && findMatchingObject(product.variants, Object.values(selectIds));
 
     updateProductState({
       ...productState,
       chosenOptions: initialOptions,
-      chosenOptionsId: Object.values(selectedIds),
+      chosenOptionsId: Object.values(selectIds),
       chosenVariant: {
         variantLabel: variantSelectedbyOptionsId?.name,
         variantId: variantSelectedbyOptionsId?.id,
@@ -77,38 +70,32 @@ const ProductOptions = ({ product }: ProductProp) => {
         variantStock: variantSelectedbyOptionsId?.stock_variant
       }
     });
-
-    console.log(productState, 'en el primer useeffect');
   }, [product]);
 
-  // Declare useEffect to 'listen' for variant selections
+  const handleClick = (value, option) => {
+    setSelectedIds((prev) => ({ ...prev, [option.label]: value?.id }));
+    setCurrentOptionValue(value);
+    setCurrentOption(option);
+  };
+
   useEffect(() => {
-    // When the options have an item clicked we ask if the selected ids are the same as in the active variant
-    if (availableProductsId.length === product.options?.length) {
-      // Returns true or false if the selected ids are the same in the active variant
-      const selectedIdsameAsActiveVariants = activeProductVariants?.map((variant) => {
-        return variant.value_ids.every((id) => {
-          return availableProductsId?.includes(id);
-        });
-      });
+    if (!currentOption) return;
+    if (!currentOptionValue) return;
 
-      // Set global state accordingly if its active or not
-      if (selectedIdsameAsActiveVariants?.includes(true)) {
-        updateState({ ...state, isVariantActive: true });
-      } else {
-        updateState({ ...state, isVariantActive: false });
-      }
-    }
-
-    // Get the variant that match with the selected options ids
+    selectIds = { ...selectedIds, [currentOption.label]: currentOptionValue?.id };
     const variantSelectedbyOptionsId =
-      product.variants && findMatchingObject(product.variants, Object.values(selectedIds));
-
-    // console.log('variantSelectedbyId:', variantSelectedbyOptionsId);
+      product.variants && findMatchingObject(product.variants, Object.values(selectIds));
 
     updateProductState({
       ...productState,
-      chosenOptionsId: Object.values(selectedIds),
+      chosenOptions: {
+        ...productState.chosenOptions,
+        [currentOption.label]: currentOptionValue.name
+      },
+      chosenOptionsId: Object.values({
+        ...productState.chosenOptions,
+        [currentOption.label]: currentOptionValue.name
+      }),
       chosenVariant: {
         ...productState.chosenVariant,
         variantLabel: variantSelectedbyOptionsId?.name,
@@ -117,10 +104,6 @@ const ProductOptions = ({ product }: ProductProp) => {
         variantStock: variantSelectedbyOptionsId?.stock_variant
       }
     });
-
-    console.log(productState.chosenOptions, 'en el segundo useeffect');
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIds]);
 
   return (
@@ -142,31 +125,23 @@ const ProductOptions = ({ product }: ProductProp) => {
                           <li
                             key={'color' + index.toString()}
                             className={`border w-5 h-5 cursor-pointer opacity-50 ${
-                              availableProductsId.includes(value.id)
+                              productState.chosenOptions[option.label] === value.name
                                 ? 'border-green opacity-95'
                                 : ''
                             }`}
                             style={{ backgroundColor: `${value.name}` }}
-                            onClick={() => {
-                              updateProductProp('chosenOptions', {
-                                ...productState.chosenOptions,
-                                [option.label]: value.name
-                              });
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id }); // ex {Color: 'red'}
-                            }}
+                            onClick={() => handleClick(value, option)}
                           ></li>
                         ) : (
                           <li
                             className={`border border-black px-2 py-1 cursor-pointer text-xs hover:bg-black hover:text-white ${
-                              availableProductsId.includes(value.id) ? 'bg-black text-white' : ''
+                              productState.chosenOptions[option.label] === value.name
+                                ? 'bg-black text-white'
+                                : ''
                             }`}
                             key={'color' + index.toString()}
                             onClick={() => {
-                              updateProductProp('chosenOptions', {
-                                ...productState.chosenOptions,
-                                [option.label]: value.name
-                              });
-                              setSelectedIds({ ...selectedIds, [option.label]: value.id }); // ex {Size: 'L'}
+                              handleClick(value, option);
                             }}
                           >
                             {value.name}

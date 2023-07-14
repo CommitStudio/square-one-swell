@@ -92,8 +92,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   };
 
   const handleAddToCart = () => {
-    console.log(chosenVariant, 'en el add to cart');
-
     // to check if the product (with no variant) is in the cart
     const productInCart = cart && cart?.items?.find((item) => item.product_id.includes(product.id));
 
