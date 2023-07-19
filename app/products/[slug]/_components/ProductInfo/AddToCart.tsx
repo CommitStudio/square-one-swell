@@ -94,7 +94,6 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
   const handleAddToCart = () => {
     // to check if the product (with no variant) is in the cart
     const productInCart = cart && cart?.items?.find((item) => item.product_id.includes(product.id));
-
     // to check if the variant is in the cart
     const variantInCart =
       cart &&
@@ -197,7 +196,8 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
               product.stock === 0 || (productHasVariant && !state.isVariantActive) || isSubmitting
             }
             className={`font-bold py-3 px-5 md:min-w-[240px] ${
-              state.isVariantActive || (product.options?.length === 0 && product.stock !== 0)
+              (state.isVariantActive && productHasVariant) ||
+              (product.options?.length === 0 && product?.stock !== 0)
                 ? 'bg-black font-quicksand border text-white duration-200 cursor-pointer hover:bg-white hover:text-black'
                 : 'bg-gray-medium text-white font-quicksand border border-gray-medium'
             }`}
