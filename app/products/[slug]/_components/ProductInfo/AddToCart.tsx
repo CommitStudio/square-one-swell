@@ -97,13 +97,19 @@ const AddToCart = ({ product, isAuthenticated }: ProductProp) => {
 
     // to check if the variant is in the cart
     const variantInCart =
-      cart && cart?.items?.find((item) => item.variant_id?.includes(chosenVariant.variantId));
+      cart &&
+      cart?.items?.find((item) =>
+        item.variant_id?.includes(chosenVariant.variantId ? chosenVariant.variantId : '')
+      );
 
     // to check the stock of the product in the cart
     if (productInCart && product.stock && productInCart?.quantity + productAmount > product.stock) {
       return notifyFailure("The amount selected exceeds the stock available. We're sorry.");
     }
-    if (variantInCart && variantInCart?.quantity + productAmount > chosenVariant.variantStock) {
+
+    const variantStock = chosenVariant.variantStock ?? 0;
+
+    if (variantInCart && variantInCart?.quantity + productAmount > variantStock) {
       return notifyFailure("The amount selected exceeds the stock available. We're sorry.");
     }
 

@@ -33,7 +33,7 @@ interface Variant {
   id: string;
   name: string;
   active: boolean;
-  value_ids: string[];
+  value_ids: Record<string, string> | string[];
   stock_variant: number;
   variantActive: boolean;
 }
