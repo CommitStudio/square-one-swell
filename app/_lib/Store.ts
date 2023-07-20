@@ -128,7 +128,7 @@ class Store {
    * Convert Swell product options to generic format
    ****************************************************************************/
   transformProductOptions(product: SwellProduct) {
-    return product.options.map((option) => ({
+    return product.options?.map((option) => ({
       label: option.name,
       active: option.active,
       values: option.values
@@ -140,9 +140,11 @@ class Store {
    ****************************************************************************/
   transformProductVariants(product: SwellProduct) {
     return product.variants?.results?.map((variant) => ({
+      id: variant.id,
       name: variant.name,
       active: variant.active,
-      value_ids: variant.option_value_ids
+      value_ids: variant.option_value_ids,
+      stock_variant: variant.stock_level
     }));
   }
 

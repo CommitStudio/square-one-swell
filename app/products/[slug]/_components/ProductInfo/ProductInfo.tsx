@@ -16,11 +16,12 @@ interface ProductProp {
 
 const ProductInfo = async ({ product }: ProductProp) => {
   const auth = await isAuthenticated();
+  const productHasVariant = product.variants && product.variants?.length > 0;
 
   return (
     <div className="w-full space-y-2 mt-5 md:mt-0">
       <ProductTitle title={product.name} />
-      <ProductStock stock={product.stock} />
+      {!productHasVariant && <ProductStock stock={product.stock} />}
       <ProductRating rating={product.reviewRating as number} />
       <ProductPriceOptions price={product.price} salePrice={product.salePrice} />
       <ProductOptions product={product} />

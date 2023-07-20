@@ -17,15 +17,25 @@ export function useGlobalState() {
  ****************************************************************************/
 type StateProduct = {
   chosenOptions: { [key: string]: string };
+  chosenOptionsId: string[];
+  chosenVariant: {
+    variantLabel: string | undefined;
+    variantId: string | undefined;
+    variantActive: boolean | undefined;
+    variantStock: number | undefined;
+  };
 };
 
-const stateProduct = atom({
-  chosenOptions: {}
+const stateProduct = atom<StateProduct>({
+  chosenOptions: {},
+  chosenOptionsId: [],
+  chosenVariant: { variantId: '', variantActive: true, variantLabel: '', variantStock: 0 }
 });
 
 export function useProductState(): {
   productState: StateProduct;
   updateProductProp: (property: string, value: unknown) => void;
+  updateProductState: (newState: StateProduct) => void;
 } {
   const [productState, setProductState] = useAtom(stateProduct);
 
@@ -36,7 +46,11 @@ export function useProductState(): {
     });
   };
 
-  return { productState, updateProductProp };
+  const updateProductState = (newState: StateProduct) => {
+    setProductState(newState);
+  };
+
+  return { productState, updateProductProp, updateProductState };
 }
 
 /*****************************************************************************
